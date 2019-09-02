@@ -1,12 +1,29 @@
-import request from './util/request'
+import { getUserInfo } from './api/user'
 App({
+  globalData: {
+    userInfo: null
+  },
   onLaunch(options) {
-    // 第一次打开
-    request({url: 'http://127.0.0.1:3000/meeting/getMeetings'})
-    // options.query == {number:1}
-  },
-  onShow(options) {
-    // 从后台被 scheme 重新打开
-    // options.query == {number:1}
-  },
+    // 获取本地保存的用户信息
+    dd.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        // 本地是否保存了用户信息
+        if (res.data) {
+          this.globalData.userInfo = res.data
+        } else {
+          // 获取授权码保存个人信息
+          dd.getAuthCode({
+            success:function(res){
+              getUserInfo(res).then((data) => {
+                dd.setStorage('userInfo', data)
+                this.globalData.userInfo = data
+                console.info('authcode', res)
+              })
+            }
+          })
+        }
+      }
+    })
+  }
 })
