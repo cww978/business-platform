@@ -1,0 +1,32 @@
+/*背景颜色*/
+.bg-info{
+  background-color: #3296FA;
+}
+.bg-error{
+  background-color: #F25643;
+}
+.bg-warning{
+  background-color: #FF943E;
+}
+.bg-success{
+  background-color: #15BC83
+}
+.bg-default{
+  background-color: #576A95
+}
+/*字体颜色*/
+.font-color-100{
+  color: rgba(25, 31, 37, 100)
+}
+.font-color-72{
+  color: rgba(25, 31, 37, 72)
+}
+.font-color-56{
+  color: rgba(25, 31, 37, 56)
+}
+.font-color-40{
+  color: rgba(25, 31, 37, 40)
+}
+.font-color-28{
+  color: rgba(25, 31, 37, 28)
+}

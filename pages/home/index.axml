@@ -1,0 +1,8 @@
+<view>
+  <view>
+    <view class="page-section-title font-color-56">营销计划
+      <view class="bg-info page-section-tag"></view>
+    </view>
+    <grid onGridItemClick="onItemClick" hasLine="{{hasLine}}" columnNum="{{3}}" list="{{menus}}" />
+  </view>
+</view>

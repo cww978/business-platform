@@ -1,0 +1,8 @@
+{
+  "pages": [
+    "pages/home/index"
+  ],
+  "window": {
+    "defaultTitle": "统一业务平台"
+  }
+}
