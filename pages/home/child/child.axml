@@ -1,17 +1,14 @@
 <view>
   <scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
-		<list>
-			<block a:for="{{menus}}">
-				<list-item
-					thumb="{{item.icon}}"
-					index="{{index}}"
-					key="items-{{index}}"
-          onClick="clickMenu"
-					last="{{index === (items.length - 1)}}"
-				>
-					{{item.text}}
-			 </list-item>
-			</block>
-		</list>
+    <block a:for="{{menus}}">
+      <view style="margin-top: 10px;" />
+      <card
+        thumb="{{item.icon}}"
+        title="{{item.text}}"
+        subTitle="{{item.subTitle}}"
+        onClick="clickMenu"
+        info="{{item.path}}"
+      />
+    </block>
   </scroll-view>
 </view>

@@ -1,7 +1,8 @@
 {
-  "defaultTitle": "List",
+  "defaultTitle": "菜单",
   "usingComponents":{
     "list": "mini-antui/es/list/index",
-    "list-item": "mini-antui/es/list/list-item/index"
+    "list-item": "mini-antui/es/list/list-item/index",
+    "card": "mini-antui/es/card/index"
   }
 }
