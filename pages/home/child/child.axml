@@ -1,14 +1,17 @@
 <view>
   <scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
-    <block a:for="{{menus}}">
-      <view style="margin-top: 10px;" />
-      <card
-        thumb="{{item.icon}}"
-        title="{{item.text}}"
-        subTitle="{{item.subTitle}}"
-        onClick="clickMenu"
-        info="{{item.path}}"
-      />
-    </block>
+    <view class="cu-list menu" :class="[menuBorder?'sm-border':'',menuCard?'card-menu margin-top':'']">
+      <block a:for="{{menus}}">
+        <view class="shadow cu-item">
+					<view class="content padding-tb-sm">
+						<view>{{item.text}}</view>
+						<view class="text-gray text-sm">{{item.subTitle}}</view>
+					</view>
+          <view class="action">
+            <view class="cu-tag round bg-red sm" a:if="{{item.tag > 0}}">{{item.tag}}</view>
+          </view>
+				</view>
+      </block>
+    </view>
   </scroll-view>
 </view>

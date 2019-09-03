@@ -1,8 +1,19 @@
 <view>
   <view>
-    <view class="page-section-title font-color-56">移动数据接入
-      <view class="bg-info page-section-tag"></view>
+  	<view class="cu-bar bg-white solid-bottom">
+      <view class="action">
+        <text class="cuIcon-title text-orange"></text> 移动数据
+      </view>
     </view>
-    <grid onGridItemClick="onItemClick" hasLine="{{hasLine}}" columnNum="{{3}}" list="{{menus}}" />
+    <view class="cu-list grid col-3 no-border">
+      <block a:for="{{menus}}">
+          <view data-index="{{index}}" onTap="onItemClick" class="cu-item">
+            <view class="cuIcon">
+              <view class="cu-avatar radius" style="background-image:url(../../static/logo.png);"></view>
+            </view>
+            <text>{{item.text}}</text>
+          </view>
+        </block>
+			</view>
   </view>
 </view>

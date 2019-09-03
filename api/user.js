@@ -20,9 +20,9 @@ export function getUserMenus(){
       {
         path: 'https://gw.alipayobjects.com/',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
-        text: '常规数据接入',
+        text: '常规数据',
         child: [
-          { text: '品吸情况', subTitle: '自律互助小组二支装品吸情况登记表', icon: '', path: '' },
+          { text: '品吸情况', subTitle: '自律互助小组二支装品吸情况登记表', icon: '', path: '', tag: 2 },
           { text: '库存盘点', subTitle: '样烟、广告品库存盘点及关账', icon: '', path: '' },
           { text: '规格引入目标', subTitle: '规格引入年度、季度、月度目标', icon: '', path: '' },
           { text: '协同计划', subTitle: '客户经理操作协同计划以及完成情况', icon: '', path: '' },
@@ -40,7 +40,7 @@ export function getUserMenus(){
       {
         path: 'https://gw.alipayobjects.com/',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
-        text: '工作写实类数据',
+        text: '写实数据',
         child: [
           { text: '驻点品吸', subTitle: '驻点品吸写实数据录入', icon: '', path: '' },
           { text: '烟模陈列', subTitle: '烟模陈列写实数据录入', icon: '', path: '' },
