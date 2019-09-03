@@ -4,3 +4,4 @@ UI组件库:mini-antui--通过npm安装
 2、mock文件夹下--存放模拟数据
 3、constant文件夹下--全局常量
 4、util文件夹下--第三方JS库
+5、ColorUI库地址：http://demo.color-ui.com/h5.html#/
