@@ -4,7 +4,8 @@ App({
     userInfo: null,
     childMenus: []
   },
-  onLaunch(options) {
+  // 更新并保存个人信息
+  updateUserInfo(){
     // 获取本地保存的用户信息
     let app = this
     dd.getStorage({
@@ -27,5 +28,8 @@ App({
         }
       }
     })
+  },
+  onLaunch(options) {
+    this.updateUserInfo()
   }
 })
