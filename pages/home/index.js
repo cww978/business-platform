@@ -2,6 +2,7 @@ import { getUserMenus } from '../../api/user'
 let app = getApp()
 Page({
   data: {
+    loading: true,
     hasLine: false,
     menus: []
   },
@@ -10,6 +11,10 @@ Page({
     getUserMenus().then((data) => {
       this.setData({ menus: data })
     })
+    let that = this
+    setTimeout(()=>{
+      that.setData({ loading: false })
+    }, 2000)
   },
   onItemClick(event){
     let index = event.target.dataset.index
@@ -17,7 +22,7 @@ Page({
     let title = this.data.menus[index].text
     app.globalData.childMenus = childs
     dd.navigateTo({
-      url: `./child/child?title=${title}`
+      url: `child/child?title=${title}`
     })
   }
 })

@@ -1,4 +1,9 @@
 <view>
+  <view a:if={{loading}} class="loading-wapper gif-white response">
+    <view class="loading-content">
+      <image mode="scaleToFill" src="/static/loading.gif"/>
+    </view>
+  </view>
   <view>
   	<view class="cu-bar bg-white solid-bottom">
       <view class="action">
@@ -9,7 +14,7 @@
       <block a:for="{{menus}}">
           <view data-index="{{index}}" onTap="onItemClick" class="cu-item">
             <view class="cuIcon">
-              <view class="cu-avatar radius" style="background-image:url(../../static/logo.png);"></view>
+              <view class="cu-avatar radius" style="background-image:url(/static/logo.png);"></view>
             </view>
             <text>{{item.text}}</text>
           </view>
