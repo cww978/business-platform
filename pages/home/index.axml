@@ -11,7 +11,7 @@
       </view>
     </view>
     <view class="cu-list grid col-3 no-border">
-      <block a:for="{{menus}}">
+      <block a:for="{{menus}}"> 
           <view data-index="{{index}}" onTap="onItemClick" class="cu-item">
             <view class="cuIcon">
               <view class="cu-avatar radius" style="background-image:url(/static/logo.png);"></view>
