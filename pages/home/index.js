@@ -13,7 +13,17 @@ Page({
       {
         path: '/pages/programme/assess/assess',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
-        text: '方案评估'
+        text: '方案评估',
+        child: [
+          {
+            text: '方案评估',
+            path: '/pages/programme/assess/assess'
+          },
+          {
+            text: '方案评估',
+            path: '/pages/programme/assess/assess'
+          }
+        ]
       },
       {
         path: '/pages/programme/verify/verify',

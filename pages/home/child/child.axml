@@ -1,6 +1,6 @@
 <view>
   <scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
-    <view class="cu-list menu" :class="[menuBorder?'sm-border':'',menuCard?'card-menu margin-top':'']">
+    <view class="cu-list menu">
       <block a:for="{{menus}}">
         <view class="shadow-blur cu-item">
 					<view class="content padding-tb-sm">
