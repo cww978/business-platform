@@ -20,9 +20,16 @@ Page({
     let index = event.target.dataset.index
     let childs = this.data.menus[index].child
     let title = this.data.menus[index].text
+    let path = this.data.menus[index].path
     app.globalData.childMenus = childs
-    dd.navigateTo({
-      url: `child/child?title=${title}`
-    })
+    if (childs instanceof Array) {
+      dd.navigateTo({
+        url: `child/child?title=${title}`
+      })
+    } else {
+      dd.navigateTo({
+        url: path
+      })
+    }
   }
 })
