@@ -5,7 +5,11 @@
     "pages/registration/registration",
     "pages/stock/check/check",
     "pages/stock/settle/settle",
-    "pages/stock/locking/locking"
+    "pages/stock/locking/locking",
+    "pages/programme/report/report",
+    "pages/programme/assess/assess",
+    "pages/programme/verify/verify",
+    "pages/programme/sample/sample"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

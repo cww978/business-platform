@@ -6,37 +6,37 @@ Page({
     hasLine: false,
     menus: [
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/programme/report/report',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '方案申报'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/programme/assess/assess',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '方案评估'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/programme/verify/verify',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '方案审核'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/programme/sample/sample',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '评估抽查'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/stock/check/check',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '销区盘点'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/stock/locking/locking',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '销区关账'
       },
       {
-        path: 'https://gw.alipayobjects.com/',
+        path: '/pages/stock/settle/settle',
         icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
         text: '销区结账'
       },
