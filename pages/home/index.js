@@ -4,13 +4,50 @@ Page({
   data: {
     loading: true,
     hasLine: false,
-    menus: []
+    menus: [
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '方案申报'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '方案评估'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '方案审核'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '评估抽查'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '销区盘点'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '销区关账'
+      },
+      {
+        path: 'https://gw.alipayobjects.com/',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '销区结账'
+      },
+      {
+        path: '/pages/registration/registration',
+        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        text: '执行登记'
+      }
+    ]
   },
   onLoad(query) {
-    // 获取权限菜单
-    getUserMenus().then((data) => {
-      this.setData({ menus: data })
-    })
     let that = this
     setTimeout(()=>{
       that.setData({ loading: false })
