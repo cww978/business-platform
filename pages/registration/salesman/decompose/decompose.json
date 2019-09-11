@@ -1,5 +1,5 @@
 {
-  "defaultTitle": "执行登记",
+  "defaultTitle": "分解至终端公司",
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "list": "mini-antui/es/list/index",

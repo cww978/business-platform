@@ -1,43 +1,81 @@
 <view class="page">
   <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
-    <view class="cu-list menu">
-      <view class="title">
-        <text class="icon lg cuIcon-writefill"></text>
-        <text class="text">填写编码</text>
-      </view>
-      <view class="cu-item">
-        <view class="content">
-          <text class="text-black">地市</text>
+    <list>
+      <view slot="header">
+				<view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">填写编码</text>
         </view>
-        <view class="action">
-          <text class="text-grey">请选择</text>
-          <text class="lg text-gray cuIcon-right"></text>
+			</view>
+      <list-item arrow="{{true}}">地市
+        <view slot="extra">
+					请选择
+        </view>  
+      </list-item>
+      <list-item arrow="{{true}}">方案编码
+        <view slot="extra">
+					请选择
+        </view> 
+      </list-item>
+    </list>
+    <list>
+      <view slot="header">
+				<view>
+          <text class="icon lg cuIcon-calendar"></text>
+          <text class="text">方案信息</text><text class="text-sm text-red">(请选择方案编码)</text>
         </view>
-      </view>
-      <view class="cu-item">
-        <view class="content">
-          <text class="text-black">方案编码</text>
+			</view>
+      <list-item disabled="{{true}}">
+        <view class="info-row">
+          <text class="text-lg">{{programme.themeName}}</text>
         </view>
-        <view class="action">
-          <text class="text-grey">请选择</text>
-          <text class="lg text-gray cuIcon-right"></text>
+        <view class="info-row">
+          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{programme.typeNmae}}</text>
         </view>
-      </view>
-    </view>
-    <view>
-      <view class="title">
-        <text class="icon lg cuIcon-calendar"></text>
-        <text class="text">方案信息</text>
-      </view>
-    </view>
+        <view class="info-row">
+          <text class="text-lg text-gray">活动时间：</text><text class="text-df text-gray">{{programme.time}}</text>
+        </view>
+        <view class="info-row">
+          <text class="text-lg text-gray">活动对象：</text>
+          <block a:for="{{programme.targets}}">
+            <view class="cu-tag round text-lg line-blue">{{item.name}}</view>
+          </block>
+        </view>
+        <view class="info-row">
+          <view>
+            <text class="text-lg text-gray">活动形式</text>
+          </view>
+          <view><text class="text-lg">{{programme.modality}}</text></view>
+        </view>
+        <view class="info-row">
+          <view>
+            <text class="text-lg text-gray">资源明细</text>
+          </view>
+          <view>
+            <view class="table">
+              <flex class="table-head bg-blue">
+                <flex-item><view class="table-td"><text class="text-center text-lg text-white">资源名称</text></view></flex-item>
+                <flex-item><view class="table-td"><text class="text-center text-lg text-white">可使用数</text></view></flex-item>
+              </flex>
+              <block a:for="{{programme.resources}}">
+                <flex class="table-content">
+                  <flex-item><view class="table-td"><text class="text-lg">{{item.name}}</text></view></flex-item>
+                  <flex-item><view class="table-td"><text class="text-lg">{{item.qty}}</text></view></flex-item>
+                </flex>
+              </block>
+            </view>
+          </view>
+        </view>
+      </list-item>
+    </list>
   </scroll-view>
   <!-- 业务员操作 -->
   <view class="footer">
-    <view class="action bg-white">
-      <text class="text-center text-blue">分解至终端</text>
+    <view class="action bg-white" onTap="navTodec">
+      <text class="text-center text-xl text-blue">分解至终端</text>
     </view>
-    <view class="action bg-blue">
-      <text class="text-center text-white">团队执行</text>
+    <view class="action bg-blue" onTap="navToimp">
+      <text class="text-center text-xl text-white">团队执行</text>
     </view>
   </view>
 </view>

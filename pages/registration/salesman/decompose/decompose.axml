@@ -1,0 +1,68 @@
+<view>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">填写信息</text>
+        </view>
+      </view>
+      <list>
+        <list-item arrow="{{true}}">终端公司
+          <picker value="{{0}}" range="{{companys}}">
+            <view class="picker">
+              {{companys[0]}}
+            </view>
+          </picker>
+        </list-item>
+      </list>
+      <view class="cu-form-group">
+        <view class="title text-lg">人数</view>
+        <input class="text-lg" type="number" onInput="inputMans" value="{{mans}}"/>
+      </view>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">资源分配标准</text><text class="text-red text-sm">(每人)</text>
+        </view>
+      </view>
+      <block a:for="{{resources}}">
+        <view class="cu-form-group">
+          <view class="title text-lg">{{item.name}}</view>
+          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputSplit" value="{{defaultSplit}}"/>
+        </view>
+      </block>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">资源分配明细</text><text class="text-red text-sm">(根据人数和标准计算获得)</text>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="table">
+          <flex class="table-head bg-blue">
+            <flex-item><view class="table-td"><text class="text-center text-lg text-white">资源名称</text></view></flex-item>
+            <flex-item><view class="table-td"><text class="text-center text-lg text-white">分配数</text></view></flex-item>
+            <flex-item><view class="table-td"><text class="text-center text-lg text-white">可分配数</text></view></flex-item>
+          </flex>
+          <block a:for="{{resources}}">
+            <flex class="table-content">
+              <flex-item><view class="table-td"><text class="text-lg">{{item.name}}</text></view></flex-item>
+              <flex-item><view class="table-td"><text class="{{item.split>item.qty?'text-lg text-red':'text-lg'}}">{{item.split}}</text></view></flex-item>
+              <flex-item><view class="table-td"><text class="text-lg">{{item.qty}}</text></view></flex-item>
+            </flex>
+          </block>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 司团队操作 -->
+  <view class="footer">
+    <view class="action bg-white">
+      <button class="cu-btn block bg-blue lg" size="default" type="primary">终端团队执行</button>
+  </view> 
+</view>
