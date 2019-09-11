@@ -1,0 +1,40 @@
+<view class="page">
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+    <view class="cu-list menu">
+      <view class="title">
+        <text class="icon lg cuIcon-writefill"></text>
+        <text class="text">填写编码</text>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-black">地市</text>
+        </view>
+        <view class="action">
+          <text class="text-grey">请选择</text>
+          <text class="lg text-gray cuIcon-right"></text>
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-black">方案编码</text>
+        </view>
+        <view class="action">
+          <text class="text-grey">请选择</text>
+          <text class="lg text-gray cuIcon-right"></text>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class="title">
+        <text class="icon lg cuIcon-calendar"></text>
+        <text class="text">方案信息</text>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 终端公司操作 -->
+  <view class="footer">
+    <view class="action bg-white">
+      <text class="text-center text-blue">分解至终端团队</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,26 @@
+.page {
+  height: 100vh;
+}
+.footer {
+  box-shadow: 0px -2px 3px 0px #eee;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  background-color: white;
+}
+.footer .action{
+  height: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer .cu-btn.block {
+  width: 60%;
+}
+.title{
+  padding: 5px 5px;
+}
+.title .icon{
+  margin-right: 10px;
+}
