@@ -45,22 +45,18 @@
           <text class="text">资源分配明细</text><text class="text-red text-sm">(根据人数和标准计算获得)</text>
         </view>
       </view>
-      <view class="cu-form-group">
-        <view class="table">
-          <flex class="table-head bg-blue">
-            <flex-item><view class="table-td"><text class="text-center text-lg text-white">资源名称</text></view></flex-item>
-            <flex-item><view class="table-td"><text class="text-center text-lg text-white">分配数</text></view></flex-item>
-            <flex-item><view class="table-td"><text class="text-center text-lg text-white">可分配数</text></view></flex-item>
-          </flex>
-          <block a:for="{{resources}}">
-            <flex class="table-content">
-              <flex-item><view class="table-td"><text class="text-lg">{{item.name}}</text></view></flex-item>
-              <flex-item><view class="table-td"><text class="{{item.split>item.qty?'text-lg text-red':'text-lg'}}">{{item.split}}</text></view></flex-item>
-              <flex-item><view class="table-td"><text class="text-lg">{{item.qty}}</text></view></flex-item>
-            </flex>
-          </block>
-        </view>
+      <view class="grid col-3 text-center inline">
+        <view><text class="text-lg text-black">资源名称</text></view>
+        <view><text class="text-lg text-black">分配数</text></view>
+        <view><text class="text-lg text-black">可分配数</text></view>
       </view>
+      <block a:for="{{resources}}">
+        <view class="grid col-3 text-center inline">
+          <view><text class="text-lg">{{item.name}}</text></view>
+          <view><text class="{{item.split>item.qty?'text-df text-red':'text-df'}}">{{item.split}}</text></view>
+          <view><text class="text-df">{{item.qty}}</text></view>
+        </view>
+      </block>
     </view>
   </scroll-view>
   <!-- 司团队操作 -->

@@ -65,7 +65,7 @@ Page({
     let otherPoints = getCurrentPages()[getCurrentPages().length - 2].data.programme.otherPoints
     let investigation = getCurrentPages()[getCurrentPages().length - 2].data.programme.investigation
     for (let item of resources) {
-      item.useNum = ''
+      item.useNum = 0
     }
     that.setData({
       investigation: investigation,

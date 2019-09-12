@@ -47,29 +47,18 @@
           </block>
         </view>
         <view class="info-row">
-          <view>
-            <text class="text-lg text-gray">活动形式</text>
-          </view>
-          <view><text class="text-lg">{{programme.modality}}</text></view>
+          <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programme.modality}}</text></view>
         </view>
         <view class="info-row">
           <view>
             <text class="text-lg text-gray">资源明细</text>
           </view>
-          <view>
-            <view class="table">
-              <flex class="table-head bg-blue">
-                <flex-item><view class="table-td"><text class="text-center text-lg text-white">资源名称</text></view></flex-item>
-                <flex-item><view class="table-td"><text class="text-center text-lg text-white">可使用数</text></view></flex-item>
-              </flex>
-              <block a:for="{{programme.resources}}">
-                <flex class="table-content">
-                  <flex-item><view class="table-td"><text class="text-lg">{{item.name}}</text></view></flex-item>
-                  <flex-item><view class="table-td"><text class="text-lg">{{item.qty}}</text></view></flex-item>
-                </flex>
-              </block>
+          <block a:for="{{programme.resources}}">
+            <view class="cu-form-group">
+              <view class="title text-lg">{{item.name}}</view>
+              <view class="text-df text-gray">可使用数：{{item.qty}}</view>
             </view>
-          </view>
+          </block>
         </view>
       </list-item>
     </list>
