@@ -1,0 +1,53 @@
+.footer {
+  box-shadow: 0px -2px 3px 0px #eee;
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  background-color: white;
+}
+.footer .action{
+  height: 50px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer .cu-btn.block {
+  width: 60%;
+}
+.header{
+  padding: 16px 16px 8px;
+  font-size:14px;
+  color:rgb(136, 136, 136);
+}
+.header .icon {
+  padding-right: 5px;
+}
+.cu-form-group .title {
+    min-width: calc(4em + 15px);
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  flex-basis: initial;
+}
+.img-group{
+  padding-left: 9px;
+  background-color: white;
+}
+.inline{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.placeholder{
+  border: 1px #eee solid;
+}
+.cuIcon-camerafill{
+  font-size: 0.44rem
+}

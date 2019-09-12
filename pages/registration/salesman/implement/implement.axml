@@ -1,3 +1,86 @@
 <view>
-  New Page
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">填写信息</text>
+        </view>
+      </view>
+      <list>
+        <list-item arrow="{{true}}">
+          <picker value="{{targetIndex}}" onChange="targetPickerChange" range-key="name" range="{{targets}}">
+            <view class="picker">
+              <view class="row">
+                <view class="row-title">对象名称</view>
+                <view class="row-extra text-lg text-gray">{{targets[targetIndex].name}}</view>
+              </view>
+            </view>
+          </picker>
+        </list-item>
+      </list>
+      <view class="cu-form-group">
+        <view class="title text-lg">人数</view>
+        <input class="text-lg" type="number" onInput="inputMans" value="{{mans}}"/>
+      </view>
+      <block a:for="{{otherPoints}}">
+        <view class="cu-form-group">
+          <view class="title text-lg">{{item.text}}</view>
+          <input a:if="{{item.type == 1}}" class="text-lg" type="number" data-id="{{item.id}}"  onInput="inputOtherPoint"/>
+          <input a:else class="text-lg" type="text" data-id="{{item.id}}"  onInput="inputOtherPoint"/>
+        </view>
+      </block>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">资源使用情况</text>
+        </view>
+      </view>
+      <block a:for="{{resources}}">
+        <view class="cu-form-group">
+          <view class="title text-lg">{{item.name}}</view>
+          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputResourcesUse" value="{{item.useNum}}"/>
+          <view class="text-df text-gray">最大值：{{item.qty}}</view>
+        </view>
+      </block>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-picfill"></text>
+          <text class="text">现场图片</text>
+        </view>
+      </view>
+      <view class="bg-white padding">
+        <view class="grid col-4 grid-square">
+          <view class="placeholder inline" onTap="chooseImage"><text class="text-gray cuIcon-camerafill"></text></view>
+          <block a:for="{{imgs}}">
+            <view class="bg-img" data-index="{{index}}" onTap="actionImage" style="{{'background-image: url('+item+')'}}"></view>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view a:if="{{investigation == 1}}">
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-edit"></text>
+          <text class="text">消费调研</text>
+        </view>
+      </view>
+      <block a:for="{{resources}}">
+        <view class="cu-form-group">
+          <view class="title text-lg">{{item.name}}</view>
+          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputResourcesUse" value="{{item.useNum}}"/>
+          <view class="text-df text-gray">最大值：{{item.qty}}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <!-- 司团队操作 -->
+  <view class="footer">
+    <view class="action bg-white">
+      <button class="cu-btn block bg-blue lg" size="default" onTap="save" type="primary">确 定</button>
+  </view> 
 </view>

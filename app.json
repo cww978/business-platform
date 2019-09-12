@@ -14,7 +14,8 @@
     "pages/registration/company/company",
     "pages/registration/team/team",
     "pages/registration/salesman/decompose/decompose",
-    "pages/registration/salesman/implement/implement"
+    "pages/registration/salesman/implement/implement",
+    "pages/registration/salesman/decompose/success/success"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

@@ -1,6 +1,9 @@
-import { selProgrammeInfo } from '/mock/programme'
+import { selProgrammeInfo, selProgrammeCodes } from '/mock/programme'
 Page({
   data: {
+    programmeId: '',
+    programmeIds: [],
+    programmeIndex: '',
     programme: {
       typeNmae: '',
       typeId: '',
@@ -14,21 +17,49 @@ Page({
       targets: []
     }
   },
-  navTodec(){
-    dd.navigateTo({
-      url: './decompose/decompose'
+  programmeChange(e) {
+    let that = this
+    that.setData({
+      programmeId: that.data.programmeIds[e.detail.value].id,
+      programmeIndex: e.detail.value
+    })
+    selProgrammeInfo().then(res => {
+      that.setData({
+        programme: res.data
+      })
     })
   },
+  navTodec(){
+    if (this.data.programmeId == '') {
+      my.showToast({
+        type: 'none',
+        content: '请先选择方案',
+        duration: 1000
+      })
+    } else {
+      dd.navigateTo({
+        url: `./decompose/decompose?programmeId=${this.data.programmeId}`
+      })
+    }
+  },
   navToimp(){
-    dd.navigateTo({
-      url: './implement/implement'
-    })
+    if (this.data.programmeId == '') {
+      my.showToast({
+        type: 'none',
+        content: '请先选择方案',
+        duration: 1000
+      })
+    } else {
+      dd.navigateTo({
+        url: `./implement/implement?programmeId=${this.data.programmeId}`
+      })
+    }
   },
   onLoad() {
     let that = this
-    selProgrammeInfo().then((res) => {
+    selProgrammeCodes().then(res => {
       that.setData({
-        programme: res.data
+        programmeIds: res.data
       })
     })
   },

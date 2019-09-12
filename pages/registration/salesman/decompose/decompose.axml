@@ -8,10 +8,13 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}">终端公司
-          <picker value="{{0}}" range="{{companys}}">
+        <list-item arrow="{{true}}">
+          <picker value="{{companyIndex}}" onChange="companyPickerChange" range-key="companyName" range="{{companys}}">
             <view class="picker">
-              {{companys[0]}}
+              <view class="row">
+                <view class="row-title">终端公司</view>
+                <view class="row-extra text-lg text-gray">{{companys[companyIndex].companyName}}</view>
+              </view>
             </view>
           </picker>
         </list-item>
@@ -63,6 +66,6 @@
   <!-- 司团队操作 -->
   <view class="footer">
     <view class="action bg-white">
-      <button class="cu-btn block bg-blue lg" size="default" type="primary">终端团队执行</button>
+      <button class="cu-btn block bg-blue lg" size="default" onTap="save" type="primary">确定分配</button>
   </view> 
 </view>
