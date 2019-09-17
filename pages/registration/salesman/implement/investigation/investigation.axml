@@ -1,0 +1,61 @@
+<view>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">品吸测试信息</text>
+        </view>
+      </view>
+      <list>
+        <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
+          测试时间
+          <view slot="extra">
+            {{form.time==''?'请选择':form.time}}
+          </view>
+        </list-item>
+      </list>
+      <view class="cu-form-group">
+        <view class="title text-lg">测试地点</view>
+        <input value="{{form.address}}" onInput="addressInput" placeholder="..." />
+      </view>
+      <view class="cu-form-group">
+        <view class="title text-lg">测试样烟</view>
+        <input value="{{form.tobacco}}" onBlur="tobaccoInput" placeholder="..." />
+      </view>
+      <view class="cu-form-group">
+        <view class="title text-lg">样烟条数</view>
+        <input value="{{form.num}}" onInput="numInput" type="number" placeholder="..." />
+      </view>
+      <view class="cu-form-group">
+        <view class="title text-lg">测试人数</view>
+        <input value="{{form.mans}}" onBlur="mansInput" type="number" placeholder="..." />
+      </view>
+    </view>
+    <block a:for="{{investigList}}">
+      <view class="header">
+        <view>
+          <text class="text">{{item.title}}</text>
+        </view>
+      </view>
+      <view a:for="{{item.tests}}" a:for-item="item2" a:for-index="index2" class="cu-form-group">
+        <view class="title text-lg">{{item2}}</view>
+        <input data-form="{{item.form}}" value="{{investigForm[item.form][index2]}}" data-index="{{index2}}" onInput="onInputInvestig" type="number" placeholder="..." />
+      </view>
+    </block>
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">更多建议</text>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <textarea value="{{form.other}}" onInput="inputTextarea" maxlength="300" auto-height placeholder="填写建议..." />
+      </view>
+    </view>
+    <view class="padding-xs"></view>
+  </scroll-view>
+  <view class="footer">
+    <view class="action bg-white">
+      <button class="cu-btn block bg-blue lg" onTap="save" type="primary">确 定</button>
+  </view> 
+</view>

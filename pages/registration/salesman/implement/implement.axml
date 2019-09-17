@@ -18,30 +18,36 @@
             </view>
           </picker>
         </list-item>
+        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].type == 1}}" onClick="openSearchPage" last="{{true}}">
+          零售户
+          <view slot="extra" class="text-gray">
+            {{retail.name==''?'请选择':retail.name}}
+          </view>
+        </list-item>
       </list>
       <view class="cu-form-group">
         <view class="title text-lg">人数</view>
-        <input class="text-lg" type="number" onInput="inputMans" value="{{mans}}"/>
+        <input class="text-lg" type="digit" placeholder="..." onInput="inputMans" value="{{mans}}"/>
       </view>
       <block a:for="{{otherPoints}}">
         <view class="cu-form-group">
           <view class="title text-lg">{{item.text}}</view>
-          <input a:if="{{item.type == 1}}" class="text-lg" type="number" data-id="{{item.id}}"  onInput="inputOtherPoint"/>
-          <input a:else class="text-lg" type="text" data-id="{{item.id}}"  onInput="inputOtherPoint"/>
+          <input a:if="{{item.type == 1}}" class="text-lg" type="digit" data-index="{{index}}" placeholder="..." onInput="inputOtherPoint"/>
+          <input a:else class="text-lg" type="text" data-index="{{index}}" placeholder="..." onInput="inputOtherPoint"/>
         </view>
       </block>
     </view>
     <view>
       <view class="header">
         <view>
-          <text class="icon lg cuIcon-writefill"></text>
+          <text class="icon lg cuIcon-favor"></text>
           <text class="text">资源使用情况</text>
         </view>
       </view>
       <block a:for="{{resources}}">
         <view class="cu-form-group">
           <view class="title text-lg">{{item.name}}</view>
-          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputResourcesUse" value="{{item.useNum}}"/>
+          <input class="text-lg" type="digit" data-index="{{index}}" placeholder="..." onInput="inputResourcesUse" value="{{item.useNum}}"/>
           <view class="text-df text-gray">最大值：{{item.qty}}</view>
         </view>
       </block>
@@ -62,25 +68,55 @@
         </view>
       </view>
     </view>
-    <view a:if="{{investigation == 1}}">
+    <view a:if="{{hasInvestigation}}">
       <view class="header">
         <view>
           <text class="icon lg cuIcon-edit"></text>
           <text class="text">消费调研</text>
         </view>
       </view>
-      <block a:for="{{resources}}">
-        <view class="cu-form-group">
-          <view class="title text-lg">{{item.name}}</view>
-          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputResourcesUse" value="{{item.useNum}}"/>
-          <view class="text-df text-gray">最大值：{{item.qty}}</view>
+      <flex class="padding-left-rigth" wrap="wrap">
+        <view class="padding-xs title text-df">调研目的: </view>
+        <flex wrap="wrap">
+          <block a:for="{{objectives}}">
+            <view class="padding-xs" data-index="{{index}}" onTap="onObjectiveClick">
+              <view a:if="{{item.active == false}}" class="cu-tag text-df line-gray">{{item.text}}</view>
+              <view a:else class="cu-tag text-df line-blue">{{item.text}}</view>
+            </view>
+          </block>
+        </flex>
+      </flex>
+      <list>
+        <view a:for="{{questions}}" key="{{index}}">
+          <swipe-action
+            index="{{index}}"
+            restore="{{swipeIndex === null || swipeIndex !== index}}"
+            right="{{[{ type: 'delete', text: '删除', bgColor: '#0ff', fColor: '#333' }]}}"
+            onRightItemClick="onRightItemClick"
+            onSwipeStart="onSwipeStart"
+            extra="{{index}}"
+          >
+            <list-item
+              index="{{index}}"
+              key="questions-{{index}}"
+              data-index="{{index}}"
+              onClick="onQuestionClick"
+              last="{{index === list.length - 1}}"
+            >
+              <view class="text-lg">{{item.tobacco}}</view>
+              <view class="text-df text-gray">测试样烟数: {{item.num}}</view>
+              <view class="text-df text-gray">测试人数: {{item.mans}}</view>
+            </list-item>
+          </swipe-action>
         </view>
-      </block>
+      </list>
+      <view class="padding-lg">
+        <button onTap="investigClick" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加测试品</button>
+      </view>
     </view>
   </scroll-view>
-  <!-- 司团队操作 -->
   <view class="footer">
     <view class="action bg-white">
-      <button class="cu-btn block bg-blue lg" size="default" onTap="save" type="primary">确 定</button>
+      <button class="cu-btn block bg-blue lg" onTap="save" type="primary">确 定</button>
   </view> 
 </view>

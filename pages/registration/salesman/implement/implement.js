@@ -1,18 +1,67 @@
+import { selProgrammeInvestigation, saveProgrammeImplement } from '/mock/programme'
 Page({
   data: {
-    resources: [],
-    targets: [],
-    otherPoints: [],
+    resources: [], // 资源
+    targets: [], //对象
+    otherPoints: [], // 其他要素
     targetId: '',
+    mans: 0,
     imgs: [],
     targetIndex: 0,
-    investigation: 0,
-    programmeId: ''
+    hasInvestigation: false,
+    objectives: [],
+    programmeId: '',
+    questions: [],
+    swipeIndex: null,
+    question: null,
+    retail: {
+      id: '',
+      name: ''
+    },
+    // 提交表单数据
+    form: {
+      id: '',// 方案id
+      targetId: '',// 对象id
+      retailId: '', // 零售户id
+      mans: '',// 人数
+      otherPoints: [], // 其他要素
+      resources: [], // 资源使用
+      imgs: '', // 现场图片
+      questionIds: '', // 问卷id
+      objective: '', // 调研目的
+    }
   },
   targetPickerChange(e) {
     this.setData({
       targetId: this.data.targets[e.detail.value].id,
       targetIndex: e.detail.value
+    })
+  },
+  hasInvestigation() {
+    selProgrammeInvestigation().then(res =>{
+      let objectives = res.data.objectives
+      for (let item of objectives) {
+        item.active = false
+      }
+      objectives[0].active = true
+      this.setData({
+        hasInvestigation: true,
+        objectives: objectives
+      })
+    })
+  },
+  onObjectiveClick(e) {
+    let objectives = this.data.objectives
+    let active = objectives[e.target.dataset.index].active
+    objectives[e.target.dataset.index].active = !active
+    this.setData({
+      objectives: objectives
+    })
+  },
+  setRetail(retail) {
+    this.setData({
+      'retail.id': retail.id,
+      'retail.name': retail.name
     })
   },
   actionImage(e) {
@@ -37,6 +86,25 @@ Page({
       }
     })
   },
+  onRightItemClick(e) {
+    e.done()
+    let questions = this.data.questions
+    questions.splice(e.extra, 1)
+    this.setData({ questions: questions })
+  },
+  onSwipeStart(e) {
+    this.setData({
+      swipeIndex: e.index,
+    })
+  },
+  onQuestionClick(e){
+    this.setData({
+      question: this.data.questions[e.index]
+    })
+    dd.navigateTo({
+      url: `./investigation/investigation?question=${e.index}`
+    })
+  },
   chooseImage() {
     let that = this
     dd.chooseImage({
@@ -49,6 +117,18 @@ Page({
       }
     })
   },
+  inputMans(e) {
+    this.setData({
+      mans: e.detail.value
+    })
+  },
+  inputOtherPoint(e) {
+    let otherPoints = this.data.otherPoints
+    otherPoints[e.target.dataset.index].value = e.detail.value
+    this.setData({
+      otherPoints: otherPoints
+    })
+  },
   inputResourcesUse(e) {
     let index = e.target.dataset.index
     let inputValue = e.detail.value
@@ -58,22 +138,92 @@ Page({
       resources: resources
     })
   },
+  addQuestion(question) {
+    let questions = this.data.questions
+    questions.push(question)
+    this.setData({ questions: questions })
+  },
+  updateQuestion(index, question) {
+    let questions = this.data.questions
+    questions[index] = question
+    this.setData({ questions: questions })
+  },
+  investigClick() {
+    dd.navigateTo({
+      url: './investigation/investigation'
+    })
+  },
+  openSearchPage() {
+    dd.navigateTo({
+      url: '/pages/common/search/search'
+    })
+  },
+  onUnload() {
+    console.log('方案执行', 'page unload')
+  },
+  save() {
+    let mans = this.data.mans
+    let retailId = this.data.retail.id
+    let targetId = this.data.targetId
+    let otherPoints = []
+    for (let item of this.data.otherPoints) {
+      otherPoints.push({ id: item.id, value: item.value })
+    }
+    let resources = []
+     for (let item of this.data.resources) {
+      resources.push({ id: item.id, useNum: item.useNum })
+    }
+    let imgs = this.data.imgs.join(',')
+    let questionIds = []
+     for (let item of this.data.questions) {
+      questionIds.push(item.id)
+    }
+    questionIds = questionIds.join(',')
+    let objectives = []
+    for (let item of this.data.objectives) {
+      if (item.active) {
+        objectives.push(item.id)
+      }
+    }
+    objectives = objectives.join(',')
+    this.setData({
+      'form.id': this.data.programmeId,
+      'form.mans': mans,
+      'form.targetId': targetId,
+      'form.retailId': retailId,
+      'form.otherPoints': otherPoints,
+      'form.resources': resources,
+      'form.imgs': imgs,
+      'form.questionIds': questionIds,
+      'form.objectives': objectives
+    })
+    saveProgrammeImplement(this.data.form).then(res => {
+      let type = res.data == 0 ? 'fail' : 'success'
+      dd.navigateTo({
+        url: `./result/result?type=${type}`
+      })
+    })
+  },
   onLoad(options) {
+    console.log('执行方案', options.programmeId)
     let that = this
     let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
     let targets = getCurrentPages()[getCurrentPages().length - 2].data.programme.targets
     let otherPoints = getCurrentPages()[getCurrentPages().length - 2].data.programme.otherPoints
-    let investigation = getCurrentPages()[getCurrentPages().length - 2].data.programme.investigation
     for (let item of resources) {
-      item.useNum = 0
+      item.useNum = ''
+    }
+    for (let item of otherPoints) {
+      item.value = ''
     }
     that.setData({
-      investigation: investigation,
+      questions: [],
       resources: resources,
       targets: targets,
       otherPoints: otherPoints,
       programmeId: options.programmeId,
       targetId: targets[that.data.targetIndex].id
     })
+    this.hasInvestigation()
   },
 });

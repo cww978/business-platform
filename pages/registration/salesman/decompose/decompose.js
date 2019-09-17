@@ -8,27 +8,16 @@ Page({
     resources: [],
     companyCode: '',
     companyName: '',
-    mans: 5,
-    defaultSplit: 5
+    standard: ''
   },
-  inputMans(e) {
-    let inputValue = e.detail.value
-    let resources = this.data.resources
-    for (let item of resources) {
-      item.split = inputValue * item.default
-    }
-    this.setData({
-      mans: inputValue,
-      resources: resources
-    })
+  inputTextarea(e) {
+    this.setData({ standard: e.detail.value })
   },
   inputSplit(e) {
     let index = e.target.dataset.index
     let inputValue = e.detail.value
-    let split = this.data.mans * inputValue
     let resources = this.data.resources
-    resources[index].split = split
-    resources[index].default = inputValue
+    resources[index].split = inputValue
     this.setData({
       resources: resources
     })
@@ -45,7 +34,7 @@ Page({
     let params = {
       id: that.data.programmeId,
       companyCode: that.data.companyCode,
-      mans: that.data.mans,
+      standard: that.data.standard,
       resources: that.data.resources
     }
     saveResolveCompany(params).then(res =>{
@@ -59,8 +48,7 @@ Page({
     let that = this
     let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
     for (let item of resources) {
-      item.split = this.data.mans * this.data.defaultSplit
-      item.default = this.data.defaultSplit
+      item.split = ''
     }
     this.setData({
       resources: resources,

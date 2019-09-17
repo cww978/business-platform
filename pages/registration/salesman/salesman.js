@@ -37,6 +37,7 @@ Page({
         duration: 1000
       })
     } else {
+      console.log('分配方案', this.data.programmeId)
       dd.navigateTo({
         url: `./decompose/decompose?programmeId=${this.data.programmeId}`
       })
@@ -50,6 +51,7 @@ Page({
         duration: 1000
       })
     } else {
+      console.log('执行', this.data.programmeId)
       dd.navigateTo({
         url: `./implement/implement?programmeId=${this.data.programmeId}`
       })

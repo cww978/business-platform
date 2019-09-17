@@ -2,6 +2,82 @@
 let Mock = require ('/util/mock')
 
 /**
+ * 执行方案
+ * @param cityCode String
+ */
+export function saveProgrammeImplement(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|0-1': 1
+    })
+    console.log('方案执行:', param)
+    resolve(data)
+  })
+}
+
+/**
+ * 保存调研信息
+ * @param cityCode String
+ */
+export function saveInvestigationQuestion(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data': {
+        id: /\d{5,10}/
+      }
+    })
+    console.log('保存调研信息:', param)
+    resolve(data)
+  })
+}
+
+/**
+ * 查询方案是否需要调研 
+ * @param cityCode String
+ */
+export function selProgrammeInvestigation(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data': {
+        id: /\d{5,10}/,
+        'objectives|3-5': [{
+          text: function() {
+            return Mock.mock('@first()')
+          },
+          id:/\d{5,10}/
+        }]
+      }
+    })
+    console.log('获取方案编码:', param)
+    resolve(data)
+  })
+}
+
+/**
+ * 根据位置、关键字搜索零售户 
+ * @param cityCode String
+ */
+export function selRetailersFromCoord(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|1-30': [{
+        name:function() {
+          return Mock.mock('@first()')
+        },
+        address: function() {
+          return Mock.mock('@first(5)')
+        },
+        longitude: /\d{5,10}/,
+        latitude: /\d{5,10}/,
+        id: /\d{5,10}/
+      }]
+    })
+    console.log('获取方案编码:', param)
+    resolve(data)
+  })
+}
+
+/**
  * 根据地市编码获取方案编码 
  * @param cityCode String
  */

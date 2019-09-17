@@ -19,42 +19,30 @@
           </picker>
         </list-item>
       </list>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-text"></text>
+          <text class="text">资源分配标准</text>
+        </view>
+      </view>
       <view class="cu-form-group">
-        <view class="title text-lg">人数</view>
-        <input class="text-lg" type="number" onInput="inputMans" value="{{mans}}"/>
+        <textarea onInput="inputTextarea" maxlength="200" auto-height placeholder="请输入标准" />
       </view>
     </view>
     <view>
       <view class="header">
         <view>
-          <text class="icon lg cuIcon-writefill"></text>
-          <text class="text">资源分配标准</text><text class="text-red text-sm">(每人)</text>
+          <text class="icon lg cuIcon-favor"></text>
+          <text class="text">资源分配明细</text>
         </view>
       </view>
       <block a:for="{{resources}}">
         <view class="cu-form-group">
           <view class="title text-lg">{{item.name}}</view>
-          <input class="text-lg" type="number" data-index="{{index}}"  onInput="inputSplit" value="{{defaultSplit}}"/>
-        </view>
-      </block>
-    </view>
-    <view>
-      <view class="header">
-        <view>
-          <text class="icon lg cuIcon-writefill"></text>
-          <text class="text">资源分配明细</text><text class="text-red text-sm">(根据人数和标准计算获得)</text>
-        </view>
-      </view>
-      <view class="grid col-3 text-center inline">
-        <view><text class="text-lg text-black">资源名称</text></view>
-        <view><text class="text-lg text-black">分配数</text></view>
-        <view><text class="text-lg text-black">可分配数</text></view>
-      </view>
-      <block a:for="{{resources}}">
-        <view class="grid col-3 text-center inline">
-          <view><text class="text-lg">{{item.name}}</text></view>
-          <view><text class="{{item.split>item.qty?'text-df text-red':'text-df'}}">{{item.split}}</text></view>
-          <view><text class="text-df">{{item.qty}}</text></view>
+          <input class="text-lg" type="digit" data-index="{{index}}" placeholder="..."  onInput="inputSplit" value="{{item.split}}"/>
+          <view class="text-df text-gray">最大值：{{item.qty}}</view>
         </view>
       </block>
     </view>

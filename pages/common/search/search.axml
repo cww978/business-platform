@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="search-bar">
+    <search-bar
+      focus="{{false}}"
+      value="{{value}}"
+      placeholder="{{placeholder}}"
+      onInput="onInput"
+      onCancel="onCancel"
+      onClear="onClear"
+      onSubmit="onSubmit"
+      showCancelButton="{{false}}" />
+  </view>
+  <view class="location padding-sm text-lg">当前位置
+    <flex class="padding-top">
+      <flex-item><view class="text-gray text-cut text-df">{{ hasLocation?address:'暂无位置信息'}}</view></flex-item>
+      <view onTap="resLocationClick" class="text-blue text-df">重新获取</view>
+    </flex>
+  </view>
+  <scroll-view style="height: calc(100vh - 120px);" scroll-y>
+    <list>
+			<view slot="header">
+				附近零售户
+			</view>
+			<block a:for="{{retails}}">
+				<list-item
+					index="{{index}}"
+					onClick="onRetailClick"
+					key="retails-{{index}}"
+					last="{{index === (retails.length - 1)}}"
+				>
+					{{item.name}}
+          <view class="am-list-brief">{{item.address}}</view>
+			 </list-item>
+			</block>
+		</list>
+  </scroll-view>
+</view>
