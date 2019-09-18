@@ -2,7 +2,8 @@ import { selProgrammeInfo, selProgrammeCodes } from '/mock/programme'
 Page({
   data: {
     programmeId: '',
-    programmeIds: [],
+    cityCode: '',
+    programmes: [],
     programmeIndex: '',
     programme: {
       typeNmae: '',
@@ -20,7 +21,7 @@ Page({
   programmeChange(e) {
     let that = this
     that.setData({
-      programmeId: that.data.programmeIds[e.detail.value].id,
+      programmeId: that.data.programmes[e.detail.value].id,
       programmeIndex: e.detail.value
     })
     selProgrammeInfo().then(res => {
@@ -37,9 +38,9 @@ Page({
         duration: 1000
       })
     } else {
-      console.log('分配方案', this.data.programmeId)
+      console.log('分配', this.data.programmeId)
       dd.navigateTo({
-        url: `./decompose/decompose?programmeId=${this.data.programmeId}`
+        url: `./decompose/decompose?programmeId=${this.data.programmeId}&cityCode=${this.data.cityCode}`
       })
     }
   },
@@ -53,16 +54,17 @@ Page({
     } else {
       console.log('执行', this.data.programmeId)
       dd.navigateTo({
-        url: `./implement/implement?programmeId=${this.data.programmeId}`
+        url: `./implement/implement?programmeId=${this.data.programmeId}&cityCode=${this.data.cityCode}`
       })
     }
   },
-  onLoad() {
+  onReady() {
     let that = this
     selProgrammeCodes().then(res => {
       that.setData({
-        programmeIds: res.data
+        programmes: res.data
       })
     })
   },
-});
+  onLoad() {}
+})

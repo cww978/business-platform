@@ -13,11 +13,11 @@
         </view>  
       </list-item>
       <list-item arrow="{{true}}">
-        <picker onChange="programmeChange" range-key="id" range="{{programmeIds}}">
+        <picker onChange="programmeChange" range-key="id" range="{{programmes}}">
           <view class="picker">
             <view class="row">
               <view class="row-title">方案编码</view>
-              <view class="row-extra text-df text-gray">{{programmeIds[programmeIndex].id}}</view>
+              <view class="row-extra text-df text-gray">{{programmes[programmeIndex].id}}</view>
             </view>
           </view>
         </picker>

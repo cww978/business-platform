@@ -7,42 +7,42 @@ Page({
     menus: [
       {
         path: '/pages/programme/report/report',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'report.png',
         text: '方案申报'
       },
       {
         path: '/pages/programme/assess/assess',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'assess.png',
         text: '方案评估'
       },
       {
         path: '/pages/programme/verify/verify',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'verify.png',
         text: '方案审核'
       },
       {
         path: '/pages/programme/sample/sample',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'sample.png',
         text: '评估抽查'
       },
       {
         path: '/pages/stock/check/check',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'check.png',
         text: '销区盘点'
       },
       {
         path: '/pages/stock/locking/locking',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'locking.png',
         text: '销区关账'
       },
       {
         path: '/pages/stock/settle/settle',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'settle.png',
         text: '销区结账'
       },
       {
         path: '/pages/registration/registration',
-        icon: 'https://gw.alipayobjects.com/zos/rmsportal/VBqNBOiGYkCjqocXjdUj.png',
+        icon: 'registration.png',
         text: '执行登记'
       }
     ]

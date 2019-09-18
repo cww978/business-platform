@@ -1,0 +1,6 @@
+{
+  "defaultTitle": "操作结果",
+  "usingComponents": {
+    "message": "mini-antui/es/message/index"
+  }
+}

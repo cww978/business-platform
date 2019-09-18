@@ -41,7 +41,7 @@
       <block a:for="{{resources}}">
         <view class="cu-form-group">
           <view class="title text-lg">{{item.name}}</view>
-          <input class="text-lg" type="digit" data-index="{{index}}" placeholder="..."  onInput="inputSplit" value="{{item.split}}"/>
+          <input class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputSplit" value="{{item.split}}"/>
           <view class="text-df text-gray">最大值：{{item.qty}}</view>
         </view>
       </block>

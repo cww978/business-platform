@@ -1,0 +1,49 @@
+<view>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-home"></text>
+          <text class="text">所属终端公司</text>
+        </view>
+      </view>
+      <list>
+        <list-item arrow="{{false}}" last="{{true}}">
+          终端公司
+          <view slot="extra">
+						{{companyName}}
+					</view>
+        </list-item>
+      </list>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-text"></text>
+          <text class="text">资源分配标准</text>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="text-lg text-content padding-top padding-bottom">{{standard}}</view> 
+      </view>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-favor"></text>
+          <text class="text">资源分配明细</text>
+        </view>
+      </view>
+      <block a:for="{{resources}}">
+        <view class="cu-form-group">
+          <view class="text-lg">{{item.name}}</view>
+          <view class="text-lg">可使用量: {{item.qty}}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <view class="footer">
+    <view class="action bg-white">
+      <button class="cu-btn block bg-blue lg" onTap="save">确认到货</button>
+  </view> 
+</view>

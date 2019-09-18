@@ -3,6 +3,7 @@ import { selCompanys, saveResolveCompany } from '/mock/programme'
 Page({
   data: {
     programmeId: '',
+    cityCode: '',
     companys: [],
     companyIndex: 0,
     resources: [],
@@ -32,6 +33,7 @@ Page({
   save() {
     let that = this
     let params = {
+      cityCode: that.data.cityCode,
       id: that.data.programmeId,
       companyCode: that.data.companyCode,
       standard: that.data.standard,
@@ -45,6 +47,8 @@ Page({
     })
   },
   onLoad(options) {
+    console.log('方案编码', options.programmeId)
+    console.log('地市编码', options.cityCode)
     let that = this
     let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
     for (let item of resources) {
@@ -52,7 +56,8 @@ Page({
     }
     this.setData({
       resources: resources,
-      programmeId: options.programmeId
+      programmeId: options.programmeId,
+      cityCode: options.cityCode
     })
     // 查询终端公司列表
     selCompanys().then((res) => {

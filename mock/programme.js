@@ -2,6 +2,67 @@
 let Mock = require ('/util/mock')
 
 /**
+ * 终端公司资源到货确认
+ * @param cityCode String
+ * @param id String
+ * @param companyCode String
+ */
+export function saveConfirmResources(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|0-1': 1
+    })
+    resolve(data)
+  })
+  console.log('终端公司资源到货确认:', param)
+}
+
+/**
+ * 查询用户所属的终端公司
+ */
+export function selUserCompany(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data': {
+        userType: 1,
+        companyName: function() {
+          return Mock.mock('@first()')
+        },
+        companyCode: /\d{5,10}/
+      }
+    })
+    resolve(data)
+  })
+}
+
+/**
+ * 查询终端公司资源分配
+ * @param cityCode String
+ * @param id String
+ * @param companyCode String
+ */
+export function selResourcesDistribution(param){
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data': {
+        standard: function() {
+          return Mock.mock('@title(10)')
+        },
+        'resources|2-5': [{
+          name: function() {
+            return Mock.mock('@first()')
+          },
+          id: /\d{5,10}/,
+          'qty|1-100': 1
+        }]
+      }
+    })
+    console.log('查询终端公司的资源分配情况:', param)
+    resolve(data)
+  })
+}
+
+/**
  * 执行方案
  * @param cityCode String
  */
@@ -48,7 +109,7 @@ export function selProgrammeInvestigation(param){
         }]
       }
     })
-    console.log('获取方案编码:', param)
+    console.log('方案调研查询:', param)
     resolve(data)
   })
 }
@@ -114,8 +175,7 @@ export function saveResolveCompany(param){
 }
 
 /**
- * 获取该角色所属的终端公司
- * @param id String
+ * 查询终端公司列表
  */
 export function selCompanys(param){
   return new Promise(resolve => {

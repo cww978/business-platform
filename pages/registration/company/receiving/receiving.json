@@ -1,5 +1,5 @@
 {
-  "defaultTitle": "执行登记",
+  "defaultTitle": "资源到货确认",
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "list": "mini-antui/es/list/index",

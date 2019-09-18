@@ -14,7 +14,7 @@
       <block a:for="{{menus}}"> 
           <view data-index="{{index}}" onTap="onItemClick" class="cu-item">
             <view class="cuIcon">
-              <view class="cu-avatar radius" style="background-image:url(/static/logo.png);"></view>
+              <view class="cu-avatar radius" style="{{'background-image:url(/static/menu-icon/'+item.icon+');'}}"></view>
             </view>
             <text>{{item.text}}</text>
           </view>

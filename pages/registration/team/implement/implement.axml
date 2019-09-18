@@ -25,11 +25,6 @@
           </view>
         </list-item>
       </list>
-      <flex class="cu-form-group">
-        <view class="title text-lg">当前地点</view>
-        <flex-item class="padding-left"><text class="text-lg text-gray text-cut">当前地点</text></flex-item>
-        <view><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
-      </flex>
       <view class="cu-form-group">
         <view class="title text-lg">人数</view>
         <input class="text-lg" type="number" placeholder="请输入.." onInput="inputMans" value="{{mans}}"/>

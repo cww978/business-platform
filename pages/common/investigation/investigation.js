@@ -112,7 +112,7 @@ Page({
   onLoad(options) {
     if(options.question){
       let lastPage = getCurrentPages()[getCurrentPages().length - 2]
-      let qty =lastPage.data.question.qty.split(',')
+      let qty = lastPage.data.question.qty.split(',')
       let branch = lastPage.data.question.branch.split(',')
       let taste = lastPage.data.question.taste.split(',')
       this.setData({

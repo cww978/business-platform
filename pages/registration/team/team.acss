@@ -2,6 +2,9 @@
   height: 100vh;
 }
 .footer {
+  z-index:2;
+  position:absolute;
+  width:100vw;
   box-shadow: 0px -2px 3px 0px #eee;
   display: flex;
   flex-direction: row;
@@ -18,9 +21,40 @@
 .footer .cu-btn.block {
   width: 60%;
 }
-.title{
-  padding: 5px 5px;
+.icon.lg{
+  margin-right: 5px;
 }
-.title .icon{
-  margin-right: 10px;
+.info-card{
+  background-color: white;
+}
+.info-row .am-list-content{
+  display: flex;
+  align-items: center;
+}
+.am-list-content .title{
+  font-size: 0.3rem;
+  padding-right: 5px;
+}
+.am-list-content, .am-list-extra{
+  overflow: auto;
+  white-space: pre-wrap;
+}
+.info-row {
+  padding: 5px 0px;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  flex-basis: initial;
+}
+.table{
+  padding: 5px 0px;
+}
+.table-td{
+  padding: 3px 5px;
 }

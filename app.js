@@ -2,7 +2,8 @@ import { getUserInfo } from './api/user'
 App({
   globalData: {
     userInfo: null,
-    childMenus: []
+    childMenus: [],
+    registration: null
   },
   // 更新并保存个人信息
   updateUserInfo(){

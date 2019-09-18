@@ -60,3 +60,6 @@ input{
 .cuIcon-camerafill{
   font-size: 0.44rem
 }
+.cuIcon-locationfill{
+  font-size: 0.5rem
+}

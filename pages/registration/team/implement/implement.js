@@ -1,14 +1,15 @@
-import { selProgrammeInvestigation, saveProgrammeImplement } from '/mock/programme'
+import { selProgrammeInvestigation, saveProgrammeImplement, selResourcesDistribution } from '/mock/programme'
 import { saveImage } from '/api/common'
+let app = getApp()
 Page({
   data: {
     resources: [], // 资源
     targets: [], //对象
+    targetIndex: 0,
     otherPoints: [], // 其他要素
     targetId: '',
     mans: 0,
     imgs: [],
-    targetIndex: 0,
     hasInvestigation: false,
     objectives: [],
     questions: [],
@@ -20,7 +21,7 @@ Page({
     },
     // 提交表单数据
     form: {
-      cityCode: '',
+      cityCode: '',// 地市编码
       id: '',// 方案id
       targetId: '',// 对象id
       retailId: '', // 零售户id
@@ -103,7 +104,7 @@ Page({
       question: this.data.questions[e.index]
     })
     dd.navigateTo({
-      url: `./investigation/investigation?question=${e.index}`
+      url: `/pages/common/investigation/investigation?question=${e.index}`
     })
   },
   chooseImage() {
@@ -207,22 +208,30 @@ Page({
       })
     })
   },
+  onReady() {
+    let params = {
+      id: this.data.form.id,
+      cityCode: this.data.form.cityCode,
+      companyCode: app.globalData.registration.companyCode
+    }
+    let that = this
+    selResourcesDistribution(params).then(res => {
+      that.setData({
+        resources: res.data.resources
+      })
+    })
+  },
   onLoad(options) {
     console.log('方案编码', options.programmeId)
     console.log('地市编码', options.cityCode)
     let that = this
-    let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
     let targets = getCurrentPages()[getCurrentPages().length - 2].data.programme.targets
     let otherPoints = getCurrentPages()[getCurrentPages().length - 2].data.programme.otherPoints
-    for (let item of resources) {
-      item.useNum = ''
-    }
     for (let item of otherPoints) {
       item.value = ''
     }
     that.setData({
       questions: [],
-      resources: resources,
       targets: targets,
       otherPoints: otherPoints,
       'form.id': options.programmeId,
@@ -230,5 +239,5 @@ Page({
       targetId: targets[that.data.targetIndex].id
     })
     this.hasInvestigation()
-  },
-});
+  }
+})
