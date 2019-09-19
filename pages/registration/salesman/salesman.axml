@@ -1,5 +1,5 @@
-<view class="page">
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+<view>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px);">
     <list>
       <view slot="header">
 				<view>
@@ -64,12 +64,12 @@
     </list>
   </scroll-view>
   <!-- 业务员操作 -->
-  <view class="footer">
+  <footer>
     <view class="action bg-white" onTap="navTodec">
       <text class="text-center text-xl text-blue">分解至终端</text>
     </view>
     <view class="action bg-blue" onTap="navToimp">
       <text class="text-center text-xl text-white">团队执行</text>
     </view>
-  </view>
+  </footer>
 </view>

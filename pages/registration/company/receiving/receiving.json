@@ -2,6 +2,7 @@
   "defaultTitle": "资源到货确认",
   "allowsBounceVertical": "NO",
   "usingComponents":{
+    "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",
     "flex": "mini-antui/es/flex/index",

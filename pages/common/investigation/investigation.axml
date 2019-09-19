@@ -54,9 +54,9 @@
     </view>
     <view class="padding-xs"></view>
   </view>
-  <view class="footer" style="bottom: 0px">
+  <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">执行方案</text>
     </view>
-  </view>
+  </footer>
 </view>

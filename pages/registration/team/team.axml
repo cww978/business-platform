@@ -52,9 +52,9 @@
       </list-item>
     </list>
   </view>
-  <view class="footer" style="bottom: 0px">
+  <footer>
     <view class="padding text-center" onTap="navToImp">
       <text class="text-xl text-blue">执行方案</text>
     </view>
-  </view>
+  </footer>
 </view>
