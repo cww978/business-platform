@@ -1,5 +1,5 @@
 <view>
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+  <view style="min-height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -46,10 +46,10 @@
         </view>
       </block>
     </view>
-  </scroll-view>
-  <!-- 司团队操作 -->
-  <view class="footer">
-    <view class="action bg-white">
-      <button class="cu-btn block bg-blue lg" size="default" onTap="save" type="primary">确定分配</button>
-  </view> 
+  </view>
+  <view class="footer" style="bottom: 0px">
+    <view class="padding text-center" onTap="save">
+      <text class="text-xl text-blue">确定分配</text>
+    </view>
+  </view>
 </view>

@@ -2,13 +2,13 @@
   <scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
     <view class="cu-list menu">
       <block a:for="{{menus}}">
-        <view class="shadow-blur cu-item">
+        <view onTap="clickMenu" data-path="{{item.path}}" class="shadow-blur cu-item">
 					<view class="content padding-tb-sm">
 						<view>{{item.text}}</view>
 						<view class="text-gray text-sm">{{item.subTitle}}</view>
 					</view>
           <view class="action">
-            <view class="cu-tag round bg-red sm" a:if="{{item.tag > 0}}">{{item.tag}}</view>
+            <text class="lg text-gray cuIcon-right"></text>
           </view>
 				</view>
       </block>

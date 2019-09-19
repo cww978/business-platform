@@ -2,19 +2,39 @@
 let Mock = require ('/util/mock')
 
 /**
- * 终端公司资源到货确认
+ * 非方案执行
  * @param cityCode String
- * @param id String
- * @param companyCode String
+ * @param themeId String
+ * @param modality String
+ * @param retailId String
+ * @param typeId String
+ * @param targetId String
+ * @param imgs String
  */
-export function saveConfirmResources(param){
+export function saveNoProgrammeImplement(param){
+  console.log('非方案执行:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data|0-1': 1
     })
     resolve(data)
   })
+}
+
+/**
+ * 终端公司资源到货确认
+ * @param cityCode String
+ * @param id String
+ * @param companyCode String
+ */
+export function saveConfirmResources(param){
   console.log('终端公司资源到货确认:', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|0-1': 1
+    })
+    resolve(data)
+  })
 }
 
 /**
@@ -42,6 +62,7 @@ export function selUserCompany(param){
  * @param companyCode String
  */
 export function selResourcesDistribution(param){
+  console.log('查询终端公司的资源分配情况:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data': {
@@ -57,7 +78,6 @@ export function selResourcesDistribution(param){
         }]
       }
     })
-    console.log('查询终端公司的资源分配情况:', param)
     resolve(data)
   })
 }
@@ -67,11 +87,11 @@ export function selResourcesDistribution(param){
  * @param cityCode String
  */
 export function saveProgrammeImplement(param){
+  console.log('方案执行:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data|0-1': 1
     })
-    console.log('方案执行:', param)
     resolve(data)
   })
 }
@@ -81,13 +101,13 @@ export function saveProgrammeImplement(param){
  * @param cityCode String
  */
 export function saveInvestigationQuestion(param){
+  console.log('保存调研信息:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data': {
         id: /\d{5,10}/
       }
     })
-    console.log('保存调研信息:', param)
     resolve(data)
   })
 }
@@ -97,6 +117,7 @@ export function saveInvestigationQuestion(param){
  * @param cityCode String
  */
 export function selProgrammeInvestigation(param){
+  console.log('方案调研查询:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data': {
@@ -109,7 +130,6 @@ export function selProgrammeInvestigation(param){
         }]
       }
     })
-    console.log('方案调研查询:', param)
     resolve(data)
   })
 }
@@ -119,6 +139,7 @@ export function selProgrammeInvestigation(param){
  * @param cityCode String
  */
 export function selRetailersFromCoord(param){
+  console.log('获取方案编码:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data|1-30': [{
@@ -133,7 +154,6 @@ export function selRetailersFromCoord(param){
         id: /\d{5,10}/
       }]
     })
-    console.log('获取方案编码:', param)
     resolve(data)
   })
 }
@@ -143,6 +163,7 @@ export function selRetailersFromCoord(param){
  * @param cityCode String
  */
 export function selProgrammeCodes(param){
+  console.log('获取方案编码:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data|1-30': [{
@@ -153,7 +174,6 @@ export function selProgrammeCodes(param){
         id: /\d{5,10}/
       }]
     })
-    console.log('获取方案编码:', param)
     resolve(data)
   })
 }
@@ -165,11 +185,11 @@ export function selProgrammeCodes(param){
  * @param resources Array
  */
 export function saveResolveCompany(param){
+  console.log('分解至终端公司:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data|0-1': 1
     })
-    console.log('分解至终端公司:', param)
     resolve(data)
   })
 }

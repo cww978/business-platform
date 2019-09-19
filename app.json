@@ -22,7 +22,10 @@
     "pages/registration/company/receiving/result/result",
     "pages/registration/team/implement/implement",
     "pages/common/investigation/investigation",
-    "pages/registration/team/implement/result/result"
+    "pages/registration/team/implement/result/result",
+    "pages/noregistration/noregistration",
+    "pages/noregistration/result/result",
+    "pages/common/areaAndYearMonth/areaAndYearMonth"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

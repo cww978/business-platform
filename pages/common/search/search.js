@@ -30,7 +30,7 @@ Page({
           resolve()
         },
         fail() {
-          dd.alert({ title: '定位失败' })
+          dd.showToast({ content: '定位失败' })
         }
       })
     })

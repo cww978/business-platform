@@ -1,5 +1,5 @@
-<view class="page">
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+<view>
+  <view style="min-height: calc(100vh - 60px)">
     <list>
       <view slot="header">
 				<view>
@@ -51,10 +51,10 @@
         </view>
       </list-item>
     </list>
-  </scroll-view>
-  <view class="footer">
-    <view class="action bg-white" onTap="navToImp">
-      <text class="text-center text-xl text-blue">执行方案</text>
+  </view>
+  <view class="footer" style="bottom: 0px">
+    <view class="padding text-center" onTap="navToImp">
+      <text class="text-xl text-blue">执行方案</text>
     </view>
   </view>
 </view>

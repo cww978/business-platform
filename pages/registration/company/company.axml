@@ -1,5 +1,5 @@
-<view class="page">
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+<view>
+  <view style="min-height: calc(100vh - 60px)">
     <list>
       <view slot="header">
 				<view>
@@ -51,11 +51,10 @@
         </view>
       </list-item>
     </list>
-  </scroll-view>
-  <!-- 业务员操作 -->
-  <view class="footer">
-    <view class="action bg-white" onTap="navToRec">
-      <text class="text-center text-xl text-blue">进行确认</text>
+  </view>
+  <view class="footer" style="bottom: 0px">
+    <view class="padding text-center" onTap="save">
+      <text class="text-xl text-blue">确 定</text>
     </view>
   </view>
 </view>

@@ -1,0 +1,29 @@
+<view>
+  <view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">请选择区域和时间</text>
+        </view>
+      </view>
+      <list>
+        <list-item arrow="{{true}}">
+          销区
+          <view slot="extra">
+            {{areaText==''?'请选择':areaText}}
+          </view>
+        </list-item>
+        <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
+          年月
+          <view slot="extra">
+            {{yearMonth==''?'请选择':yearMonth}}
+          </view>
+        </list-item>
+      </list>
+    </view>
+    <view class="padding-xs"></view>
+    <view class="padding-xs">
+      <button class="cu-btn block bg-blue lg" onTap="clickDefine">确 定</button>
+    </view> 
+  </view>
+</view>

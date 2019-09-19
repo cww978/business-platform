@@ -26,24 +26,27 @@ Page({
         text: '评估抽查'
       },
       {
-        path: '/pages/stock/check/check',
+        path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=check',
         icon: 'check.png',
         text: '销区盘点'
       },
       {
-        path: '/pages/stock/locking/locking',
+        path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=locking',
         icon: 'locking.png',
         text: '销区关账'
       },
       {
-        path: '/pages/stock/settle/settle',
+        path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=settle',
         icon: 'settle.png',
         text: '销区结账'
       },
       {
-        path: '/pages/registration/registration',
         icon: 'registration.png',
-        text: '执行登记'
+        text: '执行登记',
+        child: [
+          { path: '/pages/registration/registration', text: '方案执行登记' },
+          { path: '/pages/noregistration/noregistration', text: '非方案执行登记' }
+        ]
       }
     ]
   },

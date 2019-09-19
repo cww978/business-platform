@@ -56,3 +56,7 @@ input{
 .am-flexbox-item{
   margin-left: 0px;
 }
+.cu-form-group textarea{
+  height: auto;
+  min-height: 4.6em;
+}

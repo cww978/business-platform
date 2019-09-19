@@ -1,5 +1,5 @@
 <view>
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 70px);">
+  <view style="min-height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -27,8 +27,8 @@
       </list>
       <flex class="cu-form-group">
         <view class="title text-lg">当前地点</view>
-        <flex-item class="padding-left"><text class="text-lg text-gray text-cut">当前地点</text></flex-item>
-        <view><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
+        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{form.address}}</<view></flex-item>
+        <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
       <view class="cu-form-group">
         <view class="title text-lg">人数</view>
@@ -119,9 +119,10 @@
         <button onTap="investigClick" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加测试品</button>
       </view>
     </view>
-  </scroll-view>
-  <view class="footer">
-    <view class="action bg-white">
-      <button class="cu-btn block bg-blue lg" onTap="save" type="primary">确 定</button>
-  </view> 
+  </view>
+  <view class="footer" style="bottom: 0px">
+    <view class="padding text-center" onTap="save">
+      <text class="text-xl text-blue">确 定</text>
+    </view>
+  </view>
 </view>

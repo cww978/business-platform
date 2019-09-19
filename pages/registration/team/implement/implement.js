@@ -22,6 +22,9 @@ Page({
     // 提交表单数据
     form: {
       cityCode: '',// 地市编码
+      address: '',
+      longitude: 0,
+      latitude: 0,
       id: '',// 方案id
       targetId: '',// 对象id
       retailId: '', // 零售户id
@@ -49,6 +52,31 @@ Page({
       this.setData({
         hasInvestigation: true,
         objectives: objectives
+      })
+    })
+  },
+  clickAddress() {
+    dd.alert({
+      content: this.data.form.address,
+      buttonText: '确定'
+    })
+  },
+  location() {
+    return new Promise(resolve => {
+      let that = this
+      dd.getLocation({
+        success(res){
+          that.setData({
+            hasLocation: true,
+            'form.address': res.address,
+            'form.longitude': res.longitude,
+            'form.latitude': res.latitude
+          })
+          resolve()
+        },
+        fail() {
+          dd.showToast({ content: '定位失败' })
+        }
       })
     })
   },
@@ -220,6 +248,8 @@ Page({
         resources: res.data.resources
       })
     })
+    this.hasInvestigation()
+    this.location()
   },
   onLoad(options) {
     console.log('方案编码', options.programmeId)
@@ -238,6 +268,5 @@ Page({
       'form.cityCode': options.cityCode,
       targetId: targets[that.data.targetIndex].id
     })
-    this.hasInvestigation()
   }
 })

@@ -4,7 +4,9 @@ Page({
     menus: []
   },
   clickMenu(e){
-    console.info('path', this.data.menus[e.info].path)
+    dd.navigateTo({
+      url: e.target.dataset.path
+    })
   },
   onLoad(options) {
     //修改title
