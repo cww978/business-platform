@@ -1,0 +1,13 @@
+.header {
+  height: 50px;
+  position: sticky;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.header.shadow {
+  box-shadow: rgba(153, 153, 153, 0.24) 0 2px 7px;
+}
+.check-list .am-list-item{
+  margin: 0.1rem
+}

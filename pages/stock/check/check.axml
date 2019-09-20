@@ -1,3 +1,40 @@
 <view>
-  盘点
+  <view class="header {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
+    <flex class="padding">
+      <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
+      <flex-item><view class="text-df
+      
+      ">确定人: {{definitePerson}}</view></flex-item>
+    </flex>
+  </view>
+  <view style="min-height:calc(100vh - 110px)">
+    <list class="check-list">
+      <block  a:for="{{products}}">
+        <list-item
+          index="{{index}}"
+          key="questions-{{index}}"
+          data-index="{{index}}"
+          onClick="onInAccountClick"
+          last="{{index === list.length - 1}}"
+        >
+          <view class="text-lg">{{item.name}}</view>
+          <flex>
+            <flex-item><view class="text-df text-gray">本地库存: {{item.localNum}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">盘点库存: {{item.remoteNum}}</view></flex-item>
+          </flex>
+          <flex>
+            <flex-item><view class="text-df text-gray">冲溢平衡: {{item.balance}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">差值: {{item.difference}}</view></flex-item>
+          </flex>
+        </list-item>
+      </block>
+    </list>
+    <button size="default" type="primary" onTap="clickAddPromotion">增加促销用品</button>
+  </view>
+  <promotion show="{{showPromotion}}" onClickCancel="promotionCancel"></promotion>
+  <footer>
+    <view class="padding text-center" onTap="save">
+      <text class="text-xl {{actionType==0?'text-gray':'text-blue'}}">{{actionText}}</text>
+    </view>
+  </footer>
 </view>

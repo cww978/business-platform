@@ -1,0 +1,10 @@
+.header{
+  padding: 16px;
+  font-size:14px;
+  color:rgb(136, 136, 136);
+}
+.table-info{
+  line-height: 2;
+  padding: 7px 16px;
+  background-color: white;
+}

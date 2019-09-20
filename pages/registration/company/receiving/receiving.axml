@@ -1,5 +1,5 @@
 <view>
-  <view style="min-height: calc(100vh - 60px)">
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -41,7 +41,7 @@
         </view>
       </block>
     </view>
-  </view>
+  </scroll-view>
   <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">确定到货</text>

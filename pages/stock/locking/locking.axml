@@ -9,27 +9,48 @@
     </view>
   </view>
   <view style="min-height: calc(100vh - 110px)">
-    <list a:for="{{joins}}">
-      <list-item
-        index="{{index}}"
-        key="questions-{{index}}"
-        data-index="{{index}}"
-        onClick="onQuestionClick"
-        last="{{index === list.length - 1}}"
-      >
-        <view class="text-lg">{{item.title}}</view>
-        <view class="text-lg text-gray">促销烟合计: {{item.tobaccos}}</view>
-        <view class="text-lg text-gray">促销品合计: {{item.products}}</view>
-        <flex>
-          <flex-item><view class="text-df text-gray">创建人: {{item.personName}}</view></flex-item>
-          <flex-item><view class="text-df text-gray">入库时间: {{item.date}}</view></flex-item>
-        </flex>
-      </list-item>
+    <list a:if="{{activeTab == 0}}">
+      <block a:for="{{joins}}">
+        <list-item
+          index="{{index}}"
+          key="questions-{{index}}"
+          data-index="{{index}}"
+          onClick="onInAccountClick"
+          last="{{index === list.length - 1}}"
+        >
+          <view class="text-lg">{{item.title}}</view>
+          <view class="text-lg text-gray">促销烟合计: {{item.tobaccos}}</view>
+          <view class="text-lg text-gray">促销品合计: {{item.products}}</view>
+          <flex>
+            <flex-item><view class="text-df text-gray">创建人: {{item.personName}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">入库时间: {{item.date}}</view></flex-item>
+          </flex>
+        </list-item>
+      </block>
+    </list>
+    <list a:if="{{activeTab == 1}}">
+      <block a:for="{{outs}}">
+        <list-item
+          index="{{index}}"
+          key="questions-{{index}}"
+          data-index="{{index}}"
+          onClick="onOutAccountClick"
+          last="{{index === list.length - 1}}"
+        >
+          <view class="text-lg">{{item.title}}</view>
+          <view class="text-lg text-gray">促销烟合计: {{item.tobaccos}}</view>
+          <view class="text-lg text-gray">促销品合计: {{item.products}}</view>
+          <flex>
+            <flex-item><view class="text-df text-gray">创建人: {{item.personName}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">出库时间: {{item.date}}</view></flex-item>
+          </flex>
+        </list-item>
+      </block>
     </list>
   </view>
   <footer>
-    <view class="padding text-center">
-      <text class="text-xl text-blue">锁定销区</text>
+    <view class="padding text-center" onTap="save">
+      <text class="text-xl {{actionType==0?'text-gray':'text-blue'}}">{{actionText}}</text>
     </view>
   </footer>
 </view>

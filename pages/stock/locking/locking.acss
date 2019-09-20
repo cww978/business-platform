@@ -43,6 +43,6 @@
   color: #1371F7;
   border-bottom: 3px solid #1371F7;
 }
-.am-list{
-  padding: 0.1rem
+.am-list-item{
+  margin: 0.1rem
 }

@@ -1,0 +1,13 @@
+.component-promotion .am-list-content{
+  text-align: center
+}
+.my-picker {
+  background: #EFEFF4;
+}
+.picker-title {
+  padding: 16px;
+  background: #ffffff;
+  border-bottom: 0.5px #ddd solid;
+  display: flex;
+  justify-content: space-between
+}

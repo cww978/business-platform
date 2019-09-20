@@ -1,0 +1,59 @@
+<view>
+  <scroll-view scroll-y="{{true}}" style="height: 100vh">
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">账单信息</text>
+        </view>
+      </view>
+      <view class="table-info">
+        <view><text class="text-lg">方案主题：{{accountInfo.themeName}}</text></view>
+        <view class="text-lg">出入库单号: {{accountInfo.code}}</view>
+        <view class="text-lg">方案编号: {{accountInfo.programmeCode}}</view>
+        <view class="text-lg">数据来源编号: {{accountInfo.sourceCode}}</view>
+        <view class="text-lg">来源单据类型: {{accountInfo.sourceType}}</view>
+        <view class="text-lg">创建人: {{accountInfo.personName}}</view>
+        <view class="text-lg">出入库时间: {{accountInfo.date}}</view>
+        <flex>
+          <flex-item><view class="text-df">促销烟合计: {{accountInfo.tobaccoSum}}</view></flex-item>
+          <flex-item><view class="text-df">促销品合计: {{accountInfo.productSum}}</view></flex-item>
+        </flex>
+      </view>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">促销烟</text>
+        </view>
+      </view>
+      <flex class="text-center bg-blue padding-xs">
+        <flex-item><view class="text-df text-white">名称</view></flex-item>
+        <flex-item><view class="text-df text-white">数量</view></flex-item>
+        <flex-item><view class="text-df text-white">单位</view></flex-item>
+      </flex>
+      <flex a:for="{{tobaccos}}" class="text-center bg-white padding-xs">
+        <flex-item><view class="text-df">{{item.name}}</view></flex-item>
+        <flex-item><view class="text-df">{{item.num}}</view></flex-item>
+        <flex-item><view class="text-df">{{item.unit}}</view></flex-item>
+      </flex>
+    </view>
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">促销品</text>
+        </view>
+      </view>
+      <flex class="text-center bg-blue padding-xs">
+        <flex-item><view class="text-df text-white">名称</view></flex-item>
+        <flex-item><view class="text-df text-white">数量</view></flex-item>
+        <flex-item><view class="text-df text-white">单位</view></flex-item>
+      </flex>
+      <flex a:for="{{products}}" class="text-center bg-white padding-xs">
+        <flex-item><view class="text-df">{{item.name}}</view></flex-item>
+        <flex-item><view class="text-df">{{item.num}}</view></flex-item>
+        <flex-item><view class="text-df">{{item.unit}}</view></flex-item>
+      </flex>
+    </view>
+    <view class="padding-xs"></view>
+  </scroll-view>
+</view>

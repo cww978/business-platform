@@ -1,5 +1,5 @@
 <view>
-  <view style="min-height: calc(100vh - 60px)">
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -119,7 +119,7 @@
         <button onTap="investigClick" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加测试品</button>
       </view>
     </view>
-  </view>
+  </scroll-view>
   <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">确 定</text>

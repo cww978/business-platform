@@ -1,5 +1,5 @@
 {
-  "defaultTitle": "消费调研",
+  "defaultTitle": "销区、年月选择",
   "usingComponents":{
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index"

@@ -1,5 +1,5 @@
 <view>
-  <view style="min-height: calc(100vh - 60px)">
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -53,7 +53,7 @@
       </view>
     </view>
     <view class="padding-xs"></view>
-  </view>
+  </scroll-view>
   <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">执行方案</text>
