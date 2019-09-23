@@ -2,10 +2,70 @@
 let Mock = require ('/util/mock')
 
 /**
- * 查询销区年月盘点
+ * 确定实物盘点
  * @param yearMonth String
  * @param regionCode String
  * @param personId String
+ */
+export function defineRegionStock(param){
+  console.log('确定实物盘点', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|0-1': 1
+    })
+    resolve(data)
+  })
+}
+
+/**
+ * 保存实物盘点
+ * @param yearMonth String
+ * @param regionCode String
+ * @param personId String
+ * @param products Arrary
+ */
+export function saveRegionStock(param){
+  console.log('保存实物盘点', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|0-1': 1
+    })
+    resolve(data)
+  })
+}
+
+/**
+ * 获取促销用品列表
+ */
+export function savePromotionals(param){
+  console.log('获取促销用品列表')
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data': {
+        'products|10-15': [{
+          type: 1,
+          text: function() {
+            return Mock.mock('@first()')
+          },
+          value: /\d{5,10}/
+        }],
+        'tobaccos|10-15': [{
+          type: 2,
+          text: function() {
+            return Mock.mock('@first()')
+          },
+          value: /\d{5,10}/
+        }]
+      }
+    })
+    resolve(data)
+  })
+}
+
+/**
+ * 查询销区年月盘点
+ * @param yearMonth String
+ * @param regionCode String
  */
 export function selRegionStock(param){
   console.log('查询销区年月盘点', param)
@@ -28,17 +88,9 @@ export function selRegionStock(param){
           },
           'num|10-100': 1,
           'code': /\d{5,10}/,
-          'unit': '个',
-          'type': 1
-        }],
-        'tobaccos|5-10': [{
-          name: function() {
-            return Mock.mock('@first()')
-          },
-          'num|10-100': 1,
-          'code': /\d{5,10}/,
-          'unit': '条',
-          'type': 1
+          'unitName': '条',
+          'unitType': 1,
+          'type|1-2': 1
         }]
       }
     })
