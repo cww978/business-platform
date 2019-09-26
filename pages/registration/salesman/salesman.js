@@ -1,10 +1,17 @@
-import { selProgrammeInfo, selProgrammeCodes } from '/mock/programme'
+import { selProgrammeCodes, selCitys } from '/mock/programme'
+import { selActivityCode, selResourcesDetail } from '/api/programExecute'
+import { selProgrammeInfo } from '/api/shareHelp'
+const app = getApp()
 Page({
   data: {
+    userId: '',
     programmeId: '',
+    programmeType: '',
     cityCode: '',
+    cityText: '',
     programmes: [],
     programmeIndex: '',
+    resources: [], // 资源
     programme: {
       typeNmae: '',
       typeId: '',
@@ -18,53 +25,82 @@ Page({
       targets: []
     }
   },
-  programmeChange(e) {
-    let that = this
-    that.setData({
-      programmeId: that.data.programmes[e.detail.value].id,
-      programmeIndex: e.detail.value
+  setCityCode(e) {
+    this.setData({
+      cityCode: e.city.code,
+      cityText: e.city.name,
     })
-    selProgrammeInfo().then(res => {
-      that.setData({
-        programme: res.data
-      })
-    })
+    this.getProgrammeCodes()
   },
-  navTodec(){
-    if (this.data.programmeId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      console.log('分配', this.data.programmeId)
-      dd.navigateTo({
-        url: `./decompose/decompose?programmeId=${this.data.programmeId}&cityCode=${this.data.cityCode}`
-      })
-    }
-  },
-  navToimp(){
-    if (this.data.programmeId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      console.log('执行', this.data.programmeId)
-      dd.navigateTo({
-        url: `./implement/implement?programmeId=${this.data.programmeId}&cityCode=${this.data.cityCode}`
-      })
-    }
-  },
-  onReady() {
-    let that = this
-    selProgrammeCodes().then(res => {
-      that.setData({
+  // 获取方案编码
+  getProgrammeCodes() {
+    selActivityCode({
+      userId: this.data.userId,
+      companyId: this.data.cityCode
+    }).then(res => {
+      this.setData({
         programmes: res.data
       })
     })
   },
-  onLoad() {}
+  clickCity() {
+    dd.navigateTo({
+      url: '/pages/common/selectCompany/selectCompany'
+    })
+  },
+  programmeChange(e) {
+    this.setData({
+      programmeId: this.data.programmes[e.detail.value]['ACTIVITY_ID'],
+      programmeType: this.data.programmes[e.detail.value]['ACTIVITYTYPE'],
+      programmeIndex: e.detail.value
+    })
+    // 查询方案信息
+    // 待做...
+    // 查询资源明细
+    selResourcesDetail({
+      userId: this.data.userId,
+      companyId: 24,
+      activityId: 5570,
+      executeType: 1,
+    }).then(res => {
+      this.setData({ resources: res.data })
+    })
+  },
+  navTodec(){
+    let programmeId = 5570
+    let cityCode = 24
+    if (programmeId == '') {
+      my.showToast({
+        type: 'none',
+        content: '请先选择方案',
+        duration: 1000
+      })
+    } else {
+      dd.navigateTo({
+        url: `./decompose/decompose?programmeId=${programmeId}&cityCode=${cityCode}`
+      })
+    }
+  },
+  navToimp(){
+    let programmeId = 5570
+    let cityCode = 24
+    let programmeType = 4
+    if (programmeId == '') {
+      my.showToast({
+        type: 'none',
+        content: '请先选择方案',
+        duration: 1000
+      })
+    } else {
+      dd.navigateTo({
+        url: `./implement/implement?programmeId=${programmeId}&cityCode=${cityCode}&programmeType=${programmeType}`
+      })
+    }
+  },
+  onReady() {},
+  onLoad() {
+    this.setData({
+      userId: app.globalData.userInfo.userId
+    })
+  }
 })

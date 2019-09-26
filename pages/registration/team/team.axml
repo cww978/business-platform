@@ -7,12 +7,12 @@
           <text class="text">填写编码</text>
         </view>
 			</view>
-      <list-item arrow="{{true}}">地市
+      <list-item arrow="{{true}}" onClick="clickCity">地市
         <view slot="extra">
-					请选择
+					{{cityText==''?'请选择':cityText}}
         </view>  
       </list-item>
-      <list-item arrow="{{true}}">
+      <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
         <picker onChange="programmeChange" range-key="id" range="{{programmes}}">
           <view class="picker">
             <view class="row">
@@ -52,6 +52,7 @@
       </list-item>
     </list>
   </view>
+  <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
   <footer>
     <view class="padding text-center" onTap="navToImp">
       <text class="text-xl text-blue">执行方案</text>

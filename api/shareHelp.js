@@ -1,0 +1,110 @@
+import request from '../util/request'
+
+/**
+ * 根据活动类型查询活动对象
+ * @param promoType String
+ */
+export function selObjectElement(param){
+  console.log('根据活动类型查询活动对象', param)
+  return request({
+    url: '/shareHelp/selObjectElement',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+
+/**
+ * 查询方案基本信息
+ * @param userId String
+ * @param activityId String
+ */
+export function selProgrammeInfo(param){
+  console.log('查询方案基本信息', param)
+  return request({
+    url: '/shareHelp/selProgrammeInfo',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 查询商业公司
+ * @param userId String
+ * @param provCode String
+ */
+export function selSalesArea(param){
+  console.log('查询商业公司', param)
+  return request({
+    url: '/shareHelp/selSalesArea',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 通过省份查询地市
+ * @param userId String
+ * @param provCode String
+ */
+export function selCityByProv(param){
+  console.log('通过省份查询地市', param)
+  return request({
+    url: '/shareHelp/selCityByProv',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 通过区域查询省份列表
+ * @param userId String
+ * @param areaCode String
+ */
+export function selProvByArea(param){
+  console.log('通过区域查询省份列表', param)
+  return request({
+    url: '/shareHelp/selProvByArea',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取区域列表
+ * @param userId String
+ */
+export function selAreaByUser(param){
+  console.log('获取区域列表', param)
+  return request({
+    url: '/shareHelp/selAreaByUser',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取区域省份地市
+ * @param userId String
+ */
+export function selSynthesizeSite(params){
+  console.log('获取区域省份地市', params)
+  return request({
+    url: '/shareHelp/selSynthesizeSite',
+    params: params,
+    dataType: 'json',
+    method: 'get'
+  })
+}

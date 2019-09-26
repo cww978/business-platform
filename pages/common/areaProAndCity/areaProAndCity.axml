@@ -1,0 +1,37 @@
+<view>
+  <list>
+    <list-item arrow="{{true}}">
+      <picker value="{{areaIndex}}" onChange="areaChanged" range-key="areaName" range="{{areas}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">区域</view>
+            <view class="row-extra text-lg text-gray">{{areas[areaIndex].areaName}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+    <list-item arrow="{{true}}" a:if="{{isProv}}">
+      <picker value="{{provIndex}}" onChange="provChanged" range-key="provName" range="{{provs}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">省份</view>
+            <view class="row-extra text-lg text-gray">{{provs[provIndex].provName}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+    <list-item arrow="{{true}}" a:if="{{isCity}}">
+      <picker value="{{cityIndex}}" onChange="cityChanged" range-key="cityName" range="{{citys}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">地市</view>
+            <view class="row-extra text-lg text-gray">{{citys[cityIndex].cityName}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+  </list>
+  <view class="padding">
+    <button onTap="save" disabled="{{!isCity}}" class="cu-btn block bg-blue margin-tb-sm lg" type="primary">确 定</button>
+  </view>
+</view>

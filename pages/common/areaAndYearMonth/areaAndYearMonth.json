@@ -1,6 +1,7 @@
 {
   "defaultTitle": "销区、年月选择",
   "usingComponents":{
+    "my-picker": "/components/my-picker/my-picker",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index"
   }

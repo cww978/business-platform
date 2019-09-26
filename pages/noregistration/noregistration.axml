@@ -8,9 +8,9 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}">地市
+        <list-item arrow="{{true}}" onClick="clickCity"><text class="text-red">*</text>地市
           <view slot="extra">
-            请选择
+            {{form.cityText==''?'请选择':form.cityText}}
           </view>  
         </list-item>
         <list-item arrow="{{true}}">
@@ -72,6 +72,7 @@
       </view>
     </view>
   </view>
+  <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
   <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">确 定</text>

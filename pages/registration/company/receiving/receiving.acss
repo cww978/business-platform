@@ -33,3 +33,15 @@
   height: auto;
   min-height: 4.6em;
 }
+.resource-card {
+  margin-bottom: 0.1rem
+}
+.am-list-item {
+  margin-bottom: 0.1rem;
+}
+.am-list-content {
+  white-space: pre-wrap;
+}
+.cu-form-group {
+  background-color: transparent;
+}

@@ -1,9 +1,7 @@
 {
-  "defaultTitle": "消费调研",
+  "defaultTitle": "地市选择",
   "allowsBounceVertical": "NO",
   "usingComponents":{
-    "promotion": "/components/promotion/promotion",
-    "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index"
   }

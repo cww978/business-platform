@@ -1,6 +1,37 @@
 // 模拟数据
 let Mock = require ('/util/mock')
 
+
+/**
+ * 查询地市列表
+ */
+export function selCitys(param){
+  console.log('确定实物盘点', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|10-15': [{
+        text: function() {
+          return Mock.mock('@first()')
+        },
+        value: /\d{5,10}/,
+        'child|2-10': [{
+          text: function() {
+            return Mock.mock('@first()')
+          },
+          value: /\d{5,10}/,
+          'child|5-10': [{
+            text: function() {
+              return Mock.mock('@first()')
+            },
+            value: /\d{5,10}/,
+          }]
+        }]
+      }]
+    })
+    resolve(data)
+  })
+}
+
 /**
  * 非方案执行
  * @param cityCode String
@@ -44,7 +75,7 @@ export function selUserCompany(param){
   return new Promise(resolve => {
     let data = Mock.mock({
       'data': {
-        userType: 1,
+        userType: 3,
         companyName: function() {
           return Mock.mock('@first()')
         },
@@ -61,14 +92,39 @@ export function selUserCompany(param){
  * @param id String
  * @param companyCode String
  */
+export function selAllResourcesDistribution(param){
+  console.log('查询终端公司的资源分配情况:', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|1-4': [{
+        id: /\d{5,10}/,
+        standard: function() {
+          return Mock.mock('@title(10)')
+        },
+        'resources|2-5': [{
+          name: function() {
+            return Mock.mock('@first()')
+          },
+          id: /\d{5,10}/,
+          'qty|1-100': 1
+        }]
+      }]
+    })
+    resolve(data)
+  })
+}
+
+/**
+ * 查询团队执行时的资源分配
+ * @param cityCode String
+ * @param id String
+ * @param companyCode String
+ */
 export function selResourcesDistribution(param){
   console.log('查询终端公司的资源分配情况:', param)
   return new Promise(resolve => {
     let data = Mock.mock({
       'data': {
-        standard: function() {
-          return Mock.mock('@title(10)')
-        },
         'resources|2-5': [{
           name: function() {
             return Mock.mock('@first()')

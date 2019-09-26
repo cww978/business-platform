@@ -5,6 +5,7 @@
     "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",
+    "am-checkbox": "mini-antui/es/am-checkbox/index",
     "flex": "mini-antui/es/flex/index",
     "flex-item": "mini-antui/es/flex/flex-item/index"
   }

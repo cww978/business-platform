@@ -1,4 +1,4 @@
-import { savePromotionals } from '/mock/account'
+import { selPromotionals } from '/mock/account'
 Component({
   mixins: [],
   data: {
@@ -20,7 +20,7 @@ Component({
     onCancel: () => {}
   },
   didMount() {
-    savePromotionals().then(res => {
+    selPromotionals().then(res => {
       this.setData({
         promotionProducts: res.data.products,
         promotionTobaccos: res.data.tobaccos

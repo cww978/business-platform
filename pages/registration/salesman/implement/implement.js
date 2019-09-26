@@ -1,16 +1,21 @@
-import { selProgrammeInvestigation, saveProgrammeImplement } from '/mock/programme'
+import { saveProgrammeImplement } from '/mock/programme'
 import { saveImage } from '/api/common'
+import { selResourcesDetail, selPromoItem, selProgrammeInvestigation } from '/api/programExecute'
+import { selObjectElement } from '/api/shareHelp'
+const app = getApp()
 Page({
   data: {
+    programmeType: '', // 活动类型
     resources: [], // 资源
     targets: [], //对象
     otherPoints: [], // 其他要素
-    targetId: '',
-    mans: 0,
     imgs: [],
     targetIndex: 0,
     hasInvestigation: false,
-    objectives: [],
+    objectives: [
+      { id: 1, text: '新产品调研', active: true },
+      { id: 2, text: '老产品调研', active: false }
+    ],
     questions: [],
     swipeIndex: null,
     question: null,
@@ -28,7 +33,6 @@ Page({
       id: '',// 方案id
       targetId: '',// 对象id
       retailId: '', // 零售户id
-      mans: '',// 人数
       otherPoints: [], // 其他要素
       resources: [], // 资源使用
       imgs: '', // 现场图片
@@ -36,31 +40,28 @@ Page({
       objectives: '', // 调研目的
     }
   },
+  // 选择活动对象
   targetPickerChange(e) {
     this.setData({
-      targetId: this.data.targets[e.detail.value].id,
       targetIndex: e.detail.value
     })
   },
+  // 判断是否需要调研
   hasInvestigation() {
-    selProgrammeInvestigation().then(res =>{
-      let objectives = res.data.objectives
-      for (let item of objectives) {
-        item.active = false
-      }
-      objectives[0].active = true
+    selProgrammeInvestigation({ activityId: this.data.form.id }).then(res =>{
       this.setData({
-        hasInvestigation: true,
-        objectives: objectives
+        hasInvestigation: res.data.investigate
       })
     })
   },
+  // 点击地址查看具体值
   clickAddress() {
     dd.alert({
       content: this.data.form.address,
       buttonText: '确定'
     })
   },
+  // 定位
   location() {
     return new Promise(resolve => {
       let that = this
@@ -80,6 +81,7 @@ Page({
       })
     })
   },
+  // 选择调研目的
   onObjectiveClick(e) {
     let objectives = this.data.objectives
     let active = objectives[e.target.dataset.index].active
@@ -88,12 +90,14 @@ Page({
       objectives: objectives
     })
   },
+  // 设置零售户
   setRetail(retail) {
     this.setData({
       'retail.id': retail.id,
       'retail.name': retail.name
     })
   },
+  // 点击图片
   actionImage(e) {
     let index = e.target.dataset.index
     let that = this
@@ -116,6 +120,7 @@ Page({
       }
     })
   },
+  // 删除调研
   onRightItemClick(e) {
     e.done()
     let questions = this.data.questions
@@ -127,14 +132,16 @@ Page({
       swipeIndex: e.index,
     })
   },
+  // 点击调研查看修改
   onQuestionClick(e){
     this.setData({
       question: this.data.questions[e.index]
     })
     dd.navigateTo({
-      url: `./investigation/investigation?question=${e.index}`
+      url: `/pages/common/investigation/investigation?question=${e.index}`
     })
   },
+  // 选择上传图片
   chooseImage() {
     let that = this
     dd.chooseImage({
@@ -150,11 +157,7 @@ Page({
       }
     })
   },
-  inputMans(e) {
-    this.setData({
-      mans: e.detail.value
-    })
-  },
+  // 其他要素输入
   inputOtherPoint(e) {
     let otherPoints = this.data.otherPoints
     otherPoints[e.target.dataset.index].value = e.detail.value
@@ -162,6 +165,7 @@ Page({
       otherPoints: otherPoints
     })
   },
+  // 资源使用情况输入
   inputResourcesUse(e) {
     let index = e.target.dataset.index
     let inputValue = e.detail.value
@@ -171,40 +175,40 @@ Page({
       resources: resources
     })
   },
+  // 增加调研测试
   addQuestion(question) {
     let questions = this.data.questions
     questions.push(question)
     this.setData({ questions: questions })
   },
+  // 修改调研测试
   updateQuestion(index, question) {
     let questions = this.data.questions
     questions[index] = question
     this.setData({ questions: questions })
   },
+  // 点击新增调研测试
   investigClick() {
     dd.navigateTo({
       url: '/pages/common/investigation/investigation'
     })
   },
+  // 打开零售户搜索
   openSearchPage() {
     dd.navigateTo({
       url: '/pages/common/search/search'
     })
   },
-  onUnload() {
-    console.log('方案执行', 'page unload')
-  },
   save() {
-    let mans = this.data.mans
     let retailId = this.data.retail.id
-    let targetId = this.data.targetId
+    let targetId = this.data.targets[this.data.targetIndex].targetId
     let otherPoints = []
     for (let item of this.data.otherPoints) {
-      otherPoints.push({ id: item.id, value: item.value })
+      otherPoints.push({ itemId: item.itemId, value: item.value })
     }
     let resources = []
-     for (let item of this.data.resources) {
-      resources.push({ id: item.id, useNum: item.useNum })
+    for (let item of this.data.resources) {
+      resources.push({ id: item.ADSGOODS_ID, useNum: item.useNum })
     }
     let imgs = this.data.imgs.join(',')
     let questionIds = []
@@ -220,7 +224,6 @@ Page({
     }
     objectives = objectives.join(',')
     this.setData({
-      'form.mans': mans,
       'form.targetId': targetId,
       'form.retailId': retailId,
       'form.otherPoints': otherPoints,
@@ -236,31 +239,45 @@ Page({
       })
     })
   },
-  onReady() { 
+  // 获取其他要素
+  getOtherPoints() {
+    selPromoItem({ activityId: this.data.form.id }).then(res => {
+      this.setData({ otherPoints: res.data })
+    })
+  },
+  // 获取对象
+  getTargets() {
+    selObjectElement({ promoType: this.data.programmeType}).then(res => {
+      this.setData({ targets: res.data })
+    })
+  },
+  // 获取资源明细
+  getResources() {
+    selResourcesDetail({
+      userId: app.globalData.userInfo.userId,
+      activityId: this.data.form.id,
+      companyId: this.data.form.cityCode,
+      executeType: 1
+    }).then(res => {
+      this.setData({ resources: res.data })
+    })
+  },
+  onReady() {
+    this.getOtherPoints()
     this.hasInvestigation()
     this.location()
+    this.getResources()
+    this.getTargets()
   },
   onLoad(options) {
     console.log('方案编码', options.programmeId)
     console.log('地市编码', options.cityCode)
-    let that = this
-    let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
-    let targets = getCurrentPages()[getCurrentPages().length - 2].data.programme.targets
-    let otherPoints = getCurrentPages()[getCurrentPages().length - 2].data.programme.otherPoints
-    for (let item of resources) {
-      item.useNum = ''
-    }
-    for (let item of otherPoints) {
-      item.value = ''
-    }
-    that.setData({
+    this.setData({
       questions: [],
-      resources: resources,
-      targets: targets,
-      otherPoints: otherPoints,
+      resources: [],
+      programmeType: options.programmeType,
       'form.id': options.programmeId,
-      'form.cityCode': options.cityCode,
-      targetId: targets[that.data.targetIndex].id
+      'form.cityCode': options.cityCode
     })
   }
 })

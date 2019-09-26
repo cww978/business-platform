@@ -1,8 +1,11 @@
-import { selProgrammeInfo, selProgrammeCodes } from '/mock/programme'
+import { selProgrammeInfo, selProgrammeCodes, selCitys } from '/mock/programme'
 Page({
   data: {
     programmeId: '',
+    pickerShow: false,
     cityCode: '',
+    cityText: '',
+    citys: [],
     programmes: [],
     programmeIndex: '',
     programme: {
@@ -18,6 +21,29 @@ Page({
       targets: []
     }
   },
+  // 城市选择确认
+  clickPickerConfirm(e) {
+    let that = this
+    selProgrammeCodes().then(res => {
+      that.setData({
+        programmes: res.data
+      })
+    })
+    this.setData({
+      cityText: e[2].text,
+      cityCode: e[2].value,
+      pickerShow: false
+    })
+  },
+  // 城市选择取消
+  clickPickerCancel() {
+    this.setData({ pickerShow: false })
+  },
+  // 点击地市弹出picker
+  clickCity() {
+    this.setData({ pickerShow: true })
+  },
+  // 方案编码切换
   programmeChange(e) {
     let that = this
     that.setData({
@@ -30,7 +56,9 @@ Page({
       })
     })
   },
+  // 跳转到分配页面
   navToRec(){
+    // 判断是否选择了方案
     if (this.data.programmeId == '') {
       my.showToast({
         type: 'none',
@@ -44,11 +72,8 @@ Page({
     }
   },
   onReady() {
-    let that = this
-    selProgrammeCodes().then(res => {
-      that.setData({
-        programmes: res.data
-      })
+    selCitys().then(res => {
+      this.setData({ citys: res.data })
     })
   },
   onLoad() {}

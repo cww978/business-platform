@@ -7,27 +7,29 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
-          测试时间
+        <list-item arrow="{{true}}" onClick="testTimeClick">
+          <text class="text-red">*</text><text class="text-lg">测试时间</text>
           <view slot="extra">
             {{form.time==''?'请选择':form.time}}
           </view>
         </list-item>
+        <list-item arrow="{{true}}" onClick="clickTobacco" last="{{true}}">
+          <text class="text-red">*</text><text class="text-lg">测试用烟</text>
+          <view slot="extra">
+            {{form.tobacco==''?'请选择':form.tobacco}}
+          </view>
+        </list-item>
       </list>
       <view class="cu-form-group">
-        <view class="title text-lg">测试地点</view>
+        <view class="title text-lg"><text class="text-red">*</text>测试地点</view>
         <input value="{{form.address}}" onInput="addressInput" placeholder="..." />
       </view>
       <view class="cu-form-group">
-        <view class="title text-lg">测试样烟</view>
-        <input value="{{form.tobacco}}" onBlur="tobaccoInput" placeholder="..." />
-      </view>
-      <view class="cu-form-group">
-        <view class="title text-lg">样烟条数</view>
+        <view class="title text-lg"><text class="text-red">*</text>样烟条数</view>
         <input value="{{form.num}}" onInput="numInput" type="number" placeholder="..." />
       </view>
       <view class="cu-form-group">
-        <view class="title text-lg">测试人数</view>
+        <view class="title text-lg"><text class="text-red">*</text>测试人数</view>
         <input value="{{form.mans}}" onBlur="mansInput" type="number" placeholder="..." />
       </view>
     </view>
@@ -54,9 +56,10 @@
     </view>
     <view class="padding-xs"></view>
   </scroll-view>
+  <promotion show="{{showPromotion}}" type="2" unit="{{false}}" num="{{false}}" onConfirm="promotionConfirm" onCancel="promotionCancel"></promotion>
   <footer>
     <view class="padding text-center" onTap="save">
-      <text class="text-xl text-blue">执行方案</text>
+      <text class="text-xl text-blue">保 存</text>
     </view>
   </footer>
 </view>

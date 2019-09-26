@@ -4,20 +4,20 @@
       <view slot="header">
 				<view>
           <text class="icon lg cuIcon-writefill"></text>
-          <text class="text">填写编码</text>
+          <text class="text">填写编码</text><text class="text-sm text-red">(请先选择地市)</text>
         </view>
 			</view>
-      <list-item arrow="{{true}}">地市
+      <list-item arrow="{{true}}" onClick="clickCity">商业公司
         <view slot="extra">
-					请选择
+					{{cityText==''?'请选择':cityText}}
         </view>  
       </list-item>
-      <list-item arrow="{{true}}">
-        <picker onChange="programmeChange" range-key="id" range="{{programmes}}">
+      <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
+        <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
           <view class="picker">
             <view class="row">
               <view class="row-title">方案编码</view>
-              <view class="row-extra text-df text-gray">{{programmes[programmeIndex].id}}</view>
+              <view class="row-extra text-df text-gray">{{programmes[programmeIndex].ACTIVITY_CODE}}</view>
             </view>
           </view>
         </picker>
@@ -40,12 +40,12 @@
         <view class="info-row">
           <text class="text-lg text-gray">活动时间：</text><text class="text-df text-gray">{{programme.time}}</text>
         </view>
-        <view class="info-row">
+        <!-- <view class="info-row">
           <text class="text-lg text-gray">活动对象：</text>
           <block a:for="{{programme.targets}}">
             <view class="cu-tag round text-lg line-blue">{{item.name}}</view>
           </block>
-        </view>
+        </view> -->
         <view class="info-row">
           <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programme.modality}}</text></view>
         </view>
@@ -53,11 +53,13 @@
           <view>
             <text class="text-lg text-gray">资源明细</text>
           </view>
-          <block a:for="{{programme.resources}}">
-            <view class="cu-form-group">
-              <view class="title text-lg">{{item.name}}</view>
-              <view class="text-df text-gray">可使用数：{{item.qty}}</view>
-            </view>
+          <block a:for="{{resources}}">
+            <flex class="cu-form-group">
+              <flex-item>
+                <view class="title text-df text-cut">{{item['ADSGOODS_NAME']}}</view>
+              </flex-item>
+              <view class="text-sm text-gray">可使用数：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
+            </flex>
           </block>
         </view>
       </list-item>

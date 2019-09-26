@@ -13,7 +13,7 @@ input{
   padding-right: 5px;
 }
 .cu-form-group .title {
-    min-width: calc(4em + 15px);
+  width: calc(8em + 15px);
 }
 .row {
   display: flex;

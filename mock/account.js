@@ -2,6 +2,36 @@
 let Mock = require ('/util/mock')
 
 /**
+ * 查询地市列表
+ */
+export function selCitys(param){
+  console.log('确定实物盘点', param)
+  return new Promise(resolve => {
+    let data = Mock.mock({
+      'data|10-15': [{
+        text: function() {
+          return Mock.mock('@first()')
+        },
+        value: /\d{5,10}/,
+        'child|2-10': [{
+          text: function() {
+            return Mock.mock('@first()')
+          },
+          value: /\d{5,10}/,
+          'child|5-10': [{
+            text: function() {
+              return Mock.mock('@first()')
+            },
+            value: /\d{5,10}/,
+          }]
+        }]
+      }]
+    })
+    resolve(data)
+  })
+}
+
+/**
  * 确定实物盘点
  * @param yearMonth String
  * @param regionCode String
@@ -37,7 +67,7 @@ export function saveRegionStock(param){
 /**
  * 获取促销用品列表
  */
-export function savePromotionals(param){
+export function selPromotionals(param){
   console.log('获取促销用品列表')
   return new Promise(resolve => {
     let data = Mock.mock({
@@ -66,6 +96,7 @@ export function savePromotionals(param){
  * 查询销区年月盘点
  * @param yearMonth String
  * @param regionCode String
+ * @param personId String
  */
 export function selRegionStock(param){
   console.log('查询销区年月盘点', param)
@@ -132,7 +163,9 @@ export function saveSettleStock(param){
 
 /**
  * 查询结账信息
- * @param id String
+ * @param yearMonth String
+ * @param regionCode String
+ * @param personId String
  */
 export function selSettleStock(param){
   console.log('查询结账信息', param)

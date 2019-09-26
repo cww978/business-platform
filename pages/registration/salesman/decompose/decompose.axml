@@ -40,9 +40,9 @@
       </view>
       <block a:for="{{resources}}">
         <view class="cu-form-group">
-          <view class="title text-lg">{{item.name}}</view>
-          <input class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputSplit" value="{{item.split}}"/>
-          <view class="text-df text-gray">最大值：{{item.qty}}</view>
+          <view class="title text-lg text-cut">{{item['ADSGOODS_NAME']}}</view>
+          <input class="text-lg" type="number" data-index="{{index}}" placeholder="请输入..."  onInput="inputSplit" value="{{item.split}}"/>
+          <view class="text-df text-gray">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
         </view>
       </block>
     </view>

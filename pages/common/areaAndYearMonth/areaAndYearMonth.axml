@@ -7,7 +7,7 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}">
+        <list-item arrow="{{true}}" onClick="clickCity">
           销区
           <view slot="extra">
             {{areaText==''?'请选择':areaText}}
@@ -21,9 +21,10 @@
         </list-item>
       </list>
     </view>
+    <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button class="cu-btn block bg-blue lg" onTap="clickDefine">确 定</button>
+      <button class="cu-btn block bg-blue lg" disabled="{{!(isYear && isArea)}}"  onTap="clickDefine">确 定</button>
     </view> 
   </view>
 </view>

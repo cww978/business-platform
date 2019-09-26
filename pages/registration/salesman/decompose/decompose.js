@@ -50,7 +50,7 @@ Page({
     console.log('方案编码', options.programmeId)
     console.log('地市编码', options.cityCode)
     let that = this
-    let resources = getCurrentPages()[getCurrentPages().length - 2].data.programme.resources
+    let resources = getCurrentPages()[getCurrentPages().length - 2].data.resources
     for (let item of resources) {
       item.split = ''
     }

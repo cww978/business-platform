@@ -1,4 +1,4 @@
-import { selProgrammeInvestigation, saveNoProgrammeImplement } from '/mock/programme'
+import { selProgrammeInvestigation, saveNoProgrammeImplement, selCitys } from '/mock/programme'
 import { saveImage } from '/api/common'
 import { selActivityThemes, selActivityTypesFromTheme, selActivityTargetsFromType } from '/mock/activity'
 Page({
@@ -9,14 +9,17 @@ Page({
     themes: [],
     themeIndex: 0,
     types: [],
+    pickerShow: false,
+    citys: [],
     typeIndex: 0,
     retail: {
       id: '',
       name: ''
     },
     // 提交表单数据
-    form: {
+    form: { 
       cityCode: '',
+      cityText: '',
       themeId: '',
       modality: '',
       typeId: '',
@@ -24,6 +27,22 @@ Page({
       retailId: '', // 零售户id
       imgs: '' // 现场图片
     }
+  },
+  // 地市选择确认
+  clickPickerConfirm(e) {
+    this.setData({
+      'form.cityText': e[2].text,
+      'form.cityCode': e[2].value,
+      pickerShow: false
+    })
+  },
+  // 地市选择取消
+  clickPickerCancel() {
+    this.setData({ pickerShow: false })
+  },
+  // 点击地市弹出picker
+  clickCity() {
+    this.setData({ pickerShow: true })
   },
   clickAddress() {
     dd.alert({
@@ -89,25 +108,31 @@ Page({
       url: '/pages/common/search/search'
     })
   },
+  // 保存执行
   save() {
-    let retailId = this.data.retail.id
-    let typeId = this.data.types[this.data.typeIndex].id
-    let targetId = this.data.targets[this.data.targetIndex].id
-    let themeId = this.data.themes[this.data.themeIndex].id
-    let imgs = this.data.imgs.join(',')
-    this.setData({
-      'form.targetId': targetId,
-      'form.retailId': retailId,
-      'form.themeId': themeId,
-      'form.typeId': typeId,
-      'form.imgs': imgs
-    })
-    saveNoProgrammeImplement(this.data.form).then(res => {
-      let type = res.data == 0 ? 'fail' : 'success'
-      dd.navigateTo({
-        url: `./result/result?type=${type}`
+    // 验证是否选择了地市
+    if (this.data.form.cityCode != '') {
+      let retailId = this.data.retail.id
+      let typeId = this.data.types[this.data.typeIndex].id
+      let targetId = this.data.targets[this.data.targetIndex].id
+      let themeId = this.data.themes[this.data.themeIndex].id
+      let imgs = this.data.imgs.join(',')
+      this.setData({
+        'form.targetId': targetId,
+        'form.retailId': retailId,
+        'form.themeId': themeId,
+        'form.typeId': typeId,
+        'form.imgs': imgs
       })
-    })
+      saveNoProgrammeImplement(this.data.form).then(res => {
+        let type = res.data == 0 ? 'fail' : 'success'
+        dd.navigateTo({
+          url: `./result/result?type=${type}`
+        })
+      })
+    } else {
+      dd.showToast({ content: '请选地市' })
+    }
   },
   activityThemeChanged(e) {
     this.setData({
@@ -145,6 +170,9 @@ Page({
           that.setData({ targets: res3.data })
         })
       })
+    })
+    selCitys().then(res => {
+      this.setData({ citys: res.data })
     })
   },
   onLoad(options) {}

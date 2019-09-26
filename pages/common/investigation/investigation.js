@@ -1,6 +1,7 @@
-import { saveInvestigationQuestion } from '/mock/programme'
+import { saveInvestigationQuestion } from '/api/programExecute'
 Page({
   data: {
+    showPromotion: false,
     investigList: [
       {
         title: '价格',
@@ -52,14 +53,18 @@ Page({
       }
     })
   },
+  clickTobacco() {
+    this.setData({ showPromotion: true })
+  },
+  promotionConfirm() {
+    this.setData({ showPromotion: false })
+  },
+  promotionCancel() {
+    this.setData({ showPromotion: false })
+  },
   addressInput(e) {
     this.setData({
       'form.address': e.detail.value
-    })
-  },
-  tobaccoInput(e) {
-    this.setData({
-      'form.tobacco': e.detail.value
     })
   },
   numInput(e) {
