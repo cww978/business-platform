@@ -1,7 +1,9 @@
 import { saveInvestigationQuestion } from '/api/programExecute'
+const app = getApp()
 Page({
   data: {
     showPromotion: false,
+    companyId: '',
     investigList: [
       {
         title: '价格',
@@ -26,10 +28,11 @@ Page({
     },
     questionIndex: null,
     form: {
-      id: '',
+      id: 0,
       time: '',
       address: '',
       tobacco: '',
+      tobaccoId: '',
       num: 0,
       mans: 0,
       qty: '',
@@ -56,8 +59,13 @@ Page({
   clickTobacco() {
     this.setData({ showPromotion: true })
   },
-  promotionConfirm() {
-    this.setData({ showPromotion: false })
+  promotionConfirm(e) {
+    console.log('promotion', e)
+    this.setData({
+      showPromotion: false,
+      'form.tobacco': e.promotion['ADSGOODSNAME'],
+      'form.tobaccoId': e.promotion['ADSGOODSID']
+    })
   },
   promotionCancel() {
     this.setData({ showPromotion: false })
@@ -85,6 +93,7 @@ Page({
     })
   },
   save() {
+    // 获取上个页面 调用上个页面的方法
     let lastPage = getCurrentPages()[getCurrentPages().length - 2]
     let qty = this.data.investigForm.qty.join(',')
     let branch = this.data.investigForm.branch.join(',')
@@ -94,27 +103,51 @@ Page({
       'form.branch': branch,
       'form.taste': taste
     })
+    let data = {
+      id: this.data.form.id,
+      regId: app.globalData.userInfo.userId,
+      testTime: this.data.form.time,
+      testDest: this.data.form.address,
+      adsgoodsId: this.data.form.tobaccoId + '',
+      tobaQty: parseInt(this.data.form.num),
+      personCount: parseInt(this.data.form.mans),
+      price: this.data.form.qty,
+      packing: this.data.form.branch,
+      taste: this.data.form.taste,
+      suggestContent: this.data.form.other
+    }
     let that = this
-    saveInvestigationQuestion(that.data.form).then(res => {
-      that.setData({
-        'form.id': res.data.id
-      })
-      if (that.data.questionIndex == null) { 
-        lastPage.addQuestion(that.data.form)
+    saveInvestigationQuestion(data).then(res => {
+      // 判断是否保存成功
+      if (res.data.saveState == 0) {
+        // 保存成功
+        that.setData({ 'form.id': res.data.id })
+        // 判断是新增还是修改
+        if (that.data.questionIndex == null) { 
+          lastPage.addQuestion(that.data.form)
+        } else {
+          lastPage.updateQuestion(that.data.questionIndex, that.data.form)
+        }
+        dd.showToast({
+          type: 'success',
+          content: '保存成功',
+          duration: 1500
+        })
       } else {
-        lastPage.updateQuestion(that.data.questionIndex, that.data.form)
+        // 保存失败
+        dd.showToast({
+          type: 'fail',
+          content: '保存失败',
+          duration: 1500
+        })
       }
-      dd.showToast({
-        type: 'success',
-        content: '保存成功',
-        duration: 1500
-      })
       setTimeout(() => {
         dd.navigateBack()
       }, 1300)
     })
   },
   onLoad(options) {
+    this.setData({ companyId: options.cityCode })
     if(options.question){
       let lastPage = getCurrentPages()[getCurrentPages().length - 2]
       let qty = lastPage.data.question.qty.split(',')

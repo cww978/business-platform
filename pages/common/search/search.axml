@@ -19,7 +19,7 @@
   <scroll-view style="height: calc(100vh - 120px);" scroll-y>
     <list>
 			<view slot="header">
-				附近零售户
+				零售户列表
 			</view>
 			<block a:for="{{retails}}">
 				<list-item
@@ -28,8 +28,8 @@
 					key="retails-{{index}}"
 					last="{{index === (retails.length - 1)}}"
 				>
-					{{item.name}}
-          <view class="am-list-brief">{{item.address}}</view>
+					{{item.custName}}
+          <view class="am-list-brief">{{item.custAddress}}</view>
 			 </list-item>
 			</block>
 		</list>

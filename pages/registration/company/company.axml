@@ -1,23 +1,23 @@
 <view>
-  <view style="min-height: calc(100vh - 60px)">
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px);">
     <list>
       <view slot="header">
 				<view>
           <text class="icon lg cuIcon-writefill"></text>
-          <text class="text">填写编码</text>
+          <text class="text">填写编码</text><text class="text-sm text-red">(请先选择地市)</text>
         </view>
 			</view>
-      <list-item arrow="{{true}}" onClick="clickCity">地市
+      <list-item arrow="{{true}}" onClick="clickCity">商业公司
         <view slot="extra">
 					{{cityText==''?'请选择':cityText}}
         </view>  
       </list-item>
       <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
-        <picker onChange="programmeChange" range-key="id" range="{{programmes}}">
+        <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
           <view class="picker">
             <view class="row">
               <view class="row-title">方案编码</view>
-              <view class="row-extra text-df text-gray">{{programmes[programmeIndex].id}}</view>
+              <view class="row-extra text-df text-gray">{{programmes[programmeIndex].ACTIVITY_CODE}}</view>
             </view>
           </view>
         </picker>
@@ -32,30 +32,34 @@
 			</view>
       <list-item disabled="{{true}}">
         <view class="info-row">
-          <text class="text-lg">{{programme.themeName}}</text>
+          <text class="text-lg">{{programmeInfo['TITLE']}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{programme.typeNmae}}</text>
+          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{activitTypes[programmeInfo['ACTIVITYTYPE']]}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动时间：</text><text class="text-df text-gray">{{programme.time}}</text>
+          <text class="text-lg text-gray">活动目的：</text>
+          <text class="text-df text-gray">{{programmeInfo['TARGET']}}</text>
         </view>
         <view class="info-row">
+          <text class="text-lg text-gray">活动时间：</text>
+          <text class="text-df text-gray">{{programmeInfo['BEGINDATE']+'至'+programmeInfo['ENDDATE']}}</text>
+        </view>
+        <!-- <view class="info-row">
           <text class="text-lg text-gray">活动对象：</text>
           <block a:for="{{programme.targets}}">
             <view class="cu-tag round text-lg line-blue">{{item.name}}</view>
           </block>
-        </view>
+        </view> -->
         <view class="info-row">
-          <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programme.modality}}</text></view>
+          <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programmeInfo['FORM']}}</text></view>
         </view>
       </list-item>
     </list>
-  </view>
-  <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
+  </scroll-view>
   <footer>
     <view class="padding text-center" onTap="navToRec">
-      <text class="text-xl text-blue">确 定</text>
+      <text class="text-xl text-blue">执行方案</text>
     </view>
   </footer>
 </view>

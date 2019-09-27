@@ -1,6 +1,7 @@
 import { getUserInfo } from './api/user'
 App({
   globalData: {
+    programmeDetail: null, // 方案执行功能需要的全局变量
     userInfo: null,
     childMenus: [],
     registration: null

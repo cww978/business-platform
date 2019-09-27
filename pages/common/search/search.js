@@ -1,4 +1,6 @@
-import { selRetailersFromCoord } from '/mock/programme'
+import { selRetailersFromCoord, selRetailersByParam } from '/api/retailer'
+import { gcj02tobd09 } from '/util/coord.js'
+let app = getApp()
 Page({
   data: {
     value: '',
@@ -37,27 +39,36 @@ Page({
   },
   resLocationClick(){
     this.location().then(() => {
-      selRetailersFromCoord().then(res => {
+      let coord = gcj02tobd09(this.data.longitude, this.data.latitude)
+      selRetailersFromCoord({ longitude: coord.lng, latitude: coord.lat }).then(res => {
         this.setData({ retails: res.data })
       })
     })
   },
   onSubmit(val) {
     if (val != '') {
-      selRetailersFromCoord().then(res => {
+      selRetailersByParam({
+        userId: app.globalData.userInfo.userId,
+        param: val
+      }).then(res => {
         this.setData({ retails: res.data })
       })
     }
   },
   onRetailClick(e) {
     let lastPage = getCurrentPages()[getCurrentPages().length - 2]
-    lastPage.setRetail(this.data.retails[e.index])
+    lastPage.setRetail({
+      id: this.data.retails[e.index].custCode,
+      name: this.data.retails[e.index].custName
+    })
     dd.navigateBack()
   },
   onLoad() {
     this.location().then(() => {
-      selRetailersFromCoord().then(res => {
+      let coord = gcj02tobd09(this.data.longitude, this.data.latitude)
+      selRetailersFromCoord({ longitude: coord.lng, latitude: coord.lat }).then(res => {
         this.setData({ retails: res.data })
+        console.log('零售户', res.data)
       })
     })
   },

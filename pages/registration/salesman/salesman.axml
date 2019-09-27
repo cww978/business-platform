@@ -32,13 +32,18 @@
 			</view>
       <list-item disabled="{{true}}">
         <view class="info-row">
-          <text class="text-lg">{{programme.themeName}}</text>
+          <text class="text-lg">{{programmeInfo['TITLE']}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{programme.typeNmae}}</text>
+          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{activitTypes[programmeInfo['ACTIVITYTYPE']]}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动时间：</text><text class="text-df text-gray">{{programme.time}}</text>
+          <text class="text-lg text-gray">活动目的：</text>
+          <text class="text-df text-gray">{{programmeInfo['TARGET']}}</text>
+        </view>
+        <view class="info-row">
+          <text class="text-lg text-gray">活动时间：</text>
+          <text class="text-df text-gray">{{programmeInfo['BEGINDATE']+'至'+programmeInfo['ENDDATE']}}</text>
         </view>
         <!-- <view class="info-row">
           <text class="text-lg text-gray">活动对象：</text>
@@ -47,7 +52,7 @@
           </block>
         </view> -->
         <view class="info-row">
-          <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programme.modality}}</text></view>
+          <view><text class="text-lg text-gray">活动形式：</text><text class="text-df">{{programmeInfo['FORM']}}</text></view>
         </view>
         <view class="info-row">
           <view>

@@ -1,5 +1,5 @@
 <view>
-  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
+  <view scroll-y="{{true}}" style="min-height: calc(100vh - 60px)">
     <view>
       <view class="header">
         <view>
@@ -55,8 +55,8 @@
       </view>
     </view>
     <view class="padding-xs"></view>
-  </scroll-view>
-  <promotion show="{{showPromotion}}" type="2" unit="{{false}}" num="{{false}}" onConfirm="promotionConfirm" onCancel="promotionCancel"></promotion>
+  </view>
+  <promotion show="{{showPromotion}}" companyId="{{companyId}}" type="2" num="{{false}}" onConfirm="promotionConfirm" onCancel="promotionCancel"></promotion>
   <footer>
     <view class="padding text-center" onTap="save">
       <text class="text-xl text-blue">保 存</text>

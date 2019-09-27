@@ -1,62 +1,65 @@
-import { selProgrammeInfo, selProgrammeCodes, selCitys } from '/mock/programme'
+import { selProgrammeCodes, selCitys } from '/mock/programme'
+import { selActivityCode, selResourcesDetail } from '/api/programExecute'
+import { selProgrammeInfo } from '/api/shareHelp'
+import { activitType } from '/constant/other.js'
+const app = getApp()
 Page({
   data: {
+    userId: '',
     programmeId: '',
-    pickerShow: false,
-    cityCode: '',
-    cityText: '',
-    citys: [],
+    activitTypes: activitType, // 活动类型
     programmes: [],
     programmeIndex: '',
-    programme: {
-      typeNmae: '',
-      typeId: '',
-      themeName: '',
-      themeId: '',
-      time: '',
-      modality: '',
-      investigation: 0,
-      otherPoints: [],
-      resources: [],
-      targets: []
-    }
+    programmeType: '',
+    cityCode: '',
+    cityText: '',
+    resources: [], // 资源
+    programmeInfo: {}
   },
-  // 地市选择确认
-  clickPickerConfirm(e) {
-    let that = this
-    selProgrammeCodes().then(res => {
-      that.setData({
+  setCityCode(e) {
+    this.setData({
+      cityCode: e.city.code,
+      cityText: e.city.name,
+    })
+    this.getProgrammeCodes()
+  },
+  // 获取方案编码
+  getProgrammeCodes() {
+    selActivityCode({
+      userId: this.data.userId,
+      companyId: this.data.cityCode
+    }).then(res => {
+      this.setData({
         programmes: res.data
       })
     })
-    this.setData({
-      cityText: e[2].text,
-      cityCode: e[2].value,
-      pickerShow: false
-    })
   },
-  // 地市选择取消
-  clickPickerCancel() {
-    this.setData({ pickerShow: false })
-  },
-  // 点击地市弹出picker
   clickCity() {
-    this.setData({ pickerShow: true })
+    dd.navigateTo({
+      url: '/pages/common/selectCompany/selectCompany'
+    })
   },
   programmeChange(e) {
-    let that = this
-    that.setData({
-      programmeId: that.data.programmes[e.detail.value].id,
+    this.setData({
+      programmeId: this.data.programmes[e.detail.value]['ACTIVITY_ID'],
+      programmeType: this.data.programmes[e.detail.value]['ACTIVITY_TYPE'],
       programmeIndex: e.detail.value
     })
-    selProgrammeInfo().then(res => {
-      that.setData({
-        programme: res.data
-      })
+    // 查询方案信息
+    selProgrammeInfo({
+      userId: this.data.userId,
+      activityId: this.data.programmeId,
+      companyId: this.data.cityCode
+    }).then(res => {
+      // 将方案信息保存在全局变量中
+      app.globalData.programmeDetail = res.data.programmeDetail[0]
+      this.setData({ programmeInfo: res.data.programmeDetail[0] })
     })
   },
-  navToImp(){
-    if (this.data.programmeId == '') {
+  navTodec(){
+    let programmeId = 5570
+    let cityCode = 24
+    if (programmeId == '') {
       my.showToast({
         type: 'none',
         content: '请先选择方案',
@@ -64,14 +67,30 @@ Page({
       })
     } else {
       dd.navigateTo({
-        url: `./implement/implement?programmeId=${this.data.programmeId}&cityCode=${this.data.cityCode}`
+        url: `./decompose/decompose?programmeId=${programmeId}&cityCode=${cityCode}`
       })
     }
   },
-  onReady() {
-    selCitys().then(res => {
-      this.setData({ citys: res.data })
-    })
+  navToImp(){
+    let programmeId = this.data.programmeId
+    let cityCode = this.data.cityCode
+    let programmeType = this.data.programmeType
+    if (programmeId == '') {
+      my.showToast({
+        type: 'none',
+        content: '请先选择方案',
+        duration: 1000
+      })
+    } else {
+      dd.navigateTo({
+        url: `./implement/implement?programmeId=${programmeId}&cityCode=${cityCode}&programmeType=${programmeType}`
+      })
+    }
   },
-  onLoad() {}
+  onReady() {},
+  onLoad() {
+    this.setData({
+      userId: app.globalData.userInfo.userId
+    })
+  }
 })

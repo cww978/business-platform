@@ -1,6 +1,34 @@
 import request from '../util/request'
 
 /**
+ * 保存执行登记
+ * @param executeType int
+ * @param location String
+ * @param userId int
+ * @param activityId String
+ * @param companyId int
+ * @param targetId int
+ * @param imgs String
+ * @param custCode String
+ * @param longitude String
+ * @param latitude String
+ * @param resources Arrary
+ * @param otherPoints Arrary
+ * @param investigation String
+ * @param investTarget String
+ */
+export function saveProgrammeImplement(param){
+  console.log('保存执行登记', param)
+  return request({
+    url: '/programExecute/saveProgrammeImplement',
+    data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
  * 保存样烟调研
  * @param id int
  * @param regId int
@@ -15,11 +43,11 @@ import request from '../util/request'
  * @param suggestContent String
  */
 export function saveInvestigationQuestion(param){
-  console.log('查询方案是否需要调研', param)
+  console.log('保存样烟调研', param)
   return request({
     url: '/programExecute/saveInvestigationQuestion',
-    data: param,
     loading: true,
+    data: param,
     dataType: 'json',
     method: 'post'
   })
@@ -30,7 +58,7 @@ export function saveInvestigationQuestion(param){
  * @param activityId int
  */
 export function selPromoItem(param){
-  console.log('查询方案是否需要调研', param)
+  console.log('查询方案其他要素', param)
   return request({
     url: '/programExecute/selPromoItem',
     param: param,

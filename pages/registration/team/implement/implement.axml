@@ -9,16 +9,16 @@
       </view>
       <list>
         <list-item arrow="{{true}}">
-          <picker value="{{targetIndex}}" onChange="targetPickerChange" range-key="name" range="{{targets}}">
+          <picker value="{{targetIndex}}" onChange="targetPickerChange" range-key="tragetName" range="{{targets}}">
             <view class="picker">
               <view class="row">
-                <view class="row-title">对象名称</view>
-                <view class="row-extra text-lg text-gray">{{targets[targetIndex].name}}</view>
+                <view class="row-title">活动对象</view>
+                <view class="row-extra text-lg text-gray">{{targets[targetIndex].tragetName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
-        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].type == 1}}" onClick="openSearchPage" last="{{true}}">
+        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
           零售户
           <view slot="extra" class="text-gray">
             {{retail.name==''?'请选择':retail.name}}
@@ -27,17 +27,17 @@
       </list>
       <flex class="cu-form-group">
         <view class="title text-lg">当前地点</view>
-        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{form.address}}</<view></flex-item>
+        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{address}}</<view></flex-item>
         <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
       <view class="cu-form-group">
         <view class="title text-lg">人数</view>
-        <input class="text-lg" type="number" placeholder="请输入.." onInput="inputMans" value="{{mans}}"/>
+        <input class="text-lg" type="number"  placeholder="请输入.." onInput="inputMans"/>
       </view>
       <block a:for="{{otherPoints}}">
-        <view class="cu-form-group">
-          <view class="title text-lg">{{item.text}}</view>
-          <input a:if="{{item.type == 1}}" class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputOtherPoint"/>
+        <view class="cu-form-group" a:if="{{item != null}}">
+          <view class="title text-lg">{{item.itemName}}</view>
+          <input a:if="{{item.inputType == 1}}" class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputOtherPoint"/>
           <input a:else class="text-lg" type="text" data-index="{{index}}" placeholder="请输入.." onInput="inputOtherPoint"/>
         </view>
       </block>
@@ -51,9 +51,9 @@
       </view>
       <block a:for="{{resources}}">
         <view class="cu-form-group">
-          <view class="title text-lg">{{item.name}}</view>
+          <view class="title text-lg text-cut">{{item['ADSGOODS_NAME']}}</view>
           <input class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputResourcesUse" value="{{item.useNum}}"/>
-          <view class="text-df text-gray">最大值：{{item.qty}}</view>
+          <view class="text-df text-gray">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
         </view>
       </block>
     </view>
@@ -122,7 +122,7 @@
   </scroll-view>
   <footer>
     <view class="padding text-center" onTap="save">
-      <text class="text-xl text-blue">确 定</text>
+      <text class="text-xl text-blue">执行方案</text>
     </view>
   </footer>
 </view>

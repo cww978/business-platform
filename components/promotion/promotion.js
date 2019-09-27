@@ -1,4 +1,5 @@
-import { selPromotionals } from '/mock/account'
+import { selTobaList, selAdsgoodsList } from '/api/shareHelp'
+const app = getApp()
 Component({
   mixins: [],
   data: {
@@ -14,16 +15,21 @@ Component({
   props: { 
     show: false,
     type: 1,
+    companyId: '',
     num: true,
-    unit: true,
     onConfirm: () => {},
     onCancel: () => {}
   },
   didMount() {
-    selPromotionals().then(res => {
+    let userId = app.globalData.userInfo.userId
+    selTobaList({ userId: userId, companyId: this.props.companyId }).then(res => {
       this.setData({
-        promotionProducts: res.data.products,
-        promotionTobaccos: res.data.tobaccos
+        promotionTobaccos: res.data
+      })
+    })
+    selAdsgoodsList({ userId: userId, companyId: this.props.companyId }).then(res => {
+      this.setData({
+        promotionProducts: res.data
       })
     })
   },
@@ -36,7 +42,7 @@ Component({
         columnIndex2: e.detail.value[1],
         columnIndex3: e.detail.value[2]
       })
-      let unit =  this.props.unit ? this.data.units[e.detail.value[2]] : null
+      let unit =  this.props.num ? this.data.units[e.detail.value[2]] : null
       let num =  this.props.num ? e.detail.value[1] + 1 : null
       let promotion = this.props.type == 1 ? this.data.promotionProducts[e.detail.value[0]] : this.data.promotionTobaccos[e.detail.value[0]]
       this.setData({
@@ -47,7 +53,7 @@ Component({
       })
     },
     clickItem() {
-      let unit =  this.props.unit ? this.data.units[this.data.columnIndex3] : null
+      let unit =  this.props.num ? this.data.units[this.data.columnIndex3] : null
       let num =  this.props.num ? this.data.columnIndex2 + 1 : null
       let promotion = this.props.type == 1 ? this.data.promotionProducts[this.data.columnIndex1] : this.data.promotionTobaccos[this.data.columnIndex1]
       this.props.onConfirm({

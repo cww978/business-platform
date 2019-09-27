@@ -8,3 +8,7 @@ UI组件库:mini-antui--通过npm安装
 6、菜单图片地址：https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=6996
 
 修改方案分配
+
+----------
+1：方案分解
+2：收货确定

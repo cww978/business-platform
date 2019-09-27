@@ -27,11 +27,15 @@
       </list>
       <flex class="cu-form-group">
         <view class="title text-lg">当前地点</view>
-        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{form.address}}</<view></flex-item>
+        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{address}}</<view></flex-item>
         <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
+      <view class="cu-form-group">
+        <view class="title text-lg">人数</view>
+        <input class="text-lg" type="number"  placeholder="请输入.." onInput="inputMans"/>
+      </view>
       <block a:for="{{otherPoints}}">
-        <view class="cu-form-group">
+        <view class="cu-form-group" a:if="{{item != null}}">
           <view class="title text-lg">{{item.itemName}}</view>
           <input a:if="{{item.inputType == 1}}" class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputOtherPoint"/>
           <input a:else class="text-lg" type="text" data-index="{{index}}" placeholder="请输入.." onInput="inputOtherPoint"/>

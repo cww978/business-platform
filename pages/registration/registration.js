@@ -31,7 +31,7 @@ Page({
       app.globalData.registration = {
         userType: res.data.type
       }
-      that.switchUserType(res.data.type)
+      that.switchUserType('1')
     })
   },
   onLoad() {}

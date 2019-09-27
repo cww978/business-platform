@@ -4,25 +4,37 @@
       <view class="padding" onTap="clickCancel"><text class="text-lg text-blue">取消</text></view>
       <view class="padding" onTap="clickItem"><text class="text-lg text-blue text-bold">确认</text></view>
     </view>
-    <picker-view value="{{value}}" onChange="onChange" class="my-picker">
-      <picker-view-column a:if="{{type == 1}}">
+    <picker-view a:if="{{num == true}}" value="{{value}}" onChange="onChange" class="my-picker">
+      <picker-view-column a:if="{{type == '1'}}">
         <block a:for="{{promotionProducts}}">
-          <view>{{item.text}}</view>
+          <view>{{item['ADSGOODSNAME']}}</view>
         </block>
       </picker-view-column>
       <picker-view-column a:else>
         <block a:for="{{promotionTobaccos}}">
-          <view>{{item.text}}</view>
+          <view>{{item['ADSGOODSNAME']}}</view>
         </block>
       </picker-view-column>
-      <picker-view-column a:if="{{num}}">
+      <picker-view-column>
         <block a:for="{{99}}">
           <view>{{item}}</view>
         </block>
       </picker-view-column>
-      <picker-view-column a:if="{{unit}}">
+      <picker-view-column>
         <block a:for="{{units}}">
           <view>{{item.text}}</view>
+        </block>
+      </picker-view-column>
+    </picker-view>
+    <picker-view a:else value="{{value}}" onChange="onChange" class="my-picker">
+      <picker-view-column a:if="{{type == '1'}}">
+        <block a:for="{{promotionProducts}}">
+          <view>{{item['ADSGOODSNAME']}}</view>
+        </block>
+      </picker-view-column>
+      <picker-view-column a:else>
+        <block a:for="{{promotionTobaccos}}">
+          <view>{{item['ADSGOODSNAME']}}</view>
         </block>
       </picker-view-column>
     </picker-view>

@@ -1,6 +1,38 @@
 import request from '../util/request'
 
 /**
+ * 获取样烟列表
+ * @param userId String
+ * @param companyId String
+ */
+export function selTobaList(param){
+  console.log('获取样烟列表', param)
+  return request({
+    url: '/shareHelp/selTobaList',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取物资列表
+ * @param userId String
+ * @param companyId String
+ */
+export function selAdsgoodsList(param){
+  console.log('获取物资列表', param)
+  return request({
+    url: '/shareHelp/selAdsgoodsList',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
  * 根据活动类型查询活动对象
  * @param promoType String
  */

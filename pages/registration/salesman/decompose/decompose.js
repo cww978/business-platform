@@ -1,5 +1,6 @@
 import { selCompanys, saveResolveCompany } from '/mock/programme'
-
+import { selResourcesDetail } from '/api/programExecute'
+const app = getApp()
 Page({
   data: {
     programmeId: '',
@@ -7,8 +8,6 @@ Page({
     companys: [],
     companyIndex: 0,
     resources: [],
-    companyCode: '',
-    companyName: '',
     standard: ''
   },
   inputTextarea(e) {
@@ -24,18 +23,26 @@ Page({
     })
   },
   companyPickerChange(e) {
-    this.setData({
-      companyCode: this.data.companys[e.detail.value].companyCode,
-      companyName: this.data.companys[e.detail.value].companyName,
-      companyIndex: e.detail.value
+    this.setData({ companyIndex: e.detail.value })
+  },
+  // 获取资源明细
+  getResources() {
+    selResourcesDetail({
+      userId: app.globalData.userInfo.userId,
+      activityId: this.data.programmeId,
+      companyId: this.data.cityCode,
+      executeType: 1
+    }).then(res => {
+      this.setData({ resources: res.data })
     })
   },
   save() {
     let that = this
     let params = {
-      cityCode: that.data.cityCode,
-      id: that.data.programmeId,
-      companyCode: that.data.companyCode,
+      userId: app.globalData.userInfo.userId,
+      companyId: that.data.cityCode,
+      activityId: that.data.programmeId,
+      terminalCompanyId: that.data.companyCode,
       standard: that.data.standard,
       resources: that.data.resources
     }
@@ -46,28 +53,24 @@ Page({
       })
     })
   },
+  // 查询终端公司列表
+  getTerminals() {
+    selCompanys().then((res) => {
+      this.setData({
+        companys: res.data
+      })
+    })
+  },
+  onReady() {
+    this.getResources()
+    this.getTerminals()
+  },
   onLoad(options) {
     console.log('方案编码', options.programmeId)
     console.log('地市编码', options.cityCode)
-    let that = this
-    let resources = getCurrentPages()[getCurrentPages().length - 2].data.resources
-    for (let item of resources) {
-      item.split = ''
-    }
     this.setData({
-      resources: resources,
       programmeId: options.programmeId,
       cityCode: options.cityCode
-    })
-    // 查询终端公司列表
-    selCompanys().then((res) => {
-      that.setData({
-        companys: res.data
-      })
-      that.setData({
-        companyCode: that.data.companys[that.data.companyIndex].companyCode,
-        companyName: that.data.companys[that.data.companyIndex].companyName
-      })
     })
   },
 });

@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mini-antui": "^0.4.31"
+    "jsonp": "^0.2.1",
+    "mini-antui": "^0.4.31",
+    "qs": "^6.9.0"
   }
 }
