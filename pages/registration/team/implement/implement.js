@@ -4,9 +4,9 @@ import { selObjectElement } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
-    cityCode: '',
-    programmeId: '',
-    programmeType: '', // 活动类型
+    companyId: 0,
+    activityId: 0,
+    activityType: '', // 活动类型
     address: '',
     longitude: 0,
     latitude: 0,
@@ -42,7 +42,7 @@ Page({
   },
   // 判断是否需要调研
   hasInvestigation() {
-    selProgrammeInvestigation({ activityId: this.data.programmeId }).then(res =>{
+    selProgrammeInvestigation({ activityId: this.data.activityId }).then(res =>{
       this.setData({
         hasInvestigation: res.data.investigate
       })
@@ -134,7 +134,7 @@ Page({
       question: this.data.questions[e.index]
     })
     dd.navigateTo({
-      url: `/pages/common/investigation/investigation?question=${e.index}&cityCode=${this.data.cityCode}`
+      url: `/pages/common/investigation/investigation?question=${e.index}&cityCode=${this.data.companyId}`
     })
   },
   // 选择上传图片
@@ -186,7 +186,7 @@ Page({
   // 点击新增调研测试
   investigClick() {
     dd.navigateTo({
-      url: `/pages/common/investigation/investigation?cityCode=${this.data.cityCode}`
+      url: `/pages/common/investigation/investigation?cityCode=${this.data.companyId}`
     })
   },
   // 打开零售户搜索
@@ -227,8 +227,8 @@ Page({
       executeType: 1,
       location: this.data.address,
       userId: app.globalData.userInfo.userId,
-      activityId: this.data.programmeId,
-      companyId: this.data.cityCode,
+      activityId: this.data.activityId,
+      companyId: this.data.companyId,
       targetId: targetId,
       imgs: imgs,
       custCode: retailId,
@@ -250,7 +250,7 @@ Page({
   },
   // 获取其他要素
   getOtherPoints() {
-    selPromoItem({ activityId: this.data.programmeId }).then(res => {
+    selPromoItem({ activityId: this.data.activityId }).then(res => {
       if (res.data.list != 0) {
         this.setData({ otherPoints: res.data })
       }
@@ -258,7 +258,7 @@ Page({
   },
   // 获取对象
   getTargets() {
-    selObjectElement({ promoType: this.data.programmeType}).then(res => {
+    selObjectElement({ promoType: this.data.activityType}).then(res => {
       this.setData({ targets: res.data })
     })
   },
@@ -266,8 +266,8 @@ Page({
   getResources() {
     selResourcesDetail({
       userId: app.globalData.userInfo.userId,
-      activityId: this.data.programmeId,
-      companyId: this.data.cityCode,
+      activityId: this.data.activityId,
+      companyId: this.data.companyId,
       executeType: 2
     }).then(res => {
       this.setData({ resources: res.data })
@@ -282,14 +282,12 @@ Page({
     this.getTargets()
   },
   onLoad(options) {
-    console.log('方案编码', options.programmeId)
-    console.log('地市编码', options.cityCode)
     this.setData({
       questions: [],
       resources: [],
-      programmeType: options.programmeType,
-      programmeId: options.programmeId,
-      cityCode: options.cityCode
+      activityType: options.activityType,
+      activityId: app.globalData.registration['activityId'],
+      companyId: app.globalData.registration['companyId']
     })
   }
 })

@@ -1,12 +1,12 @@
-import { selCompanys, saveResolveCompany } from '/mock/programme'
-import { selResourcesDetail } from '/api/programExecute'
+import { selResourcesDetail, saveResolveCompany } from '/api/programExecute'
+import { selterminalCompany } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
-    programmeId: '',
-    cityCode: '',
-    companys: [],
-    companyIndex: 0,
+    companyId: 0,
+    activityId: 0,
+    terminals: [],
+    terminalIndex: 0,
     resources: [],
     standard: ''
   },
@@ -22,15 +22,15 @@ Page({
       resources: resources
     })
   },
-  companyPickerChange(e) {
-    this.setData({ companyIndex: e.detail.value })
+  terminalPickerChange(e) {
+    this.setData({ terminalIndex: e.detail.value })
   },
   // 获取资源明细
   getResources() {
     selResourcesDetail({
       userId: app.globalData.userInfo.userId,
-      activityId: this.data.programmeId,
-      companyId: this.data.cityCode,
+      activityId: this.data.activityId,
+      companyId: this.data.companyId,
       executeType: 1
     }).then(res => {
       this.setData({ resources: res.data })
@@ -38,39 +38,41 @@ Page({
   },
   save() {
     let that = this
+    let resources = []
+    for (let item of this.data.resources) {
+      resources.push(item.ADSGOODS_ID + ',' + item.split)
+    }
     let params = {
       userId: app.globalData.userInfo.userId,
-      companyId: that.data.cityCode,
-      activityId: that.data.programmeId,
-      terminalCompanyId: that.data.companyCode,
+      companyId: that.data.companyId,
+      activityId: that.data.activityId,
+      terminalCompanyId: that.data.terminals[this.data.terminalIndex].terminalCompanyId,
+      personNum: 0,
       standard: that.data.standard,
-      resources: that.data.resources
+      resources: resources.join(';')
     }
     saveResolveCompany(params).then(res =>{
       let type = res.data == 0 ? 'fail' : 'success'
       dd.navigateTo({
-        url: `./success/success?companyName=${that.data.companyName}&type=${type}`
+        url: `./success/success?companyName=${that.data.terminals[this.data.terminalIndex].terminalCompanyName}&type=${type}`
       })
     })
   },
   // 查询终端公司列表
   getTerminals() {
-    selCompanys().then((res) => {
-      this.setData({
-        companys: res.data
-      })
+    selterminalCompany({ companyId: this.data.companyId }).then(res => {
+      this.setData({ terminals: res.data })
+      console.log('terminals', res.data)
     })
   },
   onReady() {
     this.getResources()
     this.getTerminals()
   },
-  onLoad(options) {
-    console.log('方案编码', options.programmeId)
-    console.log('地市编码', options.cityCode)
+  onLoad() {
     this.setData({
-      programmeId: options.programmeId,
-      cityCode: options.cityCode
+      companyId: app.globalData.registration['companyId'],
+      activityId: app.globalData.registration['activityId']
     })
   },
 });

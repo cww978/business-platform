@@ -9,11 +9,11 @@
       </view>
       <list>
         <list-item arrow="{{true}}">
-          <picker value="{{companyIndex}}" onChange="companyPickerChange" range-key="companyName" range="{{companys}}">
+          <picker value="{{terminalIndex}}" onChange="terminalPickerChange" range-key="terminalCompanyName" range="{{terminals}}">
             <view class="picker">
               <view class="row">
                 <view class="row-title">终端公司</view>
-                <view class="row-extra text-lg text-gray">{{companys[companyIndex].companyName}}</view>
+                <view class="row-extra text-lg text-gray">{{terminals[terminalIndex].terminalCompanyName}}</view>
               </view>
             </view>
           </picker>

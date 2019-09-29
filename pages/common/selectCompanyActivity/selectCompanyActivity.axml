@@ -1,0 +1,28 @@
+<view>
+  <list>
+    <view slot="header">
+      <view>
+        <text class="text-df text-red">选择商业公司自动获取方案编码</text>
+      </view>
+    </view>
+    <list-item arrow="{{true}}" onClick="clickCity">商业公司
+      <view slot="extra">
+        {{cityText==''?'请选择':cityText}}
+      </view>  
+    </list-item>
+    <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
+      <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">方案编码</view>
+            <view class="row-extra text-df text-gray">{{programmes[programmeIndex].ACTIVITY_CODE}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+  </list>
+  <view class="padding-xs"></view>
+  <view class="padding-xs">
+    <button class="cu-btn block bg-blue lg" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>
+  </view> 
+</view>

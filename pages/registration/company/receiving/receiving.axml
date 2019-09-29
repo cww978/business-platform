@@ -11,7 +11,7 @@
         <list-item arrow="{{false}}" last="{{true}}">
           终端公司
           <view slot="extra">
-						{{companyName}}
+						{{terminalCompanyName}}
 					</view>
         </list-item>
       </list>
@@ -31,16 +31,19 @@
             </flex>
             <view>
               <view class="cu-form-group">
-                <text class="text-lg text-content padding-top padding-bottom">{{item.standard}}</text> 
+                <text class="text-df text-content">{{item.standard}}</text> 
               </view>
               <block a:for="{{item.resources}}" a:for-item="item2">
                 <view class="cu-form-group">
-                  <view class="text-lg">{{item2.name}}</view>
-                  <view class="text-lg">可使用量: {{item2.qty}}</view>
+                  <view class="text-df text-cut">{{item2.adsgoodsName}}</view>
+                  <view class="text-df">可用量: {{item2.qty}}{{item2.unit}}</view>
                 </view>
               </block>
             </view>
           </list-item>
+        </block>
+        <block a:if="{{allResources.length <= 0}}">
+          <view class="text-center text-df padding-xs">没有可用的资源</view>
         </block>
       </list>
     </view>

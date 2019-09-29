@@ -8,48 +8,53 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}" onClick="clickCity"><text class="text-red">*</text>地市
+        <list-item arrow="{{true}}" onClick="clickCity">商业公司
           <view slot="extra">
-            {{form.cityText==''?'请选择':form.cityText}}
+            {{companyText==''?'请选择':companyText}}
           </view>  
         </list-item>
         <list-item arrow="{{true}}">
-          <picker value="{{themeIndex}}" onChange="activityThemeChanged" range-key="name" range="{{themes}}">
+          <picker value="{{themeIndex}}" onChange="activityThemeChanged" range-key="themeName" range="{{themes}}">
             <view class="picker">
               <view class="row">
                 <view class="row-title">活动主题</view>
-                <view class="row-extra text-lg text-gray">{{themes[themeIndex].name}}</view>
+                <view class="row-extra text-lg text-gray">{{themes[themeIndex].themeName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
         <list-item arrow="{{true}}">
-          <picker value="{{typeIndex}}" onChange="activityTypeChanged" range-key="name" range="{{types}}">
+          <picker value="{{typeIndex}}" onChange="activityTypeChanged" range-key="promotypeName" range="{{types}}">
             <view class="picker">
               <view class="row">
                 <view class="row-title">活动类型</view>
-                <view class="row-extra text-lg text-gray">{{types[typeIndex].name}}</view>
+                <view class="row-extra text-lg text-gray">{{types[typeIndex].promotypeName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
         <list-item arrow="{{true}}">
-          <picker value="{{targetIndex}}" onChange="activityTargetChanged" range-key="name" range="{{targets}}">
+          <picker value="{{targetIndex}}" onChange="activityTargetChanged" range-key="tragetName" range="{{targets}}">
             <view class="picker">
               <view class="row">
                 <view class="row-title">活动对象</view>
-                <view class="row-extra text-lg text-gray">{{targets[targetIndex].name}}</view>
+                <view class="row-extra text-lg text-gray">{{targets[targetIndex].tragetName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
-        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].type == 1}}" onClick="openSearchPage" last="{{true}}">
+        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
           零售户
           <view slot="extra" class="text-gray">
             {{retail.name==''?'请选择':retail.name}}
           </view>
         </list-item>
       </list>
+      <flex class="cu-form-group">
+        <view class="title text-lg">当前地点</view>
+        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{address}}</<view></flex-item>
+        <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
+      </flex>
       <view class="cu-form-group">
         <view class="title text-lg">活动形式</view>
         <textarea  onInput="inputModality" maxlength="300" auto-height placeholder="请填写..." />

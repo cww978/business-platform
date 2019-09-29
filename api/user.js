@@ -1,6 +1,8 @@
 import request from '../util/request'
 /**
  * 获取用户信息
+ * 256634511022855974
+ * 0100271822890151
  * @param authCode String
  */
 export function getUserInfo(params){
@@ -8,7 +10,7 @@ export function getUserInfo(params){
     console.log('获取用户信息', params)
     resolve({
       userId: '0100271822890151',
-      userName: '管理员'
+      userName: ''
     })
   })
 }

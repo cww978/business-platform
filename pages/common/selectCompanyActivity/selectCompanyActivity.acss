@@ -1,0 +1,10 @@
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  flex-basis: initial;
+}

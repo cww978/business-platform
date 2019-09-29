@@ -1,6 +1,85 @@
 import request from '../util/request'
 
 /**
+ * 保存非方案执行登记
+ * @param activityId int
+ * @param location String
+ * @param userId int
+ * @param companyId int
+ * @param themeId String
+ * @param promoTypeId String
+ * @param targetId int
+ * @param personNum int
+ * @param executeType int
+ * @param form String
+ * @param imgs String
+ * @param custCode String
+ * @param longitude String
+ * @param latitude String
+ */
+export function saveNoProgrammeImplement(param){
+  console.log('保存非方案执行登记', param)
+  return request({
+    url: '/programExecute/saveNoProgrammeImplement',
+    data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
+ * 确认收货
+ * @param regIdStr String
+ */
+export function saveConfirmResources(param){
+  console.log('确认收货', param)
+  return request({
+    url: '/programExecute/saveConfirmResources',
+    data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
+ * 提交分配方案
+ * @param activityId int
+ * @param userId int
+ * @param companyId int
+ * @param terminalCompanyId int
+ * @param personNum int
+ * @param resources String
+ * @param standard String
+ */
+export function saveResolveCompany(param){
+  console.log('查询终端公司分配到的资源', param)
+  return request({
+    url: '/programExecute/saveResolveCompany',
+    data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
+ * 查询终端公司分配到的资源
+ * @param terminalCompanyId int
+ */
+export function selResourcesDistribution(param){
+  console.log('查询终端公司分配到的资源', param)
+  return request({
+    url: '/programExecute/selResourcesDistribution',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
  * 保存执行登记
  * @param executeType int
  * @param location String

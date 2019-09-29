@@ -56,6 +56,9 @@
           <view class="text-df text-gray">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
         </view>
       </block>
+      <block a:if="{{resources.length <= 0}}">
+        <view class="padding-xs text-df text-center">没有资源可以使用</view>
+      </block>
     </view>
     <view>
       <view class="header">

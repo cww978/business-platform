@@ -1,6 +1,64 @@
 import request from '../util/request'
 
 /**
+ * 获取活动类型
+ * @param themeId int
+ */
+export function selPromotype(param){
+  console.log('获取主题')
+  return request({
+    url: '/shareHelp/selPromotype',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取活动主题
+ */
+export function selTheme(){
+  console.log('获取主题')
+  return request({
+    url: '/shareHelp/selTheme',
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 查询用户所属的终端公司
+ * @param userId int
+ */
+export function selUserTerminalCompany(param){
+  console.log('查询用户所属的终端公司', param)
+  return request({
+    url: '/shareHelp/selUserTerminalCompany',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 获取商业公司下面终端公司列表
+ * @param companyId String
+ */
+export function selterminalCompany(param){
+  console.log('获取商业公司下面终端公司列表', param)
+  return request({
+    url: '/shareHelp/selterminalCompany',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
  * 获取样烟列表
  * @param userId String
  * @param companyId String

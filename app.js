@@ -4,7 +4,11 @@ App({
     programmeDetail: null, // 方案执行功能需要的全局变量
     userInfo: null,
     childMenus: [],
-    registration: null
+    registration: {
+      activityId: '',
+      companyId: '',
+      userType: ''
+    }
   },
   // 更新并保存个人信息
   updateUserInfo(){

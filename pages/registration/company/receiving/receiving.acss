@@ -44,4 +44,15 @@
 }
 .cu-form-group {
   background-color: transparent;
+  min-height: 0.8rem;
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  flex-basis: initial;
 }

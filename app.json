@@ -31,7 +31,8 @@
     "pages/stock/settle/result/result",
     "pages/stock/check/result/result",
     "pages/common/areaProAndCity/areaProAndCity",
-    "pages/common/selectCompany/selectCompany"
+    "pages/common/selectCompany/selectCompany",
+    "pages/common/selectCompanyActivity/selectCompanyActivity"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

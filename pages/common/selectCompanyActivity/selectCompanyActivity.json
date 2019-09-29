@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "选择地市和方案",
+  "allowsBounceVertical": "NO",
+  "usingComponents":{
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index"
+  }
+}

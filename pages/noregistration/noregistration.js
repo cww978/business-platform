@@ -1,8 +1,11 @@
-import { selProgrammeInvestigation, saveNoProgrammeImplement, selCitys } from '/mock/programme'
 import { saveImage } from '/api/common'
-import { selActivityThemes, selActivityTypesFromTheme, selActivityTargetsFromType } from '/mock/activity'
+import { selProgramExecuteRole } from '/api/role'
+import { saveNoProgrammeImplement } from '/api/programExecute'
+import { selTheme, selPromotype, selObjectElement } from '/api/shareHelp'
+const app = getApp()
 Page({
   data: {
+    userId: 0,
     imgs: [],
     targets: [], //对象
     targetIndex: 0,
@@ -16,48 +19,54 @@ Page({
       id: '',
       name: ''
     },
-    // 提交表单数据
-    form: { 
-      cityCode: '',
-      cityText: '',
-      themeId: '',
-      modality: '',
-      typeId: '',
-      targetId: '',// 对象id
-      retailId: '', // 零售户id
-      imgs: '' // 现场图片
-    }
+    address: '',
+    longitude: 0,
+    latitude: 0,
+    hasLocation: false,
+    companyId: 0,
+    companyText: '',
+    modality: ''
   },
-  // 地市选择确认
-  clickPickerConfirm(e) {
-    this.setData({
-      'form.cityText': e[2].text,
-      'form.cityCode': e[2].value,
-      pickerShow: false
+  clickCity() {
+    dd.navigateTo({
+      url: '/pages/common/selectCompany/selectCompany'
     })
   },
-  // 地市选择取消
-  clickPickerCancel() {
-    this.setData({ pickerShow: false })
-  },
-  // 点击地市弹出picker
-  clickCity() {
-    this.setData({ pickerShow: true })
+  setCityCode(e) {
+    this.setData({
+      companyId: e.city.code,
+      companyText: e.city.name
+    })
   },
   clickAddress() {
     dd.alert({
-      content: this.data.form.address,
+      content: this.data.address,
       buttonText: '确定'
     })
   },
-  inputTheme(e) {
-    this.setData({
-      'form.theme': e.detail.value
+  // 定位
+  location() {
+    return new Promise(resolve => {
+      let that = this
+      dd.getLocation({
+        success(res){
+          that.setData({
+            hasLocation: true,
+            address: res.address || '',
+            longitude: res.longitude,
+            latitude: res.latitude
+          })
+          resolve()
+        },
+        fail() {
+          dd.showToast({ content: '定位失败' })
+        }
+      })
     })
   },
   inputModality(e) {
     this.setData({
-      'form.modality': e.detail.value
+      modality: e.detail.value
     })
   },
   setRetail(retail) {
@@ -111,20 +120,29 @@ Page({
   // 保存执行
   save() {
     // 验证是否选择了地市
-    if (this.data.form.cityCode != '') {
+    if (this.data.companyId != 0) {
       let retailId = this.data.retail.id
-      let typeId = this.data.types[this.data.typeIndex].id
-      let targetId = this.data.targets[this.data.targetIndex].id
-      let themeId = this.data.themes[this.data.themeIndex].id
+      let typeId = this.data.types[this.data.typeIndex].promotypeId
+      let targetId = this.data.targets[this.data.targetIndex].targetId
+      let themeId = this.data.themes[this.data.themeIndex].themeId
       let imgs = this.data.imgs.join(',')
-      this.setData({
-        'form.targetId': targetId,
-        'form.retailId': retailId,
-        'form.themeId': themeId,
-        'form.typeId': typeId,
-        'form.imgs': imgs
-      })
-      saveNoProgrammeImplement(this.data.form).then(res => {
+      let param = {
+        activityId: 0,
+        location: this.data.address,
+        userId: this.data.userId,
+        companyId: this.data.companyId,
+        themeId: themeId,
+        promoTypeId: typeId,
+        targetId: targetId,
+        executeType: this.data.userType,
+        form: this.data.modality,
+        imgs: imgs,
+        custCode: retailId,
+        longitude: this.data.longitude,
+        latitude: this.data.latitude,
+        personNum: 0,
+      }
+      saveNoProgrammeImplement(param).then(res => {
         let type = res.data == 0 ? 'fail' : 'success'
         dd.navigateTo({
           url: `./result/result?type=${type}`
@@ -139,9 +157,9 @@ Page({
       themeIndex: e.detail.value
     })
     let that = this
-    selActivityTypesFromTheme({themeId: that.data.themes[that.data.themeIndex]}).then(res2 => {
+    selPromotype({themeId: that.data.themes[that.data.themeIndex].themeId}).then(res2 => {
       that.setData({ types: res2.data })
-      selActivityTargetsFromType({typeId: that.data.types[that.data.typeIndex]}).then(res3 => {
+      selObjectElement({promoType: that.data.types[that.data.typeIndex].promotypeId}).then(res3 => {
         that.setData({ targets: res3.data })
       })
     })
@@ -151,7 +169,7 @@ Page({
       typeIndex: e.detail.value
     })
     let that = this
-    selActivityTargetsFromType({typeId: that.data.types[that.data.typeIndex]}).then(res3 => {
+    selObjectElement({promoType: that.data.types[that.data.typeIndex].promotypeId}).then(res3 => {
       that.setData({ targets: res3.data })
     })
   },
@@ -160,20 +178,36 @@ Page({
       targetIndex: e.detail.value
     })
   },
-  onReady() { 
+  check() {
+    if (this.data.userType != 1 && this.data.userType != 2) {
+      dd.alert({
+        title: '提示',
+        content: '没有相关操作权限',
+        buttonText: '知道了',
+        success: () => {
+          dd.navigateBack()
+        },
+      })
+    }
+  },
+  onReady() {
+    this.check()
+    this.location()
     let that = this
-    selActivityThemes().then(res1 => {
+    selTheme().then(res1 => {
       that.setData({ themes: res1.data })
-      selActivityTypesFromTheme({themeId: that.data.themes[that.data.themeIndex]}).then(res2 => {
+      selPromotype({themeId: that.data.themes[that.data.themeIndex].themeId}).then(res2 => {
         that.setData({ types: res2.data })
-        selActivityTargetsFromType({typeId: that.data.types[that.data.typeIndex]}).then(res3 => {
+        selObjectElement({promoType: that.data.types[that.data.typeIndex].promotypeId}).then(res3 => {
           that.setData({ targets: res3.data })
         })
       })
     })
-    selCitys().then(res => {
-      this.setData({ citys: res.data })
-    })
   },
-  onLoad(options) {}
+  onLoad(options) {
+    this.setData({ userId: app.globalData.userInfo.userId })
+    selProgramExecuteRole({ userId: this.data.userId }).then(res => {
+      this.setData({ userType: res.data.type })
+    })
+  }
 })
