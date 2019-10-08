@@ -1,12 +1,12 @@
-import { selAccounts, saveLockAccount } from '/mock/account'
+
+import { selAccounts, saveLockAccount } from '/api/account'
+const app = getApp()
 Page({
   data: {
-    actionType: 0,
-    actionText: '无法操作',
-    personId: '',
+    userId: '',
     regionCode: '',
     top: 0,
-    yeatMonth: '',
+    yearMonth: '',
     joins: [],
     outs: [],
     tabs: ['销区入库单', '销区执行登记单'],
@@ -45,36 +45,36 @@ Page({
   },
   save() {
     let param = {
-      yearMonth: this.data.yearMonth,
-      regionCode: this.data.regionCode,
-      personId: this.data.personId
+      year: this.data.yearMonth.split('-')[0],
+      month: this.data.yearMonth.split('-')[1],
+      companyId: this.data.regionCode,
+      userId: this.data.userId
     }
-    if (this.data.actionType == 1) {
-      saveLockAccount(param).then(res => {
-        let type = res.data == 0 ? 'fail' : 'success'
-        dd.navigateTo({
-          url: `./result/result?type=${type}`
-        })
-      })
-    } else {
-      return 0
-    }
-  },
-  onReady() {
-    let that = this
-    let param = {
-      yeatMonth: this.data.yeatMonth,
-      regionCode: this.data.regionCode,
-      personId: this.data.personId
-    }
-    selAccounts(param).then(res => {
-      that.setData({
-        actionType: res.data.actionType,
-        actionText: res.data.actionText,
-        joins: res.data.join,
-        outs: res.data.out
+    saveLockAccount(param).then(res => {
+      dd.confirm({
+        title: '操作提示',
+        content: res.data.message || '操作错误',
+        confirmButtonText: '知道了',
+        cancelButtonText: '取消'
       })
     })
+  },
+  getAccounts() {
+    let param = {
+      year: this.data.yearMonth.split('-')[0],
+      month: this.data.yearMonth.split('-')[1],
+      companyId: this.data.regionCode,
+      userId: this.data.userId
+    }
+    selAccounts(param).then(res => {
+      this.setData({
+        joins: res.data.AccountsIn,
+        outs: res.data.AccountsOut
+      })
+    })
+  },
+  onReady() {
+    this.getAccounts()
   },
   onLoad(options) {
     dd.getSystemInfo({
@@ -88,7 +88,8 @@ Page({
     })
     this.setData({
       regionCode: options.regionCode,
-      yeatMonth: options.yeatMonth
+      yearMonth: options.yearMonth,
+      userId: app.globalData.userInfo.userId
     })
   }
 })

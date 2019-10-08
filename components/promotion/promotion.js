@@ -23,11 +23,13 @@ Component({
   didMount() {
     let userId = app.globalData.userInfo.userId
     selTobaList({ userId: userId, companyId: this.props.companyId }).then(res => {
+      console.log('toba', res.data)
       this.setData({
         promotionTobaccos: res.data
       })
     })
     selAdsgoodsList({ userId: userId, companyId: this.props.companyId }).then(res => {
+      console.log('toba', res.data)
       this.setData({
         promotionProducts: res.data
       })

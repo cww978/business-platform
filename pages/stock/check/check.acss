@@ -4,7 +4,9 @@
   background-color: #fff;
   z-index: 1;
 }
-
+.cu-form-group .title {
+  width: 3rem;
+}
 .header.shadow {
   box-shadow: rgba(153, 153, 153, 0.24) 0 2px 7px;
 }

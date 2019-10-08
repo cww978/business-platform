@@ -28,7 +28,14 @@ Page({
       prov: { name: this.data.provs[this.data.provIndex]['REAL_NAME'], code: this.data.provs[this.data.provIndex]['REAL_CODE'] },
       city: city
     }
+    let realCity = null
+    if (this.data.provs[this.data.provIndex]['LEVEL'] == 3) {
+      realCity = this.data.provs[this.data.provIndex]['REAL_CODE']
+    } else {
+      realCity = this.data.citys[this.data.cityIndex]['REAL_CODE']
+    }
     try {
+      parma.realCity = realCity
       // 调用上一个页面的setCityCode方法来传递参数
       lastPage.setCityCode(parma)
       console.log('区域省份地市编码', parma)

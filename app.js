@@ -7,7 +7,8 @@ App({
     registration: {
       activityId: '',
       companyId: '',
-      userType: ''
+      userType: '',
+      realCity: ''
     }
   },
   // 更新并保存个人信息

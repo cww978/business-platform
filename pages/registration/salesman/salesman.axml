@@ -49,11 +49,15 @@
   </scroll-view>
   <!-- 业务员操作 -->
   <footer>
-    <view class="action bg-white" onTap="navTodec">
-      <text class="text-center text-xl text-blue">分解至终端</text>
-    </view>
-    <view class="action bg-blue" onTap="navToimp">
-      <text class="text-center text-xl text-white">团队执行</text>
-    </view>
+    <flex-item>
+      <view class="padding text-center bg-white" onTap="navTodec">
+        <text class="text-xl text-blue">分解至终端</text>
+      </view>
+    </flex-item>
+    <flex-item>
+      <view class="padding text-center bg-blue" onTap="navToimp">
+        <text class="text-xl text-white">团队执行</text>
+      </view>
+    </flex-item>
   </footer>
 </view>

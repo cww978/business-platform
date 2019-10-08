@@ -60,8 +60,8 @@ Page({
   },
   // 查询终端公司列表
   getTerminals() {
-    selterminalCompany({ companyId: this.data.companyId }).then(res => {
-      this.setData({ terminals: res.data })
+    selterminalCompany({ companyId: app.globalData.registration['realCity'] }).then(res => {
+      this.setData({ terminals: res.data.filter(item => { return item != null }) })
       console.log('terminals', res.data)
     })
   },

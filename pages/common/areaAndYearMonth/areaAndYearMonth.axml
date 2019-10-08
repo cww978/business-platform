@@ -7,12 +7,11 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}" onClick="clickCity">
-          销区
-          <view slot="extra">
-            {{areaText==''?'请选择':areaText}}
-          </view>
-        </list-item>
+      <list-item arrow="{{true}}" onClick="clickCity">公司
+        <view slot="extra">
+          {{cityText==''?'请选择':cityText}}
+        </view>  
+      </list-item>
         <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
           年月
           <view slot="extra">
@@ -24,7 +23,7 @@
     <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button class="cu-btn block bg-blue lg" disabled="{{!(isYear && isArea)}}"  onTap="clickDefine">确 定</button>
+      <button class="cu-btn block bg-blue lg" disabled="{{!(isYear && isCity)}}"  onTap="clickDefine">确 定</button>
     </view> 
   </view>
 </view>

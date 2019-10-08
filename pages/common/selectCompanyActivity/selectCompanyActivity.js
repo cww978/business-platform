@@ -3,12 +3,13 @@ import { selProgramExecuteRole } from '/api/role'
 const app = getApp()
 Page({
   data: {
-    cityCode: '',
-    cityText: '',
+    realCity: 0,
+    cityCode: 0,
+    cityText: 0,
+    isCity: false,
     programmes: [],
     programmeIndex: 0,
-    isActivityId: false,
-    isCity: false
+    isActivityId: false
   },
   switchUserType(type) {
     let programmeId = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
@@ -41,6 +42,7 @@ Page({
   },
   setCityCode(e) {
     this.setData({
+      realCity: e.realCity,
       cityCode: e.city.code,
       cityText: e.city.name,
       isCity: true
@@ -65,8 +67,9 @@ Page({
   },
   clickDefine() {
     app.globalData.registration['activityId'] = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
+    app.globalData.registration['realCity'] = this.data.realCity
     app.globalData.registration['companyId'] = this.data.cityCode
-    this.switchUserType(3)
+    this.switchUserType(app.globalData.registration['userType'])
   },
   onLoad() {
     let userId = app.globalData.userInfo.userId

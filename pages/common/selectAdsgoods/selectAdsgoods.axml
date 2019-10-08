@@ -1,0 +1,16 @@
+<view>
+  <scroll-view scroll-y="{{true}}">
+    <list>
+      <block a:for="{{list}}">
+        <list-item
+          data-unit="{{item['ADSGOODSUNIT_APPLY']}}"
+          onClick="onItemClick"
+          index="{{index}}"
+          last="{{index === (list.length - 1)}}"
+        >
+          {{item['ADSGOODSNAME']}}
+        </list-item>
+      </block>
+    </list>
+  </scroll-view>
+</view>

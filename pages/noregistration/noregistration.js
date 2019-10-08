@@ -27,17 +27,20 @@ Page({
     companyText: '',
     modality: ''
   },
+  // 跳转到选择商业公司页面
   clickCity() {
     dd.navigateTo({
       url: '/pages/common/selectCompany/selectCompany'
     })
   },
+  // 设置商业公司
   setCityCode(e) {
     this.setData({
       companyId: e.city.code,
       companyText: e.city.name
     })
   },
+  // 点击地址查看
   clickAddress() {
     dd.alert({
       content: this.data.address,
@@ -64,17 +67,20 @@ Page({
       })
     })
   },
+  // 监听输入活动形式
   inputModality(e) {
     this.setData({
       modality: e.detail.value
     })
   },
+  // 设置零售户
   setRetail(retail) {
     this.setData({
       'retail.id': retail.id,
       'retail.name': retail.name
     })
   },
+  // 点击图片
   actionImage(e) {
     let index = e.target.dataset.index
     let that = this
@@ -112,6 +118,7 @@ Page({
       }
     })
   },
+  // 打开搜索零售户页面
   openSearchPage() {
     dd.navigateTo({
       url: '/pages/common/search/search'
@@ -152,6 +159,7 @@ Page({
       dd.showToast({ content: '请选地市' })
     }
   },
+  // 主题切换
   activityThemeChanged(e) {
     this.setData({
       themeIndex: e.detail.value
@@ -164,6 +172,7 @@ Page({
       })
     })
   },
+  // 活动类型切换
   activityTypeChanged(e) {
     this.setData({
       typeIndex: e.detail.value
@@ -173,11 +182,13 @@ Page({
       that.setData({ targets: res3.data })
     })
   },
+  // 活动对象切换
   activityTargetChanged(e) {
     this.setData({
       targetIndex: e.detail.value
     })
   },
+  // 检测是否有权限执行操作非方案执行登记
   check() {
     if (this.data.userType != 1 && this.data.userType != 2) {
       dd.alert({

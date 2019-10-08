@@ -10,47 +10,55 @@
   </view>
   <view style="min-height: calc(100vh - 110px)">
     <list a:if="{{activeTab == 0}}">
+      <view a:if="{{joins.length <= 0}}" class="text-gray padding-xl text-center">暂无数据</view>
       <block a:for="{{joins}}">
         <list-item
           index="{{index}}"
           key="questions-{{index}}"
           data-index="{{index}}"
-          onClick="onInAccountClick"
           last="{{index === list.length - 1}}"
         >
-          <view class="text-lg">{{item.title}}</view>
-          <view class="text-lg text-gray">促销烟合计: {{item.tobaccos}}</view>
-          <view class="text-lg text-gray">促销品合计: {{item.products}}</view>
+          <view class="text-lg">{{item['TITLE']}}</view>
+          <view class="text-lg text-gray">用品: {{item['ADSGOODS_NAME']}}</view>
+          <view class="text-lg text-gray">用量: {{item['QTY']}}<text class="text-lg text-gray">{{item['UNIT'] || ''}}</text></view>
+          <view a:if="{{item['OUT_CODE']}}" class="text-lg text-gray">入库单号: {{item['IN_CODE']}}</view>
+          <view a:if="{{item['ACTIVITY_CODE']}}" class="text-lg text-gray">方案编码: {{item['ACTIVITY_CODE']}}</view>
+          <view a:if="{{item['WHEREFROM_CN']}}" class="text-lg text-gray">数据来源: {{item['WHEREFROM_CN']}}</view>
+          <view a:if="{{item['LY_CODE']}}" class="text-lg text-gray">数据来源编号: {{item['LY_CODE']}}</view>
           <flex>
-            <flex-item><view class="text-df text-gray">创建人: {{item.personName}}</view></flex-item>
-            <flex-item><view class="text-df text-gray">入库时间: {{item.date}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">创建人: {{item['CREATE_PERSONNAME']}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">入库时间: {{item['OUT_DATE']}}</view></flex-item>
           </flex>
         </list-item>
       </block>
     </list>
     <list a:if="{{activeTab == 1}}">
+      <view a:if="{{outs.length <= 0}}" class="text-gray padding-xl text-center">暂无数据</view>
       <block a:for="{{outs}}">
         <list-item
           index="{{index}}"
           key="questions-{{index}}"
           data-index="{{index}}"
-          onClick="onOutAccountClick"
           last="{{index === list.length - 1}}"
         >
-          <view class="text-lg">{{item.title}}</view>
-          <view class="text-lg text-gray">促销烟合计: {{item.tobaccos}}</view>
-          <view class="text-lg text-gray">促销品合计: {{item.products}}</view>
+          <view class="text-lg">{{item['TITLE']}}</view>
+          <view class="text-lg text-gray">用品: {{item['ADSGOODS_NAME']}}</view>
+          <view class="text-lg text-gray">用量: {{item['QTY']}}<text class="text-lg text-gray">{{item['UNIT'] || ''}}</text></view>
+          <view a:if="{{item['OUT_CODE']}}" class="text-lg text-gray">出库单号: {{item['OUT_CODE']}}</view>
+          <view a:if="{{item['ACTIVITY_CODE']}}" class="text-lg text-gray">方案编码: {{item['ACTIVITY_CODE']}}</view>
           <flex>
-            <flex-item><view class="text-df text-gray">创建人: {{item.personName}}</view></flex-item>
-            <flex-item><view class="text-df text-gray">出库时间: {{item.date}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">创建人: {{item['CREATE_PERSONNAME']}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">出库时间: {{item['OUT_DATE']}}</view></flex-item>
           </flex>
         </list-item>
       </block>
     </list>
   </view>
   <footer>
-    <view class="padding text-center" onTap="save">
-      <text class="text-xl {{actionType==0?'text-gray':'text-blue'}}">{{actionText}}</text>
-    </view>
+    <flex-item>
+      <view class="padding text-center bg-blue" onTap="save">
+        <text class="text-xl text-white">锁定销区</text>
+      </view>
+    </flex-item>
   </footer>
 </view>
