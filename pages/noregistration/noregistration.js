@@ -156,7 +156,7 @@ Page({
         })
       })
     } else {
-      dd.showToast({ content: '请选地市' })
+      dd.showToast({ content: '请选择商业公司' })
     }
   },
   // 主题切换

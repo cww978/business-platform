@@ -2,9 +2,7 @@
   <view class="header {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
     <flex class="padding">
       <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
-      <flex-item><view class="text-df
-      
-      ">确定人: {{definitePerson}}</view></flex-item>
+      <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
     </flex>
   </view>
   <view style="min-height:calc(100vh - 110px)">
@@ -17,22 +15,29 @@
           onClick="onInAccountClick"
           last="{{index === list.length - 1}}"
         >
-          <view class="text-lg">{{item.name}}</view>
+          <view class="text-lg">{{item['ADSGOODS_NAME']}}{{item['UNIT']}}</view>
           <flex>
-            <flex-item><view class="text-df text-gray">本地库存: {{item.localNum}}</view></flex-item>
-            <flex-item><view class="text-df text-gray">盘点库存: {{item.remoteNum}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">本期结存: {{item['PRESENT_BALANCE_QTY']}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">盘点库存: {{item['WAREHOUSE_QTY']}}</view></flex-item>
           </flex>
           <flex>
-            <flex-item><view class="text-df text-gray">冲溢平衡: {{item.balance}}</view></flex-item>
-            <flex-item><view class="text-df text-gray">差值: {{item.difference}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">冲溢平衡: {{item['FULL_QTY']}}</view></flex-item>
+            <flex-item><view class="text-df text-gray">差值: {{item['DIFFERENCE_QTY'].replace(/<[^>]+>/g, '')}}</view></flex-item>
           </flex>
         </list-item>
       </block>
     </list>
   </view>
   <footer>
-    <view class="padding text-center" onTap="save">
-      <text class="text-xl {{actionType==0?'text-gray':'text-blue'}}">{{actionText}}</text>
-    </view>
+    <flex-item>
+      <view class="padding text-center bg-blue" onTap="save">
+        <text class="text-xl text-white">结账</text>
+      </view>
+    </flex-item>
+    <flex-item a:if="{{actionType == 1}}">
+      <view class="padding text-center" onTap="define">
+        <text class="text-xl text-blue">确认</text>
+      </view>
+    </flex-item>
   </footer>
 </view>

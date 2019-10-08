@@ -27,7 +27,6 @@
     "pages/noregistration/result/result",
     "pages/common/areaAndYearMonth/areaAndYearMonth",
     "pages/stock/locking/detail/detail",
-    "pages/stock/settle/result/result",
     "pages/common/areaProAndCity/areaProAndCity",
     "pages/common/selectCompany/selectCompany",
     "pages/common/selectCompanyActivity/selectCompanyActivity",

@@ -1,16 +1,17 @@
-import { selSettleStock, saveSettleStock, defineSettleStock } from '/mock/account'
+import { selSettleStock, saveSettleStock } from '/api/account'
+
+const app = getApp()
 Page({
   data: {
     regionCode: '',
     top: 0,
-    personId: '',
+    userId: '',
     yeatMonth: '',
     products: [],
     shadow: false,
     savePerson: '',
     definitePerson: '',
-    actionType: 0,
-    actionText: '无法操作'
+    actionType: 0
   },
   onPageScroll(e) {
     const { scrollTop } = e
@@ -30,46 +31,48 @@ Page({
       activeTab: index,
     })
   },
-  save() {
+  settleStock(state) {
     let param = {
-      yearMonth: this.data.yearMonth,
-      regionCode: this.data.regionCode,
-      personId: ''
+      year: this.data.yearMonth.split('-')[0],
+      month: this.data.yearMonth.split('-')[1],
+      companyId: this.data.regionCode,
+      userId: this.data.userId,
+      goodsinfo: '0',
+      state: state
     }
-    if (this.data.actionType == 1) {
-      saveSettleStock(param).then(res => {
-        let type = res.data == 0 ? 'fail' : 'success'
-        dd.navigateTo({
-          url: `./result/result?type=${type}`
-        })
-      })
-    } else if (this.data.actionType == 2) {
-      defineSettleStock(param).then(res => {
-        let type = res.data == 0 ? 'fail' : 'success'
-        dd.navigateTo({
-          url: `./result/result?type=${type}`
-        })
-      })
-    } else {
-      return 0
-    }
-  },
-  onReady() {
-    let that = this
-    let param = {
-      yeatMonth: this.data.yeatMonth,
-      personId: this.data.personId,
-      regionCode: this.data.regionCode
-    }
-    selSettleStock(param).then(res => {
-      that.setData({
-        products: res.data.products,
-        actionType: res.data.actionType,
-        actionText: res.data.actionText,
-        definitePerson: res.data.definitePerson,
-        savePerson: res.data.savePerson
+    saveSettleStock(param).then(res => {
+      dd.confirm({
+        title: '操作提示',
+        content: res.data.message || '操作错误',
+        confirmButtonText: '知道了',
+        cancelButtonText: '取消'
       })
     })
+  },
+  save() {
+    this.settleStock(0)
+  },
+  define() {
+    this.settleStock(1)
+  },
+  getSettleStocks() {
+    let param = {
+      year: this.data.yearMonth.split('-')[0],
+      month: this.data.yearMonth.split('-')[1],
+      companyId: this.data.regionCode,
+      userId: this.data.userId
+    }
+    selSettleStock(param).then(res => {
+      this.setData({
+        products: res.data.products,
+        definitePerson: res.data.check,
+        savePerson: res.data.keep,
+        actionType: res.data.lease
+      })
+    })
+  },
+  onReady() {
+    this.getSettleStocks()
   },
   onLoad(options) {
     dd.getSystemInfo({
@@ -83,7 +86,8 @@ Page({
     })
     this.setData({
       regionCode: options.regionCode,
-      yeatMonth: options.yeatMonth
+      yearMonth: options.yearMonth,
+      userId: app.globalData.userInfo.userId
     })
   }
 })

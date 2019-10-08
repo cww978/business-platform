@@ -1,10 +1,8 @@
 <view>
   <view class="header {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
     <flex class="padding">
-      <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
-      <flex-item><view class="text-df
-      
-      ">确定人: {{definitePerson}}</view></flex-item>
+      <flex-item><view class="text-df">保存人: {{savePerson}}</view></flex-item>
+      <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
     </flex>
   </view>
   <view style="min-height:calc(100vh - 110px)">
@@ -27,7 +25,7 @@
       </view>
     </flex-item>
     <flex-item a:if="{{actionType == 1}}">
-      <view class="padding text-center" onTap="save">
+      <view class="padding text-center" onTap="define">
         <text class="text-xl text-blue">确认</text>
       </view>
     </flex-item>

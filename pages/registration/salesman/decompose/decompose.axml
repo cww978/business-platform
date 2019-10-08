@@ -48,8 +48,10 @@
     </view>
   </view>
   <footer>
-    <view class="padding text-center" onTap="save">
-      <text class="text-xl text-blue">确定分配</text>
-    </view>
+    <flex-item>
+      <view class="padding text-center bg-blue" onTap="save">
+        <text class="text-xl text-white">确定分配</text>
+      </view>
+    </flex-item>
   </footer>
 </view>

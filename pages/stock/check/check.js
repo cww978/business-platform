@@ -70,7 +70,7 @@ Page({
     products.splice(e.target.dataset.index, 1)
     this.setData({ products: products })
   },
-  save() {
+  regionStock(state) {
     let products = []
     for (let item of this.data.products) {
       if (item['ADSGOODS_ID']) {
@@ -83,7 +83,7 @@ Page({
       goodsinfo: products,
       year: this.data.yearMonth.split('-')[0],
       month: this.data.yearMonth.split('-')[1],
-      state: this.data.actionType,
+      state: state,
       userId: this.data.userId
     }
     saveRegionStock(param).then(res => {
@@ -94,6 +94,12 @@ Page({
         cancelButtonText: '取消'
       })
     })
+  },
+  save() {
+    this.regionStock(0)
+  },
+  define() {
+    this.regionStock(1)
   },
   getRegionStocks() {
     let param = {

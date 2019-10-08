@@ -1,5 +1,5 @@
 {
-  "defaultTitle": "销区结账",
+  "defaultTitle": "实物盘点",
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "footer": "/components/footer/footer",

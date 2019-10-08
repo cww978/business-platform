@@ -12,6 +12,7 @@ export function selAccounts(param){
   return request({
     url: '/account/selAccounts',
     param: param,
+    loading: true,
     dataType: 'json',
     method: 'get'
   })
@@ -29,6 +30,7 @@ export function saveLockAccount(param){
   return request({
     url: '/account/saveLockAccount',
     data: param,
+    loading: true,
     dataType: 'json',
     method: 'post'
   })
@@ -46,6 +48,7 @@ export function selRegionStock(param){
   return request({
     url: '/account/selRegionStock',
     param: param,
+    loading: true,
     dataType: 'json',
     method: 'get'
   })
@@ -65,6 +68,43 @@ export function saveRegionStock(param){
   return request({
     url: '/account/saveRegionStock',
     data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
+ * 查询销区月结
+ * @param userId String
+ * @param companyId String 
+ * @param month String
+ * @param year String
+ */
+export function selSettleStock(param){
+  console.log('查询销区月结', param)
+  return request({
+    url: '/account/selSettleStock',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 月结
+ * @param userId String
+ * @param companyId String 
+ * @param month String
+ * @param year String
+ */
+export function saveSettleStock(param){
+  console.log('月结', param)
+  return request({
+    url: '/account/saveSettleStock',
+    data: param,
+    loading: true,
     dataType: 'json',
     method: 'post'
   })

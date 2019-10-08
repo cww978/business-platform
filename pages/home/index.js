@@ -38,7 +38,7 @@ Page({
       {
         path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=settle',
         icon: 'settle.png',
-        text: '销区结账'
+        text: '销区月账'
       },
       {
         icon: 'registration.png',

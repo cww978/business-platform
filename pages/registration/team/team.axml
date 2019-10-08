@@ -35,8 +35,10 @@
     </list>
   </scroll-view>
   <footer>
-    <view class="padding text-center" onTap="navToImp">
-      <text class="text-xl text-blue">执行方案</text>
-    </view>
+    <flex-item>
+      <view class="padding text-center bg-blue" onTap="navToImp">
+        <text class="text-xl text-white">执行方案</text>
+      </view>
+    </flex-item>
   </footer>
 </view>
