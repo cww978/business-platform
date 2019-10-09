@@ -1,6 +1,7 @@
 import { saveImage } from '/api/common'
 import { saveNoProgrammeImplement } from '/api/programExecute'
 import { selTheme, selPromotype, selObjectElement } from '/api/shareHelp'
+import { getLocation } from '/util/location.js'
 const app = getApp()
 Page({
   data: {
@@ -49,21 +50,12 @@ Page({
   },
   // 定位
   location() {
-    return new Promise(resolve => {
-      let that = this
-      dd.getLocation({
-        success(res){
-          that.setData({
-            hasLocation: true,
-            address: res.address || '',
-            longitude: res.longitude,
-            latitude: res.latitude
-          })
-          resolve()
-        },
-        fail() {
-          dd.showToast({ content: '定位失败' })
-        }
+    getLocation().then(res => {
+      this.setData({
+        hasLocation: true,
+        address: res.address || '',
+        longitude: res.longitude,
+        latitude: res.latitude
       })
     })
   },

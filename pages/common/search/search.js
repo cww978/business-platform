@@ -1,5 +1,5 @@
 import { selRetailersFromCoord, selRetailersByParam } from '/api/retailer'
-import { gcj02tobd09 } from '/util/coord.js'
+import { getLocation } from '/util/location.js'
 let app = getApp()
 Page({
   data: {
@@ -11,40 +11,18 @@ Page({
     retails: [],
     hasLocation: false
   },
+  // 清空输入
   onClear() {
     this.setData({ value: '' })
   },
   onInput(value){
     this.setData({ value: value })
   },
-  location() {
-    return new Promise(resolve => {
-      let that = this
-      dd.getLocation({
-        success(res){
-          console.log('位置', res.address)
-          that.setData({
-            hasLocation: true,
-            address: res.address,
-            longitude: res.longitude,
-            latitude: res.latitude
-          })
-          resolve()
-        },
-        fail() {
-          dd.showToast({ content: '定位失败' })
-        }
-      })
-    })
-  },
+  // 重新定位获取附近零售户
   resLocationClick(){
-    this.location().then(() => {
-      let coord = gcj02tobd09(this.data.longitude, this.data.latitude)
-      selRetailersFromCoord({ longitude: coord.lng, latitude: coord.lat }).then(res => {
-        this.setData({ retails: res.data })
-      })
-    })
+    this.getRetailersFromCoord()
   },
+  // 搜索零售户
   onSubmit(val) {
     if (val != '') {
       selRetailersByParam({
@@ -55,6 +33,7 @@ Page({
       })
     }
   },
+  // 选择零售户
   onRetailClick(e) {
     let lastPage = getCurrentPages()[getCurrentPages().length - 2]
     lastPage.setRetail({
@@ -63,13 +42,22 @@ Page({
     })
     dd.navigateBack()
   },
-  onLoad() {
-    this.location().then(() => {
-      let coord = gcj02tobd09(this.data.longitude, this.data.latitude)
-      selRetailersFromCoord({ longitude: coord.lng, latitude: coord.lat }).then(res => {
+  // 获取附近零售户
+  getRetailersFromCoord() {
+    getLocation().then(res => {
+      this.setData({
+        hasLocation: true,
+        address: res.address,
+        longitude: res.longitude,
+        latitude: res.latitude
+      })
+      selRetailersFromCoord({ longitude: res.longitude, latitude: res.latitude }).then(res => {
         this.setData({ retails: res.data })
         console.log('零售户', res.data)
       })
     })
   },
-});
+  onReady() {
+    this.getRetailersFromCoord()
+  }
+})

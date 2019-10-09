@@ -1,6 +1,7 @@
 import { saveImage } from '/api/common'
 import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement } from '/api/programExecute'
 import { selObjectElement } from '/api/shareHelp'
+import { getLocation } from '/util/location.js'
 const app = getApp()
 Page({
   data: {
@@ -57,21 +58,12 @@ Page({
   },
   // 定位
   location() {
-    return new Promise(resolve => {
-      let that = this
-      dd.getLocation({
-        success(res){
-          that.setData({
-            hasLocation: true,
-            address: res.address || '',
-            longitude: res.longitude,
-            latitude: res.latitude
-          })
-          resolve()
-        },
-        fail() {
-          dd.showToast({ content: '定位失败' })
-        }
+    getLocation().then(res => {
+      this.setData({
+        hasLocation: true,
+        address: res.address || '',
+        longitude: res.longitude,
+        latitude: res.latitude
       })
     })
   },
@@ -286,6 +278,10 @@ Page({
     this.setData({
       questions: [],
       resources: [],
+      objectives: [
+        { id: 1, text: '新产品调研', active: false },
+        { id: 2, text: '老产品调研', active: false }
+      ],
       activityType: options.activityType,
       companyId: app.globalData.registration['companyId'],
       activityId: app.globalData.registration['activityId']
