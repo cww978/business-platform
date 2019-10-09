@@ -1,0 +1,58 @@
+<view>
+  <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">
+    <view style="height:100%;width:100%;">
+      <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">资源执行登记情况</view>
+        </view>
+        <view style="width:100%;padding: 5rpx 50rpx;min-height:200rpx;">
+          测试段落
+        </view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">目标实现情况</view>
+        </view>
+        <view style="width:100%;padding: 5rpx 50rpx;">
+          为配合公司终端形象提升和自律小组之家建设，拟跟进“小组之家终端宣传陈列”，主要是结合小组之家制作品牌文化墙，融入利群品牌现象和重点推荐产品陈列，跟进利群全系列烟模陈列。预计由公司选点100户，每户制作费用5000元。;(参考该活动形式填写)
+        </view>
+        <view style="width:100%;padding: 5rpx 20rpx;">
+          <textarea style="border:1px solid #c9c9c9;width:100%;min-height:200rpx;font-size:35rpx;line-height:40rpx;" maxlength=-1 auto-height=true/>
+        </view>      
+      </view>
+      <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">后期改进意见</view>
+        </view>
+        <view style="width:100%;padding: 5rpx 20rpx;">
+          <textarea style="border:1px solid #c9c9c9;width:100%;min-height:200rpx;font-size:35rpx;line-height:40rpx;" maxlength=-1 auto-height=true/>
+        </view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;">
+        <view class="fx fx-jcsb">
+          <view class="fx">
+            <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+              <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+            </view>
+            <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">评估附件</view>
+            <view class="fx fx-aic" style="height:50rpx;font-size:26rpx;color:red;margin-left:10rpx;">请上传零售户名单</view>
+          </view>
+          <view class="fx fx-jcc fx-aic" style="width:140rpx;height:50rpx;border-radius:10rpx;background-color:#00ccff;color:#ffffff;margin-right:10rpx;">添加附件</view>
+        </view>
+        <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+          测试段落
+        </view>
+      </view>          
+    </view>
+  </scroll-view>
+  <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="submit">提交评估</view>
+</view>

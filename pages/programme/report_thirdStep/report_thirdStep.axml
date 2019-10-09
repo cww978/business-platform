@@ -1,0 +1,194 @@
+<view>
+  <view class="fx fx-aic" style="width:100%;height:100rpx;background-color:#ffffff;padding-left:10rpx;font-size:35rpx;font-weight:bold;font-family:'微软雅黑';">三、方案资源预报</view>
+  <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx fx-jcsb">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">促销烟随货的到货地点</view>
+        </view>
+        <view class="fx fx-jcc fx-aic" style="width:80rpx;height:50rpx;border-radius:10rpx;background-color:#00ccff;color:#ffffff;margin-right:10rpx;" onTap="selectStore">选择</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{ifChooseStore}}
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx fx-jcsb">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">到货地址</view>
+        </view>
+        <view class="fx fx-jcc fx-aic" style="width:80rpx;height:50rpx;border-radius:10rpx;background-color:#00ccff;color:#ffffff;margin-right:10rpx;">
+          <picker onChange="addressChange" value="{{addressArrIndex}}" range="{{address}}" range-key="destName">
+            <view>选择</view>
+          </picker>
+        </view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{address[addressArrIndex].destName}}
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">宣传品</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 10rpx;min-height:160rpx;font-size:30rpx;">
+        <view class="fx" style="width:100%;">
+          <view class="fx fx-jcc fx-aic" style="width:35%;height:80rpx;">品种</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">申报单位</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">申报量</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:80rpx;">业务库存</view>
+        </view>
+        <view class="fx" style="width:100%;" a:for="{{items1}}">
+          <view class="fx fx-jcs fx-aic" style="width:35%;height:80rpx;font-size:28rpx;">福样促试(利群(红利))</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">条</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">8</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:80rpx;">100</view>
+        </view>
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">宣传用烟</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 10rpx;min-height:160rpx;font-size:30rpx;">
+        <view class="fx" style="width:100%;">
+          <view class="fx fx-jcc fx-aic" style="width:35%;height:80rpx;">品种</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">申报单位</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">申报量</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:80rpx;">业务库存</view>
+        </view>
+        <view class="fx" style="width:100%;" a:for="{{items2}}">
+          <view class="fx fx-jcs fx-aic" style="width:35%;height:80rpx;font-size:28rpx;">福样促试(利群(红利))</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">条</view>
+          <view class="fx fx-jcc fx-aic" style="width:20%;height:80rpx;">8</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:80rpx;">100</view>
+        </view>
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx fx-jcsb">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">其他费用(元)</view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:26rpx;color:red;margin-left:10rpx;">实际费用以品牌部最终商议费用为准</view>
+        </view>
+        <view class="fx fx-jcc fx-aic" style="width:80rpx;height:50rpx;border-radius:10rpx;background-color:#00ccff;color:#ffffff;margin-right:10rpx;" onTap="addCost">添加</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;height:50rpx;">
+        <view a:if="{{ifIncludeCost}}" class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;margin-left:5rpx;"> 
+          <image src="../../../common/Img/xuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;" onTap="isIncludeCost"/>
+        </view>        
+        <view a:else class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;margin-left:5rpx;"> 
+          <image src="../../../common/Img/weixuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;" onTap="isIncludeCost"/>
+        </view>
+        <view class="fx fx-aie" style="height:50rpx;">包含其他费用</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 10rpx;min-height:160rpx;font-size:30rpx;">
+        <view class="fx" style="width:100%;" a:for="{{selectedCost}}">
+          <view class="fx fx-jcs fx-aic" style="width:85%;height:80rpx;">{{item.feeTypeName}} : {{item.feeTypeNum}}</view>
+          <view class="fx fx-jcc fx-aic" style="width:15%;height:80rpx;">
+            <image src="../../../common/Img/delete.png" mode="aspectFit" style="width:48rpx;height:48rpx;" onTap="deleteCost" data-value="{{item.feeTypeId}}"/>
+          </view>
+        </view>        
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx fx-jcsb">
+        <view class="fx">
+          <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+            <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+          </view>
+          <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">方案附件</view>
+        </view>
+        <view class="fx fx-jcc fx-aic" style="width:140rpx;height:50rpx;border-radius:10rpx;background-color:#00ccff;color:#ffffff;margin-right:10rpx;">添加附件</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>    
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-top:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">备注说明</view>
+      </view>
+      <view style="width:100%;padding: 5rpx 20rpx;">
+        <textarea style="border:1px solid #c9c9c9;width:100%;min-height:200rpx;font-size:35rpx;line-height:40rpx;" maxlength=-1 auto-height=true/>
+      </view>
+    </view>                    
+  </scroll-view>
+  <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';">提 交</view>
+  <view hidden="{{!store_showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:#f2f2f2;z-index:100;">  
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">区域</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="areaChange" value="{{areaArrIndex}}" range="{{areas}}" range-key="areaName">
+          <view class="fx fx-aic">
+            <view>{{areas[areaArrIndex].areaName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">省份</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="proChange" value="{{proArrIndex}}" range="{{pros}}" range-key="provName">
+          <view class="fx fx-aic">
+            <view>{{pros[proArrIndex].provName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">地市</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="cityChange" value="{{cityArrIndex}}" range="{{cities}}" range-key="cityName">
+          <view class="fx fx-aic">
+            <view>{{cities[cityArrIndex].cityName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">库点</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="storeChange" value="{{storeArrIndex}}" range="{{stores}}" range-key="stationName">
+          <view class="fx fx-aic">
+            <view>{{stores[storeArrIndex].stationName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>            
+    <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="closeStoreAlert">确 定</view>    
+  </view>
+  <view hidden="{{!cost_showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:#f2f2f2;z-index:100;">  
+    <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight2}}rpx;width:100%;">
+      <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;" a:for="{{cost}}" key="{{item.feeTypeId}}">
+        <view style="margin-left:25rpx;">{{item.feeTypeName}}</view>
+        <view class="fx fx-aic" style="width:25%;margin-right:25rpx;">
+          <input onInput="setCostNum" data-index="{{index}}" value="{{item.feeTypeNum}}" type="number" style="width:100%;border-bottom:1px solid #c9c9c9;font-size:30rpx;text-align:right;"/>元
+        </view>
+      </view>    
+    </scroll-view>
+    <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="closeCostAlert">确 定</view>    
+  </view>      
+</view>

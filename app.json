@@ -10,6 +10,16 @@
     "pages/programme/assess/assess",
     "pages/programme/verify/verify",
     "pages/programme/sample/sample",
+
+    "pages/programme/assess_detail/assess_detail",
+    "pages/programme/assess_assess/assess_assess",
+    "pages/programme/verify_detail/verify_detail",
+    "pages/programme/sample_detail/sample_detail",
+    "pages/programme/report_detail/report_detail",
+    "pages/programme/report_firstStep/report_firstStep",
+    "pages/programme/report_secondStep/report_secondStep",
+    "pages/programme/report_thirdStep/report_thirdStep",
+
     "pages/registration/salesman/salesman",
     "pages/registration/company/company",
     "pages/registration/team/team",

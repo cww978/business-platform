@@ -1,4 +1,172 @@
+// 生成 app 实例
+var app = getApp();
+let _ratio = 750 / app.globalData.systemInfo.screenWidth;
+let domain = app.globalData.domain;
+
 Page({
-  data: {},
-  onLoad() {},
+  data: {
+    loading:true,
+    srcollviewHeight:app.globalData.systemInfo.windowHeight * _ratio - 240,//滚动区高度
+    startTime:'2019年1月1日',
+    endTime:'2019年9月10日',
+    st:'2019-01-01',
+    et:'2019-09-10',
+    userId:'0100271822890151',
+    assessState:[{
+      stateId:-2,
+      stateName:'不可评估'
+    },{
+      stateId:-1,
+      stateName:'待评估'
+    },{
+      stateId:0,
+      stateName:'评估草稿状态'
+    },{
+      stateId:1,
+      stateName:'评估已提交'
+    },{
+      stateId:2,
+      stateName:'已完成审核'
+    },{
+      stateId:3,
+      stateName:'已完成抽查'
+    },{
+      stateId:4,
+      stateName:'评估驳回'
+    }],
+    arrIndex:1,
+    arrLength:0,
+    inputValue:'',
+    activitiesList: [],
+  },
+  onLoad() {
+    this.init();
+  },
+  onReady() {
+  },
+  init(){
+    this.getDate();
+  },
+  getDate() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    this.setData({
+      endTime:year + '年' + month + '月' + day + '日'
+    });    
+    month = month<=9 ? '0'+month : month;
+    day = day<=9 ? '0'+day : day; 
+    this.setData({
+      et:year + '-' + month + '-' + day
+    });
+    date = new Date();
+    date.setDate(date.getDate() - 30);
+    year = date.getFullYear();
+    month = date.getMonth() + 1;
+    day = date.getDate();
+    this.setData({
+      startTime:year + '年' + month + '月' + day + '日'
+    });    
+    month = month<=9 ? '0'+month : month;
+    day = day<=9 ? '0'+day : day;
+    this.setData({
+      st:year + '-' + month + '-' + day
+    });    
+    this.checkInfo();
+  },
+  selectTime() {
+    let _this = this;
+    dd.showToast({
+      content: '选择起始日期'
+    });    
+    dd.datePicker({
+      format: 'yyyy-MM-dd',
+      currentDate: _this.data.st,
+      success: (res) => {
+        _this.setData({
+          startTime:res.date.substring(0,4)+'年'+parseInt(res.date.substring(5,7))+'月'+parseInt(res.date.substring(8,10))+'日',
+          st:res.date
+        })
+        dd.showToast({
+          content: '选择截止日期'
+        });        
+        dd.datePicker({
+          format: 'yyyy-MM-dd',
+          currentDate: _this.data.et,
+          success: (res) => {
+            _this.setData({
+              endTime:res.date.substring(0,4)+'年'+parseInt(res.date.substring(5,7))+'月'+parseInt(res.date.substring(8,10))+'日',
+              et:res.date
+            })
+            _this.checkInfo()
+          }
+        });        
+      }
+    });
+  },
+  bindObjPickerChange(e) {
+    this.setData({
+      arrIndex: e.detail.value
+    });
+    this.checkInfo()
+  },
+  bindKeyInput(e) {
+    this.setData({
+      inputValue: e.detail.value
+    });
+  },
+  checkInfo() {
+    this.getActivityList();
+  },
+  checkDetail(e) {
+    let activityId = e.target.dataset.value;
+    let activitiesList = this.data.activitiesList;
+    for(let i=0;i<activitiesList.length;i++) {
+      if(activitiesList[i].ACTIVITY_ID === activityId) {
+        dd.setStorage({
+          key: 'assess_DetailCondition',
+          data: {
+            activityId:activityId,
+            companyId:activitiesList[i].COMPANY_ID2
+          }
+        });    
+        dd.navigateTo({
+          url: '../assess_detail/assess_detail'
+        })
+      }
+    }    
+  },
+  getActivityList() {    
+    let _this = this;
+    _this.setData({
+      loading: true 
+    });    
+    dd.httpRequest({
+      url: domain + '/programme/selActivityApply',
+      method: 'GET',
+      data: {
+        userId: _this.data.userId,
+        beginDate: _this.data.st,
+        endDate: _this.data.et,
+        keyWord: _this.data.inputValue,
+        state: _this.data.assessState[_this.data.arrIndex].stateId,
+        menuType: '1' //方案评估
+      },
+      dataType: 'json',
+      success: function(res) {
+        console.log(res.data.data);
+        for(let i=0;i<res.data.data.length;i++){
+          if(res.data.data[i].TITLE.length > 15) {
+            res.data.data[i].TITLE = res.data.data[i].TITLE.substring(0,15) + '...'
+          }
+        }
+        _this.setData({
+          arrLength:res.data.data.length,
+          activitiesList: res.data.data,
+          loading: false 
+        });
+      }
+    });
+  }
 });

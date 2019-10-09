@@ -1,3 +1,66 @@
 <view>
-  抽查
+  <view a:if={{loading}} class="loading-wapper gif-white response">
+    <view class="loading-content">
+      <image mode="scaleToFill" src="/static/loading.gif"/>
+    </view>
+  </view>
+  <view class="fx fx-dcu fx-jcsa fx-aic" style="width:100%;height:240rpx;background-color:#ffffff;">
+    <view class="fx" style="width:96%;height:30%;">
+      <view class="fx fx-jcs fx-aic" style="width:80%;height:100%;font-size:35rpx;">
+        {{startTime}} - {{endTime}}
+      </view>
+      <view class="fx fx-jce fx-aic" style="width:20%;height:100%;">
+        <view class="fx fx-jcc fx-aic" style="width:80%;height:90%;color:#ffffff;background-color:#00ccff;border-radius:10rpx;" onTap="selectTime">时间</view>
+      </view>
+    </view>
+    <view class="fx" style="width:96%;height:30%;">
+      <view class="fx fx-jcs fx-aic" style="width:80%;height:100%;font-size:35rpx;font-weight:bold;color:red;">
+        {{sampleState[arrIndex].stateName}}({{arrLength}})
+      </view>
+      <view class="fx fx-jce fx-aic" style="width:20%;height:100%;">
+        <view class="fx fx-jcc fx-aic" style="width:80%;height:90%;color:#ffffff;background-color:#00ccff;border-radius:10rpx;">
+          <picker onChange="bindObjPickerChange" value="{{arrIndex}}" range="{{sampleState}}" range-key="stateName">
+            <view>状态</view>
+          </picker>
+        </view>
+      </view>      
+    </view>
+    <view class="fx" style="width:96%;height:30%;">
+      <view class="fx fx-jcs fx-aic" style="width:80%;height:100%;">
+        <input onInput="bindKeyInput" value="{{inputValue}}" type="text" placeholder="请输入关键词查询..." style="width:100%;height:90%;border:1px solid #c9c9c9;font-size:30rpx;"/>
+      </view>
+      <view class="fx fx-jce fx-aic" style="width:20%;height:100%;">
+        <view class="fx fx-jcc fx-aic" style="width:80%;height:90%;color:#ffffff;background-color:#00ccff;border-radius:10rpx;" onTap="checkInfo">查询</view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">
+    <view class="fx" style="width:100%;height:170rpx;background-color:#ffffff;margin-top:15rpx;" a:for="{{activitiesList}}" key="{{item.ACTIVITY_ID}}" onTap="checkDetail" data-value="{{item.ACTIVITY_ID}}">
+      <view class="fx fx-jcc fx-aic" style="width:22%;height:100%;">
+        <view style="width:18vw;height:18vw;">
+          <view class="fx fx-jcc fx-aic" style="width:100%;height:75%;border-radius:15rpx 15rpx 0 0;background-color:#00ccff;font-size:45rpx;color:#ffffff;font-family:'微软雅黑';">
+            <view a:if="{{item.ACTIVITY_TYPE === 1}}">销 区</view>
+            <view a:else>统 筹</view>
+          </view>
+          <view class="fx fx-jcc fx-aic" style="width:100%;height:25%;border-radius:0 0 15rpx 15rpx;background-color:#ff0000;font-size:24rpx;color:#ffffff;">
+            {{item.APPLY_DATE}}
+          </view>
+        </view>
+      </view>
+      <view style="width:78%;height:100%;">
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:31%;font-size:30rpx;font-weight:bold;">
+          主题：{{item.TITLE}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:23%;font-size:28rpx;color:#868686;">
+          申报人：{{item.APPLY_PERSON_NAME}}-{{item.APPLY_DEPART_NAME}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:23%;font-size:28rpx;color:#868686;">
+          方案编号：{{item.ACTIVITY_CODE}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:23%;font-size:28rpx;color:#868686;">
+          状态：{{sampleState[arrIndex].stateName}} 待审查人：{{item.TOBE_CHECKED_PERSON_NAME}}
+        </view>
+      </view>      
+    </view>    
+  </scroll-view>
 </view>

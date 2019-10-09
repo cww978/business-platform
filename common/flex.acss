@@ -1,0 +1,289 @@
+/************************flex布局********************************************/
+/*flex布局,设为Flex布局以后，子元素的float、clear和vertical-align属性将失效。*/
+.fx{
+    /*display: -webkit-flex;*/ /* Safari */
+    display: flex;
+}
+/*行内元素flex布局*/
+.fx-il{
+    display: inline-flex;
+}
+
+/*采用Flex布局的元素，称为Flex容器，简称”容器”。
+ *它的所有子元素自动成为容器成员，称为Flex项目，简称”项目”
+ *容器默认存在两根轴：水平的主轴和垂直的交叉轴*/
+
+/************************************容器属性************************************/
+/*flex-direction:决定主轴的方向(即项目的排列方向),默认值为row;
+ *flex-wrap:如果一条轴线排不下是否换行,默认值为nowrap;
+ *flex-flow:flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap;
+ *justify-content:项目在主轴上的对齐方式，默认值为flex-start;
+ *align-items:项目在交叉轴上的对齐方式,默认值为stretch;
+ *align-content:多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。默认值为stretch；
+ */
+
+/*flex-direction:属性决定主轴的方向(即项目的排列方向)*/
+/*(默认值)主轴为水平方向，起点在左端*/
+.fx-drl{
+    flex-direction: row;
+}
+/*主轴为水平方向，起点在右端*/
+.fx-drr{
+    flex-direction: row-reverse;
+}
+/*主轴为垂直方向，起点在上沿*/
+.fx-dcu{
+    flex-direction: column;
+}
+/*主轴为垂直方向，起点在下沿*/
+.fx-dcd{
+    flex-direction: column-reverse;
+}
+
+/*flex-wrap:如果一条轴线排不下是否换行*/
+/*(默认值)不换行*/
+.fx-wn{
+    flex-wrap: nowrap;
+}
+/*换行，第一行在上方*/
+.fx-wu{
+    flex-wrap: wrap;
+}
+/*换行，第一行在下方*/
+.fx-wd{
+    flex-wrap: wrap-reverse;
+}
+
+/*flex-flow:flex-direction属性和flex-wrap属性的简写形式*/
+/*(默认值)水平左，不换行*/
+.fx-drl-wn{
+    flex-flow: row nowrap;
+}
+/*水平左，换行上*/
+.fx-drl-wu{
+    flex-flow: row wrap;
+}
+/*水平左，换行下*/
+.fx-drl-wd{
+    flex-flow: row wrap-reverse;
+}
+/*水平右，不换行*/
+.fx-drr-wn{
+    flex-flow: row-reverse nowrap;
+}
+/*水平右，换行上*/
+.fx-drr-wu{
+    flex-flow: row-reverse wrap;
+}
+/*水平右，换行下*/
+.fx-drr-wd{
+    flex-flow: row-reverse wrap-reverse;
+}
+/*垂直上，不换行*/
+.fx-dcu-wn{
+    flex-flow: column nowrap;
+}
+/*垂直上，换行上*/
+.fx-dcu-wu{
+    flex-flow: column wrap;
+}
+/*垂直上，换行下*/
+.fx-dcu-wd{
+    flex-flow: column wrap-reverse;
+}
+/*垂直下，不换行*/
+.fx-dcd-wn{
+    flex-flow: column-reverse nowrap;
+}
+/*垂直下，换行上*/
+.fx-dcd-wu{
+    flex-flow: column-reverse wrap;
+}
+/*垂直下，换行下*/
+.fx-dcd-wd{
+    flex-flow: column-reverse wrap-reverse;
+}
+
+/*项目在主轴上的对齐方式*/
+/*(默认值)：起点对齐*/
+.fx-jcs{
+    justify-content: flex-start;
+}
+/*终点对齐*/
+.fx-jce{
+    justify-content: flex-end;
+}
+/*居中*/
+.fx-jcc{
+    justify-content: center;
+}
+/*两端对齐，项目之间的间隔都相等*/
+.fx-jcsb{
+    justify-content: space-between;
+}
+/*每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。*/
+.fx-jcsa{
+    justify-content: space-around;
+}
+
+/*项目在交叉轴上的对齐方式*/
+/*交叉轴的起点对齐*/
+.fx-ais{
+  align-items: flex-start;
+}
+/*交叉轴的终点对齐*/
+.fx-aie{
+  align-items: flex-end;
+}
+/*交叉轴的中点对齐*/
+.fx-aic{
+  align-items: center;
+}
+/*项目的第一行文字的基线对齐*/
+.fx-aibl{
+  align-items: baseline;
+}
+/*(默认值)如果项目未设置高度或设为auto，将占满整个容器的高度*/
+.fx-aist{
+  align-items: stretch;
+}
+
+/*多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用*/
+/*与交叉轴的起点对齐*/
+.fx-acs{
+  align-content: flex-start;
+}
+/*与交叉轴的终点对齐*/
+.fx-ace{
+  align-content: flex-end;
+}
+/*与交叉轴的中点对齐*/
+.fx-acc{
+  align-content: center;
+}
+/*与交叉轴两端对齐，轴线之间的间隔平均分布*/
+.fx-acsb{
+  align-content: space-between;
+}
+/*每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍*/
+.fx-acsa{
+  align-content: space-around;
+}
+/*(默认值)轴线占满整个交叉轴*/
+.fx-acst{
+  align-content: stretch;
+}
+
+/************************************项目属性************************************/
+/*order:项目的排列顺序，数值越小，排列越靠前，默认值为0;
+ *flex-grow:项目的放大比例，默认值为0(不放大);
+ *flex-shrink:项目的缩小比例，默认值为1(空间不足就缩小);
+ *flex-basis:在分配多余空间之前，项目占据的主轴空间（main size），默认值为auto;
+ *flex:flex-grow,flex-shrink和 flex-basis的简写，默认值为0 1 auto。后两个属性可选;
+ *     有两个快捷值：auto (1 1 auto) 和 none (0 0 auto);
+ *align-self:允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto;
+ */
+
+/*order:0(默认值)~9*/
+.fx-odr0{
+    order:0;
+}
+.fx-odr1{
+    order:1;
+}
+.fx-odr2{
+    order:2;
+}
+.fx-odr3{
+    order:3;
+}
+.fx-odr4{
+    order:4;
+}
+.fx-odr5{
+    order:5;
+}
+.fx-odr6{
+    order:6;
+}
+.fx-odr7{
+    order:7;
+}
+.fx-odr8{
+    order:8;
+}
+.fx-odr9{
+    order:9;
+}
+
+/*flex-grow：0(默认值)~9*/
+/*如果所有项目的flex-grow属性都为1，则它们将等分剩余空间(如果有的话)。
+ *如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。*/
+.fx-grw0{
+    flex-grow:0;
+}
+.fx-grw1{
+    flex-grow:1;
+}
+.fx-grw2{
+    flex-grow:2;
+}
+.fx-grw3{
+    flex-grow:3;
+}
+.fx-grw4{
+    flex-grow:4;
+}
+.fx-grw5{
+    flex-grow:5;
+}
+.fx-grw6{
+    flex-grow:6;
+}
+.fx-grw7{
+    flex-grow:7;
+}
+.fx-grw8{
+    flex-grow:8;
+}
+.fx-grw9{
+    flex-grow:9;
+}
+
+/*flex-shrink：0、1(默认值)*/
+/*如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。
+ *如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
+ *负值对该属性无效。
+ */
+.fx-srk0{
+    flex-shrink:0;
+}
+.fx-srk1{
+    flex-shrink:1;
+}
+
+/*align-self:*/
+/*交叉轴的起点对齐*/
+.fx-ass{
+    align-self: flex-start;
+}
+/*交叉轴的终点对齐*/
+.fx-ase{
+    align-self: flex-end;
+}
+/*交叉轴的中点对齐*/
+.fx-asc{
+    align-self: center;
+}
+/*项目的第一行文字的基线对齐*/
+.fx-assb{
+    align-self: baseline;
+}
+/*如果项目未设置高度或设为auto，将占满整个容器的高度*/
+.fx-asst{
+    align-self: stretch;
+}
+/*(默认值)继承父元素的align-items属性，如果没有父元素，则等同于stretch*/
+.fx-asat{
+    align-self: auto;
+}

@@ -1,0 +1,238 @@
+<view>
+  <view a:if={{loading}} class="loading-wapper gif-white response">
+    <view class="loading-content">
+      <image mode="scaleToFill" src="/static/loading.gif"/>
+    </view>
+  </view>  
+  <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">   
+    <view class="fx" style="width:100%;height:170rpx;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx fx-jcc fx-aic" style="width:22%;height:100%;">
+        <view style="width:18vw;height:18vw;">
+          <view class="fx fx-jcc fx-aic" style="width:100%;height:75%;border-radius:15rpx 15rpx 0 0;background-color:#00ccff;font-size:45rpx;color:#ffffff;font-family:'微软雅黑';">
+            销 区
+          </view>
+          <view class="fx fx-jcc fx-aic" style="width:100%;height:25%;border-radius:0 0 15rpx 15rpx;background-color:#ff0000;font-size:24rpx;color:#ffffff;">
+            {{activityInfo.programmeDetail[0].APPLY_TIME}}
+          </view>
+        </view>
+      </view>
+      <view style="width:78%;height:100%;">
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:25%;font-size:28rpx;">
+          申报人：{{activityInfo.programmeDetail[0].APPLY_PERSON_NAME}}-{{activityInfo.programmeDetail[0].APPLY_DEPART_NAME}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:25%;font-size:28rpx;">
+          方案类别：{{activityInfo.programmeDetail[0].TYPENAME}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:25%;font-size:28rpx;">
+          活动日期：{{activityInfo.programmeDetail[0].BEGINDATE}} 至 {{activityInfo.programmeDetail[0].ENDDATE}}
+        </view>
+        <view class="fx fx-jcs fx-aic" style="width:100%;height:25%;font-size:28rpx;">
+          活动区域：{{activityInfo.programmeDetail[0].AREA_NAME}}-{{activityInfo.programmeDetail[0].PROV_NAME}}-{{activityInfo.programmeDetail[0].CITY_NAME}}-{{activityInfo.programmeDetail[0].COMP_NAME}}
+        </view>      
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">活动延迟</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;">
+        <view style="padding: 5rpx 50rpx;">延期时间：{{activityInfo.delays[0].DELAY_BEGIN_DATE}} 至 {{activityInfo.delays[0].DELAY_END_DATE}}</view>
+        <view style="padding: 5rpx 50rpx;">延迟原因：</view>
+        <view class="fx fx-aic" style="padding: 5rpx 50rpx;min-height:100rpx;">
+          {{activityInfo.delays[0].RELAY_REASON}}
+        </view>
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">活动主题</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{activityInfo.programmeDetail[0].TITLE}}
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">活动目的</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{activityInfo.programmeDetail[0].TARGET}}
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">活动形式</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{activityInfo.programmeDetail[0].FORM}}
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">方案附件</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>    
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">备注说明</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        {{activityInfo.programmeDetail[0].DETAILED_USAGE}}
+      </view>
+    </view>    
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">宣传用烟-市场营销烟</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 20rpx;min-height:100rpx;">
+        <view class="fx" style="width:100%;">
+          <view class="fx fx-jcs fx-aic" style="width:60%;height:50rpx;">品种</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:50rpx;">申报单位</view>
+          <view class="fx fx-jce fx-aic" style="width:15%;height:50rpx;">申报量</view>
+        </view>
+        <view class="fx" style="width:100%;" a:for="{{activityInfo.tobas}}" key="{{item.GOODSID}}">
+          <view class="fx fx-jcs fx-aic" style="width:60%;min-height:50rpx;">{{item.NAME}}</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;min-height:50rpx;">{{item.UNIT_APPLY}}</view>
+          <view class="fx fx-jce fx-aic" style="width:15%;min-height:50rpx;">{{item.APPLY_QTY}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">宣传品</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 20rpx;min-height:100rpx;">
+        <view class="fx" style="width:100%;">
+          <view class="fx fx-jcs fx-aic" style="width:60%;height:50rpx;">品种</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;height:50rpx;">申报单位</view>
+          <view class="fx fx-jce fx-aic" style="width:15%;height:50rpx;">申报量</view>
+        </view>
+        <view class="fx" style="width:100%;" a:for="{{activityInfo.goods}}" key="{{item.GOODSID}}">
+          <view class="fx fx-jcs fx-aic" style="width:60%;min-height:50rpx;">{{item.NAME}}</view>
+          <view class="fx fx-jcc fx-aic" style="width:25%;min-height:50rpx;">{{item.UNIT_APPLY}}</view>
+          <view class="fx fx-jce fx-aic" style="width:15%;min-height:50rpx;">{{item.APPLY_QTY}}</view>
+        </view>        
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">费用详情(元)</view>
+      </view>
+      <view class="fx fx-dcu" style="width:100%;padding: 5rpx 20rpx;min-height:100rpx;">
+        <view class="fx" style="width:100%;" a:for="{{activityInfo.cost}}" key="{{item.FEE_TYPE_ID}}">
+          <view class="fx fx-jcs fx-aic" style="width:70%;min-height:50rpx;">{{item.FEE_TYPE_NAME}}</view>
+          <view class="fx fx-jce fx-aic" style="width:30%;min-height:50rpx;">{{item.CHECK_AMOUNT}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">资源执行登记情况</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">目标实现情况</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">后期改进意见</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;margin-bottom:15rpx;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">留痕附件</view>
+      </view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>    
+    <view class="fx fx-dcu" style="width:100%;background-color:#ffffff;">
+      <view class="fx">
+        <view class="fx fx-jcc fx-aic" style="width:50rpx;height:50rpx;"> 
+          <image src="../../../common/Img/bangong.png" mode="aspectFit" style="width:48rpx;height:48rpx;margin-left:10rpx;"/>
+        </view>
+        <view class="fx fx-aic" style="height:50rpx;font-size:30rpx;font-weight:bold;">审批意见</view>
+      </view>
+      <view a:if="{{isagreed}}" class="fx fx-jcc fx-aic" style="width:15%;height:60rpx;margin-left:50rpx;font-size:30rpx;color:#ffffff;background-color:#00ccff;border-radius:10rpx;">同意</view>
+      <view a:else class="fx fx-jcc fx-aic" style="width:15%;height:60rpx;margin-left:50rpx;font-size:30rpx;color:#ffffff;background-color:#c9c9c9;border-radius:10rpx;">驳回</view>
+      <view class="fx fx-aic" style="width:100%;padding: 5rpx 50rpx;min-height:100rpx;">
+        测试段落
+      </view>
+    </view>      
+  </scroll-view>
+  <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="auditShow">审 核</view>                
+  <view hidden="{{!showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:rgba(0,0,0,0.5);z-index:100;">
+    <view class="fx fx-dcu" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:460rpx;background-color:#ffffff;">
+      <view class="fx fx-jcsb fx-aic" style="width:100%;height:80rpx;">
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-left:15rpx;font-size:35rpx;color:#00ccff;" onTap="alertCancel">取消</view>
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-right:15rpx;font-size:35rpx;color:#00ccff;" onTap="alertSure">确定</view>
+      </view>
+      <view a:if="{{checkState}}" class="fx fx-aic" style="width:100%;height:80rpx;">
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-left:25rpx;font-size:30rpx;color:#ffffff;background-color:#00ccff;border:1px solid #00ccff;border-radius:10rpx;" onTap="ifAgree" data-value="1">同意</view>
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-left:25rpx;font-size:30rpx;border:1px solid #c9c9c9;border-radius:10rpx;" onTap="ifAgree" data-value="0">驳回</view>
+      </view>
+      <view a:else class="fx fx-aic" style="width:100%;height:80rpx;">
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-left:25rpx;font-size:30rpx;border:1px solid #c9c9c9;border-radius:10rpx;" onTap="ifAgree" data-value="1">同意</view>
+        <view class="fx fx-jcc fx-aic" style="width:15%;height:70rpx;margin-left:25rpx;font-size:30rpx;color:#ffffff;background-color:#00ccff;border:1px solid #00ccff;border-radius:10rpx;" onTap="ifAgree" data-value="0">驳回</view>
+      </view>      
+      <view class="fx fx-jcc fx-aic" style="width:100%;height:250rpx;">
+        <textarea onInput="textAreaInput" style="border:1px solid #c9c9c9;width:95%;height:90%;font-size:35rpx;line-height:40rpx;" maxlength=-1 value="{{checkMsg}}"/>
+      </view>
+      <view style="width:100%;height:50rpx;">
+      </view>      
+    </view>
+  </view>
+</view>

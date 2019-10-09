@@ -1,0 +1,187 @@
+<view>
+  <view class="fx fx-aic" style="width:100%;height:100rpx;background-color:#ffffff;padding-left:10rpx;font-size:35rpx;font-weight:bold;font-family:'微软雅黑';">一、方案基础信息填写</view>
+  <view class="fx fx-dcu" style="font-size:30rpx;">
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">主题</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="themeChange" value="{{themesArrIndex}}" range="{{themes}}" range-key="themeName">
+          <view class="fx fx-aic">
+            <view>{{themes[themesArrIndex].themeName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">活动类型</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="activityTypeChange" value="{{typeArrIndex}}" range="{{activityType}}" range-key="promotypeName">
+          <view class="fx fx-aic">
+            <view>{{activityType[typeArrIndex].promotypeName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>        
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">销区</view>
+      <view class="fx fx-aic" style="margin-right:25rpx;" onTap="openArea">
+        <view>{{ifChooseArea}}</view>
+        <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">起始时间</view>
+      <view class="fx fx-aic" style="margin-right:25rpx;" onTap="selectStartDate">
+        <view>{{startDate}}</view>
+        <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">截止时间</view>
+      <view class="fx fx-aic" style="margin-right:25rpx;" onTap="selectEndDate">
+        <view>{{endDate}}</view>
+        <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">样烟类型</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="tobaTypeChange" value="{{tobaTypeArrIndex}}" range="{{tobaType}}" range-key="tobaTypeName">
+          <view class="fx fx-aic">
+            <view>{{tobaType[tobaTypeArrIndex].tobaTypeName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>        
+      </view>
+    </view>    
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">目标样烟</view>
+      <view class="fx fx-aic" style="margin-right:25rpx;" onTap="showToba">
+        <view>{{ifChooseToba}}</view>
+        <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-top:15rpx;width:100%;height:100rpx;background-color:#ffffff;">
+      <view style="margin-left:25rpx;">物料选择</view>
+      <view class="fx fx-aic" style="margin-right:25rpx;" onTap="showGoods">
+        <view>{{ifChooseGoods}}</view>
+        <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+      </view>
+    </view>    
+  </view>
+  <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="toSecondStep">下一步</view>
+  <view hidden="{{!toba_showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:#f2f2f2;z-index:100;">  
+    <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">
+      <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;" a:for="{{tobas}}" key="{{item.ADSGOODSID}}" data-index="{{index}}" onTap="isChooseToba">
+        <view style="margin-left:25rpx;">{{index * 1 + 1}}.{{item.ADSGOODSNAME}}</view>
+        <view class="fx fx-aic" style="margin-right:25rpx;">
+          <image a:if="{{item.ISCHECK*1 === 1}}" src="../../../common/Img/xuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          <image a:else src="../../../common/Img/weixuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+        </view>
+      </view>    
+    </scroll-view>
+    <view class="fx" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;">
+      <view class="fx fx-jcc fx-aic" style="width:60%;height:100%;background-color:#eecb53;color:#ffffff;font-size:40rpx;font-family:'微软雅黑';" onTap="showTobaChecked">已选({{tobaCheckedNum}})</view>
+      <view class="fx fx-jcc fx-aic" style="width:40%;height:100%;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="closeTobaAlert">确 定</view>
+    </view>
+  </view>
+  <view hidden="{{!toba_checkedAlert}}" style="position:fixed;bottom:100rpx;left:0;right:0;width:100%;min-height:180rpx;max-height:{{srcollviewHeight}}rpx;background-color:#f2f2f2;z-index:100;background-color:#ffffff;border-top:1px solid #c9c9c9;">  
+    <view class="fx fx-jce fx-aic" style="height:80rpx;width:100%;">
+      <view class="fx fx-jcc fx-aic" style="margin-right:25rpx;" onTap="deleteAllSelectedToba">
+        <image src="../../../common/Img/delete.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>清空
+      </view>
+      <view class="fx fx-jcc fx-aic" style="margin-right:25rpx;" onTap="cancel_checkedTobaAlert">
+        <image src="../../../common/Img/cancel.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>关闭
+      </view>
+    </view>
+    <scroll-view scroll-y="{{true}}" style="width:100%;max-height:{{srcollviewHeight * 1 - 100}}rpx;">    
+      <view class="fx fx-jcsb fx-aic" style="width:100%;height:100rpx;font-size:30rpx;" a:for="{{tobaCheckedList}}" key="{{item.ADSGOODSID}}" data-adsgoodsid="{{item.ADSGOODSID}}" onTap="deleteSelectedToba">
+        <view style="margin-left:25rpx;">{{item.ORDERNUM}}.{{item.ADSGOODSNAME}}</view>
+        <view class="fx fx-aic" style="margin-right:25rpx;">
+          <image src="../../../common/Img/delete.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+        </view>
+      </view>    
+    </scroll-view>
+  </view>    
+  <view hidden="{{!goods_showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:#f2f2f2;z-index:100;">  
+    <scroll-view scroll-y="{{true}}" style="height:{{srcollviewHeight}}rpx;width:100%;">
+      <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;" a:for="{{goods}}" key="{{item.ADSGOODSID}}" data-index="{{index}}" onTap="isChooseGoods">
+        <view style="margin-left:25rpx;">{{index * 1 + 1}}.{{item.ADSGOODSNAME}}</view>
+        <view class="fx fx-aic" style="margin-right:25rpx;">
+          <image a:if="{{item.ISCHECK*1 === 1}}" src="../../../common/Img/xuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          <image a:else src="../../../common/Img/weixuanzhong.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+        </view>
+      </view>    
+    </scroll-view>
+    <view class="fx" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;">
+      <view class="fx fx-jcc fx-aic" style="width:60%;height:100%;background-color:#eecb53;color:#ffffff;font-size:40rpx;font-family:'微软雅黑';" onTap="showGoodsChecked">已选({{goodsCheckedNum}})</view>
+      <view class="fx fx-jcc fx-aic" style="width:40%;height:100%;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="closeGoodsAlert">确 定</view>
+    </view>
+  </view>
+  <view hidden="{{!goods_checkedAlert}}" style="position:fixed;bottom:100rpx;left:0;right:0;width:100%;min-height:180rpx;max-height:{{srcollviewHeight}}rpx;background-color:#f2f2f2;z-index:100;background-color:#ffffff;border-top:1px solid #c9c9c9;">  
+    <view class="fx fx-jce fx-aic" style="height:80rpx;width:100%;">
+      <view class="fx fx-jcc fx-aic" style="margin-right:25rpx;" onTap="deleteAllSelectedGoods">
+        <image src="../../../common/Img/delete.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>清空
+      </view>
+      <view class="fx fx-jcc fx-aic" style="margin-right:25rpx;" onTap="cancel_checkedGoodsAlert">
+        <image src="../../../common/Img/cancel.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>关闭
+      </view>
+    </view>
+    <scroll-view scroll-y="{{true}}" style="width:100%;max-height:{{srcollviewHeight * 1 - 100}}rpx;">    
+      <view class="fx fx-jcsb fx-aic" style="width:100%;height:100rpx;font-size:30rpx;" a:for="{{goodsCheckedList}}" key="{{item.ADSGOODSID}}" data-adsgoodsid="{{item.ADSGOODSID}}" onTap="deleteSelectedGoods">
+        <view style="margin-left:25rpx;">{{item.ORDERNUM}}.{{item.ADSGOODSNAME}}</view>
+        <view class="fx fx-aic" style="margin-right:25rpx;">
+          <image src="../../../common/Img/delete.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+        </view>
+      </view>    
+    </scroll-view>
+  </view>    
+  <view hidden="{{!area_showAlert}}" style="position:fixed;bottom:0;left:0;right:0;width:100%;height:{{bodyHeight}}rpx;background-color:#f2f2f2;z-index:100;">  
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">区域</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="areaChange" value="{{areaArrIndex}}" range="{{areas}}" range-key="areaName">
+          <view class="fx fx-aic">
+            <view>{{areas[areaArrIndex].areaName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">省份</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="proChange" value="{{proArrIndex}}" range="{{pros}}" range-key="provName">
+          <view class="fx fx-aic">
+            <view>{{pros[proArrIndex].provName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">地市</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="cityChange" value="{{cityArrIndex}}" range="{{cities}}" range-key="cityName">
+          <view class="fx fx-aic">
+            <view>{{cities[cityArrIndex].cityName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="fx fx-jcsb fx-aic" style="margin-bottom:15rpx;width:100%;height:100rpx;background-color:#ffffff;font-size:30rpx;">
+      <view style="margin-left:25rpx;">区县</view>
+      <view style="margin-right:25rpx;">
+        <picker onChange="countChange" value="{{countArrIndex}}" range="{{counts}}" range-key="countyName">
+          <view class="fx fx-aic">
+            <view>{{counts[countArrIndex].countyName}}</view>
+            <image src="../../../common/Img/jiantou.png" mode="aspectFit" style="width:48rpx;height:48rpx;"/>
+          </view>
+        </picker>
+      </view>
+    </view>            
+    <view class="fx fx-jcc fx-aic" style="position: fixed; bottom:0;left:0;right:0;width:100%;height:100rpx;background-color:#00ccff;color:#ffffff;font-weight:bold;font-size:60rpx;font-family:'微软雅黑';" onTap="closeAreaAlert">确 定</view>    
+  </view>  
+</view>

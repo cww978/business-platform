@@ -4,12 +4,14 @@ App({
     programmeDetail: null, // 方案执行功能需要的全局变量
     userInfo: null,
     childMenus: [],
+    systemInfo: dd.getSystemInfoSync(),
     registration: {
       activityId: '',
       companyId: '',
       userType: '',
       realCity: ''
-    }
+    },
+    domain:'http://ldw.natapp1.cc'
   },
   // 更新并保存个人信息
   updateUserInfo(){
