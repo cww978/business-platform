@@ -1,13 +1,4 @@
 {
   "defaultTitle": "非方案执行",
-  "allowsBounceVertical": "NO",
-  "usingComponents":{
-    "my-picker": "/components/my-picker/my-picker",
-    "footer": "/components/footer/footer",
-    "list": "mini-antui/es/list/index",
-    "list-item": "mini-antui/es/list/list-item/index",
-    "flex": "mini-antui/es/flex/index",
-    "flex-item": "mini-antui/es/flex/flex-item/index",
-    "swipe-action": "mini-antui/es/swipe-action/index"
-  }
+  "allowsBounceVertical": "NO"
 }

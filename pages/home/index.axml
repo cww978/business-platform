@@ -1,9 +1,4 @@
 <view>
-  <view a:if={{loading}} class="loading-wapper gif-white response">
-    <view class="loading-content">
-      <image mode="scaleToFill" src="/static/loading.gif"/>
-    </view>
-  </view>
   <view>
   	<view class="cu-bar bg-white solid-bottom">
       <view class="action">

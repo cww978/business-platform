@@ -1,0 +1,52 @@
+.padding-left-rigth{
+  padding: 0px 0.3rem;
+}
+input{
+  height: .6rem
+}
+.header{
+  padding: 16px 16px 8px;
+  font-size:14px;
+  color:rgb(136, 136, 136);
+}
+.header .icon {
+  padding-right: 5px;
+}
+.cu-form-group .title {
+    min-width: calc(4em + 15px);
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  flex-basis: initial;
+}
+.img-group{
+  padding-left: 9px;
+  background-color: white;
+}
+.inline{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.placeholder{
+  border: 1px #eee solid;
+}
+.cuIcon-camerafill{
+  font-size: 0.44rem
+}
+.cuIcon-locationfill{
+  font-size: 0.5rem
+}
+.am-flexbox-item{
+  margin-left: 0px;
+}
+.cu-form-group textarea{
+  height: auto;
+  min-height: 4.6em;
+}

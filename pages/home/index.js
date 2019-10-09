@@ -50,12 +50,7 @@ Page({
       }
     ]
   },
-  onLoad(query) {
-    let that = this
-    setTimeout(()=>{
-      that.setData({ loading: false })
-    }, 2000)
-  },
+  onLoad(query) {},
   onItemClick(event){
     let index = event.target.dataset.index
     let childs = this.data.menus[index].child

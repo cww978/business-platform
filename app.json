@@ -25,7 +25,8 @@
     "pages/common/selectCompanyActivity/selectCompanyActivity",
     "pages/common/selectAdsgoods/selectAdsgoods",
     "pages/common/implementation/implementation",
-    "pages/common/result/result"
+    "pages/common/result/result",
+    "pages/noregistration/implementation/implementation"
   ],
   "window": {
     "defaultTitle": "统一业务平台"
