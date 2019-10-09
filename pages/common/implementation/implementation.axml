@@ -53,7 +53,7 @@
         <view class="cu-form-group">
           <view class="title text-lg text-cut">{{item['ADSGOODS_NAME']}}</view>
           <input class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputResourcesUse" value="{{item.useNum}}"/>
-          <view class="text-df text-gray">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
+          <view class="text-df {{item.useNum > item['TRUE_ACT_STOCK']?'text-red':'text-gray'}}">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
         </view>
       </block>
     </view>

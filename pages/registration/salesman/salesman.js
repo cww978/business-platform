@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   data: {
     userId: '',
+    loading: true,
     activitTypes: activitType, // 活动类型
     programmeType: '',
     resources: [], // 资源
@@ -26,7 +27,7 @@ Page({
         activityId: app.globalData.registration['activityId'],
         executeType: 1,
       }).then(res => {
-        this.setData({ resources: res.data })
+        this.setData({ resources: res.data, loading: false })
       })
     })
   },

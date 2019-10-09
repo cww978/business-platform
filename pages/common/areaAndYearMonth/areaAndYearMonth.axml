@@ -23,7 +23,7 @@
     <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button class="cu-btn block bg-blue lg" disabled="{{!(isYear && isCity)}}"  onTap="clickDefine">确 定</button>
+      <button type="primary" class="cu-btn block bg-blue lg" disabled="{{!(isYear && isCity)}}"  onTap="clickDefine">确 定</button>
     </view> 
   </view>
 </view>

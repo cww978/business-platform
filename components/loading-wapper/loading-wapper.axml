@@ -1,0 +1,5 @@
+<view class="loading-wapper gif-white response {{loading ? 'loading-wapper-show' : 'loading-wapper-hide'}}">
+  <view class="loading-content">
+    <image mode="scaleToFill" src="/static/loading.gif"/>
+  </view>
+</view>

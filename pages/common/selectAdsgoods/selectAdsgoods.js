@@ -10,7 +10,7 @@ Page({
     lastPage.setAdsgood(this.data.list[e.index])
     setTimeout(() => {
       dd.navigateBack()
-    }, 500)
+    }, 300)
   },
   getTobaList() {
     selTobaList({ userId: app.globalData.userInfo.userId, companyId: this.data.companyId }).then(res => {

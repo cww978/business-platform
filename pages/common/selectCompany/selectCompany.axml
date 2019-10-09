@@ -33,6 +33,6 @@
     </list-item>
   </list>
   <view class="padding">
-    <button onTap="save" disabled="{{!isCity}}" class="cu-btn block bg-blue margin-tb-sm lg" type="primary">确 定</button>
+    <button onTap="save" loading="{{loading}}" disabled="{{!isCity}}" class="cu-btn block bg-blue margin-tb-sm lg" type="primary">确 定</button>
   </view>
 </view>

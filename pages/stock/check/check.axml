@@ -9,9 +9,9 @@
     <block a:for="{{products}}">
       <flex class="cu-form-group">
         <view class="text-cut title text-lg">{{item['ADSGOODS_NAME']}}</view>
-        <flex-item><view><input class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputNum" value="{{item['QTY']}}"/></view></flex-item>
+        <flex-item><view><input disabled="{{item['ADSGOODS_ID']?false:true}}" class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputNum" value="{{item['QTY']}}"/></view></flex-item>
         <flex-item><view class="text-lg text-gray text-center">{{item['UNIT']}}</view></flex-item>
-        <view onTap="clickDelItem" data-index="{{index}}"><text class="text-lg text-red text-right">删除</text></view>
+        <view onTap="clickDelItem" a:if="{{item['ADSGOODS_ID']?true:false}}" data-index="{{index}}"><text class="text-lg text-red text-right">删除</text></view>
       </flex>
     </block>
     <view class="padding-lg">

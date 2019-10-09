@@ -174,7 +174,7 @@ export function selResourcesDetail(param){
   return request({
     url: '/programExecute/selResourcesDetail',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -190,7 +190,7 @@ export function selActivityCode(param){
   return request({
     url: '/programExecute/selActivityCode',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })

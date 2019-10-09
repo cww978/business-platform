@@ -2,6 +2,7 @@ import { selSalesArea } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
+    loading: false,
     isCity: false,
     isProv: false,
     citys: [], //对象
@@ -42,9 +43,7 @@ Page({
     } catch (error) {
       console.error('前一个页面没有设置方法：setCityCode')
     }
-    setTimeout(() => {
-      dd.navigateBack()
-    }, 200)
+    dd.navigateBack()
   },
   // 切换区域
   areaChanged(e) {
@@ -126,7 +125,9 @@ Page({
   onReady() {
     let userId = app.globalData.userInfo.userId
     // 获取区域
+    this.setData({ loading: true })
     selSalesArea({ userId: userId }).then(res => {
+      this.setData({ loading: false })
       this.formatData(res.data)
     })
   },

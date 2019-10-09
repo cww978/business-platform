@@ -1,3 +1,18 @@
+.loading-wapper{
+  position: absolute;
+  z-index: 9;
+  height: 100vh;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .padding-left-rigth{
   padding: 0px 0.3rem;
 }

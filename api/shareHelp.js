@@ -9,7 +9,7 @@ export function selPromotype(param){
   return request({
     url: '/shareHelp/selPromotype',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -22,7 +22,7 @@ export function selTheme(){
   console.log('获取主题')
   return request({
     url: '/shareHelp/selTheme',
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -99,7 +99,7 @@ export function selObjectElement(param){
   return request({
     url: '/shareHelp/selObjectElement',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -117,7 +117,7 @@ export function selProgrammeInfo(param){
   return request({
     url: '/shareHelp/selProgrammeInfo',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -133,7 +133,7 @@ export function selSalesArea(param){
   return request({
     url: '/shareHelp/selSalesArea',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })

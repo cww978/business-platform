@@ -1,7 +1,9 @@
 import { selProgramExecuteRole } from '/api/role'
 let app = getApp()
 Page({
-  data: {},
+  data: {
+    loading: true
+  },
   onReady() {
     dd.redirectTo({
       url: '/pages/common/selectCompanyActivity/selectCompanyActivity'

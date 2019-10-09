@@ -3,6 +3,7 @@ import { activitType } from '/constant/other.js'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     userId: '',
     activityId: 0,
     activitTypes: activitType, // 活动类型
@@ -18,7 +19,7 @@ Page({
       companyId: this.data.companyId
     }).then(res => {
       console.log('programmeInfo', res.data.programmeDetail[0])
-      this.setData({ programmeInfo: res.data.programmeDetail[0] })
+      this.setData({ programmeInfo: res.data.programmeDetail[0], loading: false })
     })
   },
   // 执行方案

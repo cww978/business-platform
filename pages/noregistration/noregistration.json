@@ -1,4 +1,7 @@
 {
   "defaultTitle": "非方案执行",
-  "allowsBounceVertical": "NO"
+  "allowsBounceVertical": "NO",
+  "usingComponents":{
+    "loading-wapper": "/components/loading-wapper/loading-wapper"
+  }
 }

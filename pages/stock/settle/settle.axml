@@ -6,6 +6,7 @@
     </flex>
   </view>
   <view style="min-height:calc(100vh - 110px)">
+    <view class="text-gray text-center padding-xl" a:if="{{products.length<=0}}">暂无数据</view>
     <list>
       <block a:for="{{products}}">
         <list-item

@@ -4,6 +4,7 @@ import { selTheme, selPromotype, selObjectElement } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     userId: 0,
     imgs: [],
     targets: [], //对象
@@ -134,7 +135,7 @@ Page({
       let imgs = this.data.imgs.join(',')
       let param = {
         activityId: 0,
-        location: this.data.address,
+        location: '',
         userId: this.data.userId,
         companyId: this.data.companyId,
         themeId: themeId,
@@ -161,7 +162,8 @@ Page({
   // 主题切换
   activityThemeChanged(e) {
     this.setData({
-      themeIndex: e.detail.value
+      themeIndex: e.detail.value,
+      typeIndex: 0
     })
     let that = this
     selPromotype({themeId: that.data.themes[that.data.themeIndex].themeId}).then(res2 => {
@@ -174,7 +176,8 @@ Page({
   // 活动类型切换
   activityTypeChanged(e) {
     this.setData({
-      typeIndex: e.detail.value
+      typeIndex: e.detail.value,
+      targetIndex: 0
     })
     let that = this
     selObjectElement({promoType: that.data.types[that.data.typeIndex].promotypeId}).then(res3 => {
@@ -195,7 +198,7 @@ Page({
       selPromotype({themeId: that.data.themes[that.data.themeIndex].themeId}).then(res2 => {
         that.setData({ types: res2.data })
         selObjectElement({promoType: that.data.types[that.data.typeIndex].promotypeId}).then(res3 => {
-          that.setData({ targets: res3.data })
+          that.setData({ targets: res3.data, loading: false })
         })
       })
     })

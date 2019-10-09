@@ -6,6 +6,7 @@ Page({
     realCity: 0,
     cityCode: 0,
     cityText: 0,
+    loading: false,
     isCity: false,
     programmes: [],
     programmeIndex: 0,
@@ -45,9 +46,13 @@ Page({
       realCity: e.realCity,
       cityCode: e.city.code,
       cityText: e.city.name,
-      isCity: true
+      isCity: true,
+      isActivityId: false,
+      loading: true,
     })
-    this.getProgrammeCodes()
+    setTimeout(() => {
+      this.getProgrammeCodes()
+    }, 300)
   },
   // 获取方案编码
   getProgrammeCodes() {
@@ -55,10 +60,23 @@ Page({
       userId: app.globalData.userInfo.userId,
       companyId: this.data.cityCode
     }).then(res => {
-      console.log('programmes', res.data)
+      let isActivityId = false
+      if (res.data.length > 0) {
+        isActivityId = true
+      } else {
+        setTimeout(() => {
+          dd.confirm({
+            title: '操作提示',
+            content: '该地区下没有活动方案',
+            confirmButtonText: '知道了',
+            cancelButtonText: '取消'
+          })
+        },0)
+      }
       this.setData({
-        isActivityId: true,
-        programmes: res.data
+        isActivityId: isActivityId,
+        programmes: res.data,
+        loading: false
       })
     })
   },

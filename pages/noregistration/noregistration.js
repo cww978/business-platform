@@ -1,7 +1,9 @@
 import { selProgramExecuteRole } from '/api/role'
 const app = getApp()
 Page({
-  data: {},
+  data: {
+    loading: true
+  },
   // 检测是否有权限执行操作非方案执行登记
   check() {
     selProgramExecuteRole({ userId: app.globalData.userInfo.userId }).then(res => {

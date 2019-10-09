@@ -1,4 +1,5 @@
 <view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
   <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px);">
     <list>
       <view slot="header">

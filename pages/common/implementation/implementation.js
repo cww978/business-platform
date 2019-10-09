@@ -16,7 +16,7 @@ Page({
     otherPoints: [], // 其他要素
     imgs: [],
     targetIndex: 0,
-    hasInvestigation: true,
+    hasInvestigation: false,
     objectives: [
       { id: 1, text: '新产品调研', active: false },
       { id: 2, text: '老产品调研', active: false }
@@ -225,7 +225,7 @@ Page({
     }
     let data = {
       executeType: 1,
-      location: this.data.address,
+      location: '',
       userId: app.globalData.userInfo.userId,
       activityId: this.data.activityId,
       companyId: this.data.companyId,

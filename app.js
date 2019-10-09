@@ -1,4 +1,5 @@
 import { getUserInfo } from './api/user'
+import { SERVER_URL } from '/constant/SERVER.js'
 App({
   globalData: {
     programmeDetail: null, // 方案执行功能需要的全局变量
@@ -11,7 +12,7 @@ App({
       userType: '',
       realCity: ''
     },
-    domain:'http://ldw.natapp1.cc'
+    domain: SERVER_URL
   },
   // 更新并保存个人信息
   updateUserInfo(){

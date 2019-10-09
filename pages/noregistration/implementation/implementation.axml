@@ -1,4 +1,9 @@
 <view>
+  <view a:if={{loading}} class="loading-wapper gif-white response">
+    <view class="loading-content">
+      <image mode="scaleToFill" src="/static/loading.gif"/>
+    </view>
+  </view>
   <view style="min-height: calc(100vh - 60px)">
     <view>
       <view class="header">
