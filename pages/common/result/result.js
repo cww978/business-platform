@@ -7,7 +7,7 @@ Page({
         buttonText: "返回首页"
       },
       subButton: {
-        buttonText: "继续查看方案"
+        buttonText: "继续查看"
       }
     }
   },
@@ -22,16 +22,10 @@ Page({
     })
   },
   onLoad(options) {
-    if (options.type == 'success') {
-      this.setData({
-        title: '操作成功',
-        type: options.type
-      })
-    } else {
-      this.setData({
-        title: '操作失败',
-        type: options.type
-      })
-    }
+    this.setData({
+      title: options.title,
+      subTitle: options.subTitle,
+      type: options.type
+    })
   }
 });

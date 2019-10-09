@@ -30,6 +30,7 @@ Page({
       })
     })
   },
+  // 分配方案
   navTodec(){
     let activityId = app.globalData.registration['activityId']
     if (activityId == '') {
@@ -44,6 +45,7 @@ Page({
       })
     }
   },
+  // 执行方案
   navToimp(){
     let activityId = app.globalData.registration['activityId']
     let activityType = this.data.programmeInfo['ACTIVITYTYPE']
@@ -55,7 +57,7 @@ Page({
       })
     } else {
       dd.navigateTo({
-        url: `./implement/implement?activityType=${activityType}`
+        url: `/pages/common/implementation/implementation?activityType=${activityType}`
       })
     }
   },

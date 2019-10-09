@@ -31,7 +31,7 @@
         <textarea onInput="inputTextarea" maxlength="200" auto-height placeholder="请输入标准" />
       </view>
     </view>
-    <view>
+    <view a:if="{{resources.length > 0}}">
       <view class="header">
         <view>
           <text class="icon lg cuIcon-favor"></text>

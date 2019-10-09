@@ -33,7 +33,8 @@
         </view>
         <view class="info-row">
           <view>
-            <text class="text-lg text-gray">资源明细</text>
+            <text class="text-lg text-gray">资源明细：</text>
+            <text class="text-df text-gray" a:if="{{resources.length <= 0}}">没有资源</text>
           </view>
           <block a:for="{{resources}}">
             <flex class="cu-form-group">

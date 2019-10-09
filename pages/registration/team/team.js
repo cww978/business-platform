@@ -21,6 +21,7 @@ Page({
       this.setData({ programmeInfo: res.data.programmeDetail[0] })
     })
   },
+  // 执行方案
   navToImp(){
     let activityType = this.data.programmeInfo['ACTIVITYTYPE']
     let activityId = this.data.activityId
@@ -32,7 +33,7 @@ Page({
       })
     } else {
       dd.navigateTo({
-        url: `./implement/implement?activityType=${activityType}`
+        url: `/pages/common/implementation/implementation?activityType=${activityType}`
       })
     }
   },

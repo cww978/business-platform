@@ -52,9 +52,9 @@ Page({
       resources: resources.join(';')
     }
     saveResolveCompany(params).then(res =>{
-      let type = res.data == 0 ? 'fail' : 'success'
+      let type = res.data.saveState != 0 ? 'fail' : 'success'
       dd.navigateTo({
-        url: `./success/success?companyName=${that.data.terminals[this.data.terminalIndex].terminalCompanyName}&type=${type}`
+        url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
       })
     })
   },

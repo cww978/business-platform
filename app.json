@@ -14,23 +14,18 @@
     "pages/registration/company/company",
     "pages/registration/team/team",
     "pages/registration/salesman/decompose/decompose",
-    "pages/registration/salesman/implement/implement",
-    "pages/registration/salesman/decompose/success/success",
     "pages/common/search/search",
-    "pages/registration/salesman/implement/result/result",
     "pages/registration/company/receiving/receiving",
-    "pages/registration/company/receiving/result/result",
-    "pages/registration/team/implement/implement",
     "pages/common/investigation/investigation",
-    "pages/registration/team/implement/result/result",
     "pages/noregistration/noregistration",
-    "pages/noregistration/result/result",
     "pages/common/areaAndYearMonth/areaAndYearMonth",
     "pages/stock/locking/detail/detail",
     "pages/common/areaProAndCity/areaProAndCity",
     "pages/common/selectCompany/selectCompany",
     "pages/common/selectCompanyActivity/selectCompanyActivity",
-    "pages/common/selectAdsgoods/selectAdsgoods"
+    "pages/common/selectAdsgoods/selectAdsgoods",
+    "pages/common/implementation/implementation",
+    "pages/common/result/result"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

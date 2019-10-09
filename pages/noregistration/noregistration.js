@@ -150,9 +150,9 @@ Page({
         personNum: 0,
       }
       saveNoProgrammeImplement(param).then(res => {
-        let type = res.data == 0 ? 'fail' : 'success'
+        let type = res.data.saveState == 0 ? 'success' : 'fail'
         dd.navigateTo({
-          url: `./result/result?type=${type}`
+          url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
         })
       })
     } else {

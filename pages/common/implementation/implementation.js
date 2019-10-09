@@ -16,7 +16,7 @@ Page({
     otherPoints: [], // 其他要素
     imgs: [],
     targetIndex: 0,
-    hasInvestigation: false,
+    hasInvestigation: true,
     objectives: [
       { id: 1, text: '新产品调研', active: false },
       { id: 2, text: '老产品调研', active: false }
@@ -243,8 +243,9 @@ Page({
     // 保存操作
     saveProgrammeImplement(data).then(res => {
       let type = res.data.saveState == 0 ? 'success' : 'fail'
+      console.log('执行结果', res.data)
       dd.navigateTo({
-        url: `./result/result?type=${type}`
+        url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
       })
     })
   },
@@ -268,7 +269,7 @@ Page({
       userId: app.globalData.userInfo.userId,
       activityId: this.data.activityId,
       companyId: this.data.companyId,
-      executeType: 2
+      executeType: 1
     }).then(res => {
       this.setData({ resources: res.data })
     })
@@ -286,8 +287,8 @@ Page({
       questions: [],
       resources: [],
       activityType: options.activityType,
-      activityId: app.globalData.registration['activityId'],
-      companyId: app.globalData.registration['companyId']
+      companyId: app.globalData.registration['companyId'],
+      activityId: app.globalData.registration['activityId']
     })
   }
 })

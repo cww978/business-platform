@@ -26,16 +26,24 @@ Page({
       dd.showToast({ content: '请选择一个执行单在确认' })
     } else {
       saveConfirmResources({ regIdStr: ids.join(',') }).then(res => {
-        let type = res.data == 0 ? 'fail' : 'success'
+        let type = 'success'
+        let message = '保存成功!'
+        if (res.data) {
+          type = 'success'
+          message = '保存成功!'
+        } else {
+          type = 'fail'
+          message = '保存失败!'
+        }
         dd.navigateTo({
-          url: `./result/result?type=${type}`
+          url: `/pages/common/result/result?type=${type}&title=${message}`
         })
       })
-    }
+    } 
   },
+  // 获取用户所属终端公司
   getUserTerminal() {
     selUserTerminalCompany({ userId: app.globalData.userInfo.userId }).then(res => {
-      console.log('terminalCompanyId', res.data)
       this.setData({
         terminalCompanyId: res.data[0].terminalCompanyId,
         terminalCompanyName: res.data[0].terminalCompanyName
@@ -43,6 +51,7 @@ Page({
       this.getResourcesDistribution()
     })
   },
+  // 获取资源
   getResourcesDistribution() {
     selResourcesDistribution({ terminalCompanyId: this.data.terminalCompanyId }).then(res => {
       let list = []
