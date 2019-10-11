@@ -1,7 +1,7 @@
 <view>
   <loading-wapper loading="{{loading}}"></loading-wapper>
   <scroll-view scroll-y="{{true}}" style="height:calc(100vh - 60px)">
-    <view a:if="{{actionType == 1}}">
+    <view a:if="{{lease == 1}}">
       <flex class="padding bg-blue text-white text-bold">
         <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
         <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
@@ -36,7 +36,7 @@
         {{isSave?'已结账':'结 账'}}
       </button>
     </flex-item>
-    <flex-item a:if="{{actionType == 1}}">
+    <flex-item a:if="{{showConfirm}}">
       <view>
         <button hover-class="button-hover" disabled="{{isConfirm}}" onTap="define" class="bg-green text-white cu-btn block lg" type="default">
           {{isConfirm?'已确认':'确 认'}}

@@ -3,6 +3,8 @@ import { selSettleStock, saveSettleStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    lease: 0,
+    showConfirm: false,
     loading: true,
     isSave: false,
     isConfirm: false,
@@ -12,8 +14,7 @@ Page({
     yeatMonth: '',
     products: [],
     savePerson: '',
-    definitePerson: '',
-    actionType: 0
+    definitePerson: ''
   },
   onTabBarTap(e) {
     const { index } = e.target.dataset
@@ -31,7 +32,6 @@ Page({
       state: state
     }
     saveSettleStock(param).then(res => {
-      console.log('结账', res.data)
       dd.confirm({
         title: '操作提示',
         content: res.data.message || '操作错误',
@@ -41,10 +41,30 @@ Page({
     })
   },
   save() {
-    this.settleStock(0)
+    dd.confirm({
+      title: '提示',
+      content: '物资数据是否正确',
+      confirmButtonText: '结账',
+      cancelButtonText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          this.settleStock(0)
+        }
+      }
+    })
   },
   define() {
-    this.settleStock(1)
+    dd.confirm({
+      title: '提示',
+      content: '核对数据是否正确',
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          this.settleStock(1)
+        }
+      }
+    })
   },
   getSettleStocks() {
     let param = {
@@ -56,23 +76,29 @@ Page({
     selSettleStock(param).then(res => {
       let isConfirm = false
       let isSave = false
-      // 当需要两人操作且没有确认时允许删除
-      if (res.data.lease == 1 && !res.data.check) {
-        isDel = true
+      let showConfirm = false
+      if (res.data.lease == 1 && res.data.keep) {
+        showConfirm = true
+      } else {
+        showConfirm = false
       }
       // 判断是否已经保存和确认
       if (res.data.check) {
         isConfirm = true
         isSave = true
       }
+      if (res.data.keep) {
+        isSave = true
+      }
       this.setData({
+        showConfirm: showConfirm,
         loading: false,
         isConfirm: isConfirm,
         isSave: isSave,
         products: res.data.products,
         definitePerson: res.data.check,
         savePerson: res.data.keep,
-        actionType: res.data.lease
+        lease: res.data.lease
       })
     })
   },

@@ -2,6 +2,8 @@ import { selRegionStock, saveRegionStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    lease: 0,
+    showConfirm: false,
     isSave: false,
     isConfirm: false,
     loading: true,
@@ -12,8 +14,7 @@ Page({
     products: [],
     newProducts: [],
     savePerson: '',
-    definitePerson: '',
-    actionType: 0
+    definitePerson: ''
   },
   // 设置数量
   inputNum(e) {
@@ -45,7 +46,7 @@ Page({
     dd.showActionSheet({
       title: '新增促销用品',
       items: ['促销烟', '促销品'],
-      cancelButtonText: '取消',
+      canelButtonText: '取消',
       success: (res) => {
         if (res.index == 0) {
           dd.navigateTo({
@@ -116,12 +117,32 @@ Page({
   },
   // 保存促销
   save() {
-    this.regionStock(0)
+    dd.confirm({
+      title: '提示',
+      content: '保存的物资数据是否正确',
+      confirmButtonText: '确定保存',
+      cancelButtonText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          this.regionStock(0)
+        }
+      }
+    })
   },
   
   // 确定促销
   define() {
-    this.regionStock(1)
+    dd.confirm({
+      title: '提示',
+      content: '保存的数据核对是否正确',
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          this.regionStock(1)
+        }
+      }
+    })
   },
   // 查询促销用品
   getRegionStocks(ids = '', goodsinfo = '') {
@@ -138,9 +159,15 @@ Page({
       let isDel = false
       let isConfirm = false
       let isSave = false
+      let showConfirm = false
       // 当需要两人操作且没有确认时允许删除
       if (res.data.lease == 1 && !res.data.check) {
         isDel = true
+      }
+      if (res.data.lease == 1 && res.data.keep) {
+        showConfirm = true
+      } else {
+        showConfirm = false
       }
       // 判断是否已经保存和确认
       if (res.data.check) {
@@ -148,6 +175,7 @@ Page({
         isSave = true
       }
       this.setData({
+        showConfirm: showConfirm,
         loading: false,
         isDel: isDel,
         isConfirm: isConfirm,
@@ -155,7 +183,7 @@ Page({
         products: res.data.lists || [],
         definitePerson: res.data.check,
         savePerson: res.data.keep,
-        actionType: res.data.lease
+        lease: res.data.lease
       })
     })
   },
