@@ -2,34 +2,24 @@ import { selRegionStock, saveRegionStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    loading: false,
+    isDel: false, // 是否可以删除
     regionCode: '',
-    top: 0,
     userId: '',
     yearMonth: '',
     products: [],
-    shadow: false,
+    newProducts: [],
     savePerson: '',
     definitePerson: '',
-    actionType: 0,
-    actionText: '保存'
+    actionType: 0
   },
-  onPageScroll(e) {
-    const { scrollTop } = e
-    let shadow = false
-    if (scrollTop > 10) {
-      shadow = true
-    } else {
-      shadow = false
-    }
-    this.setData({
-      shadow
-    })
-  },
+  // 设置数量
   inputNum(e) {
     let products = this.data.products
     products[e.target.dataset.index]['QTY'] = parseInt(e.detail.value)
     this.setData({ products: products })
   },
+  // 设置新增促销用品
   setAdsgood(e) {
     for (let item of this.data.products) {
       if (item['ADSGOODS_ID'] == e['ADSGOODSID']) {
@@ -43,10 +33,12 @@ Page({
       UNIT: e['ADSGOODSUNIT_APPLY'],
       QTY: 0,
     }
-    let products = this.data.products
+    let products = this.data.newProducts
     products.push(adsgood)
-    this.setData({ products: products })
+    this.setData({ newProducts: products })
+    this.newSaveRegionStock()
   },
+  // 新增
   clickAddPromotion() {
     dd.showActionSheet({
       title: '新增促销用品',
@@ -65,6 +57,30 @@ Page({
       },
     })
   },
+  newSaveRegionStock() {
+    // 构建新增查询参数
+    let products = []
+    for (let item of this.data.products) {
+      if (item['ADSGOODS_ID']) {
+        products.push(`${item['ADSGOODS_ID']},${item['QTY']},${item['UNIT_WEIGHT']}`)
+      }
+    }
+    products = products.join(';')
+    let ids = []
+    for (let item of this.data.products) {
+      if (item['ADSGOODS_ID']) {
+        ids.push(item['ADSGOODS_ID'])
+      }
+    }
+    for (let item of this.data.newProducts) {
+      if (item['ADSGOODS_ID']) {
+        ids.push(item['ADSGOODS_ID'])
+      }
+    }
+    ids = ids.join(';')
+    this.getRegionStocks(ids, products)
+  },
+  // 删除促销品
   clickDelItem(e) {
     let products = this.data.products
     products.splice(e.target.dataset.index, 1)
@@ -72,9 +88,10 @@ Page({
   },
   regionStock(state) {
     let products = []
+    console.log('ddd', this.data.products)
     for (let item of this.data.products) {
       if (item['ADSGOODS_ID']) {
-        products.push( item['ADSGOODS_ID'] + ',' + item['QTY'])
+        products.push(`${item['ADSGOODS_ID']},${item['QTY']},${item['UNIT_WEIGHT']}`)
       }
     }
     products = products.join(';')
@@ -95,21 +112,35 @@ Page({
       })
     })
   },
+  // 保存促销
   save() {
     this.regionStock(0)
   },
+  
+  // 确定促销
   define() {
     this.regionStock(1)
   },
-  getRegionStocks() {
+  // 查询促销用品
+  getRegionStocks(ids = '', goodsinfo = '') {
     let param = {
       year: this.data.yearMonth.split('-')[0],
       month: this.data.yearMonth.split('-')[1],
       companyId: this.data.regionCode,
-      userId: this.data.userId
+      userId: this.data.userId,
+      ids: ids,
+      goodsinfo: goodsinfo 
     }
+    this.setData({ loading: true })
     selRegionStock(param).then(res => {
+      let isDel = false
+      // 当需要两人操作且没有确认时允许删除
+      if (res.data.lease == 1 && !res.data.check) {
+        isDel = true
+      }
       this.setData({
+        loading: false,
+        isDel: isDel,
         products: res.data.lists || [],
         definitePerson: res.data.check,
         savePerson: res.data.keep,
@@ -121,16 +152,8 @@ Page({
     this.getRegionStocks()
   },
   onLoad(options) {
-    dd.getSystemInfo({
-      success: (res) => {
-        if (res.statusBarHeight && res.titleBarHeight) {
-          this.setData({
-            top: res.statusBarHeight + res.titleBarHeight,
-          })
-        }
-      }
-    })
     this.setData({
+      newProducts: [],
       regionCode: options.regionCode,
       yearMonth: options.yearMonth,
       userId: app.globalData.userInfo.userId

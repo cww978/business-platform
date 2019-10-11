@@ -190,11 +190,11 @@ export function selAreaByUser(param){
  * 获取区域省份地市
  * @param userId String
  */
-export function selSynthesizeSite(params){
-  console.log('获取区域省份地市', params)
+export function selSynthesizeSite(param){
+  console.log('获取区域省份地市', param)
   return request({
     url: '/shareHelp/selSynthesizeSite',
-    params: params,
+    param: param,
     dataType: 'json',
     method: 'get'
   })

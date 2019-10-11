@@ -1,14 +1,14 @@
-.header {
-  height: 50px;
-  position: sticky;
-  background-color: #fff;
-  z-index: 1;
-}
 .cu-form-group .title {
-  width: 3rem;
+  flex: 1;
 }
-.header.shadow {
-  box-shadow: rgba(153, 153, 153, 0.24) 0 2px 7px;
+.cu-form-group .content {
+  width: 2rem;
+}
+.cu-form-group .unit {
+  width: 1rem;
+}
+.cu-form-group .action {
+  width: 1rem;
 }
 .check-list .am-list-item{
   margin: 0.1rem

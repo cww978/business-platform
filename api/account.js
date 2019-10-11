@@ -48,7 +48,7 @@ export function selRegionStock(param){
   return request({
     url: '/account/selRegionStock',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -86,7 +86,7 @@ export function selSettleStock(param){
   return request({
     url: '/account/selSettleStock',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -107,5 +107,22 @@ export function saveSettleStock(param){
     loading: true,
     dataType: 'json',
     method: 'post'
+  })
+}
+
+
+/**
+ * 获取盘点，结账区域
+ * @param userId String
+ * @param month String
+ * @param year String
+ */
+export function selAccountCompanyTree(param){
+  console.log('获取盘点，结账区域', param)
+  return request({
+    url: '/account/selAccountCompanyTree',
+    param: param,
+    dataType: 'json',
+    method: 'get'
   })
 }

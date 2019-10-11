@@ -1,5 +1,22 @@
 <view>
-  <scroll-view scroll-y="{{true}}">
+  <view>
+    <view>
+      <search-bar
+        value="{{keyword}}"
+        placeholder="搜索"
+        onInput="handleInput"
+        onClear="handleClear"
+        onCancel="handleCancel"
+        onSubmit="handleSubmit"
+        showCancelButton="{{false}}" />
+    </view>
+    <flex class="padding-xs" a:if="{{showType == 1}}">
+      <flex-item a:for="{{tobaTypes}}">
+        <view onTap="checkTobaType" data-index="{{index}}" class="padding-xs text-center {{item.active?'bg-blue text-white':'text-gray'}}">{{item.text}}</view>
+      </flex-item>
+    </flex>
+  </view>
+  <scroll-view scroll-y="{{true}}" style="{{showType == 1?'height: calc(100vh - 80px)':'height: calc(100vh - 44px)'}}">
     <list>
       <block a:for="{{list}}">
         <list-item
@@ -9,6 +26,9 @@
           last="{{index === (list.length - 1)}}"
         >
           {{item['ADSGOODSNAME']}}
+          <view slot="extra" a:if="{{item['TOBA_TYPE_CN']}}">
+						{{item['TOBA_TYPE_CN']}}
+					</view>
         </list-item>
       </block>
     </list>

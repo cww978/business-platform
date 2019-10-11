@@ -3,3 +3,6 @@
   font-size:14px;
   color:rgb(136, 136, 136);
 }
+.am-list-extra {
+  flex-basis: auto;
+}

@@ -38,7 +38,7 @@ Page({
   },
   clickCity() {
     dd.navigateTo({
-      url: '/pages/common/selectCompany/selectCompany'
+      url: '/pages/common/selectCompany/selectCompany?type=1'
     })
   },
   setCityCode(e) {

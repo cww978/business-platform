@@ -1,7 +1,10 @@
 import { selSalesArea } from '/api/shareHelp'
+import { selAccountCompanyTree } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    month: 1,
+    year: 2000,
     loading: false,
     isCity: false,
     isProv: false,
@@ -88,6 +91,7 @@ Page({
     let provs = []
     let citys = []
     for (let item of data) {
+      item.REAL_NAME = item.REAL_NAME.replace(/<[^>]+>/g, '')
       if (item['LEVEL'] == '2') {
         areas.push(item)
       }
@@ -126,10 +130,31 @@ Page({
     let userId = app.globalData.userInfo.userId
     // 获取区域
     this.setData({ loading: true })
-    selSalesArea({ userId: userId }).then(res => {
-      this.setData({ loading: false })
-      this.formatData(res.data)
-    })
+    if (this.data.type == 1) {
+      selSalesArea({ userId: userId }).then(res => {
+        this.setData({ loading: false })
+        this.formatData(res.data)
+      })
+    } else {
+      selAccountCompanyTree({
+        userId: userId,
+        month: this.data.month,
+        year: this.data.year
+      }).then(res => {
+        this.setData({ loading: false })
+        this.formatData(res.data)
+      })
+    }
   },
-  onLoad(options) {}
+  onLoad(options) {
+    if (options.type == 0) {
+      this.setData({
+        month: options.yearMonth.split('-')[1],
+        year: options.yearMonth.split('-')[0]
+      })
+    }
+    this.setData({
+      type: options.type || 1
+    })
+  }
 })

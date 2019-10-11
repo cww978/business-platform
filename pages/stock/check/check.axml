@@ -1,23 +1,36 @@
 <view>
-  <view class="header {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
-    <flex class="padding">
-      <flex-item><view class="text-df">保存人: {{savePerson}}</view></flex-item>
-      <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
-    </flex>
-  </view>
-  <view style="min-height:calc(100vh - 110px)">
-    <block a:for="{{products}}">
-      <flex class="cu-form-group">
-        <view class="text-cut title text-lg">{{item['ADSGOODS_NAME']}}</view>
-        <flex-item><view><input disabled="{{item['ADSGOODS_ID']?false:true}}" class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputNum" value="{{item['QTY']}}"/></view></flex-item>
-        <flex-item><view class="text-lg text-gray text-center">{{item['UNIT']}}</view></flex-item>
-        <view onTap="clickDelItem" a:if="{{item['ADSGOODS_ID']?true:false}}" data-index="{{index}}"><text class="text-lg text-red text-right">删除</text></view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
+    <view a:if="{{actionType == 1}}">
+      <flex class="padding bg-blue text-white text-bold">
+        <flex-item><view class="text-df">保存人: {{savePerson}}</view></flex-item>
+        <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
       </flex>
-    </block>
+    </view>
+    <view class="text-gray text-center padding-xl" a:if="{{products.length<=0}}">暂无数据</view>
+    <view a:if="{{products.length>0}}">
+      <view class="padding-xs"></view>
+      <flex class="cu-form-group header" style="position: static;">
+        <view class="title text-blue text-lg">名称</view>
+        <view class="content text-blue text-lg">数量</view>
+        <view class="unit text-lg text-blue text-center">单位</view>
+        <view a:if="{{isDel}}" class="action text-lg text-blue text-center">操作</view>
+      </flex>
+      <block a:for="{{products}}">
+        <flex class="cu-form-group">
+          <view class="title text-lg text-cut">{{item['ADSGOODS_NAME']}}</view>
+          <view class="content"><input disabled="{{item['ADSGOODS_ID']?false:true}}" class="text-lg" type="number" data-index="{{index}}" placeholder="..."  onInput="inputNum" value="{{item['QTY']}}"/></view>
+          <view class="unit text-lg text-gray text-center">{{item['UNIT'] || '无'}}</view>
+          <view a:if="{{isDel}}" class="action text-center">
+            <text a:if="{{item['ADSGOODS_ID']}}" class="text-lg text-red" onTap="clickDelItem" data-index="{{index}}">删除</text>
+          </view>
+        </flex>
+      </block>
+    </view>
     <view class="padding-lg">
       <button onTap="clickAddPromotion" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加促销用品</button>
     </view>
-  </view>
+  </scroll-view>
   <footer>
     <flex-item>
       <view class="padding text-center bg-blue" onTap="save">

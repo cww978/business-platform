@@ -5,9 +5,9 @@ import request from '../util/request'
  * 0100271822890151
  * @param authCode String
  */
-export function getUserInfo(params){
+export function getUserInfo(param){
   return new Promise(resolve => {
-    console.log('获取用户信息', params)
+    console.log('获取用户信息', param)
     resolve({
       userId: '0100271822890151',
       userName: ''

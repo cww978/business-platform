@@ -3,6 +3,7 @@ import { selAccounts, saveLockAccount } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     userId: '',
     regionCode: '',
     top: 0,
@@ -67,7 +68,9 @@ Page({
       userId: this.data.userId
     }
     selAccounts(param).then(res => {
+      console.log('关账', res.data)
       this.setData({
+        loading: false,
         joins: res.data.AccountsIn,
         outs: res.data.AccountsOut
       })

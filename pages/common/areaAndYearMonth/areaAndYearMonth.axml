@@ -8,7 +8,7 @@
       </view>
       <list>
       <list-item arrow="{{true}}" onClick="clickCity">公司
-        <view slot="extra">
+        <view slot="extra" class="text-cut">
           {{cityText==''?'请选择':cityText}}
         </view>  
       </list-item>
@@ -20,10 +20,9 @@
         </list-item>
       </list>
     </view>
-    <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button type="primary" class="cu-btn block bg-blue lg" disabled="{{!(isYear && isCity)}}"  onTap="clickDefine">确 定</button>
+      <button type="primary" loading="{{loading}}" class="cu-btn block bg-blue lg" disabled="{{!isCity || loading}}"  onTap="clickDefine">确 定</button>
     </view> 
   </view>
 </view>

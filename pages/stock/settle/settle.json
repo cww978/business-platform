@@ -1,7 +1,8 @@
 {
-  "defaultTitle": "销区月账",
+  "defaultTitle": "销区结账",
   "allowsBounceVertical": "NO",
   "usingComponents":{
+    "loading-wapper": "/components/loading-wapper/loading-wapper",
     "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",

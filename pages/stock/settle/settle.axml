@@ -1,11 +1,12 @@
 <view>
-  <view class="header {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
-    <flex class="padding">
-      <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
-      <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
-    </flex>
-  </view>
-  <view style="min-height:calc(100vh - 110px)">
+  <loading-wapper loading="{{loading}}"></loading-wapper>
+  <scroll-view scroll-y="{{true}}" style="height:calc(100vh - 60px)">
+    <view a:if="{{actionType == 1}}">
+      <flex class="padding bg-blue text-white text-bold">
+        <flex-item><view class="text-df">月结人: {{savePerson}}</view></flex-item>
+        <flex-item><view class="text-df">确定人: {{definitePerson}}</view></flex-item>
+      </flex>
+    </view>
     <view class="text-gray text-center padding-xl" a:if="{{products.length<=0}}">暂无数据</view>
     <list>
       <block a:for="{{products}}">
@@ -16,7 +17,7 @@
           onClick="onInAccountClick"
           last="{{index === list.length - 1}}"
         >
-          <view class="text-lg">{{item['ADSGOODS_NAME']}}{{item['UNIT']}}</view>
+          <view class="text-lg">{{item['ADSGOODS_NAME']}}</view>
           <flex>
             <flex-item><view class="text-df text-gray">本期结存: {{item['PRESENT_BALANCE_QTY']}}</view></flex-item>
             <flex-item><view class="text-df text-gray">盘点库存: {{item['WAREHOUSE_QTY']}}</view></flex-item>
@@ -28,7 +29,7 @@
         </list-item>
       </block>
     </list>
-  </view>
+  </scroll-view>
   <footer>
     <flex-item>
       <view class="padding text-center bg-blue" onTap="save">

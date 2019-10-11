@@ -13,7 +13,7 @@
           <text class="text-lg">{{programmeInfo['TITLE']}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{activitTypes[programmeInfo['ACTIVITYTYPE']]}}</text>
+          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{programmeInfo['TYPENAME']}}</text>
         </view>
         <view class="info-row">
           <text class="text-lg text-gray">活动目的：</text>

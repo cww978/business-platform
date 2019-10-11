@@ -3,27 +3,15 @@ import { selSettleStock, saveSettleStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     regionCode: '',
     top: 0,
     userId: '',
     yeatMonth: '',
     products: [],
-    shadow: false,
     savePerson: '',
     definitePerson: '',
     actionType: 0
-  },
-  onPageScroll(e) {
-    const { scrollTop } = e
-    let shadow = false
-    if (scrollTop > 10) {
-      shadow = true
-    } else {
-      shadow = false
-    }
-    this.setData({
-      shadow
-    })
   },
   onTabBarTap(e) {
     const { index } = e.target.dataset
@@ -41,6 +29,7 @@ Page({
       state: state
     }
     saveSettleStock(param).then(res => {
+      console.log('结账', res.data)
       dd.confirm({
         title: '操作提示',
         content: res.data.message || '操作错误',
@@ -64,6 +53,7 @@ Page({
     }
     selSettleStock(param).then(res => {
       this.setData({
+        loading: false,
         products: res.data.products,
         definitePerson: res.data.check,
         savePerson: res.data.keep,
@@ -75,15 +65,6 @@ Page({
     this.getSettleStocks()
   },
   onLoad(options) {
-    dd.getSystemInfo({
-      success: (res) => {
-        if (res.statusBarHeight && res.titleBarHeight) {
-          this.setData({
-            top: res.statusBarHeight + res.titleBarHeight,
-          })
-        }
-      }
-    })
     this.setData({
       regionCode: options.regionCode,
       yearMonth: options.yearMonth,
