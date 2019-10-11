@@ -4,6 +4,8 @@ const app = getApp()
 Page({
   data: {
     loading: true,
+    isSave: false,
+    isConfirm: false,
     regionCode: '',
     top: 0,
     userId: '',
@@ -52,8 +54,21 @@ Page({
       userId: this.data.userId
     }
     selSettleStock(param).then(res => {
+      let isConfirm = false
+      let isSave = false
+      // 当需要两人操作且没有确认时允许删除
+      if (res.data.lease == 1 && !res.data.check) {
+        isDel = true
+      }
+      // 判断是否已经保存和确认
+      if (res.data.check) {
+        isConfirm = true
+        isSave = true
+      }
       this.setData({
         loading: false,
+        isConfirm: isConfirm,
+        isSave: isSave,
         products: res.data.products,
         definitePerson: res.data.check,
         savePerson: res.data.keep,

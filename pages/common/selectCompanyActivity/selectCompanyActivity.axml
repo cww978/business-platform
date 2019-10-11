@@ -23,6 +23,6 @@
   </list>
   <view class="padding-xs"></view>
   <view class="padding-xs">
-    <button type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>
+    <button hover-class="button-hover" type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>
   </view> 
 </view>

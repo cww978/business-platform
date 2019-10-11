@@ -2,7 +2,6 @@ import { saveInvestigationQuestion } from '/api/programExecute'
 const app = getApp()
 Page({
   data: {
-    showPromotion: false,
     companyId: '',
     investigList: [
       {
@@ -57,18 +56,15 @@ Page({
     })
   },
   clickTobacco() {
-    this.setData({ showPromotion: true })
-  },
-  promotionConfirm(e) {
-    console.log('promotion', e)
-    this.setData({
-      showPromotion: false,
-      'form.tobacco': e.promotion['ADSGOODSNAME'],
-      'form.tobaccoId': e.promotion['ADSGOODSID']
+    dd.navigateTo({
+      url: `/pages/common/selectAdsgoods/selectAdsgoods?type=1&companyId=${this.data.companyId}`
     })
   },
-  promotionCancel() {
-    this.setData({ showPromotion: false })
+  setAdsgood(e) {
+    this.setData({
+      'form.tobacco': e['ADSGOODSNAME'],
+      'form.tobaccoId': e['ADSGOODSID']
+    })
   },
   addressInput(e) {
     this.setData({

@@ -52,13 +52,17 @@
   <!-- 业务员操作 -->
   <footer>
     <flex-item>
-      <view class="padding text-center bg-white" onTap="navTodec">
-        <text class="text-xl text-blue">分解至终端</text>
+      <view>
+        <button hover-class="button-hover" onTap="navTodec" class="bg-blue text-white cu-btn block lg" type="default">
+          分解至终端
+        </button>
       </view>
     </flex-item>
     <flex-item>
-      <view class="padding text-center bg-blue" onTap="navToimp">
-        <text class="text-xl text-white">团队执行</text>
+      <view>
+        <button hover-class="button-hover" onTap="navToimp" class="bg-green text-white cu-btn block lg" type="default">
+          团队执行
+        </button>
       </view>
     </flex-item>
   </footer>

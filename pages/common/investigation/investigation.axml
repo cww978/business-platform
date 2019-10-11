@@ -56,10 +56,13 @@
     </view>
     <view class="padding-xs"></view>
   </view>
-  <promotion show="{{showPromotion}}" companyId="{{companyId}}" type="2" num="{{false}}" onConfirm="promotionConfirm" onCancel="promotionCancel"></promotion>
   <footer>
-    <view class="padding text-center" onTap="save">
-      <text class="text-xl text-blue">保 存</text>
-    </view>
+    <flex-item>
+      <view>
+        <button hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+          保 存
+        </button>
+      </view>
+    </flex-item>
   </footer>
 </view>

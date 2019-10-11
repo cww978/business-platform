@@ -57,8 +57,10 @@
   </view>
   <footer>
     <flex-item>
-      <view class="padding text-center bg-blue" onTap="save">
-        <text class="text-xl text-white">锁定销区</text>
+      <view>
+          <button hover-class="button-hover" disabled="{{isSave}}" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+            锁定销区
+          </button>
       </view>
     </flex-item>
   </footer>

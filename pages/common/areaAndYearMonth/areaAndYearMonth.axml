@@ -22,7 +22,7 @@
     </view>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button type="primary" loading="{{loading}}" class="cu-btn block bg-blue lg" disabled="{{!isCity || loading}}"  onTap="clickDefine">确 定</button>
+      <button hover-class="button-hover" type="primary" loading="{{loading}}" class="bg-blue text-white cu-btn block lg" disabled="{{!isCity || loading}}"  onTap="clickDefine">确 定</button>
     </view> 
   </view>
 </view>

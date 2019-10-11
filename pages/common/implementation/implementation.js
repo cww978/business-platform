@@ -244,8 +244,9 @@ Page({
   // 获取其他要素
   getOtherPoints() {
     selPromoItem({ activityId: this.data.activityId }).then(res => {
-      if (res.data.list != 0) {
-        this.setData({ otherPoints: res.data })
+      console.log('其他要素', res.data)
+      if (res.data.list.length != 0) {
+        this.setData({ otherPoints: res.data.list })
       }
     })
   },

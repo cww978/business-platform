@@ -2,7 +2,9 @@ import { selRegionStock, saveRegionStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
-    loading: false,
+    isSave: false,
+    isConfirm: false,
+    loading: true,
     isDel: false, // 是否可以删除
     regionCode: '',
     userId: '',
@@ -134,13 +136,22 @@ Page({
     this.setData({ loading: true })
     selRegionStock(param).then(res => {
       let isDel = false
+      let isConfirm = false
+      let isSave = false
       // 当需要两人操作且没有确认时允许删除
       if (res.data.lease == 1 && !res.data.check) {
         isDel = true
       }
+      // 判断是否已经保存和确认
+      if (res.data.check) {
+        isConfirm = true
+        isSave = true
+      }
       this.setData({
         loading: false,
         isDel: isDel,
+        isConfirm: isConfirm,
+        isSave: isSave,
         products: res.data.lists || [],
         definitePerson: res.data.check,
         savePerson: res.data.keep,

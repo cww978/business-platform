@@ -34,6 +34,14 @@
         <view class="title text-lg">人数</view>
         <input class="text-lg" type="number"  placeholder="请输入.." onInput="inputMans"/>
       </view>
+    </view>
+    <view a:if="{{otherPoints.length > 0}}">
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-newshot"></text>
+          <text class="text">其他要素</text>
+        </view>
+      </view>
       <block a:for="{{otherPoints}}">
         <view class="cu-form-group" a:if="{{item != null}}">
           <view class="title text-lg">{{item.itemName}}</view>
@@ -122,8 +130,10 @@
   </scroll-view>
   <footer>
     <flex-item>
-      <view class="padding text-center bg-blue" onTap="save">
-        <text class="text-xl text-white">确 定</text>
+      <view>
+        <button hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+          执 行
+        </button>
       </view>
     </flex-item>
   </footer>

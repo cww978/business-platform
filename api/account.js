@@ -42,6 +42,8 @@ export function saveLockAccount(param){
  * @param companyId String
  * @param month String
  * @param year String
+ * @param goodsinfo String
+ * @param ids String
  */
 export function selRegionStock(param){
   console.log('查询库存盘点', param)

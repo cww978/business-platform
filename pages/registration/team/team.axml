@@ -37,8 +37,10 @@
   </scroll-view>
   <footer>
     <flex-item>
-      <view class="padding text-center bg-blue" onTap="navToImp">
-        <text class="text-xl text-white">执行方案</text>
+      <view>
+        <button hover-class="button-hover" onTap="navToImp" class="bg-green text-white cu-btn block lg" type="default">
+          执行方案
+        </button>
       </view>
     </flex-item>
   </footer>

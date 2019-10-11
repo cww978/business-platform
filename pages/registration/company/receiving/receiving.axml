@@ -50,8 +50,10 @@
   </scroll-view>
   <footer>
     <flex-item>
-      <view class="padding text-center bg-blue" onTap="save">
-        <text class="text-xl text-white">确定到货</text>
+      <view>
+        <button hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+          确定到货
+        </button>
       </view>
     </flex-item>
   </footer> 
