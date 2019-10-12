@@ -1,8 +1,9 @@
-import { selActivityCode } from '/api/programExecute'
+import { selActivityCode, selTerminalActivityCode } from '/api/programExecute'
 import { selProgramExecuteRole } from '/api/role'
 const app = getApp()
 Page({
   data: {
+    showModal: false,
     realCity: 0,
     cityCode: 0,
     cityText: 0,
@@ -50,9 +51,15 @@ Page({
       isActivityId: false,
       loading: true,
     })
-    setTimeout(() => {
-      this.getProgrammeCodes()
-    }, 300)
+    if (app.globalData.registration['userType'] == 1) {
+      setTimeout(() => {
+        this.getProgrammeCodes()
+      }, 300)
+    } else {
+      setTimeout(() => {
+        this.getProgrammeCodesForTerminal()
+      }, 300)
+    }
   },
   // 获取方案编码
   getProgrammeCodes() {
@@ -64,14 +71,7 @@ Page({
       if (res.data.length > 0) {
         isActivityId = true
       } else {
-        setTimeout(() => {
-          dd.confirm({
-            title: '操作提示',
-            content: '该地区下没有活动方案',
-            confirmButtonText: '知道了',
-            cancelButtonText: '取消'
-          })
-        },0)
+        this.setData({ showModal: true })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -79,6 +79,34 @@ Page({
         loading: false
       })
     })
+  },
+  // 获取终端公司的方案编码
+  getProgrammeCodesForTerminal() {
+    let type = app.globalData.registration['userType'] == 2?1:2
+    selTerminalActivityCode({
+      companyId: this.data.cityCode,
+      type: type
+    }).then(res => {
+      let isActivityId = false
+      if (res.data.length > 0) {
+        // 格式化数据
+        for (let item of res.data) {
+          item['ACTIVITY_CODE'] = item.activityCode
+          item['ACTIVITY_ID'] = item.activityId
+        }
+        isActivityId = true
+      } else {
+        this.setData({ showModal: true })
+      }
+      this.setData({
+        isActivityId: isActivityId,
+        programmes: res.data,
+        loading: false
+      })
+    })
+  },
+  onModalClick() {
+    this.setData({ showModal: false })
   },
   programmeChange(e) {
     this.setData({ programmeIndex: e.detail.value })
@@ -94,6 +122,7 @@ Page({
     selProgramExecuteRole({ userId: userId }).then(res => {
       console.log('用户类型', res.data)
       app.globalData.registration['userType'] = res.data.type
+      // app.globalData.registration['userType'] = 3
     })
   },
 });

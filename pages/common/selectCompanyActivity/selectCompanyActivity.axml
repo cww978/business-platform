@@ -21,6 +21,11 @@
       </picker>
     </list-item>
   </list>
+  	<modal showClose="{{false}}" show="{{showModal}}" onModalClick="onModalClick">
+      <view slot="header">提示</view>
+        该地区下没有能操作的活动方案
+      <view slot="footer">确定</view>
+    </modal>
   <view class="padding-xs"></view>
   <view class="padding-xs">
     <button hover-class="button-hover" type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>

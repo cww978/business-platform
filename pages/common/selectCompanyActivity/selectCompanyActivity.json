@@ -3,6 +3,7 @@
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "list": "mini-antui/es/list/index",
-    "list-item": "mini-antui/es/list/list-item/index"
+    "list-item": "mini-antui/es/list/list-item/index",
+    "modal": "mini-antui/es/modal/index"
   }
 }

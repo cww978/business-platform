@@ -1,4 +1,4 @@
-import { saveImage } from '/api/common'
+import { uploadImage } from '/api/common'
 import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement } from '/api/programExecute'
 import { selObjectElement } from '/api/shareHelp'
 import { getLocation } from '/util/location.js'
@@ -135,7 +135,7 @@ Page({
     dd.chooseImage({
       success: res => {
         const path = (res.filePaths && res.filePaths[0]) || (res.apFilePaths && res.apFilePaths[0])
-        saveImage(path).then(res => {
+        uploadImage(path).then(res => {
           let imgs = that.data.imgs
           imgs.push(res.data)
           that.setData({ imgs: imgs })
@@ -216,7 +216,7 @@ Page({
       }
     }
     let data = {
-      executeType: 1,
+      executeType: app.globalData.registration['userType'] == 1 ? 1 : 2,
       location: '',
       userId: app.globalData.userInfo.userId,
       activityId: this.data.activityId,
@@ -262,7 +262,7 @@ Page({
       userId: app.globalData.userInfo.userId,
       activityId: this.data.activityId,
       companyId: this.data.companyId,
-      executeType: 1
+      executeType: app.globalData.registration['userType'] == 1 ? 1 : 2
     }).then(res => {
       this.setData({ resources: res.data })
     })

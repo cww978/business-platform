@@ -1,3 +1,6 @@
+.am-modal-show {
+  z-index: 1
+}
 .row {
   display: flex;
   align-items: center;

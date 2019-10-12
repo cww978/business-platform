@@ -1,6 +1,23 @@
 import request from '../util/request'
 
 /**
+ * 查询终端公司方案
+ * @param userId String
+ * @param companyId String
+ * @param type String
+ */
+export function selTerminalActivityCode(param){
+  console.log('查询终端公司方案', param)
+  return request({
+    url: '/programExecute/selTerminalActivityCode',
+    param: param,
+    loading: false,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
  * 保存非方案执行登记
  * @param activityId int
  * @param location String
