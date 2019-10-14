@@ -26,24 +26,13 @@ Page({
       shadow
     })
   },
-  onInAccountClick(e) {
-    let id = this.data.joins[e.target.dataset.index].id
-    dd.navigateTo({
-      url: `./detail/detail?id=${id}`
-    })
-  },
-  onOutAccountClick(e) {
-    let id = this.data.outs[e.target.dataset.index].id
-    dd.navigateTo({
-      url: `./detail/detail?id=${id}`
-    })
-  },
   onTabBarTap(e) {
     const { index } = e.target.dataset
     this.setData({
       activeTab: index,
     })
   },
+  // 锁定销区
   save() {
     let param = {
       year: this.data.yearMonth.split('-')[0],
@@ -65,6 +54,7 @@ Page({
       })
     })
   },
+  // 查询账单
   getAccounts() {
     let param = {
       year: this.data.yearMonth.split('-')[0],

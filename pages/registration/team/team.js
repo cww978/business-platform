@@ -18,7 +18,6 @@ Page({
       activityId: this.data.activityId,
       companyId: this.data.companyId
     }).then(res => {
-      console.log('programmeInfo', res.data.programmeDetail[0])
       this.setData({ programmeInfo: res.data.programmeDetail[0], loading: false })
     })
   },

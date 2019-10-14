@@ -22,6 +22,7 @@ Page({
       activeTab: index,
     })
   },
+  // 结账、确认请求
   settleStock(state) {
     let param = {
       year: this.data.yearMonth.split('-')[0],
@@ -45,6 +46,7 @@ Page({
       })
     })
   },
+  // 结账
   save() {
     dd.confirm({
       title: '提示',
@@ -58,6 +60,7 @@ Page({
       }
     })
   },
+  // 确认
   define() {
     dd.confirm({
       title: '提示',
@@ -71,6 +74,7 @@ Page({
       }
     })
   },
+  // 获取促销数据
   getSettleStocks() {
     let param = {
       year: this.data.yearMonth.split('-')[0],

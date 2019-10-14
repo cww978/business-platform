@@ -18,7 +18,6 @@ Page({
       activityId: app.globalData.registration['activityId'],
       companyId: app.globalData.registration['companyId']
     }).then(res => {
-      console.log('programmeInfo', res.data.programmeDetail[0])
       this.setData({ programmeInfo: res.data.programmeDetail[0] })
       // 查询资源明细
       selResourcesDetail({
