@@ -35,8 +35,13 @@ Page({
       dd.confirm({
         title: '操作提示',
         content: res.data.message || '操作错误',
-        confirmButtonText: '知道了',
-        cancelButtonText: '取消'
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        success: (e) => {
+          if (e.confirm && res.data.saveState == 1) {
+            dd.navigateBack()
+          }
+        }
       })
     })
   },

@@ -89,9 +89,9 @@ Page({
     products.splice(e.target.dataset.index, 1)
     this.setData({ products: products })
   },
+  // 保存、确定实物盘点
   regionStock(state) {
     let products = []
-    console.log('ddd', this.data.products)
     for (let item of this.data.products) {
       if (item['ADSGOODS_ID']) {
         products.push(`${item['ADSGOODS_ID']},${item['QTY']},${item['UNIT_WEIGHT']}`)
@@ -110,8 +110,17 @@ Page({
       dd.confirm({
         title: '操作提示',
         content: res.data.message || '操作错误',
-        confirmButtonText: '知道了',
-        cancelButtonText: '取消'
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        success: (e) => {
+          if (e.confirm && res.data.saveState == 1) {
+            dd.navigateBack()
+          } else {
+            if (res.data.saveState == 0) {
+              this.getRegionStocks()
+            }
+          }
+        }
       })
     })
   },

@@ -59,7 +59,7 @@
     <flex-item>
       <view>
           <button hover-class="button-hover" disabled="{{isSave}}" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
-            确 定
+            锁定销区
           </button>
       </view>
     </flex-item>
