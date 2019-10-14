@@ -22,18 +22,9 @@ Page({
     })
   },
   navToRec(){
-    let activityId = this.data.activityId
-    if (activityId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      dd.navigateTo({
-        url: './receiving/receiving'
-      })
-    }
+    dd.navigateTo({
+      url: './receiving/receiving'
+    })
   },
   onReady() {
     this.getProgrammeInfo()

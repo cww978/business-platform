@@ -32,34 +32,15 @@ Page({
   },
   // 分配方案
   navTodec(){
-    let activityId = app.globalData.registration['activityId']
-    if (activityId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      dd.navigateTo({
-        url: './decompose/decompose'
-      })
-    }
+    dd.navigateTo({
+      url: './decompose/decompose'
+    })
   },
   // 执行方案
   navToimp(){
-    let activityId = app.globalData.registration['activityId']
-    let activityType = this.data.programmeInfo['ACTIVITYTYPE']
-    if (activityId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      dd.navigateTo({
-        url: `/pages/common/implementation/implementation?activityType=${activityType}`
-      })
-    }
+    dd.navigateTo({
+      url: `/pages/common/implementation/implementation?activityType=${this.data.programmeInfo['ACTIVITYTYPE']}`
+    })
   },
   onReady() {
     this.getProgrammeInfo()

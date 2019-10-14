@@ -23,19 +23,9 @@ Page({
   },
   // 执行方案
   navToImp(){
-    let activityType = this.data.programmeInfo['ACTIVITYTYPE']
-    let activityId = this.data.activityId
-    if (activityId == '') {
-      my.showToast({
-        type: 'none',
-        content: '请先选择方案',
-        duration: 1000
-      })
-    } else {
-      dd.navigateTo({
-        url: `/pages/common/implementation/implementation?activityType=${activityType}`
-      })
-    }
+    dd.navigateTo({
+      url: `/pages/common/implementation/implementation?activityType=${this.data.programmeInfo['ACTIVITYTYPE']}`
+    })
   },
   onReady() {
     this.getProgrammeInfo()
