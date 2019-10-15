@@ -10,9 +10,8 @@ Page({
     terminalCompanyName: ''
   },
   onCheckResource(e) {
-    let resources = this.data.allResources
-    resources[e.target.dataset.index].checked = e.detail.value
-    this.setData({ allResources: resources })
+    let key = `allResources[${e.target.dataset.index}].checked`
+    this.setData({ [key]: e.detail.value })
   },
   // 到货确定
   save() {

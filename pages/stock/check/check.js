@@ -18,9 +18,10 @@ Page({
   },
   // 设置数量
   inputNum(e) {
-    let products = this.data.products
-    products[e.target.dataset.index]['QTY'] = parseInt(e.detail.value)
-    this.setData({ products: products })
+    let key = `products[${e.target.dataset.index}].QTY`
+    this.setData({
+      [key]: parseInt(e.detail.value)
+    })
   },
   // 设置新增促销用品
   setAdsgood(e) {

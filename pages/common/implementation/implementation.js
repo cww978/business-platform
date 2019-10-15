@@ -152,21 +152,13 @@ Page({
   },
   // 其他要素输入
   inputOtherPoint(e) {
-    let otherPoints = this.data.otherPoints
-    otherPoints[e.target.dataset.index].value = e.detail.value
-    this.setData({
-      otherPoints: otherPoints
-    })
+    let key = `otherPoints[${e.target.dataset.index}].value`
+    this.setData({ [key]: e.detail.value })
   },
   // 资源使用情况输入
   inputResourcesUse(e) {
-    let index = e.target.dataset.index
-    let inputValue = e.detail.value
-    let resources = this.data.resources
-    resources[index].useNum = inputValue
-    this.setData({
-      resources: resources
-    })
+    let key = `resources[${e.target.dataset.index}].useNum`
+    this.setData({ [key]: e.detail.value })
   },
   // 增加调研测试
   addQuestion(question) {
@@ -176,9 +168,8 @@ Page({
   },
   // 修改调研测试
   updateQuestion(index, question) {
-    let questions = this.data.questions
-    questions[index] = question
-    this.setData({ questions: questions })
+    let key = `questions${index}`
+    this.setData({ [key]: question })
   },
   // 点击新增调研测试
   investigClick() {

@@ -15,13 +15,8 @@ Page({
     this.setData({ standard: e.detail.value })
   },
   inputSplit(e) {
-    let index = e.target.dataset.index
-    let inputValue = e.detail.value
-    let resources = this.data.resources
-    resources[index].split = inputValue
-    this.setData({
-      resources: resources
-    })
+    let key = `resources[${e.target.dataset.index}].split`
+    this.setData({ [key]: e.detail.value })
   },
   terminalPickerChange(e) {
     this.setData({ terminalIndex: e.detail.value })
