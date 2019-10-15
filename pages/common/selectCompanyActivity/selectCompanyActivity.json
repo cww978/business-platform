@@ -1,5 +1,5 @@
 {
-  "defaultTitle": "选择地市和方案",
+  "defaultTitle": "选择地区和方案",
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "select-company": "/components/select-company/select-company",

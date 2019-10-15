@@ -87,6 +87,9 @@ Page({
         for (let item of res.data) {
           item['ACTIVITY_CODE'] = item.activityCode
           item['ACTIVITY_ID'] = item.activityId
+          item['TITLE'] = item.title
+          item['BEGIN_DATE'] = item.beginDate
+          item['END_DATE'] = item.endDate
         }
         isActivityId = true
       } else {
