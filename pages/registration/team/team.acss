@@ -17,7 +17,7 @@
   white-space: pre-wrap;
 }
 .info-row {
-  padding: 5px 0px;
+  line-height: .8rem
 }
 .row {
   display: flex;

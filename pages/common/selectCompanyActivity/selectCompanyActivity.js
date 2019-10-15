@@ -3,7 +3,7 @@ import { selProgramExecuteRole } from '/api/role'
 const app = getApp()
 Page({
   data: {
-    showModal: false,
+    showProgrammePicker: false,
     realCity: 0,
     cityCode: 0,
     cityText: 0,
@@ -37,12 +37,8 @@ Page({
       default: break
     }
   },
-  clickCity() {
-    dd.navigateTo({
-      url: '/pages/common/selectCompany/selectCompany?type=1'
-    })
-  },
-  setCityCode(e) {
+  // 确定地区更改
+  confirmCompany(e) {
     this.setData({
       realCity: e.realCity,
       cityCode: e.city.code,
@@ -52,13 +48,9 @@ Page({
       loading: true,
     })
     if (app.globalData.registration['userType'] == 1) {
-      setTimeout(() => {
-        this.getProgrammeCodes()
-      }, 300)
+      this.getProgrammeCodes()
     } else {
-      setTimeout(() => {
-        this.getProgrammeCodesForTerminal()
-      }, 300)
+      this.getProgrammeCodesForTerminal()
     }
   },
   // 获取方案编码
@@ -67,11 +59,12 @@ Page({
       userId: app.globalData.userInfo.userId,
       companyId: this.data.cityCode
     }).then(res => {
+      console.log('方案编码', res.data)
       let isActivityId = false
       if (res.data.length > 0) {
         isActivityId = true
       } else {
-        this.setData({ showModal: true })
+        this.setData({ showProgrammePicker: true })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -87,6 +80,7 @@ Page({
       companyId: this.data.cityCode,
       type: type
     }).then(res => {
+      console.log('方案编码', res.data)
       let isActivityId = false
       if (res.data.length > 0) {
         // 格式化数据
@@ -96,7 +90,7 @@ Page({
         }
         isActivityId = true
       } else {
-        this.setData({ showModal: true })
+        this.setData({ showProgrammePicker: true })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -104,9 +98,6 @@ Page({
         loading: false
       })
     })
-  },
-  onModalClick() {
-    this.setData({ showModal: false })
   },
   programmeChange(e) {
     this.setData({ programmeIndex: e.detail.value })

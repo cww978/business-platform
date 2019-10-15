@@ -1,13 +1,29 @@
 .am-modal-show {
   z-index: 1
 }
+.info-row {
+  line-height: .8rem;
+}
 .row {
   display: flex;
   align-items: center;
 }
 .row-title {
   flex: 1;
+  margin-right: 10px;
 }
 .row-extra {
   flex-basis: initial;
+}
+.am-list-line {
+  min-height: 46px;
+}
+.am-list-item {
+  margin: 8px 0px;
+}
+.am-list-item:nth-of-type(1) {
+  margin-top: 0px;
+}
+.am-list-item:nth-last-of-type(1){
+  margin-bottom: 0px;
 }

@@ -30,10 +30,11 @@
         <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{address}}</<view></flex-item>
         <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
-      <view class="cu-form-group">
+      <!-- 基本信息不需要人数 -->
+      <!-- <view class="cu-form-group">
         <view class="title text-lg">人数</view>
         <input class="text-lg" type="number"  placeholder="请输入.." onInput="inputMans"/>
-      </view>
+      </view> -->
     </view>
     <view a:if="{{otherPoints.length > 0}}">
       <view class="header">

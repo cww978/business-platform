@@ -245,7 +245,7 @@ Page({
   getOtherPoints() {
     selPromoItem({ activityId: this.data.activityId }).then(res => {
       console.log('其他要素', res.data)
-      if (res.data.list.length != 0) {
+      if (res.data.list.length != 0 && res.data.list[0] != null) {
         this.setData({ otherPoints: res.data.list })
       }
     })

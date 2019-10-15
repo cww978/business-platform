@@ -2,6 +2,7 @@
   "defaultTitle": "选择地市和方案",
   "allowsBounceVertical": "NO",
   "usingComponents":{
+    "select-company": "/components/select-company/select-company",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",
     "modal": "mini-antui/es/modal/index"

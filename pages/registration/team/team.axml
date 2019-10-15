@@ -5,7 +5,7 @@
       <view slot="header">
 				<view>
           <text class="icon lg cuIcon-calendar"></text>
-          <text class="text">方案信息</text>
+          <text class="text">方案详情</text>
         </view>
 			</view>
       <list-item disabled="{{true}}">
@@ -13,15 +13,20 @@
           <text class="text-lg">{{programmeInfo['TITLE']}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动类型：</text><text class="text-lg">{{programmeInfo['TYPENAME']}}</text>
+          <text class="text-lg text-gray">活动类型：</text>
+          <text class="text-lg">{{programmeInfo['TYPENAME']}}</text>
         </view>
         <view class="info-row">
           <text class="text-lg text-gray">活动目的：</text>
-          <text class="text-df text-gray">{{programmeInfo['TARGET']}}</text>
+          <text class="text-lg">{{programmeInfo['TARGET']}}</text>
         </view>
         <view class="info-row">
-          <text class="text-lg text-gray">活动时间：</text>
-          <text class="text-df text-gray">{{programmeInfo['BEGINDATE']+'至'+programmeInfo['ENDDATE']}}</text>
+          <text class="text-lg text-gray">开始时间：</text>
+          <text class="text-lg">{{programmeInfo['BEGINDATE']}}</text>
+        </view>
+        <view class="info-row">
+          <text class="text-lg text-gray">结束时间：</text>
+          <text class="text-lg">{{programmeInfo['ENDDATE']}}</text>
         </view>
         <!-- <view class="info-row">
           <text class="text-lg text-gray">活动对象：</text>

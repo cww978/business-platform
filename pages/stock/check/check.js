@@ -138,7 +138,7 @@ Page({
       }
     })
   },
-  
+
   // 确定促销
   define() {
     dd.confirm({

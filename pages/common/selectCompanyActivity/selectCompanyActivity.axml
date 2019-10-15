@@ -2,30 +2,46 @@
   <list>
     <view slot="header">
       <view>
-        <text class="text-df text-red">选择商业公司自动获取方案编码</text>
+        <text class="text">选择地区和方案编码</text>
       </view>
     </view>
-    <list-item arrow="{{true}}" onClick="clickCity">商业公司
-      <view slot="extra">
-        {{cityText==''?'请选择':cityText}}
-      </view>  
-    </list-item>
+    <select-company onConfirm="confirmCompany"></select-company>
     <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
       <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
         <view class="picker">
           <view class="row">
             <view class="row-title">方案编码</view>
-            <view class="row-extra text-df text-gray">{{programmes[programmeIndex].ACTIVITY_CODE}}</view>
+            <view class="row-extra text-df text-gray text-cut">
+              {{programmes[programmeIndex].ACTIVITY_CODE}}-
+              {{programmes[programmeIndex].TITLE}}
+            </view>
           </view>
         </view>
       </picker>
     </list-item>
+    <view a:else class="padding-xs text-center text-df text-red">该地区下没有能操作的活动方案</view>
   </list>
-  	<modal showClose="{{false}}" show="{{showModal}}" onModalClick="onModalClick">
-      <view slot="header">提示</view>
-        该地区下没有能操作的活动方案
-      <view slot="footer">确定</view>
-    </modal>
+  <list a:if="{{programmes.length > 0}}">
+    <view slot="header">
+      <view>
+        <text class="text">方案信息</text>
+      </view>
+    </view>
+    <list-item disabled="{{true}}">
+      <view class="info-row">
+        <text class="text-lg text-gray">方案编号：</text><text class="text-lg">{{programmes[programmeIndex].ACTIVITY_CODE}}</text>
+      </view>
+      <view class="info-row">
+        <text class="text-lg text-gray">方案主题：</text><text class="text-lg">{{programmes[programmeIndex].TITLE}}</text>
+      </view>
+      <view class="info-row">
+        <text class="text-lg text-gray">开始时间：</text><text class="text-lg">{{programmes[programmeIndex].BEGIN_DATE}}</text>
+      </view>
+      <view class="info-row">
+        <text class="text-lg text-gray">结束时间：</text><text class="text-lg">{{programmes[programmeIndex].END_DATE}}</text>
+      </view>
+    </list-item>
+  </list>
   <view class="padding-xs"></view>
   <view class="padding-xs">
     <button hover-class="button-hover" type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>

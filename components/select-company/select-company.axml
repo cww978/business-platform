@@ -1,0 +1,38 @@
+<view>
+  <list>
+    <list-item arrow="{{true}}">
+      <picker value="{{areaIndex}}" onChange="areaChanged" range-key="REAL_NAME" range="{{areas}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">区域</view>
+            <view class="row-extra text-lg text-gray">{{areas[areaIndex].REAL_NAME}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+    <list-item arrow="{{true}}" a:if="{{isProv && provs.length > 0}}">
+      <picker value="{{provIndex}}" onChange="provChanged" range-key="REAL_NAME" range="{{provs}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title" a:if="{{areas[areaIndex].REAL_NAME == '浙江'}}">地市</view>
+            <view a:else class="row-title">{{ citys.length<=0?'商业公司':'省份'}}</view>
+            <view class="row-extra text-lg text-gray">{{provs[provIndex].REAL_NAME}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+    <list-item arrow="{{true}}" a:if="{{isCity && citys.length > 0}}">
+      <picker value="{{cityIndex}}" onChange="cityChanged" range-key="REAL_NAME" range="{{citys}}">
+        <view class="picker">
+          <view class="row">
+            <view class="row-title">商业公司</view>
+            <view class="row-extra text-lg text-gray">{{citys[cityIndex].REAL_NAME}}</view>
+          </view>
+        </view>
+      </picker>
+    </list-item>
+  </list>
+  <!-- <view class="padding">
+    <button hover-class="button-hover" onTap="save" loading="{{loading}}" disabled="{{!isCity}}" class="bg-blue text-white cu-btn block lg" type="primary">确 定</button>
+  </view> -->
+</view>
