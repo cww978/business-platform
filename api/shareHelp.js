@@ -52,7 +52,7 @@ export function selterminalCompany(param){
   return request({
     url: '/shareHelp/selterminalCompany',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })

@@ -173,7 +173,7 @@ export function selPromoItem(param){
   return request({
     url: '/programExecute/selPromoItem',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })
@@ -188,7 +188,7 @@ export function selProgrammeInvestigation(param){
   return request({
     url: '/programExecute/selProgrammeInvestigation',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })

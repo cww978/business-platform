@@ -1,10 +1,11 @@
 import { uploadImage } from '/api/common'
-import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement } from '/api/programExecute'
+import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement, selActivityAccount } from '/api/programExecute'
 import { selObjectElement } from '/api/shareHelp'
 import { getLocation } from '/util/location.js'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     companyId: 0,
     activityId: 0,
     activityType: '', // 活动类型
@@ -12,6 +13,7 @@ Page({
     longitude: 0,
     latitude: 0,
     mans: 0,
+    isClick: true,
     resources: [], // 资源
     targets: [], //对象
     otherPoints: [], // 其他要素
@@ -43,9 +45,12 @@ Page({
   },
   // 判断是否需要调研
   hasInvestigation() {
-    selProgrammeInvestigation({ activityId: this.data.activityId }).then(res =>{
-      this.setData({
-        hasInvestigation: res.data.investigate
+    return new Promise(resolve => {
+      selProgrammeInvestigation({ activityId: this.data.activityId }).then(res =>{
+        this.setData({
+          hasInvestigation: res.data.investigate
+        })
+        resolve()
       })
     })
   },
@@ -243,37 +248,75 @@ Page({
   },
   // 获取其他要素
   getOtherPoints() {
-    selPromoItem({ activityId: this.data.activityId }).then(res => {
-      console.log('其他要素', res.data)
-      if (res.data.list.length != 0 && res.data.list[0] != null) {
-        this.setData({ otherPoints: res.data.list })
-      }
+    return new Promise(resolve => {
+      selPromoItem({ activityId: this.data.activityId }).then(res => {
+        console.log('其他要素', res.data)
+        if (res.data.list.length != 0 && res.data.list[0] != null) {
+          this.setData({ otherPoints: res.data.list })
+        }
+        resolve()
+      })
     })
   },
   // 获取对象
   getTargets() {
-    selObjectElement({ promoType: this.data.activityType}).then(res => {
-      this.setData({ targets: res.data })
+    return new Promise(resolve => {
+      selObjectElement({ promoType: this.data.activityType}).then(res => {
+        this.setData({ targets: res.data })
+        resolve()
+      })
     })
   },
   // 获取资源明细
   getResources() {
-    selResourcesDetail({
-      userId: app.globalData.userInfo.userId,
-      activityId: this.data.activityId,
-      companyId: this.data.companyId,
-      executeType: app.globalData.registration['userType'] == 1 ? 1 : 2
-    }).then(res => {
-      this.setData({ resources: res.data })
+    return new Promise(resolve => {
+      selResourcesDetail({
+        userId: app.globalData.userInfo.userId,
+        activityId: this.data.activityId,
+        companyId: this.data.companyId,
+        executeType: app.globalData.registration['userType'] == 1 ? 1 : 2
+      }).then(res => {
+        this.setData({ resources: res.data })
+        resolve()
+      })
+    })
+  },
+  // 检验该地区是否已经锁定关账
+  testAccount() {
+    return new Promise(resolve => {
+      selActivityAccount({ companyId: this.data.companyId }).then(res => {
+        this.setData({ loading: false })
+        if (res.data.saveState == 1) {
+          this.setData({ isClick: false })
+          dd.confirm({
+            title: '操作提示',
+            content: res.data.message,
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            success: (e) => {
+              if (e.confirm && res.data.saveState == 1) {
+                dd.navigateBack()
+              }
+            }
+          })
+        }
+        resolve()
+      })
     })
   },
   // 准备数据
   onReady() {
-    this.getOtherPoints()
-    this.hasInvestigation()
-    this.location()
-    this.getResources()
-    this.getTargets()
+    this.getOtherPoints().then(() => {
+      this.hasInvestigation().then(() => {
+        this.getResources().then(() => {
+          this.getTargets().then(() => {
+            this.testAccount().then(() => {
+              this.location()
+            })
+          })
+        })
+      })
+    })
   },
   onLoad(options) {
     this.setData({

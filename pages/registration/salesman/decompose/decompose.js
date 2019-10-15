@@ -3,6 +3,7 @@ import { selterminalCompany } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
+    loading: true,
     companyId: 0,
     activityId: 0,
     terminals: [],
@@ -27,13 +28,16 @@ Page({
   },
   // 获取资源明细
   getResources() {
-    selResourcesDetail({
-      userId: app.globalData.userInfo.userId,
-      activityId: this.data.activityId,
-      companyId: this.data.companyId,
-      executeType: 1
-    }).then(res => {
-      this.setData({ resources: res.data })
+    return new Promise(resolve => {
+      selResourcesDetail({
+        userId: app.globalData.userInfo.userId,
+        activityId: this.data.activityId,
+        companyId: this.data.companyId,
+        executeType: 1
+      }).then(res => {
+        this.setData({ resources: res.data })
+        resolve()
+      })
     })
   },
   save() {
@@ -61,13 +65,17 @@ Page({
   // 查询终端公司列表
   getTerminals() {
     selterminalCompany({ companyId: app.globalData.registration['realCity'] }).then(res => {
-      this.setData({ terminals: res.data.filter(item => { return item != null }) })
+      this.setData({
+        terminals: res.data.filter(item => { return item != null }),
+        loading: false
+      })
       console.log('terminals', res.data)
     })
   },
   onReady() {
-    this.getResources()
-    this.getTerminals()
+    this.getResources().then(() => {  
+      this.getTerminals()
+    })
   },
   onLoad() {
     this.setData({

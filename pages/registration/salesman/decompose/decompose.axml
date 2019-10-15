@@ -1,4 +1,5 @@
 <view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
   <view style="min-height: calc(100vh - 60px)">
     <view>
       <view class="header">
