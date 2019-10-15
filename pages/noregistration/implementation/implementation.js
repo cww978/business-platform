@@ -13,8 +13,6 @@ Page({
     themes: [],
     themeIndex: 0,
     types: [],
-    pickerShow: false,
-    citys: [],
     typeIndex: 0,
     retail: {
       id: '',

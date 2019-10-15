@@ -1,6 +1,21 @@
 import request from '../util/request'
 
 /**
+ * 判断地区是否已经锁定关账
+ * @param companyId String
+ */
+export function selActivityAccount(param){
+  console.log('判断地区是否已经锁定关账', param)
+  return request({
+    url: '/programExecute/selActivityAccount',
+    param: param,
+    loading: false,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
  * 查询终端公司方案
  * @param userId String
  * @param companyId String

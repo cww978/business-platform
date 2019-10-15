@@ -82,7 +82,6 @@
       </view>
     </view>
   </view>
-  <my-picker dataList="{{citys}}" show="{{pickerShow}}" onCancel="clickPickerCancel" onConfirm="clickPickerConfirm"></my-picker>
   <footer>
     <flex-item>
       <view>

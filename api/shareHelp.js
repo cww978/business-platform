@@ -112,7 +112,7 @@ export function selObjectElement(param){
  * @param activityId String
  */
 export function selProgrammeInfo(param){
-  param.menuType  = 0
+  param.menuType  = 4
   console.log('查询方案基本信息', param)
   return request({
     url: '/shareHelp/selProgrammeInfo',

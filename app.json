@@ -30,7 +30,6 @@
     "pages/noregistration/noregistration",
     "pages/common/areaAndYearMonth/areaAndYearMonth",
     "pages/stock/locking/detail/detail",
-    "pages/common/areaProAndCity/areaProAndCity",
     "pages/common/selectCompany/selectCompany",
     "pages/common/selectCompanyActivity/selectCompanyActivity",
     "pages/common/selectAdsgoods/selectAdsgoods",
