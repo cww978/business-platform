@@ -115,31 +115,25 @@ Page({
     let that = this
     saveInvestigationQuestion(data).then(res => {
       // 判断是否保存成功
-      if (res.data.saveState == 0) {
-        // 保存成功
-        that.setData({ 'form.id': res.data.id })
-        // 判断是新增还是修改
-        if (that.data.questionIndex == null) { 
-          lastPage.addQuestion(that.data.form)
-        } else {
-          lastPage.updateQuestion(that.data.questionIndex, that.data.form)
+      console.log('测试调研', res)
+      dd.alert({
+        title: '操作提示',
+        content: res.data.message,
+        buttonText: '确定',
+        success: () => {
+          if (res.data.saveState == 0) {
+            // 保存成功
+            that.setData({ 'form.id': res.data.id })
+            // 判断是新增还是修改
+            if (that.data.questionIndex == null) { 
+              lastPage.addQuestion(that.data.form)
+            } else {
+              lastPage.updateQuestion(that.data.questionIndex, that.data.form)
+            }
+            dd.navigateBack()
+          }
         }
-        dd.showToast({
-          type: 'success',
-          content: '保存成功',
-          duration: 1500
-        })
-      } else {
-        // 保存失败
-        dd.showToast({
-          type: 'fail',
-          content: '保存失败',
-          duration: 1500
-        })
-      }
-      setTimeout(() => {
-        dd.navigateBack()
-      }, 1300)
+      })
     })
   },
   onLoad(options) {

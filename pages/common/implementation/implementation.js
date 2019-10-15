@@ -168,7 +168,7 @@ Page({
   },
   // 修改调研测试
   updateQuestion(index, question) {
-    let key = `questions${index}`
+    let key = `questions[${index}]`
     this.setData({ [key]: question })
   },
   // 点击新增调研测试
