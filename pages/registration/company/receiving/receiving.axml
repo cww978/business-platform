@@ -1,13 +1,13 @@
 <view>
   <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
     <view>
-      <view class="header">
-        <view>
-          <text class="icon lg cuIcon-home"></text>
-          <text class="text">所属终端公司</text>
-        </view>
-      </view>
       <list>
+        <view slot="header">
+          <view>
+            <text class="icon lg cuIcon-home"></text>
+            <text class="text">所属终端公司</text>
+          </view>
+        </view>
         <list-item arrow="{{false}}" last="{{true}}">
           终端公司
           <view slot="extra">
@@ -16,37 +16,40 @@
         </list-item>
       </list>
     </view>
-    <view>
-      <view class="header">
+    <list>
+      <view slot="header">
         <view>
           <text class="icon lg cuIcon-text"></text>
           <text class="text">资源分配</text>
         </view>
       </view>
-      <list>
-        <block a:for="{{allResources}}">
-          <list-item disabled="{{true}}">
-            <flex slot="prefix">
-              <am-checkbox data-index="{{index}}" onChange="onCheckResource" />
-            </flex>
-            <view>
-              <view class="cu-form-group">
-                <text class="text-df text-content">{{item.standard}}</text> 
-              </view>
-              <block a:for="{{item.resources}}" a:for-item="item2">
-                <view class="cu-form-group">
-                  <view class="text-df text-cut">{{item2.adsgoodsName}}</view>
-                  <view class="text-df">可用量: {{item2.qty}}{{item2.unit}}</view>
-                </view>
-              </block>
+      <block a:for="{{allResources}}">
+        <list-item disabled="{{true}}">
+          <flex slot="prefix">
+            <am-checkbox checked="{{item.state == 1}}" disabled="{{item.state == 1}}" data-index="{{index}}"
+              onChange="onCheckResource" />
+          </flex>
+          <view class="info-row">
+            <text class="text-df">收货状态：</text>
+            <text class="text-blue text-df" a:if="{{item.state == 1}}">已确认收货</text>
+            <text class="text-gray text-df" a:else>未确认收货</text>
+          </view>
+          <view class="info-row">
+            <text class="text-df">分配标准：</text>
+            <text class="text-df">{{item.standard==''?'无':item.standard}}</text>
+          </view>
+          <block a:for="{{item.resources}}" a:for-item="item2">
+            <view class="cu-form-group">
+              <view class="text-df text-cut">{{item2.adsgoodsName}}</view>
+              <view class="text-df">可用量: {{item2.qty}}{{item2.unit}}</view>
             </view>
-          </list-item>
-        </block>
-        <block a:if="{{allResources.length <= 0}}">
-          <view class="text-center text-df padding-xs">没有可用的资源</view>
-        </block>
-      </list>
-    </view>
+          </block>
+        </list-item>
+      </block>
+      <block a:if="{{allResources.length <= 0}}">
+        <view class="text-center text-df padding-xs">没有可用的资源</view>
+      </block>
+    </list>
   </scroll-view>
   <footer>
     <flex-item>

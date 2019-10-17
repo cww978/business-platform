@@ -115,8 +115,8 @@ Page({
     let userId = app.globalData.userInfo.userId
     selProgramExecuteRole({ userId: userId }).then(res => {
       console.log('用户类型', res.data)
-      app.globalData.registration['userType'] = res.data.type
-      // app.globalData.registration['userType'] = 3
+      // app.globalData.registration['userType'] = res.data.type
+      app.globalData.registration['userType'] = 1
     })
   },
-});
+})

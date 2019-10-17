@@ -4,10 +4,10 @@ Page({
     subTitle: "",
     messageButton: {
       mainButton: {
-        buttonText: "返回首页"
+        buttonText: "返回"
       },
       subButton: {
-        buttonText: "继续查看"
+        buttonText: "继续"
       }
     }
   },
@@ -17,9 +17,7 @@ Page({
     })
   },
   goBack() {
-    dd.navigateBack({
-      delta: 2
-    })
+    dd.navigateBack()
   },
   onLoad(options) {
     this.setData({

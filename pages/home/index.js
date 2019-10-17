@@ -26,14 +26,14 @@ Page({
         text: '评估抽查'
       },
       {
-        path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=check',
-        icon: 'check.png',
-        text: '销区盘点'
-      },
-      {
         path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=locking',
         icon: 'locking.png',
         text: '销区关账'
+      },
+      {
+        path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=check',
+        icon: 'check.png',
+        text: '销区盘点'
       },
       {
         path: '/pages/common/areaAndYearMonth/areaAndYearMonth?type=settle',

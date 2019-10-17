@@ -1,0 +1,9 @@
+.img-group{
+  padding-left: 9px;
+  background-color: white;
+}
+.inline{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+<view class="bg-white padding">
+  <view class="grid col-4 grid-square">
+    <!-- 显示图片 -->
+    <block a:for="{{urls}}">
+      <view class="bg-img" data-index="{{index}}" onTap="actionImage" style="{{'background-image: url('+item.path+')'}}"></view>
+    </block>
+    <!-- 图片上传按钮 -->
+    <view class="placeholder inline" onTap="chooseImage"><text class="text-gray cuIcon-camerafill"></text></view>
+  </view>
+</view>

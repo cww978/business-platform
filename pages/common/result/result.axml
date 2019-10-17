@@ -3,8 +3,6 @@
     title="{{title}}"
     type="{{type}}" 
     mainButton="{{messageButton.mainButton}}" 
-    subButton="{{messageButton.subButton}}" 
-    onTapMain="goHome"
-    onTapSub="goBack">
+    onTapMain="goBack">
   </message>
 </view>

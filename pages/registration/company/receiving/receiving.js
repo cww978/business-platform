@@ -25,17 +25,24 @@ Page({
       dd.showToast({ content: '请选择一个执行单在确认' })
     } else {
       saveConfirmResources({ regIdStr: ids.join(',') }).then(res => {
+        console.log('确认收货', res)
         let type = 'success'
-        let message = '保存成功!'
+        let message = '确认收货成功!'
         if (res.data) {
           type = 'success'
-          message = '保存成功!'
+          message = '确认收货成功!'
         } else {
           type = 'fail'
-          message = '保存失败!'
+          message = '收货失败!'
         }
-        dd.navigateTo({
-          url: `/pages/common/result/result?type=${type}&title=${message}`
+        dd.alert({
+          content: message,
+          buttonText: '确定',
+          success: () => {
+            if (type == 'success') {
+              this.getResourcesDistribution()
+            }
+          },
         })
       })
     } 
@@ -52,7 +59,10 @@ Page({
   },
   // 获取资源
   getResourcesDistribution() {
-    selResourcesDistribution({ terminalCompanyId: this.data.terminalCompanyId }).then(res => {
+    selResourcesDistribution({
+      terminalCompanyId: this.data.terminalCompanyId,
+      activityId: this.data.activityId 
+    }).then(res => {
       let list = []
       for (let item of res.data) {
         let has = false
@@ -62,13 +72,18 @@ Page({
           }
         }
         if (has == false) {
-          list.push({ regId: item.regId, standard: item.standard, resources: [] })
+          list.push({ regId: item.regId, state: item.state, standard: item.standard, resources: [] })
         }
       }
       for (let item of res.data) {
         for (let reg of list) {
           if (reg.regId == item.regId) {
-            reg.resources.push({ adsgoodsId: item.adsgoodsId, unit: item.unit, qty: item.qty, adsgoodsName: item.adsgoodsName })
+            reg.resources.push({
+              adsgoodsId: item.adsgoodsId,
+              unit: item.unit,
+              qty: item.qty,
+              adsgoodsName: item.adsgoodsName
+            })
           }
         }
       }

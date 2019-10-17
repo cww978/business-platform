@@ -72,14 +72,7 @@
           <text class="text">现场图片</text>
         </view>
       </view>
-      <view class="bg-white padding">
-        <view class="grid col-4 grid-square">
-          <view class="placeholder inline" onTap="chooseImage"><text class="text-gray cuIcon-camerafill"></text></view>
-          <block a:for="{{imgs}}">
-            <view class="bg-img" data-index="{{index}}" onTap="actionImage" style="{{'background-image: url('+item+')'}}"></view>
-          </block>
-        </view>
-      </view>
+      <upload-image urls="{{imgs}}" onUploadImg="addImage" onDeleteImg="deleteImage"></upload-image>
     </view>
   </view>
   <footer>

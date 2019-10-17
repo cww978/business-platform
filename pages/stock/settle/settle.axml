@@ -24,7 +24,7 @@
           </flex>
           <flex>
             <flex-item><view class="text-df text-gray">冲溢平衡: {{item['FULL_QTY']}}</view></flex-item>
-            <flex-item><view class="text-df text-gray">差值: {{item['DIFFERENCE_QTY'].replace(/<[^>]+>/g, '')}}</view></flex-item>
+            <flex-item><view class="text-df {{item['DIFFERENCE_QTY']!= 0?'text-red':'text-gray'}}">差值: {{item['DIFFERENCE_QTY']}}</view></flex-item>
           </flex>
         </list-item>
       </block>

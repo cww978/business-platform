@@ -3,6 +3,7 @@
   "allowsBounceVertical": "NO",
   "usingComponents":{
     "loading-wapper": "/components/loading-wapper/loading-wapper",
+    "upload-image": "/components/upload-image/upload-image",
     "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",

@@ -1,5 +1,5 @@
 import { selProgrammeInfo } from '/api/shareHelp'
-import { activitType } from '/constant/other.js'
+import { selActivityAccount } from '/api/programExecute'
 const app = getApp()
 Page({
   data: {
@@ -7,7 +7,6 @@ Page({
     userId: '',
     activityId: '',
     companyId: '',
-    activitTypes: activitType, // 活动类型
     programmeInfo: {}
   },
   getProgrammeInfo() {
@@ -21,9 +20,32 @@ Page({
       this.setData({ programmeInfo: res.data.programmeDetail[0], loading: false })
     })
   },
+  // 检验该地区是否已经锁定关账
+  testAccount() {
+    return new Promise(resolve => {
+      selActivityAccount({ companyId: app.globalData.registration['companyId'] }).then(res => {
+        if (res.data.saveState == 1) {
+          dd.confirm({
+            content: res.data.message,
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            success: (e) => {
+              if (e.confirm && res.data.saveState == 1) {
+                dd.navigateBack()
+              }
+            }
+          })
+        } else {
+          resolve()
+        }
+      })
+    })
+  },
   navToRec(){
-    dd.navigateTo({
-      url: './receiving/receiving'
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: './receiving/receiving'
+      })
     })
   },
   onReady() {

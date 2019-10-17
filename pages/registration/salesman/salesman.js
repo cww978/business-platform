@@ -1,4 +1,4 @@
-import { selActivityCode, selResourcesDetail } from '/api/programExecute'
+import { selActivityCode, selResourcesDetail, selActivityAccount } from '/api/programExecute'
 import { selProgrammeInfo } from '/api/shareHelp'
 import { activitType } from '/constant/other.js'
 const app = getApp()
@@ -30,16 +30,41 @@ Page({
       })
     })
   },
+  // 检验该地区是否已经锁定关账
+  testAccount() {
+    return new Promise(resolve => {
+      selActivityAccount({ companyId: app.globalData.registration['companyId'] }).then(res => {
+        if (res.data.saveState == 1) {
+          dd.confirm({
+            content: res.data.message,
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            success: (e) => {
+              if (e.confirm && res.data.saveState == 1) {
+                dd.navigateBack()
+              }
+            }
+          })
+        } else {
+          resolve()
+        }
+      })
+    })
+  },
   // 分配方案
   navTodec(){
-    dd.navigateTo({
-      url: './decompose/decompose'
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: './decompose/decompose'
+      })
     })
   },
   // 执行方案
   navToimp(){
-    dd.navigateTo({
-      url: `/pages/common/implementation/implementation?activityType=${this.data.programmeInfo['ACTIVITYTYPE']}`
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: `/pages/common/implementation/implementation?activityType=${this.data.programmeInfo['ACTIVITYTYPE']}`
+      })
     })
   },
   onReady() {

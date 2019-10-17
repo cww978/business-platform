@@ -1,50 +1,24 @@
 
-.header{
-  padding: 16px 16px 8px;
-  font-size:14px;
-  color:rgb(136, 136, 136);
+.icon.lg{
+  margin-right: 5px;
 }
-.header .icon {
+.info-card{
+  background-color: white;
+}
+.info-row .am-list-content{
+  display: flex;
+  align-items: center;
+}
+.am-list-content .title{
+  font-size: 0.3rem;
   padding-right: 5px;
 }
-.cu-form-group .title {
-    min-width: calc(4em + 15px);
-}
-.row {
-  display: flex;
-  align-items: center;
-}
-.row-title {
-  flex: 1;
-}
-.row-extra {
-  flex-basis: initial;
-}
-.inline{
-  padding:0.5px 0.3rem;
-  background-color: white;
-  min-height: 1rem;
-  align-items: center;
-}
-.inline + .inline{
-  border-top:0.5px solid rgb(238, 238, 238)
-}
-.cu-form-group textarea{
-  height: auto;
-  min-height: 4.6em;
-}
-.resource-card {
-  margin-bottom: 0.1rem
-}
-.am-list-item {
-  margin-bottom: 0.1rem;
-}
-.am-list-content {
+.am-list-content, .am-list-extra{
+  overflow: auto;
   white-space: pre-wrap;
 }
-.cu-form-group {
-  background-color: transparent;
-  min-height: 0.8rem;
+.info-row {
+  line-height: .8rem;
 }
 .row {
   display: flex;
@@ -55,4 +29,7 @@
 }
 .row-extra {
   flex-basis: initial;
+}
+.cu-form-group {
+  padding: 0px;
 }

@@ -32,8 +32,21 @@ Page({
       activeTab: index,
     })
   },
-  // 锁定销区
+  // 保存
   save() {
+    dd.confirm({
+      content: '是否确认锁定销区',
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      success: (e) => {
+        if (e.confirm) {
+          this.lockAccount()
+        }
+      }
+    })
+  },
+  // 锁定销区
+  lockAccount() {
     let param = {
       year: this.data.yearMonth.split('-')[0],
       month: this.data.yearMonth.split('-')[1],
@@ -42,12 +55,11 @@ Page({
     }
     saveLockAccount(param).then(res => {
       dd.confirm({
-        title: '操作提示',
         content: res.data.message || '操作错误',
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         success: (e) => {
-          if (e.confirm && res.data.saveState == 1) {
+          if (e.confirm) {
             dd.navigateBack()
           }
         }

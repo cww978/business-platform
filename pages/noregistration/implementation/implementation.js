@@ -70,43 +70,11 @@ Page({
       'retail.name': retail.name
     })
   },
-  // 点击图片
-  actionImage(e) {
-    let index = e.target.dataset.index
-    let that = this
-    dd.showActionSheet({
-      items: ['查看图片', '删除'],
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.index == 0) {
-          dd.previewImage({
-            current: index,
-            urls: that.data.imgs
-          })
-        } else if (res.index == 1) {
-          let imgs = that.data.imgs
-          imgs.splice(index, 1)
-          that.setData({
-            imgs: imgs
-          })
-        }
-      }
-    })
+  addImage(e) {
+    this.setData({ imgs: e })
   },
-  chooseImage() {
-    let that = this
-    dd.chooseImage({
-      success: res => {
-        const path = (res.filePaths && res.filePaths[0]) || (res.apFilePaths && res.apFilePaths[0])
-        saveImage(path).then(res => {
-          let imgs = that.data.imgs
-          imgs.push(res.data)
-          that.setData({ imgs: imgs })
-        }).catch(() => {
-          dd.showToast({ content: '上传图片失败' })
-        })
-      }
-    })
+  deleteImage(e) {
+    this.setData({ imgs: e })
   },
   // 打开搜索零售户页面
   openSearchPage() {
@@ -122,7 +90,11 @@ Page({
       let typeId = this.data.types[this.data.typeIndex].promotypeId
       let targetId = this.data.targets[this.data.targetIndex].targetId
       let themeId = this.data.themes[this.data.themeIndex].themeId
-      let imgs = this.data.imgs.join(',')
+      let imgs = []
+      for (let img of this.data.imgs) {
+        imgs.push(img.id)
+      }
+      imgs = imgs.join(',')
       let param = {
         activityId: 0,
         location: '',
@@ -141,7 +113,7 @@ Page({
       }
       saveNoProgrammeImplement(param).then(res => {
         let type = res.data.saveState == 0 ? 'success' : 'fail'
-        dd.navigateTo({
+        dd.redirectTo({
           url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
         })
       })
@@ -195,6 +167,7 @@ Page({
   },
   onLoad(options) {
     this.setData({
+      imgs: [],
       userId: app.globalData.userInfo.userId,
       userType: options.userType
     })

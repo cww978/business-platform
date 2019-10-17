@@ -109,7 +109,6 @@ Page({
     }
     saveRegionStock(param).then(res => {
       dd.confirm({
-        title: '操作提示',
         content: res.data.message || '操作错误',
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -128,7 +127,6 @@ Page({
   // 保存促销
   save() {
     dd.confirm({
-      title: '提示',
       content: '保存的物资数据是否正确',
       confirmButtonText: '确定保存',
       cancelButtonText: '取消',
@@ -143,7 +141,6 @@ Page({
   // 确定促销
   define() {
     dd.confirm({
-      title: '提示',
       content: '保存的数据核对是否正确',
       confirmButtonText: '确认',
       cancelButtonText: '取消',

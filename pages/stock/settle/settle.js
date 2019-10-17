@@ -24,23 +24,31 @@ Page({
   },
   // 结账、确认请求
   settleStock(state) {
+    let goodsinfo = []
+    for (let item of this.data.products) {
+      goodsinfo.push(`${item.ADSGOODS_ID},${parseInt(item.DIFFERENCE_QTY)}`)
+    }
+    goodsinfo = goodsinfo.join(';')
     let param = {
       year: this.data.yearMonth.split('-')[0],
       month: this.data.yearMonth.split('-')[1],
       companyId: this.data.regionCode,
       userId: this.data.userId,
-      goodsinfo: '0',
+      goodsinfo: goodsinfo,
       state: state
     }
     saveSettleStock(param).then(res => {
       dd.confirm({
-        title: '操作提示',
         content: res.data.message || '操作错误',
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         success: (e) => {
           if (e.confirm && res.data.saveState == 1) {
             dd.navigateBack()
+          } else {
+            if (res.data.saveState == 0) {
+              this.getSettleStocks()
+            }
           }
         }
       })
@@ -49,9 +57,8 @@ Page({
   // 结账
   save() {
     dd.confirm({
-      title: '提示',
       content: '物资数据是否正确',
-      confirmButtonText: '结账',
+      confirmButtonText: '确定结账',
       cancelButtonText: '取消',
       success: (res) => {
         if (res.confirm) {
@@ -63,7 +70,6 @@ Page({
   // 确认
   define() {
     dd.confirm({
-      title: '提示',
       content: '核对数据是否正确',
       confirmButtonText: '确认',
       cancelButtonText: '取消',
@@ -82,6 +88,7 @@ Page({
       companyId: this.data.regionCode,
       userId: this.data.userId
     }
+    this.setData({ loading: true })
     selSettleStock(param).then(res => {
       let isConfirm = false
       let isSave = false
@@ -98,6 +105,10 @@ Page({
       }
       if (res.data.keep) {
         isSave = true
+      }
+      // 去掉不需要的标签
+      for (let item of res.data.products) {
+        item['DIFFERENCE_QTY'] = item['DIFFERENCE_QTY'].replace(/<[^>]+>/g, '')
       }
       this.setData({
         showConfirm: showConfirm,

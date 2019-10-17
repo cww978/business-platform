@@ -1,5 +1,5 @@
-import { uploadImage } from '/api/common'
-import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement, selActivityAccount } from '/api/programExecute'
+import { uploadFile } from '/api/common'
+import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement } from '/api/programExecute'
 import { selObjectElement } from '/api/shareHelp'
 import { getLocation } from '/util/location.js'
 const app = getApp()
@@ -32,6 +32,12 @@ Page({
       name: ''
     },
     hasLocation: false
+  },
+  addImage(e) {
+    this.setData({ imgs: e })
+  },
+  deleteImage(e) {
+    this.setData({ imgs: e })
   },
   // 输入人数
   inputMans(e) {
@@ -90,29 +96,6 @@ Page({
       'retail.name': retail.name
     })
   },
-  // 点击图片
-  actionImage(e) {
-    let index = e.target.dataset.index
-    let that = this
-    dd.showActionSheet({
-      items: ['查看图片', '删除'],
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.index == 0) {
-          dd.previewImage({
-            current: index,
-            urls: that.data.imgs
-          })
-        } else if (res.index == 1) {
-          let imgs = that.data.imgs
-          imgs.splice(index, 1)
-          that.setData({
-            imgs: imgs
-          })
-        }
-      }
-    })
-  },
   // 删除调研
   onRightItemClick(e) {
     e.done()
@@ -132,22 +115,6 @@ Page({
     })
     dd.navigateTo({
       url: `/pages/common/investigation/investigation?question=${e.index}&cityCode=${this.data.companyId}`
-    })
-  },
-  // 选择上传图片
-  chooseImage() {
-    let that = this
-    dd.chooseImage({
-      success: res => {
-        const path = (res.filePaths && res.filePaths[0]) || (res.apFilePaths && res.apFilePaths[0])
-        uploadImage(path).then(res => {
-          let imgs = that.data.imgs
-          imgs.push(res.data)
-          that.setData({ imgs: imgs })
-        }).catch(() => {
-          dd.showToast({ content: '上传图片失败' })
-        })
-      }
     })
   },
   // 其他要素输入
@@ -198,7 +165,11 @@ Page({
       resources.push(item.ADSGOODS_ID + ',' + item.useNum)
     }
     resources = resources.join(';')
-    let imgs = this.data.imgs.join(',')
+    let imgs = []
+    for (let img of this.data.imgs) {
+      imgs.push(img.id)
+    }
+    imgs = imgs.join(',')
     let questionIds = []
      for (let item of this.data.questions) {
       questionIds.push(item.id)
@@ -232,7 +203,7 @@ Page({
     saveProgrammeImplement(data).then(res => {
       let type = res.data.saveState == 0 ? 'success' : 'fail'
       console.log('执行结果', res.data)
-      dd.navigateTo({
+      dd.redirectTo({
         url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
       })
     })
@@ -253,7 +224,7 @@ Page({
   getTargets() {
     return new Promise(resolve => {
       selObjectElement({ promoType: this.data.activityType}).then(res => {
-        this.setData({ targets: res.data })
+        this.setData({ targets: res.data, loading: false })
         resolve()
       })
     })
@@ -272,38 +243,13 @@ Page({
       })
     })
   },
-  // 检验该地区是否已经锁定关账
-  testAccount() {
-    return new Promise(resolve => {
-      selActivityAccount({ companyId: this.data.companyId }).then(res => {
-        this.setData({ loading: false })
-        if (res.data.saveState == 1) {
-          this.setData({ isClick: false })
-          dd.confirm({
-            title: '操作提示',
-            content: res.data.message,
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            success: (e) => {
-              if (e.confirm && res.data.saveState == 1) {
-                dd.navigateBack()
-              }
-            }
-          })
-        }
-        resolve()
-      })
-    })
-  },
   // 准备数据
   onReady() {
     this.getOtherPoints().then(() => {
       this.hasInvestigation().then(() => {
         this.getResources().then(() => {
           this.getTargets().then(() => {
-            this.testAccount().then(() => {
-              this.location()
-            })
+            this.location()
           })
         })
       })
@@ -312,6 +258,7 @@ Page({
   onLoad(options) {
     this.setData({
       questions: [],
+      imgs: [],
       resources: [],
       objectives: [
         { id: 1, text: '新产品调研', active: false },

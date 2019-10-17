@@ -30,9 +30,3 @@
 .row-extra {
   flex-basis: initial;
 }
-.table{
-  padding: 5px 0px;
-}
-.table-td{
-  padding: 3px 5px;
-}  
