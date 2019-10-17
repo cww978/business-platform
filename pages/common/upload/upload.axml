@@ -1,0 +1,3 @@
+<view>
+  <web-view id="web-view-1" src="http://cww.vaiwan.com/upload" onMessage="onmessage"/>
+</view>

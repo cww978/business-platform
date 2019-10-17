@@ -10,7 +10,6 @@
     "pages/programme/assess/assess",
     "pages/programme/verify/verify",
     "pages/programme/sample/sample",
-
     "pages/programme/assess_detail/assess_detail",
     "pages/programme/assess_assess/assess_assess",
     "pages/programme/verify_detail/verify_detail",
@@ -19,7 +18,6 @@
     "pages/programme/report_firstStep/report_firstStep",
     "pages/programme/report_secondStep/report_secondStep",
     "pages/programme/report_thirdStep/report_thirdStep",
-
     "pages/registration/salesman/salesman",
     "pages/registration/company/company",
     "pages/registration/team/team",
@@ -35,7 +33,8 @@
     "pages/common/selectAdsgoods/selectAdsgoods",
     "pages/common/implementation/implementation",
     "pages/common/result/result",
-    "pages/noregistration/implementation/implementation"
+    "pages/noregistration/implementation/implementation",
+    "pages/common/upload/upload"
   ],
   "window": {
     "defaultTitle": "统一业务平台",

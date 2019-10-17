@@ -41,6 +41,11 @@ Page({
         text: '销区结账'
       },
       {
+        path: '/pages/common/upload/upload',
+        icon: 'upload.png',
+        text: '文件上传测试'
+      },
+      {
         icon: 'registration.png',
         text: '执行登记',
         child: [
