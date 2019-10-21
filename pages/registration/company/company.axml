@@ -40,6 +40,13 @@
       </list-item>
     </list>
   </scroll-view>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作提示"
+    show="{{showModal}}"/>
   <footer>
     <flex-item>
       <view>

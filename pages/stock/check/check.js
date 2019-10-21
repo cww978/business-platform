@@ -2,6 +2,9 @@ import { selRegionStock, saveRegionStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    modalContent: '',
+    showModal: false,
+    handleModalType: 1, // 1: 保存物资，2: 确定物资，3: 刷新页面，4: 确定返回
     lease: 0,
     showConfirm: false,
     isSave: false,
@@ -84,6 +87,23 @@ Page({
     ids = ids.join(';')
     this.getRegionStocks(ids, products)
   },
+  handleModalRight() {
+    this.setData({ showModal: false })
+    switch(this.data.handleModalType) {
+      case 1: this.regionStock(0)
+        break
+      case 2: this.regionStock(1)
+        break
+      case 3: this.getRegionStocks()
+        break
+      case 4: dd.navigateBack()
+        break
+      default: break
+    }
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
+  },
   // 删除促销品
   clickDelItem(e) {
     let products = this.data.products
@@ -94,7 +114,7 @@ Page({
   regionStock(state) {
     let products = []
     for (let item of this.data.products) {
-      if (item['ADSGOODS_ID']) {
+      if (item['ADSGOODS_ID'] && item['QTY']) {
         products.push(`${item['ADSGOODS_ID']},${item['QTY']},${item['UNIT_WEIGHT']}`)
       }
     }
@@ -108,47 +128,32 @@ Page({
       userId: this.data.userId
     }
     saveRegionStock(param).then(res => {
-      dd.confirm({
-        content: res.data.message || '操作错误',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        success: (e) => {
-          if (e.confirm && res.data.saveState == 1) {
-            dd.navigateBack()
-          } else {
-            if (res.data.saveState == 0) {
-              this.getRegionStocks()
-            }
-          }
-        }
-      })
+      this.setData({ showModal: true, modalContent: res.data.message })
+      if (res.data.saveState == 1) {
+        this.setData({
+          handleModalType: 4
+        })
+      } else {
+        this.setData({
+          handleModalType: 3
+        })
+      }
     })
   },
   // 保存促销
   save() {
-    dd.confirm({
-      content: '保存的物资数据是否正确',
-      confirmButtonText: '确定保存',
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.confirm) {
-          this.regionStock(0)
-        }
-      }
+    this.setData({
+      showModal: true,
+      modalContent: '保存的物资数据是否正确',
+      handleModalType: 1
     })
   },
-
   // 确定促销
   define() {
-    dd.confirm({
-      content: '保存的数据核对是否正确',
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.confirm) {
-          this.regionStock(1)
-        }
-      }
+    this.setData({
+      showModal: true,
+      modalContent: '保存的物资数据是否正确',
+      handleModalType: 2
     })
   },
   // 查询促销用品

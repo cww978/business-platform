@@ -1,0 +1,20 @@
+<view>
+  <view class="c-mask {{show?'show':''}}"></view>
+  <view class="c-modal {{show?'show':''}}">
+    <view class="c-modal-header">
+      <text>{{title}}</text>
+    </view>
+    <view class="c-modal-main">
+      <view a:if="{{content != ''}}" class="c-modal-content">{{content}}</view>
+      <slot a:else name="content"></slot>
+    </view>
+    <view class="c-modal-footer">
+      <view>
+        <button  onTap="handleLeft" plain="{{true}}" size="default" type="primary">{{leftButtonText}}</button>
+      </view>
+      <view>
+        <button  onTap="handleRight" size="default" type="primary">{{rightButtonText}}</button>
+      </view>
+    </view>
+  </view>
+</view>

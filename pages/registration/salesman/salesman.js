@@ -5,6 +5,8 @@ const app = getApp()
 Page({
   data: {
     userId: '',
+    modalContent: '',
+    showModal: false,
     loading: true,
     activitTypes: activitType, // 活动类型
     programmeType: '',
@@ -30,20 +32,20 @@ Page({
       })
     })
   },
+  handleModalLeft() {
+    this.setData({ showModal: false })
+  },
+  handleModalRight() {
+    dd.navigateBack()
+  },
   // 检验该地区是否已经锁定关账
   testAccount() {
     return new Promise(resolve => {
       selActivityAccount({ companyId: app.globalData.registration['companyId'] }).then(res => {
         if (res.data.saveState == 1) {
-          dd.confirm({
-            content: res.data.message,
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            success: (e) => {
-              if (e.confirm && res.data.saveState == 1) {
-                dd.navigateBack()
-              }
-            }
+          this.setData({
+            modalContent: res.data.message,
+            showModal: true
           })
         } else {
           resolve()

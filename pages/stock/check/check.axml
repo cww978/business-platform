@@ -1,5 +1,7 @@
 <view>
+  <!-- 加载框 -->
   <loading-wapper loading="{{loading}}"></loading-wapper>
+  <!-- 物资展示 -->
   <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
     <view a:if="{{lease == 1}}">
       <flex class="padding bg-blue text-white text-bold">
@@ -31,6 +33,14 @@
       <button onTap="clickAddPromotion" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加促销用品</button>
     </view>
   </scroll-view>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作提示"
+    show="{{showModal}}"/>
+  <!-- 页脚按钮 -->
   <footer>
     <flex-item>
       <view>

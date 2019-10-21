@@ -1,6 +1,7 @@
 {
   "defaultTitle": "销区、年月选择",
   "usingComponents":{
+    "c-modal": "/components/c-modal/c-modal",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index"
   }

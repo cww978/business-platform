@@ -1,4 +1,7 @@
 {
   "defaultTitle": "文件上传",
-  "backgroundColor": "#FFFFFF"
+  "backgroundColor": "#FFFFFF",
+  "usingComponents":{
+    "c-modal": "/components/c-modal/c-modal"
+  }
 }

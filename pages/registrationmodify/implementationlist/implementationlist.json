@@ -1,14 +1,13 @@
 {
-  "defaultTitle": "实物盘点",
+  "defaultTitle": "方案执行信息列表",
   "allowsBounceVertical": "NO",
   "usingComponents":{
-    "c-modal": "/components/c-modal/c-modal",
+    "search-bar": "mini-antui/es/search-bar/index",
     "loading-wapper": "/components/loading-wapper/loading-wapper",
-    "footer": "/components/footer/footer",
+    "c-modal": "/components/c-modal/c-modal",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",
     "flex": "mini-antui/es/flex/index",
     "flex-item": "mini-antui/es/flex/flex-item/index"
-  },
-  "backgroundColor": "#FFFFFF"
+  }
 }

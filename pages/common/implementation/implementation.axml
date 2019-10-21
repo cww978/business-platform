@@ -21,7 +21,7 @@
         </list-item>
         <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
           零售户
-          <view slot="extra" class="text-gray">
+          <view slot="extra" class="text-gray text-cut">
             {{retail.name==''?'请选择':retail.name}}
           </view>
         </list-item>
@@ -61,7 +61,7 @@
       </view>
       <block a:for="{{resources}}">
         <view class="cu-form-group">
-          <view class="title text-lg text-cut">{{item['ADSGOODS_NAME']}}</view>
+          <view class="title text-lg text-cut" data-index="{{index}}" onTap="clickAdsgoods">{{item['ADSGOODS_NAME']}}</view>
           <input class="text-lg" type="number" data-index="{{index}}" placeholder="请输入.." onInput="inputResourcesUse" value="{{item.useNum}}"/>
           <view class="text-df {{item.useNum > item['TRUE_ACT_STOCK']?'text-red':'text-gray'}}">最大值：{{item['TRUE_ACT_STOCK']}}{{item['UNIT']}}</view>
         </view>
@@ -83,11 +83,11 @@
           <text class="text">消费调研</text>
         </view>
       </view>
-      <flex class="padding-left-rigth" wrap="wrap">
-        <view class="padding-xs title text-df">调研目的: </view>
+      <flex class="padding bg-white" wrap="wrap">
+        <view class="title text-df">调研目的: </view>
         <flex wrap="wrap">
           <block a:for="{{objectives}}">
-            <view class="padding-xs" data-index="{{index}}" onTap="onObjectiveClick">
+            <view class="padding-left" data-index="{{index}}" onTap="onObjectiveClick">
               <view a:if="{{item.active == false}}" class="cu-tag text-df line-gray">{{item.text}}</view>
               <view a:else class="cu-tag text-df bg-blue">{{item.text}}</view>
             </view>
@@ -95,28 +95,31 @@
         </flex>
       </flex>
       <list>
-        <view a:for="{{questions}}" key="{{index}}">
-          <swipe-action
+        <block a:for="{{questions}}" key="{{index}}">
+          <list-item
             index="{{index}}"
-            restore="{{swipeIndex === null || swipeIndex !== index}}"
-            right="{{[{ type: 'delete', text: '删除', bgColor: '#0ff', fColor: '#333' }]}}"
-            onRightItemClick="onRightItemClick"
-            onSwipeStart="onSwipeStart"
-            extra="{{index}}"
+            key="questions-{{index}}"
+            data-index="{{index}}"
+            disabled="{{true}}"
+            last="{{index === list.length - 1}}"
           >
-            <list-item
-              index="{{index}}"
-              key="questions-{{index}}"
-              data-index="{{index}}"
-              onClick="onQuestionClick"
-              last="{{index === list.length - 1}}"
-            >
-              <view class="text-lg">{{item.tobacco}}</view>
-              <view class="text-df text-gray">测试样烟数: {{item.num}}</view>
-              <view class="text-df text-gray">测试人数: {{item.mans}}</view>
-            </list-item>
-          </swipe-action>
-        </view>
+            <flex>
+              <flex-item><view class="text-lg">{{item.tobacco}}</view></flex-item>
+              <view data-index="{{index}}" class="text-xxl" onTap="onRightItemClick"><text class="text-gray cuIcon-delete"></text></view>
+            </flex>
+            <flex>
+              <view class="text-df text-gray">测试样烟数：</view>
+              <flex-item><view class="text-df">{{item.num}}</view></flex-item>
+            </flex>
+            <flex>
+              <view class="text-df text-gray">测试人员数：</view>
+              <flex-item><view class="text-df">{{item.mans}}</view></flex-item>
+            </flex>
+            <flex>
+              <view data-index="{{index}}" onTap="onQuestionClick" class="text-df text-blue">查看详情</view>
+            </flex>
+          </list-item>
+        </block>
       </list>
       <view class="padding-lg">
         <button onTap="investigClick" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加测试品</button>

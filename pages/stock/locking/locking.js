@@ -3,6 +3,9 @@ import { selAccounts, saveLockAccount } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    modalContent: '',
+    showModal: false,
+    handleModalType: 1,// 1: 确定关账，2: 确定返回
     loading: true,
     userId: '',
     regionCode: '',
@@ -13,6 +16,20 @@ Page({
     tabs: ['销区入库单', '销区执行登记单'],
     activeTab: 0,
     shadow: false
+  },
+  // 提示框右边按钮事件
+  handleModalRight() {
+    this.setData({ showModal: false })
+    switch(this.data.handleModalType) {
+      case 1: this.lockAccount()
+        break
+      default: dd.navigateBack()
+        break
+    }
+  },
+  // 提示框左边按钮事件
+  handleModalLeft() {
+    this.setData({ showModal: false })
   },
   onPageScroll(e) {
     const { scrollTop } = e
@@ -34,15 +51,10 @@ Page({
   },
   // 保存
   save() {
-    dd.confirm({
-      content: '是否确认锁定销区',
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      success: (e) => {
-        if (e.confirm) {
-          this.lockAccount()
-        }
-      }
+    this.setData({
+      showModal: true,
+      modalContent: '是否确认锁定销区',
+      handleModalType: 1
     })
   },
   // 锁定销区
@@ -54,15 +66,10 @@ Page({
       userId: this.data.userId
     }
     saveLockAccount(param).then(res => {
-      dd.confirm({
-        content: res.data.message || '操作错误',
-        confirmButtonText: '确认',
-        cancelButtonText: '取消',
-        success: (e) => {
-          if (e.confirm) {
-            dd.navigateBack()
-          }
-        }
+      this.setData({
+        showModal: true,
+        modalContent: res.data.message,
+        handleModalType: 2
       })
     })
   },

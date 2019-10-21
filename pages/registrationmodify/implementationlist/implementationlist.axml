@@ -1,0 +1,73 @@
+<view>
+  <!-- 执行单搜索输入 -->
+  <view style="height: 8px"></view>
+  <search-bar
+    focus="{{false}}"
+    value="{{value}}"
+    placeholder="请输入执行单编码、名称"
+    onInput="onInput"
+    onCancel="onCancel"
+    onClear="onClear"
+    onSubmit="onSubmit"
+    showCancelButton="{{false}}" />
+  <view style="height: 8px"></view>
+  <!-- 执行单列表  -->
+  <scroll-view style="height:calc(100vh - 60px)" scroll-y="{{true}}">
+    <list>
+      <block>
+        <list-item disabled="{{true}}" last="{{true}}">
+          <flex>
+            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
+            <view class="text-xxl" onTap="delete"><text class="text-gray cuIcon-delete"></text></view>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">活动对象:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">活动位置:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">执行单号:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-blue">详情</view>
+          </flex>
+          <view class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
+        </list-item>
+        <list-item last="{{true}}">
+          <flex>
+            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
+            <view class="text-xxl"><text class="text-gray cuIcon-delete"></text></view>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">活动对象:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">活动位置:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">执行单号:</view>
+            <flex-item><view class="text-lg">Block</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-blue">详情</view>
+          </flex>
+          <view class="tag-state bg-yellow text-center text-white text-df">删除申请中</view>
+        </list-item>
+      </block>
+    </list>
+  </scroll-view>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="删除信息确认"
+    rightButtonText="{{modalRightText}}"
+    show="{{showModal}}"/>
+</view>

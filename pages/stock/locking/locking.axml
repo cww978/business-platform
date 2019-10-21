@@ -1,5 +1,7 @@
 <view>
+  <!-- 等待框 -->
   <loading-wapper loading="{{loading}}"></loading-wapper>
+  <!-- 入库、出库切换 -->
   <view class="tabs {{shadow ? 'shadow' : ''}}" style="top: {{top}}px">
     <view class="tabs-bar">
       <block a:for="{{tabs}}">
@@ -9,6 +11,7 @@
       </block>
     </view>
   </view>
+  <!-- 入库账单展示 -->
   <view style="min-height: calc(100vh - 110px)">
     <list a:if="{{activeTab == 0}}">
       <view a:if="{{joins.length <= 0}}" class="text-gray padding-xl text-center">暂无数据</view>
@@ -33,6 +36,7 @@
         </list-item>
       </block>
     </list>
+    <!-- 出库账单展示 -->
     <list a:if="{{activeTab == 1}}">
       <view a:if="{{outs.length <= 0}}" class="text-gray padding-xl text-center">暂无数据</view>
       <block a:for="{{outs}}">
@@ -55,6 +59,14 @@
       </block>
     </list>
   </view>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作提示"
+    show="{{showModal}}"/>
+  <!-- 页脚按钮 -->
   <footer>
     <flex-item>
       <view>

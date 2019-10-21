@@ -3,6 +3,10 @@ import { selSettleStock, saveSettleStock } from '/api/account'
 const app = getApp()
 Page({
   data: {
+    modalContent: '',
+    showModal: false,
+    handleModalType: 1, // 1: 结账，2: 确定结账，3: 刷新页面，4: 确定返回
+    modalRightText: '确 定',
     lease: 0,
     showConfirm: false,
     loading: true,
@@ -15,6 +19,23 @@ Page({
     products: [],
     savePerson: '',
     definitePerson: ''
+  },
+  handleModalRight() {
+    this.setData({ showModal: false })
+    switch(this.data.handleModalType) {
+      case 1: this.settleStock(0)
+        break
+      case 2: this.settleStock(1)
+        break
+      case 3: this.getSettleStocks()
+        break
+      case 4: dd.navigateBack()
+        break
+      default: break
+    }
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
   },
   onTabBarTap(e) {
     const { index } = e.target.dataset
@@ -38,46 +59,38 @@ Page({
       state: state
     }
     saveSettleStock(param).then(res => {
-      dd.confirm({
-        content: res.data.message || '操作错误',
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        success: (e) => {
-          if (e.confirm && res.data.saveState == 1) {
-            dd.navigateBack()
-          } else {
-            if (res.data.saveState == 0) {
-              this.getSettleStocks()
-            }
-          }
-        }
+      this.setData({
+        showModal: true,
+        modalContent: res.data.message,
+        modalRightText: '确 定'
       })
+      if (res.data.saveState == 1) {
+        this.setData({
+          handleModalType: 4
+        })
+      } else {
+        this.setData({
+          handleModalType: 3
+        })
+      }
     })
   },
   // 结账
   save() {
-    dd.confirm({
-      content: '物资数据是否正确',
-      confirmButtonText: '确定结账',
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.confirm) {
-          this.settleStock(0)
-        }
-      }
+    this.setData({
+      showModal: true,
+      modalContent: '物资数据是否正确',
+      modalRightText: '确定结账',
+      handleModalType: 1
     })
   },
   // 确认
   define() {
-    dd.confirm({
-      content: '核对数据是否正确',
-      confirmButtonText: '确认',
-      cancelButtonText: '取消',
-      success: (res) => {
-        if (res.confirm) {
-          this.settleStock(1)
-        }
-      }
+    this.setData({
+      showModal: true,
+      modalContent: '核对数据是否正确',
+      modalRightText: '确 定',
+      handleModalType: 2
     })
   },
   // 获取促销数据

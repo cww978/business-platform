@@ -1,0 +1,8 @@
+{
+  "defaultTitle": "方案执行修改",
+  "allowsBounceVertical": "NO",
+  "usingComponents":{
+    "loading-wapper": "/components/loading-wapper/loading-wapper",
+    "c-modal": "/components/c-modal/c-modal"
+  }
+}

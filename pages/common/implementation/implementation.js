@@ -25,7 +25,6 @@ Page({
       { id: 2, text: '老产品调研', active: false }
     ],
     questions: [],
-    swipeIndex: null,
     question: null,
     retail: {
       id: '',
@@ -67,6 +66,12 @@ Page({
       buttonText: '确定'
     })
   },
+  clickAdsgoods(e) {
+    dd.alert({
+      content: this.data.resources[e.target.dataset.index]['ADSGOODS_NAME'],
+      buttonText: '确定'
+    })
+  },
   // 定位
   location() {
     getLocation().then(res => {
@@ -98,20 +103,14 @@ Page({
   },
   // 删除调研
   onRightItemClick(e) {
-    e.done()
     let questions = this.data.questions
-    questions.splice(e.extra, 1)
+    questions.splice(e.target.dataset.index, 1)
     this.setData({ questions: questions })
-  },
-  onSwipeStart(e) {
-    this.setData({
-      swipeIndex: e.index,
-    })
   },
   // 点击调研查看修改
   onQuestionClick(e){
     this.setData({
-      question: this.data.questions[e.index]
+      question: this.data.questions[e.target.dataset.index]
     })
     dd.navigateTo({
       url: `/pages/common/investigation/investigation?question=${e.index}&cityCode=${this.data.companyId}`
@@ -183,8 +182,9 @@ Page({
       }
     }
     let data = {
+      regId: 0,
       executeType: app.globalData.registration['userType'] == 1 ? 1 : 2,
-      location: '',
+      location: this.data.address,
       userId: app.globalData.userInfo.userId,
       activityId: this.data.activityId,
       companyId: this.data.companyId,

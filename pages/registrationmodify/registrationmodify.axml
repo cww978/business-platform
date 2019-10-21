@@ -1,0 +1,11 @@
+<view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作提示"
+    rightButtonText="{{modalRightText}}"
+    show="{{showModal}}"/>
+</view>

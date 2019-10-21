@@ -2,6 +2,7 @@
   "defaultTitle": "销区结账",
   "allowsBounceVertical": "NO",
   "usingComponents":{
+    "c-modal": "/components/c-modal/c-modal",
     "loading-wapper": "/components/loading-wapper/loading-wapper",
     "footer": "/components/footer/footer",
     "list": "mini-antui/es/list/index",

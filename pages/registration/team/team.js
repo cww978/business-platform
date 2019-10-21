@@ -3,12 +3,20 @@ import { selActivityAccount } from '/api/programExecute'
 const app = getApp()
 Page({
   data: {
+    showModal: false,
+    modalContent: '',
     loading: true,
     userId: '',
     activityId: 0,
     companyId: 0,
     resources: [], // 资源
     programmeInfo: {}
+  },
+  handleModalRight() {
+    dd.navigateBack()
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
   },
   getProgrammeInfo() {
     // 查询方案信息
@@ -25,16 +33,7 @@ Page({
     return new Promise(resolve => {
       selActivityAccount({ companyId: app.globalData.registration['companyId'] }).then(res => {
         if (res.data.saveState == 1) {
-          dd.confirm({
-            content: res.data.message,
-            confirmButtonText: '确认',
-            cancelButtonText: '取消',
-            success: (e) => {
-              if (e.confirm && res.data.saveState == 1) {
-                dd.navigateBack()
-              }
-            }
-          })
+          this.setData({ showModal: true, modalContent: res.data.message })
         } else {
           resolve()
         }

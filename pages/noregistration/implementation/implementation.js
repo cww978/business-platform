@@ -18,6 +18,7 @@ Page({
       id: '',
       name: ''
     },
+    regId: 0,
     address: '',
     longitude: 0,
     latitude: 0,
@@ -96,8 +97,9 @@ Page({
       }
       imgs = imgs.join(',')
       let param = {
+        regId: this.data.regId,
         activityId: 0,
-        location: '',
+        location: this.data.address,
         userId: this.data.userId,
         companyId: this.data.companyId,
         themeId: themeId,

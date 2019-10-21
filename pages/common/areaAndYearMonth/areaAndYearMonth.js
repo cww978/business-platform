@@ -3,6 +3,8 @@ import { dateFormat } from '/util/tool'
 const app = getApp()
 Page({
   data: {
+    showModal: false,
+    modalContent: '',
     loading: false,
     realCity: 0,
     cityCode: 0,
@@ -15,6 +17,12 @@ Page({
     dd.navigateTo({
       url: `/pages/common/selectCompany/selectCompany?yearMonth=${this.data.yearMonth}&type=0`
     })
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
+  },
+  handleModalRight() {
+    this.setData({ showModal: false })
   },
   setCityCode(e) {
     this.setData({
@@ -62,12 +70,7 @@ Page({
         selRegionStock(param).then(res => {
           this.setData({ loading: false })
           if (res.data.saveState == 1) {
-            dd.confirm({
-              title: '操作提示',
-              content: res.data.message,
-              confirmButtonText: '知道了',
-              cancelButtonText: '取消'
-            })
+            this.setData({ showModal: true, modalContent: res.data.message })
           } else {
             dd.navigateTo({ url: path })
           }
@@ -77,12 +80,7 @@ Page({
         selSettleStock(param).then(res => {
           this.setData({ loading: false })
           if (res.data.saveState == 1) {
-            dd.confirm({
-              title: '操作提示',
-              content: res.data.message,
-              confirmButtonText: '知道了',
-              cancelButtonText: '取消'
-            })
+            this.setData({ showModal: true, modalContent: res.data.message })
           } else {
             dd.navigateTo({ url: path })
           }

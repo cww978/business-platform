@@ -50,7 +50,8 @@ Page({
         text: '执行登记',
         child: [
           { path: '/pages/registration/registration', text: '方案执行登记' },
-          { path: '/pages/noregistration/noregistration', text: '非方案执行登记' }
+          { path: '/pages/noregistration/noregistration', text: '非方案执行登记' },
+          { path: '/pages/registrationmodify/registrationmodify', text: '方案执行修改' }
         ]
       }
     ]

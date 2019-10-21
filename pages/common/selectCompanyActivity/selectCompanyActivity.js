@@ -3,6 +3,7 @@ import { selProgramExecuteRole } from '/api/role'
 const app = getApp()
 Page({
   data: {
+    type: 1,
     showProgrammePicker: false,
     realCity: 0,
     cityCode: 0,
@@ -32,6 +33,11 @@ Page({
       case 1 :
         dd.navigateTo({
           url: `/pages/registration/salesman/salesman?programmeId=${programmeId}&cityCode=${cityCode}`
+        })
+        break
+      case 0 :
+        dd.navigateTo({
+          url: `/pages/registrationmodify/implementationlist/implementationlist?programmeId=${programmeId}&cityCode=${cityCode}`
         })
         break
       default: break
@@ -109,14 +115,9 @@ Page({
     app.globalData.registration['activityId'] = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
     app.globalData.registration['realCity'] = this.data.realCity
     app.globalData.registration['companyId'] = this.data.cityCode
-    this.switchUserType(app.globalData.registration['userType'])
+    this.switchUserType(this.data.type)
   },
-  onLoad() {
-    let userId = app.globalData.userInfo.userId
-    selProgramExecuteRole({ userId: userId }).then(res => {
-      console.log('用户类型', res.data)
-      // app.globalData.registration['userType'] = res.data.type
-      app.globalData.registration['userType'] = 1
-    })
+  onLoad(options) {
+    this.setData({ type: options.type })
   },
 })

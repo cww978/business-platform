@@ -1,5 +1,13 @@
 Page({
-  data: {},
+  data: {
+    show: false
+  },
+  close() {
+    this.setData({ show: false })
+  },
+  open() {
+    this.setData({ show: true })
+  },
   onLoad() {
     this.webViewContext = dd.createWebViewContext('web-view-1')
   },

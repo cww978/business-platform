@@ -1,0 +1,82 @@
+.c-mask {
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(1, 1, 1, .4);
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 10;
+}
+.c-mask.show {
+  animation: mask-show 200ms ease-in-out;
+  display: block;
+}
+.c-modal {
+  z-index: 11;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -60%);
+  width: 75%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+}
+.c-modal.show{
+  animation: modal-show 200ms ease-in-out;
+  display: flex
+}
+.c-modal-header {
+  position: relative;
+  text-align: center;
+  font-weight: 600;
+  font-size: 17px;
+  padding-bottom: 20px;
+}
+.c-modal-main {
+  padding-bottom: 10px;
+  font-size: 16px;
+  line-height: .6rem;
+}
+.c-modal-content {
+  border-top: 0.5px #cccccc solid;
+  padding: 10px 5px 0px 5px;
+}
+.c-modal-main textarea {
+  font-size: 16px;
+  border: 0.5px #cccccc solid;
+  border-radius: 8px;
+  min-height: 80px;
+}
+.c-modal-footer {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+.c-modal-footer button{
+  height:40px;
+  line-height:40px;
+  font-size: 16px;
+}
+.c-modal-footer view:nth-of-type(1) {
+  flex: 1;
+  padding: 10px 10px 0px 0px;
+}
+.c-modal-footer view:nth-last-of-type(1) {
+  flex: 1;
+  padding: 10px 0px 0px 10px;
+}
+@keyframes modal-show {
+  from {opacity: 0; transform: translate(-50%, -100%);}
+  to {opacity: 1; transform: translate(-50%, -60%);}
+}
+@keyframes mask-show {
+  from {opacity: 0}
+  to {opacity: 1}
+}

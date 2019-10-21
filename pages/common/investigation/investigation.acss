@@ -1,5 +1,5 @@
 .header{
-  padding: 16px 16px 8px;
+  padding: 8px 16px;
   font-size:14px;
   color:rgb(136, 136, 136);
 }

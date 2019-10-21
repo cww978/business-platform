@@ -59,6 +59,12 @@
       </list-item>
     </list>
   </scroll-view>
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作失败"
+    show="{{showModal}}"/>
   <!-- 业务员操作 -->
   <footer>
     <flex-item>

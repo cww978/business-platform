@@ -1,0 +1,24 @@
+.search-bar {
+  margin: 10px;
+}
+.am-list-item {
+  position: relative;
+  border-radius: 8px;
+  margin: .18rem;
+}
+.am-list-item:nth-of-type(1){
+  margin-top: 0px
+}
+.am-list-item:nth-last-of-type(1) {
+  margin-bottom: 0px
+}
+.am-list-content {
+  line-height: .6rem
+}
+.tag-state {
+  position: absolute;
+  width: 50%;
+  transform: rotate(-40deg);
+  bottom: 20px;
+  right: -44px;
+}
