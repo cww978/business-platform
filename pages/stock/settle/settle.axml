@@ -18,6 +18,7 @@
           data-index="{{index}}"
           onClick="onInAccountClick"
           last="{{index === list.length - 1}}"
+          a:if="{{item['PRESENT_BALANCE_QTY'] !=0 || item['WAREHOUSE_QTY'] != 0 || item['FULL_QTY'] != 0 || item['DIFFERENCE_QTY'] != 0}}"
         >
           <view class="text-lg">{{item['ADSGOODS_NAME']}}</view>
           <flex>

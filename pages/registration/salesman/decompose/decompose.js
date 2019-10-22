@@ -52,7 +52,7 @@ Page({
     }
     saveResolveCompany(params).then(res =>{
       let type = res.data.saveState != 0 ? 'fail' : 'success'
-      dd.navigateTo({
+      dd.redirectTo({
         url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
       })
     })

@@ -25,7 +25,6 @@ Page({
       dd.showToast({ content: '请选择一个执行单在确认' })
     } else {
       saveConfirmResources({ regIdStr: ids.join(',') }).then(res => {
-        console.log('确认收货', res)
         let type = 'success'
         let message = '确认收货成功!'
         if (res.data) {
@@ -35,14 +34,8 @@ Page({
           type = 'fail'
           message = '收货失败!'
         }
-        dd.alert({
-          content: message,
-          buttonText: '确定',
-          success: () => {
-            if (type == 'success') {
-              this.getResourcesDistribution()
-            }
-          },
+        dd.redirectTo({
+          url: `/pages/common/result/result?type=${type}&title=${message}`
         })
       })
     } 

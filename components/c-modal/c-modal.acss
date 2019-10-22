@@ -11,6 +11,7 @@
   z-index: 10;
 }
 .c-mask.show {
+  -webkit-animation: mask-show 200ms ease-in-out;
   animation: mask-show 200ms ease-in-out;
   display: block;
 }
@@ -29,6 +30,7 @@
   padding: 20px;
 }
 .c-modal.show{
+  -webkit-animation: modal-show 200ms ease-in-out;
   animation: modal-show 200ms ease-in-out;
   display: flex
 }
@@ -73,10 +75,10 @@
   padding: 10px 0px 0px 10px;
 }
 @keyframes modal-show {
-  from {opacity: 0; transform: translate(-50%, -100%);}
-  to {opacity: 1; transform: translate(-50%, -60%);}
+  0% {opacity: 0; transform: translate(-50%, -100%);}
+  100% {opacity: 1; transform: translate(-50%, -60%);}
 }
 @keyframes mask-show {
-  from {opacity: 0}
-  to {opacity: 1}
+  0% {opacity: 0}
+  100% {opacity: 1}
 }

@@ -78,9 +78,15 @@ export function selTobaList(param){
  * 获取物资列表
  * @param userId String
  * @param companyId String
+ * @param price1 int
+ * @param price2 int
+ * @param priceChoice int
  */
 export function selAdsgoodsList(param){
   console.log('获取物资列表', param)
+  param.price1 = 0
+  param.price2 = 0
+  param.priceChoice = -1
   return request({
     url: '/shareHelp/selAdsgoodsList',
     param: param,

@@ -50,7 +50,7 @@ Page({
     dd.showActionSheet({
       title: '新增促销用品',
       items: ['促销烟', '促销品'],
-      canelButtonText: '取消',
+      cancelButtonText: '取消',
       success: (res) => {
         if (res.index == 0) {
           dd.navigateTo({
