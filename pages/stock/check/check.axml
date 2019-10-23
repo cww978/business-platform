@@ -29,9 +29,11 @@
         </flex>
       </block>
     </view>
-    <view class="padding-lg">
-      <button onTap="clickAddPromotion" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加促销用品</button>
+    <!-- 添加新的物资 -->
+    <view class="padding-lg" a:if="{{isSave == false}}">
+      <button onTap="clickAddPromotion" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>新增物资</button>
     </view>
+    <view a:else class="padding-xs"></view>
   </scroll-view>
   <!-- 操作提示框 -->
   <c-modal
