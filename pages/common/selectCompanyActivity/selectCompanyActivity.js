@@ -1,11 +1,12 @@
-import { selActivityCode, selTerminalActivityCode } from '/api/programExecute'
+import { selActivityCode, selTerminalActivityCode, selActivityAccount } from '/api/programExecute'
 import { selProgramExecuteRole } from '/api/role'
 import { selSalesArea } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
     type: -1,
-    modalContent: '对不起，您暂时没有权限',
+    tipsInfo: '请选择区地获取方案',
+    modalContent: '',
     showModal: false,
     showProgrammePicker: false,
     realCity: 0,
@@ -24,36 +25,6 @@ Page({
   handleModalLeft() {
     this.setData({ showModal: false })
   },
-  switchUserType(type) {
-    let programmeId = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
-    let cityCode = this.data.cityCode
-    type = parseInt(type)
-    switch(type){
-      // 根据操作人员类型跳转至不同的操作页面
-      case 3 :
-        dd.navigateTo({
-          url: `/pages/registration/team/team?programmeId=${programmeId}&cityCode=${cityCode}`
-        })
-        break
-      case 2 :
-        dd.navigateTo({
-          url: `/pages/registration/company/company?programmeId=${programmeId}&cityCode=${cityCode}`
-        })
-        break
-      case 1 :
-        dd.navigateTo({
-          url: `/pages/registration/salesman/salesman?programmeId=${programmeId}&cityCode=${cityCode}`
-        })
-        break
-      case 0 :
-        dd.navigateTo({
-          url: `/pages/registrationmodify/implementationlist/implementationlist?programmeId=${programmeId}&cityCode=${cityCode}`
-        })
-        break
-      default: this.setData({ showModal: true })
-        break
-    }
-  },
   // 确定地区更改
   confirmCompany(e) {
     this.setData({
@@ -70,6 +41,21 @@ Page({
       this.getProgrammeCodesForTerminal()
     }
   },
+  // 检验该地区是否已经锁定关账
+  testAccount() {
+    return new Promise(resolve => {
+      selActivityAccount({ companyId: app.globalData.registration['companyId'] }).then(res => {
+        if (res.data.saveState == 1) {
+          this.setData({
+            modalContent: res.data.message,
+            showModal: true
+          })
+        } else {
+          resolve()
+        }
+      })
+    })
+  },
   // 获取方案编码
   getProgrammeCodes() {
     selActivityCode({
@@ -80,7 +66,10 @@ Page({
       if (res.data.length > 0) {
         isActivityId = true
       } else {
-        this.setData({ showProgrammePicker: true })
+        this.setData({
+          showProgrammePicker: true,
+          tipsInfo: '该地区下没有可操作的方案'
+        })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -108,7 +97,10 @@ Page({
         }
         isActivityId = true
       } else {
-        this.setData({ showProgrammePicker: true })
+        this.setData({
+          showProgrammePicker: true,
+          tipsInfo: '该地区下没有可操作的方案'
+        })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -120,14 +112,50 @@ Page({
   programmeChange(e) {
     this.setData({ programmeIndex: e.detail.value })
   },
-  clickDefine() {
+  setGlobalData() {
     app.globalData.registration['activityId'] = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
     app.globalData.registration['realCity'] = this.data.realCity
     app.globalData.registration['companyId'] = this.data.cityCode
-    this.switchUserType(this.data.type)
+  },
+  // 分配方案
+  navToRec() {
+    this.setGlobalData()
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: `/pages/registration/salesman/decompose/decompose`
+      })
+    })
+  },
+  // 执行方案
+  navToImp() {
+    this.setGlobalData()
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: `/pages/common/implementation/implementation`
+      })
+    })
+  },
+  // 确认收货
+  navToCheck() {
+    this.setGlobalData()
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: `/pages/registration/company/receiving/receiving`
+      })
+    })
+  },
+  clickDefine() {
+    this.setGlobalData()
+    this.testAccount().then(() => {
+      dd.navigateTo({
+        url: `/pages/registrationmodify/implementationlist/implementationlist`
+      })
+    })
   },
   onReady() {
-    selSalesArea({ userId: app.globalData.userInfo.userId }).then(res => {
+    selSalesArea({
+      userId: app.globalData.registration['userType'] == 2 ? -1 : app.globalData.userInfo.userId
+    }).then(res => {
       this.setData({ areaList: res.data, loading: false })
     })
   },

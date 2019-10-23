@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "grid": "mini-antui/es/grid/index"
+    "grid": "mini-antui/es/grid/index",
+    "loading-wapper": "/components/loading-wapper/loading-wapper"
   }
 }

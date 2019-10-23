@@ -6,6 +6,8 @@
     "select-company": "/components/select-company/select-company",
     "list": "mini-antui/es/list/index",
     "list-item": "mini-antui/es/list/list-item/index",
-    "modal": "mini-antui/es/modal/index"
+    "modal": "mini-antui/es/modal/index",
+    "flex": "mini-antui/es/flex/index",
+    "flex-item": "mini-antui/es/flex/flex-item/index"
   }
 }

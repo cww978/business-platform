@@ -4,7 +4,6 @@ import { activitType } from '/constant/other.js'
 const app = getApp()
 Page({
   data: {
-    userId: '',
     modalContent: '',
     showModal: false,
     loading: true,
@@ -16,14 +15,14 @@ Page({
   getProgrammeInfo() {
       // 查询方案信息
     selProgrammeInfo({
-      userId: this.data.userId,
+      userId: app.globalData.userInfo.userId,
       activityId: app.globalData.registration['activityId'],
       companyId: app.globalData.registration['companyId']
     }).then(res => {
       this.setData({ programmeInfo: res.data.programmeDetail[0] })
       // 查询资源明细
       selResourcesDetail({
-        userId: this.data.userId,
+        userId: app.globalData.userInfo.userId,
         companyId: app.globalData.registration['companyId'],
         activityId: app.globalData.registration['activityId'],
         executeType: 1,
@@ -72,9 +71,5 @@ Page({
   onReady() {
     this.getProgrammeInfo()
   },
-  onLoad(options) {
-    this.setData({
-      userId: app.globalData.userInfo.userId
-    })
-  }
+  onLoad(options) {}
 })

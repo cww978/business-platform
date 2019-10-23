@@ -51,9 +51,14 @@ Page({
       resources: resources.join(';')
     }
     saveResolveCompany(params).then(res =>{
-      let type = res.data.saveState != 0 ? 'fail' : 'success'
+      let [ type, message, subTitle ] = ['success', '分配成功', `你已成功分配物资给${that.data.terminals[this.data.terminalIndex].terminalCompanyName},请及时通知对方确认`]
+      if (res.data.saveState != 0) {
+        type = 'fail'
+        message = '分配失败'
+        subTitle = `分配物资给${that.data.terminals[this.data.terminalIndex].terminalCompanyName}失败,请重新分配`
+      }
       dd.redirectTo({
-        url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
+        url: `/pages/common/result/result?type=${type}&title=${message}&subTitle=${subTitle}`
       })
     })
   },

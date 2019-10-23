@@ -10,7 +10,7 @@ export function getUserInfo(param){
       url: '/login',
       baseUrl: 'DD_SERVER_URL',
       param: param,
-      loading: true,
+      loading: false,
       dataType: 'json',
       method: 'get'
     })

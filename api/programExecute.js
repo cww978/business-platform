@@ -180,21 +180,6 @@ export function selPromoItem(param){
 }
 
 /**
- * 查询方案是否需要调研
- * @param activityId int
- */
-export function selProgrammeInvestigation(param){
-  console.log('查询方案是否需要调研', param)
-  return request({
-    url: '/programExecute/selProgrammeInvestigation',
-    param: param,
-    loading: false,
-    dataType: 'json',
-    method: 'get'
-  })
-}
-
-/**
  * 查询方案资源明细
  * @param userId String
  * @param companyId String

@@ -105,7 +105,7 @@ Page({
         themeId: themeId,
         promoTypeId: typeId,
         targetId: targetId,
-        executeType: this.data.userType,
+        executeType: this.data.userType == 1 ? 1 : 2,
         form: this.data.modality,
         imgs: imgs,
         custCode: retailId,
@@ -114,9 +114,13 @@ Page({
         personNum: 0,
       }
       saveNoProgrammeImplement(param).then(res => {
-        let type = res.data.saveState == 0 ? 'success' : 'fail'
+        let [ type, title ] = ['success', '保存成功']
+        if (res.data.saveState != 0) {
+          type = 'fail'
+          title = '保存失败'
+        }
         dd.redirectTo({
-          url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
+          url: `/pages/common/result/result?type=${type}&title=${title}`
         })
       })
     } else {

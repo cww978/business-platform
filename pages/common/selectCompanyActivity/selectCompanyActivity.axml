@@ -7,19 +7,18 @@
     </view>
     <select-company list="{{areaList}}" onConfirm="confirmCompany"></select-company>
     <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
-      <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
+      <picker onChange="programmeChange" range-key="TITLE" range="{{programmes}}">
         <view class="picker">
           <view class="row">
-            <view class="row-title">方案编码</view>
+            <view class="row-title">方 案</view>
             <view class="row-extra text-df text-gray text-cut">
-              {{programmes[programmeIndex].ACTIVITY_CODE}}-
               {{programmes[programmeIndex].TITLE}}
             </view>
           </view>
         </view>
       </picker>
     </list-item>
-    <view a:else class="padding-xs text-center text-df text-red">该地区下没有能操作的活动方案</view>
+    <view a:else class="padding-xs text-center text-df text-red">{{tipsInfo}}</view>
   </list>
   <list a:if="{{programmes.length > 0}}">
     <view slot="header">
@@ -50,7 +49,48 @@
     title="操作提示"
     show="{{showModal}}"/>
   <view class="padding-xs"></view>
-  <view class="padding-xs">
-    <button hover-class="button-hover" type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>
-  </view> 
+  <flex a:if="{{type == 1}}" class="activity-action padding-xs">
+    <flex-item>
+      <view class="padding-xs">
+        <button plain="{{true}}" type="primary"  
+        disabled="{{!(isActivityId && isCity)}}"  
+        onTap="navToRec">分配终端</button>
+      </view>
+    </flex-item>
+    <flex-item>
+      <view class="padding-xs">
+        <button type="primary" loading="{{loading}}"
+        disabled="{{!(isActivityId && isCity)}}" 
+        onTap="navToImp">执行方案</button>
+      </view>
+    </flex-item>
+  </flex>
+  <flex a:elif="{{type == 2}}" class="activity-action padding-xs">
+    <flex-item>
+      <view class="padding-xs">
+        <button type="primary"  loading="{{loading}}"
+        disabled="{{!(isActivityId && isCity)}}"
+        onTap="navToCheck">确认收货</button>
+      </view>
+    </flex-item>
+  </flex>
+  <flex a:elif="{{type == 3}}" class="activity-action padding-xs">
+    <flex-item>
+      <view class="padding-xs">
+        <button type="primary"  loading="{{loading}}"
+        disabled="{{!(isActivityId && isCity)}}"
+        onTap="navToImp">执行方案</button>
+      </view>
+    </flex-item>
+  </flex>
+  <flex a:else class="activity-action padding-xs">
+    <flex-item> 
+      <view class="padding-xs">
+        <button type="primary"  loading="{{loading}}"
+        disabled="{{!(isActivityId && isCity)}}"
+        data-index="1"
+        onTap="clickDefine">确 定</button>
+      </view>
+    </flex-item>
+  </flex>
 </view>

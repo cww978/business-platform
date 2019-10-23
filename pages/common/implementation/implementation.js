@@ -1,10 +1,11 @@
 import { uploadFile } from '/api/common'
-import { selResourcesDetail, selPromoItem, selProgrammeInvestigation, saveProgrammeImplement } from '/api/programExecute'
-import { selObjectElement } from '/api/shareHelp'
+import { selResourcesDetail, selPromoItem, saveProgrammeImplement } from '/api/programExecute'
+import { selObjectElement, selProgrammeInfo, selProgrammeInvestigation } from '/api/shareHelp'
 import { getLocation } from '/util/location.js'
 const app = getApp()
 Page({
   data: {
+    programmeInfo: {},
     loading: true,
     companyId: 0,
     activityId: 0,
@@ -201,10 +202,14 @@ Page({
     }
     // 保存操作
     saveProgrammeImplement(data).then(res => {
-      let type = res.data.saveState == 0 ? 'success' : 'fail'
+      let [ type, title ] = ['success', '保存成功']
+      if (res.data.saveState != 0) {
+        type = 'fail'
+        title = '保存失败'
+      }
       console.log('执行结果', res.data)
       dd.redirectTo({
-        url: `/pages/common/result/result?type=${type}&title=${res.data.message}`
+        url: `/pages/common/result/result?type=${type}&title=${title}`
       })
     })
   },
@@ -223,7 +228,7 @@ Page({
   // 获取对象
   getTargets() {
     return new Promise(resolve => {
-      selObjectElement({ promoType: this.data.activityType}).then(res => {
+      selObjectElement({ promoType: this.data.programmeInfo['ACTIVITYTYPE']}).then(res => {
         this.setData({ targets: res.data, loading: false })
         resolve()
       })
@@ -243,13 +248,28 @@ Page({
       })
     })
   },
+  // 查询方案信息
+  getProgrammeInfo() {
+    return new Promise(resolve => {
+      selProgrammeInfo({
+        userId: app.globalData.userInfo.userId,
+        activityId: app.globalData.registration['activityId'],
+        companyId: app.globalData.registration['companyId']
+      }).then(res => {
+        this.setData({ programmeInfo: res.data.programmeDetail[0] })
+        resolve()
+      })
+    })
+  },
   // 准备数据
   onReady() {
-    this.getOtherPoints().then(() => {
-      this.hasInvestigation().then(() => {
-        this.getResources().then(() => {
-          this.getTargets().then(() => {
-            this.location()
+    this.getProgrammeInfo().then(() => {
+      this.getOtherPoints().then(() => {
+        this.hasInvestigation().then(() => {
+          this.getResources().then(() => {
+            this.getTargets().then(() => {
+              this.location()
+            })
           })
         })
       })

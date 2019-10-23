@@ -4,15 +4,16 @@
 input{
   height: .6rem
 }
-.header{
+.header, .am-list-header{
   padding: 8px 16px;
   font-size:14px;
   color:rgb(136, 136, 136);
 }
-.header .icon {
+.header .icon, .am-list-header .icon{
   padding-right: 5px;
 }
 .cu-form-group .title {
+  font-size: 17px;
   width: calc(8em + 15px);
 }
 .row {
@@ -23,6 +24,7 @@ input{
   flex: 1;
 }
 .row-extra {
+  font-size: 16px;
   flex-basis: initial;
 }
 .img-group{
@@ -45,4 +47,11 @@ input{
 }
 .am-flexbox-item{
   margin-left: 0px;
+}
+.info-row {
+  line-height: 1.6;
+}
+.info-row .am-list-content{
+  display: flex;
+  align-items: center;
 }

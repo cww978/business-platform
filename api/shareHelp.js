@@ -1,5 +1,21 @@
 import request from '../util/request'
 
+
+/**
+ * 查询方案是否需要调研
+ * @param activityId int
+ */
+export function selProgrammeInvestigation(param){
+  console.log('查询方案是否需要调研', param)
+  return request({
+    url: '/shareHelp/selProgrammeInvestigation',
+    param: param,
+    loading: false,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
 /**
  * 获取活动类型
  * @param themeId int

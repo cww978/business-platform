@@ -1,0 +1,29 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+}
+.result-icon image{
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10px;
+}
+.result-title, .result-des {
+  margin: 10px
+}
+.result-des {
+  width: 70%;
+}
+.result-action {
+  bottom: 30vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.result-action button {
+  width: 80%;
+  height: 40px;
+  line-height: 40px;
+}

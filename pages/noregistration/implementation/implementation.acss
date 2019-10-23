@@ -28,6 +28,7 @@ input{
   padding-right: 5px;
 }
 .cu-form-group .title {
+  font-size: 17px;
     min-width: calc(4em + 15px);
 }
 .row {
@@ -38,6 +39,7 @@ input{
   flex: 1;
 }
 .row-extra {
+  font-size: 16px;
   flex-basis: initial;
 }
 .img-group{

@@ -6,9 +6,6 @@ Page({
     showModal: false,
     modalContent: '',
     loading: true,
-    userId: '',
-    activityId: 0,
-    companyId: 0,
     resources: [], // 资源
     programmeInfo: {}
   },
@@ -21,9 +18,9 @@ Page({
   getProgrammeInfo() {
     // 查询方案信息
     selProgrammeInfo({
-      userId: this.data.userId,
-      activityId: this.data.activityId,
-      companyId: this.data.companyId
+      userId: app.globalData.userInfo.userId,
+      activityId: app.globalData.registration['activityId'],
+      companyId: app.globalData.registration['companyId']
     }).then(res => {
       this.setData({ programmeInfo: res.data.programmeDetail[0], loading: false })
     })
@@ -51,11 +48,5 @@ Page({
   onReady() {
     this.getProgrammeInfo()
   },
-  onLoad(options) {
-    this.setData({
-      userId: app.globalData.userInfo.userId,
-      activityId: app.globalData.registration['activityId'],
-      companyId: app.globalData.registration['companyId']
-    })
-  }
+  onLoad(options) {}
 })

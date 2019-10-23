@@ -1,8 +1,12 @@
 <view>
-  <message
-    title="{{title}}"
-    type="{{type}}" 
-    mainButton="{{messageButton.mainButton}}" 
-    onTapMain="goBack">
-  </message>
+  <view class="result">
+    <view class="result-icon">
+      <image mode="scaleToFill" src="/static/image/{{type}}.png"/>
+    </view>
+    <view class="result-title text-bold text-xxl">{{title}}</view>
+    <view class="result-des text-lg">{{subTitle}}</view>
+  </view>
+  <view class="result-action">
+    <button size="default" onTap="goBack" type="primary">返 回</button>
+  </view>
 </view>

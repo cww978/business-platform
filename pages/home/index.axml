@@ -1,4 +1,5 @@
 <view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
   <view>
   	<view class="cu-bar bg-white solid-bottom">
       <view class="action">
@@ -7,7 +8,7 @@
     </view>
     <view class="cu-list grid col-3 no-border">
       <block a:for="{{menus}}"> 
-          <view data-index="{{index}}" onTap="onItemClick" class="cu-item">
+          <view a:if="{{item.show}}" data-index="{{index}}" onTap="onItemClick" class="cu-item">
             <view class="cuIcon">
               <view class="cu-avatar radius" style="{{'background-image:url(/static/menu-icon/'+item.icon+');'}}"></view>
             </view>

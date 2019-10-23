@@ -2,7 +2,7 @@
   <scroll-view style="height: 100vh;" scroll-y onScrollToLower="onScrollToLower">
     <view class="cu-list menu">
       <block a:for="{{menus}}">
-        <view onTap="clickMenu" data-path="{{item.path}}" class="shadow-blur cu-item">
+        <view a:if="{{item.show}}" onTap="clickMenu" data-path="{{item.path}}" class="shadow-blur cu-item">
 					<view class="content padding-tb-sm">
 						<view>{{item.text}}</view>
 						<view class="text-gray text-sm">{{item.subTitle}}</view>

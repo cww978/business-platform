@@ -57,7 +57,7 @@
       </list>
       <flex class="cu-form-group">
         <view class="title text-lg">当前地点</view>
-        <flex-item class="padding-left"><view onTap="clickAddress" class="text-df text-gray text-cut">{{address}}</<view></flex-item>
+        <flex-item class="padding-left"><view onTap="clickAddress" class="text-lg text-gray text-cut">{{address}}</<view></flex-item>
         <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
       <view class="cu-form-group">
