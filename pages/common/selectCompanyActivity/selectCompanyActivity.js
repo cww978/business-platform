@@ -1,18 +1,28 @@
 import { selActivityCode, selTerminalActivityCode } from '/api/programExecute'
 import { selProgramExecuteRole } from '/api/role'
+import { selSalesArea } from '/api/shareHelp'
 const app = getApp()
 Page({
   data: {
-    type: 1,
+    type: -1,
+    modalContent: '对不起，您暂时没有权限',
+    showModal: false,
     showProgrammePicker: false,
     realCity: 0,
     cityCode: 0,
     cityText: 0,
-    loading: false,
+    loading: true,
     isCity: false,
     programmes: [],
+    areaList: [],
     programmeIndex: 0,
     isActivityId: false
+  },
+  handleModalRight() {
+    this.setData({ showModal: false })
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
   },
   switchUserType(type) {
     let programmeId = this.data.programmes[this.data.programmeIndex]['ACTIVITY_ID']
@@ -40,7 +50,8 @@ Page({
           url: `/pages/registrationmodify/implementationlist/implementationlist?programmeId=${programmeId}&cityCode=${cityCode}`
         })
         break
-      default: break
+      default: this.setData({ showModal: true })
+        break
     }
   },
   // 确定地区更改
@@ -65,7 +76,6 @@ Page({
       userId: app.globalData.userInfo.userId,
       companyId: this.data.cityCode
     }).then(res => {
-      console.log('方案编码', res.data)
       let isActivityId = false
       if (res.data.length > 0) {
         isActivityId = true
@@ -86,7 +96,6 @@ Page({
       companyId: this.data.cityCode,
       type: type
     }).then(res => {
-      console.log('方案编码', res.data)
       let isActivityId = false
       if (res.data.length > 0) {
         // 格式化数据
@@ -116,6 +125,11 @@ Page({
     app.globalData.registration['realCity'] = this.data.realCity
     app.globalData.registration['companyId'] = this.data.cityCode
     this.switchUserType(this.data.type)
+  },
+  onReady() {
+    selSalesArea({ userId: app.globalData.userInfo.userId }).then(res => {
+      this.setData({ areaList: res.data, loading: false })
+    })
   },
   onLoad(options) {
     this.setData({ type: options.type })

@@ -1,9 +1,5 @@
-import { selSalesArea } from '/api/shareHelp'
-const app = getApp()
 Component({
   data: {
-    month: 1,
-    year: 2000,
     loading: false,
     isCity: false,
     isProv: false,
@@ -18,18 +14,25 @@ Component({
   },
   props: {
     type: 1,
+    list: [],
     onConfirm: () => {}
   },
-  didMount() {
-    let userId = app.globalData.userInfo.userId
-    // 获取区域
-    this.setData({ loading: true })
-    selSalesArea({ userId: userId }).then(res => {
-      this.setData({ loading: false })
-      this.formatData(res.data)
-    })
+  didMount() {},
+  didUpdate(e) {
+    if (e.list != this.props.list) {
+      this.formatData(this.props.list)
+      try{
+        this.setData({
+          provs: this.getProvsForAreaCode(this.data.areas[this.data.areaIndex]['CODE'])
+        })
+        this.setData({
+          citys: this.getCitysForProvCode(this.data.provs[this.data.provIndex]['CODE'])
+        })
+      } catch(e) {
+        return true
+      }
+    }
   },
-  didUpdate() {},
   didUnmount() {},
   methods: {
     // 保存执行

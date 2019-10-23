@@ -29,8 +29,9 @@ App({
           dd.getAuthCode({
             success:function(res){
               getUserInfo(res).then((data) => {
-                dd.setStorage('userInfo', data)
-                app.globalData.userInfo = data
+                console.log('用户信息', data.result)
+                dd.setStorage('userInfo', data.result)
+                app.globalData.userInfo = data.result
                 console.info('authcode', res)
               })
             }

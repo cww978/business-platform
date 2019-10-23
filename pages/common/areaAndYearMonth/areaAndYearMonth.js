@@ -1,5 +1,6 @@
 import { selRegionStock, selSettleStock } from '/api/account'
 import { dateFormat } from '/util/tool'
+import { selAccountCompanyTree } from '/api/account'
 const app = getApp()
 Page({
   data: {
@@ -10,6 +11,7 @@ Page({
     cityCode: 0,
     cityText: 0,
     isCity: false,
+    areaList: [],
     yearMonth: dateFormat(new Date(), 'yyyy-MM'),
     type: ''
   },
@@ -24,7 +26,7 @@ Page({
   handleModalRight() {
     this.setData({ showModal: false })
   },
-  setCityCode(e) {
+  confirmCompany(e) {
     this.setData({
       realCity: e.realCity,
       cityCode: e.city.code,
@@ -38,10 +40,21 @@ Page({
       format: 'yyyy-MM',
       currentDate: this.data.yearMonth,
       success(res) {
-        that.setData({
-          'yearMonth': res.date
-        })
+        if (res.date != void 0) {
+          that.setData({ 'yearMonth': res.date })
+          that.getAccountCompanyTree()
+        }
       }
+    })
+  },
+  getAccountCompanyTree() {
+    this.setData({ loading: true })
+    selAccountCompanyTree({
+      userId: app.globalData.userInfo.userId,
+      month: this.data.yearMonth.split('-')[1],
+      year: this.data.yearMonth.split('-')[0]
+    }).then(res => {
+      this.setData({ areaList: res.data, loading: false })
     })
   },
   clickDefine() {
@@ -90,7 +103,9 @@ Page({
       }
     }
   },
-  onReady() {},
+  onReady() {
+    this.getAccountCompanyTree()
+  },
   onLoad(options) {
     this.setData({ type: options.type })
   },

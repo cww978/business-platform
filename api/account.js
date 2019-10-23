@@ -12,7 +12,7 @@ export function selAccounts(param){
   return request({
     url: '/account/selAccounts',
     param: param,
-    loading: true,
+    loading: false,
     dataType: 'json',
     method: 'get'
   })

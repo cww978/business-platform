@@ -1,25 +1,19 @@
 <view>
   <view>
-    <view>
-      <view class="header">
+    <list>
+      <view slot="header">
         <view>
-          <text class="text">请选择区域和时间</text>
+          <text class="text">选择年月和销区</text>
         </view>
       </view>
-      <list>
-      <list-item arrow="{{true}}" onClick="clickCity">公司
-        <view slot="extra" class="text-cut">
-          {{cityText==''?'请选择':cityText}}
-        </view>  
+      <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
+        年月
+        <view slot="extra">
+          {{yearMonth==''?'请选择':yearMonth}}
+        </view>
       </list-item>
-        <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
-          年月
-          <view slot="extra">
-            {{yearMonth==''?'请选择':yearMonth}}
-          </view>
-        </list-item>
-      </list>
-    </view>
+      <select-company list="{{areaList}}" onConfirm="confirmCompany"></select-company>
+    </list>
     <view class="padding-xs"></view>
     <view class="padding-xs">
       <button hover-class="button-hover" type="primary" loading="{{loading}}" class="bg-blue text-white cu-btn block lg" disabled="{{!isCity || loading}}"  onTap="clickDefine">确 定</button>

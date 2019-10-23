@@ -6,3 +6,15 @@
 .am-list-extra {
   flex-basis: auto;
 }
+.am-list-line {
+  min-height: 46px;
+}
+.am-list-item {
+  margin: 8px 0px;
+}
+.am-list-item:nth-of-type(1) {
+  margin-top: 0px;
+}
+.am-list-item:nth-last-of-type(1){
+  margin-bottom: 0px;
+}

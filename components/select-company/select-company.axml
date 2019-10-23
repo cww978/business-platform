@@ -32,7 +32,4 @@
       </picker>
     </list-item>
   </list>
-  <!-- <view class="padding">
-    <button hover-class="button-hover" onTap="save" loading="{{loading}}" disabled="{{!isCity}}" class="bg-blue text-white cu-btn block lg" type="primary">确 定</button>
-  </view> -->
 </view>

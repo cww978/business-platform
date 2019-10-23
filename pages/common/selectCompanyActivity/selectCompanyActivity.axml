@@ -5,7 +5,7 @@
         <text class="text">选择地区和方案编码</text>
       </view>
     </view>
-    <select-company onConfirm="confirmCompany"></select-company>
+    <select-company list="{{areaList}}" onConfirm="confirmCompany"></select-company>
     <list-item arrow="{{true}}" a:if="{{programmes.length > 0}}">
       <picker onChange="programmeChange" range-key="ACTIVITY_CODE" range="{{programmes}}">
         <view class="picker">
@@ -42,6 +42,13 @@
       </view>
     </list-item>
   </list>
+  <!-- 操作提示框 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="操作提示"
+    show="{{showModal}}"/>
   <view class="padding-xs"></view>
   <view class="padding-xs">
     <button hover-class="button-hover" type="primary" class="cu-btn block bg-blue lg" loading="{{loading}}" disabled="{{!(isActivityId && isCity)}}"  onTap="clickDefine">确 定</button>

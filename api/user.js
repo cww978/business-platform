@@ -6,13 +6,14 @@ import request from '../util/request'
  * @param authCode String
  */
 export function getUserInfo(param){
-  return new Promise(resolve => {
-    console.log('获取用户信息', param)
-    resolve({
-      userId: '0100271822890151',
-      userName: ''
+    return request({
+      url: '/login',
+      baseUrl: 'DD_SERVER_URL',
+      param: param,
+      loading: true,
+      dataType: 'json',
+      method: 'get'
     })
-  })
 }
 
 /**
