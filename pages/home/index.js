@@ -5,7 +5,7 @@ let app = getApp()
 //industry 中烟业务员角色
 //terminal 终端公司管理员角色
 //salesman 终端公司业务员角色
-const roles = ['industry', 'terminal', 'salesman'] 
+const roles = ['industry', 'terminal', 'salesman']
 Page({
   data: {
     userType: -1,
@@ -128,6 +128,7 @@ Page({
       })
     })
   },
+  // 根据人员角色过滤菜单
   filterMenu() {
     // 是终端管理员角色身份
     let menus = this.data.menus

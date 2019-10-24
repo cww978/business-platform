@@ -7,7 +7,7 @@
         </view>
       </view>
       <list-item arrow="{{true}}" onClick="testTimeClick" last="{{true}}">
-        年月
+        年 月
         <view slot="extra">
           {{yearMonth==''?'请选择':yearMonth}}
         </view>
@@ -16,7 +16,11 @@
     </list>
     <view class="padding-xs"></view>
     <view class="padding-xs">
-      <button hover-class="button-hover" type="primary" loading="{{loading}}" class="bg-blue text-white cu-btn block lg" disabled="{{!isCity || loading}}"  onTap="clickDefine">确 定</button>
+      <button hover-class="button-hover" type="primary" loading="{{loading}}"
+      class="bg-blue text-white cu-btn block lg" disabled="{{!isCity || loading}}" 
+      onTap="clickDefine">
+        确 定
+      </button>
     </view> 
   </view>
   <c-modal

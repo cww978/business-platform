@@ -28,8 +28,8 @@ input{
   padding-right: 5px;
 }
 .cu-form-group .title {
-  font-size: 17px;
-    min-width: calc(4em + 15px);
+  font-size: 0.32rem;
+  min-width: calc(4em + 15px);
 }
 .row {
   display: flex;

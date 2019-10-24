@@ -3,7 +3,7 @@
     <view class="result-icon">
       <image mode="scaleToFill" src="/static/image/{{type}}.png"/>
     </view>
-    <view class="result-title text-bold text-xxl">{{title}}</view>
+    <view class="result-title text-black text-bold text-xl">{{title}}</view>
     <view class="result-des text-lg">{{subTitle}}</view>
   </view>
   <view class="result-action">

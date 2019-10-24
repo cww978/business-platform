@@ -5,12 +5,12 @@
   padding-top: 10vh;
 }
 .result-icon image{
-  width: 200rpx;
-  height: 200rpx;
-  margin: 10px;
+  width: 180rpx;
+  height: 180rpx;
+  margin: 8px;
 }
 .result-title, .result-des {
-  margin: 10px
+  margin: 8px
 }
 .result-des {
   width: 70%;

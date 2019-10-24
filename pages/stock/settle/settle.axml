@@ -44,13 +44,13 @@
   <!-- 页脚操作按钮 -->
   <footer>
     <flex-item>
-      <button hover-class="button-hover" disabled="{{isSave}}" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+      <button disabled="{{isSave}}" onTap="save" type="primary">
         {{isSave?'已结账':'结 账'}}
       </button>
     </flex-item>
     <flex-item a:if="{{showConfirm}}">
       <view>
-        <button hover-class="button-hover" disabled="{{isConfirm}}" onTap="define" class="bg-green text-white cu-btn block lg" type="default">
+        <button disabled="{{isConfirm}}" plain="{{true}}" onTap="define" type="primary">
           {{isConfirm?'已确认':'确 认'}}
         </button>
       </view>

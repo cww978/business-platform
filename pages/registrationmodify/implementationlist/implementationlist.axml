@@ -33,7 +33,7 @@
             <flex-item><view class="text-lg">Block</view></flex-item>
           </flex>
           <flex>
-            <view class="text-lg text-blue">详情</view>
+            <view onTap="openEdit" class="text-lg text-blue">详情</view>
           </flex>
           <view class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
         </list-item>

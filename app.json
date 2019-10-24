@@ -36,7 +36,8 @@
     "pages/noregistration/implementation/implementation",
     "pages/common/upload/upload",
     "pages/registrationmodify/registrationmodify",
-    "pages/registrationmodify/implementationlist/implementationlist"
+    "pages/registrationmodify/implementationlist/implementationlist",
+    "pages/registrationmodify/implementationEdit/implementationEdit"
   ],
   "window": {
     "defaultTitle": "统一业务平台"

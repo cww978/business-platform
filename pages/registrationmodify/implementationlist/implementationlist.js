@@ -8,6 +8,11 @@ Page({
   delete() {
     this.setData({ showModal: true })
   },
+  openEdit() {
+    dd.navigateTo({
+      url: `/pages/registrationmodify/implementationEdit/implementationEdit`
+    })
+  },
   handleModalLeft() {
     this.setData({ showModal: false })
   },

@@ -13,7 +13,8 @@
         </view>
       </view>
       <list>
-        <list-item arrow="{{true}}" onClick="clickCity">商业公司
+        <list-item arrow="{{true}}" onClick="clickCity">
+          <text class="text-lg">商业公司</text>
           <view slot="extra">
             {{companyText==''?'请选择':companyText}}
           </view>  
@@ -22,7 +23,7 @@
           <picker value="{{themeIndex}}" onChange="activityThemeChanged" range-key="themeName" range="{{themes}}">
             <view class="picker">
               <view class="row">
-                <view class="row-title">活动主题</view>
+                <view class="row-title text-lg">活动主题</view>
                 <view class="row-extra text-lg text-gray">{{themes[themeIndex].themeName}}</view>
               </view>
             </view>
@@ -32,7 +33,7 @@
           <picker value="{{typeIndex}}" onChange="activityTypeChanged" range-key="promotypeName" range="{{types}}">
             <view class="picker">
               <view class="row">
-                <view class="row-title">活动类型</view>
+                <view class="row-title text-lg">活动类型</view>
                 <view class="row-extra text-lg text-gray">{{types[typeIndex].promotypeName}}</view>
               </view>
             </view>
@@ -42,14 +43,14 @@
           <picker value="{{targetIndex}}" onChange="activityTargetChanged" range-key="tragetName" range="{{targets}}">
             <view class="picker">
               <view class="row">
-                <view class="row-title">活动对象</view>
+                <view class="row-title text-lg">活动对象</view>
                 <view class="row-extra text-lg text-gray">{{targets[targetIndex].tragetName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
         <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
-          零售户
+          <text class="text-lg">零售户</text>
           <view slot="extra" class="text-gray">
             {{retail.name==''?'请选择':retail.name}}
           </view>
@@ -78,7 +79,7 @@
   <footer>
     <flex-item>
       <view>
-        <button hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+        <button onTap="save" type="primary">
           确 定
         </button>
       </view>

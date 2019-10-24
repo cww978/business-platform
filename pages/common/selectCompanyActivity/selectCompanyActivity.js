@@ -8,7 +8,6 @@ Page({
     tipsInfo: '请选择区地获取方案',
     modalContent: '',
     showModal: false,
-    showProgrammePicker: false,
     realCity: 0,
     cityCode: 0,
     cityText: 0,
@@ -66,10 +65,7 @@ Page({
       if (res.data.length > 0) {
         isActivityId = true
       } else {
-        this.setData({
-          showProgrammePicker: true,
-          tipsInfo: '该地区下没有可操作的方案'
-        })
+        this.setData({ tipsInfo: '该地区下没有可操作的方案' })
       }
       this.setData({
         isActivityId: isActivityId,
@@ -97,10 +93,7 @@ Page({
         }
         isActivityId = true
       } else {
-        this.setData({
-          showProgrammePicker: true,
-          tipsInfo: '该地区下没有可操作的方案'
-        })
+        this.setData({ tipsInfo: '该地区下没有可操作的方案' })
       }
       this.setData({
         isActivityId: isActivityId,

@@ -1,6 +1,7 @@
 <view>
   <loading-wapper loading="{{loading}}"></loading-wapper>
   <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
+    <!-- 方案信息 -->
     <list>
       <view slot="header">
 				<view>
@@ -9,38 +10,39 @@
         </view>
 			</view>
       <list-item disabled="{{true}}">
-        活动主题
+        <text class="text-lg">活动主题</text>
         <view slot="extra">
           {{programmeInfo['TITLE']}}
         </view>
       </list-item>
       <list-item disabled="{{true}}">
-        活动类型
+        <text class="text-lg">活动类型</text>
         <view slot="extra">
           {{programmeInfo['TYPENAME']}}
         </view>
       </list-item>
     </list>
+    <!-- 填写方案 -->
     <view>
-      <view class="header">
-        <view>
-          <text class="icon lg cuIcon-writefill"></text>
-          <text class="text">填写信息</text>
-        </view>
-      </view>
       <list>
+        <view slot="header">
+          <view>
+            <text class="icon lg cuIcon-writefill"></text>
+            <text class="text">填写信息</text>
+          </view>
+        </view>
         <list-item arrow="{{true}}">
           <picker value="{{targetIndex}}" onChange="targetPickerChange" range-key="tragetName" range="{{targets}}">
             <view class="picker">
               <view class="row">
-                <view class="row-title">活动对象</view>
-                <view class="row-extra text-lg text-gray">{{targets[targetIndex].tragetName}}</view>
+                <view class="row-title text-lg">活动对象</view>
+                <view class="row-extra text-gray">{{targets[targetIndex].tragetName}}</view>
               </view>
             </view>
           </picker>
         </list-item>
         <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
-          零售户
+          <text class="text-lg">零售户</text>
           <view slot="extra" class="text-gray text-cut">
             {{retail.name==''?'请选择':retail.name}}
           </view>
@@ -146,10 +148,11 @@
       </view>
     </view>
   </scroll-view>
+  <!-- 操作按钮 -->
   <footer>
     <flex-item>
       <view>
-        <button disabled="{{!isClick}}" hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+        <button disabled="{{!isClick}}" onTap="save" type="primary">
           执 行
         </button>
       </view>

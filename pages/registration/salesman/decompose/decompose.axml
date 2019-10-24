@@ -51,7 +51,7 @@
   <footer>
     <flex-item>
       <view>
-        <button hover-class="button-hover" onTap="save" class="bg-blue text-white cu-btn block lg" type="default">
+        <button onTap="save" type="primary">
           确定分配
         </button>
       </view>
