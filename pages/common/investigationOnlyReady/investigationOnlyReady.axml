@@ -1,0 +1,39 @@
+<view>
+  <view scroll-y="{{true}}" style="min-height: 100vh">
+    <view>
+      <view class="header">
+        <view>
+          <text class="text">品吸测试信息</text>
+        </view>
+      </view>
+      <modify-item title="测试时间" content="2019-02-01" old="2019-02-02"></modify-item>
+      <modify-item title="测试用烟" content="测试用烟1" old="测试用烟2"></modify-item>
+      <modify-item title="测试地点" content="测试地点1" old="测试地点2"></modify-item>
+      <modify-item title="样烟条数" content="100" old="20"></modify-item>
+      <modify-item title="测试人数" content="100" old="10"></modify-item>
+      <block a:for="{{investigList}}">
+        <view class="header">
+          <view>
+            <text class="text">{{item.title}}</text>
+          </view>
+        </view>
+        <view a:for="{{item.tests}}" a:for-item="item2" a:for-index="index2" class="cu-form-group">
+          <view class="title text-lg">{{item2}}</view>
+          <view>{{investigForm[item.form][index2]}}</view>
+          <view class="text-df text-red">(原：21)</view>
+        </view>
+      </block>
+      <view>
+        <view class="header">
+          <view>
+            <text class="text">更多建议</text>
+          </view>
+        </view>
+        <view class="bg-white padding">
+          <view class="text-lg padding-xs">无</view>
+          <view class="text-df text-red padding-xs">(原：大萨达撒多)</view>
+        </view>
+      </view>
+    <view class="padding-xs"></view>
+  </view>
+</view>

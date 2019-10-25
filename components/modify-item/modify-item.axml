@@ -1,0 +1,18 @@
+<view>
+  <flex class="cu-form-group solid-bottom">
+    <view class="title text-lg" onTap="titleClick">{{title}}</view>
+    <flex-item a:if="{{extra != ''}}">
+      <view class="text-df text-gray text-center">
+        {{extra}}
+      </view>
+    </flex-item>
+    <flex-item class="padding-left">
+      <view class="text-right text-lg text-gray text-cut">
+        {{content}}
+      </view>
+    </flex-item>
+  </flex>
+  <view class="text-right old" a:if="{{old != ''}}">
+    <text class="text-red text-df">(原：{{old}})</text>
+  </view>
+</view>

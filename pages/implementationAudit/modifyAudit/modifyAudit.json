@@ -1,7 +1,8 @@
 {
-  "defaultTitle": "方案执行修改",
+  "defaultTitle": "方案修改申请审核",
   "allowsBounceVertical": "NO",
   "usingComponents":{
+    "modify-item": "/components/modify-item/modify-item",
     "c-modal": "/components/c-modal/c-modal",
     "loading-wapper": "/components/loading-wapper/loading-wapper",
     "upload-image": "/components/upload-image/upload-image",

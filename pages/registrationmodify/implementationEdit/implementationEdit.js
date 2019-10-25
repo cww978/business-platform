@@ -1,10 +1,11 @@
 import { uploadFile } from '/api/common'
-import { selResourcesDetail, selPromoItem, saveProgrammeImplement } from '/api/programExecute'
+import { selRegDetail, selResourcesDetail, selPromoItem, saveProgrammeImplement } from '/api/programExecute'
 import { selObjectElement, selProgrammeInfo, selProgrammeInvestigation } from '/api/shareHelp'
 import { getLocation } from '/util/location.js'
 const app = getApp()
 Page({
   data: {
+    showModal: false,
     programmeInfo: {},
     loading: false,
     companyId: 0,
@@ -152,66 +153,7 @@ Page({
   },
   // 执行登记
   save() {
-    // 构建参数
-    let retailId = this.data.retail.id
-    let targetId = this.data.targets[this.data.targetIndex].targetId
-    let otherPoints = []
-    for (let item of this.data.otherPoints) {
-      otherPoints.push(item.itemId + ',' + item.value)
-    }
-    otherPoints = otherPoints.join(';')
-    let resources = []
-    for (let item of this.data.resources) {
-      resources.push(item.ADSGOODS_ID + ',' + item.useNum)
-    }
-    resources = resources.join(';')
-    let imgs = []
-    for (let img of this.data.imgs) {
-      imgs.push(img.id)
-    }
-    imgs = imgs.join(',')
-    let questionIds = []
-     for (let item of this.data.questions) {
-      questionIds.push(item.id)
-    }
-    questionIds = questionIds.join(',')
-    let objective = ''
-    for (let item of this.data.objectives) {
-      if (item.active) {
-        objective = item.id
-        break
-      }
-    }
-    let data = {
-      regId: 0,
-      executeType: app.globalData.registration['userType'] == 1 ? 1 : 2,
-      location: this.data.address,
-      userId: app.globalData.userInfo.userId,
-      activityId: this.data.activityId,
-      companyId: this.data.companyId,
-      targetId: targetId,
-      imgs: imgs,
-      custCode: retailId,
-      longitude: this.data.longitude,
-      latitude: this.data.latitude,
-      resources: resources,
-      otherPoints: otherPoints,
-      investigation: questionIds,
-      investTarget: objective,
-      personNum: this.data.mans
-    }
-    // 保存操作
-    saveProgrammeImplement(data).then(res => {
-      let [ type, title ] = ['success', '保存成功']
-      if (res.data.saveState != 0) {
-        type = 'fail'
-        title = '保存失败'
-      }
-      console.log('执行结果', res.data)
-      dd.redirectTo({
-        url: `/pages/common/result/result?type=${type}&title=${title}`
-      })
-    })
+    this.setData({ showModal: true })
   },
   // 获取其他要素
   getOtherPoints() {
@@ -260,6 +202,24 @@ Page({
         resolve()
       })
     })
+  },
+  // 查询执行单详细信息
+  getRegDetail() {
+    selRegDetail({ regId: 43 }).then((res) => {
+      let detail = {}
+      // 如果修改了就显示修改之后的信息
+      if (res.data.listMod == void 0) {
+        detail = res.data.listPro
+      } else {
+        detail = res.data.listMod
+      }
+    })
+  },
+  handleModalLeft() {
+    this.setData({ showModal: false })
+  },
+  handleModalRight() {
+    this.setData({ showModal: false })
   },
   // 准备数据
   onReady() {

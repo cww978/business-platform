@@ -86,7 +86,8 @@ Page({
           { role: ['terminal'], show: false ,path: '/pages/registration/registration', text: '终端确定收货' },
           { role: ['industry', 'salesman'], show: false ,path: '/pages/registration/registration', text: '方案执行登记' },
           { role: ['industry', 'salesman'], show: false, path: '/pages/noregistration/noregistration', text: '非方案执行登记' },
-          { role: ['industry', 'salesman'], show: false, path: '/pages/registrationmodify/registrationmodify', text: '方案执行修改' }
+          { role: ['industry', 'salesman'], show: false, path: '/pages/registrationmodify/registrationmodify', text: '执行修改' },
+          { role: ['industry', 'salesman'], show: false, path: '/pages/implementationAudit/implementationAudit', text: '执行审核' }
         ]
       }
     ]

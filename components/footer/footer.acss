@@ -10,6 +10,7 @@
   box-shadow: rgba(200, 200, 200, 0.2) 0 -2px 5px;
 }
 .footer button {
+  margin: 0px 5px;
   height: 40px;
   line-height: 40px;
   font-size: .32rem;

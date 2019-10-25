@@ -1,0 +1,11 @@
+{
+  "defaultTitle": "消费调研",
+  "allowsBounceVertical": "NO",
+  "usingComponents":{
+    "modify-item": "/components/modify-item/modify-item",
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index",
+    "flex": "mini-antui/es/flex/index",
+    "flex-item": "mini-antui/es/flex/flex-item/index"
+  }
+}

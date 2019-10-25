@@ -1,6 +1,22 @@
 import request from '../util/request'
 
 /**
+ * 查询执行单详细信息
+ * @param regId String
+ */
+export function selRegDetail(param){
+  console.log('查询执行单详细信息', param)
+  return request({
+    url: '/programExecute/selRegDetail',
+    param: param,
+    loading: false,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+
+/**
  * 判断地区是否已经锁定关账
  * @param companyId String
  */

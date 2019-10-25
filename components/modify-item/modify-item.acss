@@ -1,0 +1,19 @@
+.cu-form-group .title {
+  font-size: 0.32rem;
+  width: calc(8em + 15px);
+}
+.row {
+  display: flex;
+  align-items: center;
+}
+.row-title {
+  flex: 1;
+}
+.row-extra {
+  font-size: 16px;
+  flex-basis: initial;
+}
+.old {
+  padding: 5px 15px 5px 5px;
+  background-color: #f9f9f9f9;
+}

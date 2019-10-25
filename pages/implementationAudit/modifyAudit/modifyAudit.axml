@@ -1,0 +1,113 @@
+<view>
+  <loading-wapper loading="{{loading}}"></loading-wapper>
+  <scroll-view scroll-y="{{true}}" style="height: calc(100vh - 60px)">
+    <!-- 填写方案 -->
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-writefill"></text>
+          <text class="text">填写信息</text>
+        </view>
+      </view>
+      <modify-item title="活动对象" content="活动对象12" old="活动对象22"></modify-item>
+      <modify-item title="零售户" content="零售户1"></modify-item>
+      <modify-item title="地 点" content="杭州" old="北京"></modify-item>
+    </view>
+    <!-- 其他要素 -->
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-newshot"></text>
+          <text class="text">其他要素</text>
+        </view>
+      </view>
+      <modify-item title="人 数" content="100" old="1"></modify-item>
+    </view>
+    <!-- 物资使用 -->
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-favor"></text>
+          <text class="text">资源使用情况</text>
+        </view>
+      </view>
+      <modify-item title="物资1" extra="最大值 400条" content="100" old="1"></modify-item>
+    </view>
+    <!-- 现场照片 -->
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-picfill"></text>
+          <text class="text">现场图片</text>
+        </view>
+      </view>
+      <upload-image urls="{{imgs}}"></upload-image>
+    </view>
+    <!-- 消费调研 -->
+    <view>
+      <view class="header">
+        <view>
+          <text class="icon lg cuIcon-edit"></text>
+          <text class="text">消费调研</text>
+        </view>
+      </view>
+      <flex class="padding bg-white solid-bottom" wrap="wrap">
+        <view class="title text-df">调研目的: </view>
+        <flex wrap="wrap">
+          <view class="padding-left">
+            <view class="cu-tag text-df line-gray">新产品调研</view>
+          </view>
+          <view class="padding-left" data-index="{{index}}">
+            <view class="cu-tag text-df line-gray">老产品调研</view>
+          </view>
+        </flex>
+      </flex>
+      <list>
+        <list-item class="card" disabled="{{false}}" onClick="clickInvestigation">
+          <flex>
+            <flex-item><view class="text-lg">样品烟1</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-df text-gray">测试样烟数：</view>
+            <flex-item><view class="text-df">10</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-df text-gray">测试人员数：</view>
+            <flex-item><view class="text-df">100</view></flex-item>
+          </flex>
+          <view class="card-seal">
+            <image mode="widthFix" src="/static/image/revised.png"/>
+          </view>
+        </list-item>
+      </list>
+    </view>
+    <view class="padding-xs"></view>
+  </scroll-view>
+  <!-- 修改确认提示 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="{{modalContent}}"
+    onLeft="handleModalLeft"
+    title="{{modalTitle}}"
+    rightButtonText="{{modalButtonText}}"
+    show="{{showModal}}">
+    <textarea onInput="inputReject" slot="content" placeholder="意见"></textarea>
+  </c-modal>
+  <!-- 操作按钮 -->
+  <footer>
+    <flex-item>
+      <view>
+        <button plain="{{true}}" onTap="reject" type="primary">
+          驳 回
+        </button>
+      </view>
+    </flex-item>
+    <flex-item>
+      <view>
+        <button onTap="agree" type="primary">
+          同 意
+        </button>
+      </view>
+    </flex-item>
+  </footer>
+</view>

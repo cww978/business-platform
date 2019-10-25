@@ -1,0 +1,13 @@
+{
+  "defaultTitle": "执行审核",
+  "allowsBounceVertical": "NO",
+  "usingComponents":{
+    "popup": "mini-antui/es/popup/index",
+    "list": "mini-antui/es/list/index",
+    "list-item": "mini-antui/es/list/list-item/index",
+    "flex": "mini-antui/es/flex/index",
+    "flex-item": "mini-antui/es/flex/flex-item/index",
+    "loading-wapper": "/components/loading-wapper/loading-wapper",
+    "c-modal": "/components/c-modal/c-modal"
+  }
+}

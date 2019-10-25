@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents":{
+    "flex": "mini-antui/es/flex/index",
+    "flex-item": "mini-antui/es/flex/flex-item/index"
+  }
+}

@@ -74,7 +74,7 @@
           <text class="text">消费调研</text>
         </view>
       </view>
-      <flex class="padding bg-white" wrap="wrap">
+      <flex class="padding bg-white solid-bottom" wrap="wrap">
         <view class="title text-df">调研目的: </view>
         <flex wrap="wrap">
           <block a:for="{{objectives}}">
@@ -100,7 +100,7 @@
             <flex-item><view class="text-df">100</view></flex-item>
           </flex>
           <flex>
-            <view  class="text-df text-blue">查看详情</view>
+            <view class="text-df text-blue">查看详情</view>
           </flex>
         </list-item>
       </list>
@@ -109,6 +109,14 @@
       </view>
     </view>
   </scroll-view>
+  <!-- 修改确认提示 -->
+  <c-modal
+    onRight="handleModalRight"
+    content="是否确定提交修改?"
+    onLeft="handleModalLeft"
+    title="信息确认修改"
+    rightButtonText="确认提交"
+    show="{{showModal}}"/>
   <!-- 操作按钮 -->
   <footer>
     <flex-item>
