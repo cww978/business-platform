@@ -3,7 +3,6 @@ const app = getApp()
 Page({
   data: {
     list: [],
-    companyId: 0,
     keyword: '',
     showType: 1,
     tobaTypes: [
@@ -60,7 +59,7 @@ Page({
     }
     selTobaList({
         userId: app.globalData.userInfo.userId,
-        companyId: this.data.companyId,
+        companyId: app.globalData.registration['companyId'],
         keyword: this.data.keyword,
         tobaType: type
       }).then(res => {
@@ -72,7 +71,7 @@ Page({
   getAdsgoodsList() {
     selAdsgoodsList({
         userId: app.globalData.userInfo.userId,
-        companyId: this.data.companyId,
+        companyId: app.globalData.registration['companyId'],
         keyword: this.data.keyword
       }).then(res => {
       this.setData({
@@ -87,7 +86,6 @@ Page({
         { text: '品吸烟', active: false, value: 2 },
         { text: '试制烟', active: false, value: 3 }
       ],
-      companyId: options.companyId,
       showType: options.type
     })
     if (options.type == 1) {

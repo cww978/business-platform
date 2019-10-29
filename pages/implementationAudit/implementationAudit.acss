@@ -3,7 +3,8 @@
   height: 40px;
   position: sticky;
   background-color: #fff;
-  z-index: 1;
+  transition: box-shadow 100ms ease-out;
+  z-index: 2;
 }
 
 .tabs.shadow {

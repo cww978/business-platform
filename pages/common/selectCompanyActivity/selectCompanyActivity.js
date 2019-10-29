@@ -67,6 +67,7 @@ Page({
       } else {
         this.setData({ tipsInfo: '该地区下没有可操作的方案' })
       }
+      console.log('方案', res.data)
       this.setData({
         isActivityId: isActivityId,
         programmes: res.data,

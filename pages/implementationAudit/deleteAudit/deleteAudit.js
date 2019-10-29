@@ -5,6 +5,7 @@ Page({
     modalButtonText: '同 意',
     showModal: false,
     rejectValue: '',
+    imgs: [],
     objectives: [
       { id: 1, text: '新产品调研', active: false },
       { id: 2, text: '老产品调研', active: false }
@@ -33,7 +34,9 @@ Page({
     })
   },
   handleModalRight() {
-    this.setData({ showModal: false })
+    dd.redirectTo({
+      url: `/pages/common/result/result?type=success&title=审核成功&subTitle=你以为完成对执行单:1331删除申请的审核`
+    })
   },
   handleModalLeft() {
     this.setData({ showModal: false })
@@ -45,7 +48,8 @@ Page({
   },
   onLoad() {
     this.setData({
-      objectives: [{ id: 1, text: '新产品调研', active: false }, { id: 2, text: '老产品调研', active: false }]
+      objectives: [{ id: 1, text: '新产品调研', active: false }, { id: 2, text: '老产品调研', active: false }],
+      imgs: []
     })
   }
 });

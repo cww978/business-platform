@@ -20,10 +20,10 @@
             </view>
           </picker>
         </list-item>
-        <list-item arrow="{{true}}" onClick="openSearchPage" last="{{true}}">
+        <list-item arrow="{{true}}" a:if="{{targets[targetIndex].targetType == 2}}" onClick="openSearchPage" last="{{true}}">
           <text class="text-lg">零售户</text>
           <view slot="extra" class="text-gray text-cut">
-            {{retail.name==''?'请选择':retail.name}}
+            {{retailerInfo.custName?retailerInfo.custName:'请选择'}}
           </view>
         </list-item>
       </list>
@@ -33,31 +33,39 @@
         <view onTap="location"><text class="icon text-sl cuIcon-locationfill text-blue"></text></view>
       </flex>
     </view>
-    <view>
+    <!-- 其他要素填写 -->
+    <view a:if="{{regElement.length > 0}}">
       <view class="header">
         <view>
           <text class="icon lg cuIcon-newshot"></text>
           <text class="text">其他要素</text>
         </view>
       </view>
-      <view class="cu-form-group">
-        <view class="title text-lg">人数</view>
-        <input class="text-lg" type="text"  placeholder="请输入.." />
-      </view>
+      <block a:for="{{regElement}}">
+        <view class="cu-form-group">
+          <view class="title text-lg">{{item['ITEMNAME']}}</view>
+          <input a:if="{{item['INPUTTYPE'] == 1}}" onInput="inputOtherPoint" class="text-lg" type="number" data-index="{{index}}" value="{{item['VALUE']}}" placeholder="请输入.."/>
+          <input a:else class="text-lg" onInput="inputOtherPoint" type="text" data-index="{{index}}" placeholder="请输入.." value="{{item['VALUE']}}"/>
+        </view>
+      </block>
     </view>
-    <view>
+    <!-- 物资填写 -->
+    <view a:if="{{regGoods.length > 0}}">
       <view class="header">
         <view>
           <text class="icon lg cuIcon-favor"></text>
           <text class="text">资源使用情况</text>
         </view>
       </view>
-      <view class="cu-form-group">
-        <view class="title text-lg text-cut"  onTap="clickAdsgoods">物资1</view>
-        <input class="text-lg" type="number"  placeholder="请输入.."/>
-        <view class="text-df">最大值：100/条</view>
-      </view>
+      <block a:for="{{regGoods}}">
+        <view class="cu-form-group">
+          <view class="title text-lg text-cut"  onTap="clickAdsgoods">{{item['ADSGOODS_NAME']}}</view>
+          <input class="text-lg" type="number" data-index="{{index}}" onInput="inputResourcesUse" value="{{item['QTY']}}"  placeholder="请输入.."/>
+          <view class="text-df text-gray">{{item['UNIT']}}</view>
+        </view>
+      </block>
     </view>
+    <!-- 图片上传 -->
     <view>
       <view class="header">
         <view>
@@ -67,7 +75,8 @@
       </view>
       <upload-image urls="{{imgs}}" onUploadImg="addImage" onDeleteImg="deleteImage"></upload-image>
     </view>
-    <view>
+    <!-- 调研数据 -->
+    <view a:if="{{hasInvestigation == true}}">
       <view class="header">
         <view>
           <text class="icon lg cuIcon-edit"></text>
@@ -86,28 +95,32 @@
         </flex>
       </flex>
       <list>
-        <list-item disabled="{{true}}">
-          <flex>
-            <flex-item><view class="text-lg">样品烟1</view></flex-item>
-            <view  class="text-xxl"><text class="text-gray cuIcon-delete"></text></view>
-          </flex>
-          <flex>
-            <view class="text-df text-gray">测试样烟数：</view>
-            <flex-item><view class="text-df">10</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-df text-gray">测试人员数：</view>
-            <flex-item><view class="text-df">100</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-df text-blue">查看详情</view>
-          </flex>
-        </list-item>
+        <block a:for="{{regInvest}}">
+          <list-item disabled="{{true}}">
+            <flex>
+              <flex-item><view class="text-lg">{{item.tobacco}}</view></flex-item>
+              <view  class="text-xxl"><text class="text-gray cuIcon-delete"></text></view>
+            </flex>
+            <flex>
+              <view class="text-df text-gray">测试样烟数：</view>
+              <flex-item><view class="text-df">{{item.num}}</view></flex-item>
+            </flex>
+            <flex>
+              <view class="text-df text-gray">测试人员数：</view>
+              <flex-item><view class="text-df">{{item.mans}}</view></flex-item>
+            </flex>
+            <flex>
+              <view onTap="onQuestionClick" data-index="{{index}}" class="text-df text-blue">查看详情</view>
+            </flex>
+          </list-item>
+        </block>
       </list>
       <view class="padding-lg">
         <button onTap="investigClick" class="cu-btn block line-blue lg"><text class="cuIcon-upload"></text>增加测试品</button>
       </view>
     </view>
+    <!-- 站位view -->
+    <view class="padding-xs"></view>
   </scroll-view>
   <!-- 修改确认提示 -->
   <c-modal
@@ -121,7 +134,7 @@
   <footer>
     <flex-item>
       <view>
-        <button disabled="{{!isClick}}" onTap="save" type="primary">
+        <button onTap="submission" type="primary">
           提交申请
         </button>
       </view>

@@ -1,6 +1,7 @@
 {
   "defaultTitle": "执行审核",
-  "allowsBounceVertical": "NO",
+  "allowsBounceVertical": "YES",
+  "pullRefresh": true,
   "usingComponents":{
     "popup": "mini-antui/es/popup/index",
     "list": "mini-antui/es/list/index",

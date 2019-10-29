@@ -100,7 +100,7 @@ Page({
       'form.taste': taste
     })
     let data = {
-      id: this.data.form.id,
+      id: 0,
       regId: app.globalData.userInfo.userId,
       testTime: this.data.form.time,
       testDest: this.data.form.address,

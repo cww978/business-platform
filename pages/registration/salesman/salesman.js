@@ -64,7 +64,7 @@ Page({
   navToimp(){
     this.testAccount().then(() => {
       dd.navigateTo({
-        url: `/pages/common/implementation/implementation?activityType=${this.data.programmeInfo['ACTIVITYTYPE']}`
+        url: '/pages/common/implementation/implementation'
       })
     })
   },

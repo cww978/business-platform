@@ -30,82 +30,70 @@
       </view>
     </view>
   </popup>
-  <!-- 入库账单展示 -->
   <view>
     <view class="padding-xs"></view>
+    <!-- 未审核的执行单 -->
     <list a:if="{{activeTab == 0}}">
-      <list-item class="card" disabled="{{true}}" last="{{true}}">
-        <flex class="card-header">
-          <view class="text-lg text-gray">方案编码:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <flex-item><view class="text-lg text-cut">Black</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">活动对象:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">活动位置:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">执行单号:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view onTap="openModify" class="text-lg text-blue">详情</view>
-        </flex>
-        <view class="tag-state bg-yellow text-center text-white text-df">修改申请</view>
-      </list-item>
-      <list-item class="card" disabled="{{true}}" last="{{true}}">
-        <flex class="card-header">
-          <view class="text-lg text-gray">方案编码:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <flex-item><view class="text-lg text-cut">Black</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">活动对象:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">活动位置:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view class="text-lg text-gray">执行单号:</view>
-          <flex-item><view class="text-lg">Block</view></flex-item>
-        </flex>
-        <flex>
-          <view onTap="openDelete" class="text-lg text-blue">详情</view>
-        </flex>
-        <view class="tag-state bg-red text-center text-white text-df">删除申请</view>
-      </list-item>
-    </list>
-    <list a:else>
-      <block>
+      <view class="text-gray text-center padding-xl" a:if="{{notList.length<=0}}">暂无数据</view>
+      <block a:for="{{notList}}">
         <list-item class="card" disabled="{{true}}" last="{{true}}">
           <flex class="card-header">
-            <view class="text-lg text-gray">方案编码:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <view class="text-lg text-gray">执行单号:</view>
+            <flex-item><view class="text-lg">{{item['REG_CODE']}}</view></flex-item>
           </flex>
           <flex>
-            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
+            <flex-item><view class="text-lg text-cut">{{item['TITLE']}}</view></flex-item>
           </flex>
           <flex>
             <view class="text-lg text-gray">活动对象:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <flex-item><view class="text-lg">{{item['TRAGET_NAME']}}</view></flex-item>
           </flex>
           <flex>
-            <view class="text-lg text-gray">活动位置:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <view class="text-lg text-gray">执行人:</view>
+            <flex-item><view class="text-lg">{{item['CREATEPERSON_NAME']}}</view></flex-item>
           </flex>
           <flex>
+            <view class="text-lg text-gray">执行时间:</view>
+            <flex-item><view class="text-lg">{{item['ACTIVITYTIME']}}</view></flex-item>
+          </flex>
+          <block a:if="{{item['BILL_TYPE'] == 2}}">
+            <flex>
+              <view onTap="openModify" class="text-lg text-blue">详情</view>
+            </flex>
+            <view class="tag-state bg-yellow text-center text-white text-df">{{item['BILL_TYPE_COMM']}}</view>
+          </block>
+          <block a:elif="{{item['BILL_TYPE'] == 3}}" >
+            <flex>
+              <view onTap="openDelete" class="text-lg text-blue">详情</view>
+            </flex>
+            <view class="tag-state bg-red text-center text-white text-df">{{item['BILL_TYPE_COMM']}}</view>
+          </block>
+        </list-item>
+      </block>
+    </list>
+    <!-- 已审核的执行单 -->
+    <list a:else>
+      <view class="text-gray text-center padding-xl" a:if="{{alreadyList.length<=0}}">暂无数据</view>
+      <block a:for="{{alreadyList}}">
+        <list-item class="card" disabled="{{true}}" last="{{true}}">
+          <flex class="card-header">
             <view class="text-lg text-gray">执行单号:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <flex-item><view class="text-lg">{{item['REG_CODE']}}</view></flex-item>
+          </flex>
+          <flex>
+            <flex-item><view class="text-lg text-cut">{{item['TITLE']}}</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">活动对象:</view>
+            <flex-item><view class="text-lg">{{item['TRAGET_NAME']}}</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">执行人:</view>
+            <flex-item><view class="text-lg">{{item['ACTIVITYTIME']}}</view></flex-item>
+          </flex>
+          <flex>
+            <view class="text-lg text-gray">执行时间:</view>
+            <flex-item><view class="text-lg">{{item['CREATETIME']}}</view></flex-item>
           </flex>
           <flex>
             <view onTap="openModify" class="text-lg text-blue">详情</view>
@@ -113,35 +101,18 @@
           <view class="card-seal">
             <image mode="widthFix" src="/static/image/agree.png"/>
           </view>
-          <view class="tag-state bg-yellow text-center text-white text-df">修改申请</view>
-        </list-item>
-        <list-item class="card" disabled="{{true}}" last="{{true}}">
-          <flex class="card-header">
-            <view class="text-lg text-gray">方案编码:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">活动对象:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">活动位置:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">执行单号:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view onTap="openDelete" class="text-lg text-blue">详情</view>
-          </flex>
-          <view class="card-seal">
-            <image mode="widthFix" src="/static/image/reject.png"/>
-          </view>
-          <view class="tag-state bg-red text-center text-white text-df">删除申请</view>
+          <block a:if="{{item['BILL_TYPE'] == 2}}">
+            <flex>
+              <view onTap="openModify" class="text-lg text-blue">详情</view>
+            </flex>
+            <view class="tag-state bg-yellow text-center text-white text-df">{{item['BILL_TYPE_COMM']}}</view>
+          </block>
+          <block a:elif="{{item['BILL_TYPE'] == 3}}" >
+            <flex>
+              <view onTap="openDelete" class="text-lg text-blue">详情</view>
+            </flex>
+            <view class="tag-state bg-red text-center text-white text-df">{{item['BILL_TYPE_COMM']}}</view>
+          </block>
         </list-item>
       </block>
     </list>

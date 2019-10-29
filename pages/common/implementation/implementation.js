@@ -7,9 +7,6 @@ Page({
   data: {
     programmeInfo: {},
     loading: true,
-    companyId: 0,
-    activityId: 0,
-    activityType: '', // 活动类型
     address: '',
     longitude: 0,
     latitude: 0,
@@ -52,7 +49,7 @@ Page({
   // 判断是否需要调研
   hasInvestigation() {
     return new Promise(resolve => {
-      selProgrammeInvestigation({ activityId: this.data.activityId }).then(res =>{
+      selProgrammeInvestigation({ activityId: app.globalData.registration['activityId'] }).then(res =>{
         this.setData({
           hasInvestigation: res.data.investigate
         })
@@ -114,7 +111,7 @@ Page({
       question: this.data.questions[e.target.dataset.index]
     })
     dd.navigateTo({
-      url: `/pages/common/investigation/investigation?question=${e.index}&cityCode=${this.data.companyId}`
+      url: `/pages/common/investigation/investigation?question=${e.target.dataset.index}&cityCode=${app.globalData.registration['companyId']}`
     })
   },
   // 其他要素输入
@@ -141,7 +138,7 @@ Page({
   // 点击新增调研测试
   investigClick() {
     dd.navigateTo({
-      url: `/pages/common/investigation/investigation?cityCode=${this.data.companyId}`
+      url: `/pages/common/investigation/investigation?cityCode=${app.globalData.registration['companyId']}`
     })
   },
   // 打开零售户搜索
@@ -187,8 +184,8 @@ Page({
       executeType: app.globalData.registration['userType'] == 1 ? 1 : 2,
       location: this.data.address,
       userId: app.globalData.userInfo.userId,
-      activityId: this.data.activityId,
-      companyId: this.data.companyId,
+      activityId: app.globalData.registration['activityId'],
+      companyId: app.globalData.registration['companyId'],
       targetId: targetId,
       imgs: imgs,
       custCode: retailId,
@@ -216,7 +213,7 @@ Page({
   // 获取其他要素
   getOtherPoints() {
     return new Promise(resolve => {
-      selPromoItem({ activityId: this.data.activityId }).then(res => {
+      selPromoItem({ activityId: app.globalData.registration['activityId'] }).then(res => {
         console.log('其他要素', res.data)
         if (res.data.list.length != 0 && res.data.list[0] != null) {
           this.setData({ otherPoints: res.data.list })
@@ -228,7 +225,7 @@ Page({
   // 获取对象
   getTargets() {
     return new Promise(resolve => {
-      selObjectElement({ promoType: this.data.programmeInfo['ACTIVITYTYPE']}).then(res => {
+      selObjectElement({ promoType: this.data.programmeInfo['TYPEID']}).then(res => {
         this.setData({ targets: res.data, loading: false })
         resolve()
       })
@@ -239,8 +236,8 @@ Page({
     return new Promise(resolve => {
       selResourcesDetail({
         userId: app.globalData.userInfo.userId,
-        activityId: this.data.activityId,
-        companyId: this.data.companyId,
+        activityId: app.globalData.registration['activityId'],
+        companyId: app.globalData.registration['companyId'],
         executeType: app.globalData.registration['userType'] == 1 ? 1 : 2
       }).then(res => {
         this.setData({ resources: res.data })
@@ -283,10 +280,7 @@ Page({
       objectives: [
         { id: 1, text: '新产品调研', active: false },
         { id: 2, text: '老产品调研', active: false }
-      ],
-      activityType: options.activityType,
-      companyId: app.globalData.registration['companyId'],
-      activityId: app.globalData.registration['activityId']
+      ]
     })
   }
 })

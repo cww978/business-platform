@@ -11,13 +11,13 @@
 			</view>
       <list-item disabled="{{true}}">
         <text class="text-lg">活动主题</text>
-        <view slot="extra">
+        <view slot="extra" class="text-cut">
           {{programmeInfo['TITLE']}}
         </view>
       </list-item>
       <list-item disabled="{{true}}">
         <text class="text-lg">活动类型</text>
-        <view slot="extra">
+        <view slot="extra" class="text-cut">
           {{programmeInfo['TYPENAME']}}
         </view>
       </list-item>

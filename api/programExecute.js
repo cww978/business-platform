@@ -1,6 +1,41 @@
 import request from '../util/request'
 
 /**
+ * 查询审核执行单列表
+ * @param companyId String
+ * @param userId String
+ * @param activityId String
+ */
+export function selApprovalManRegList(param){
+  console.log('查询审核执行单列表', param)
+  return request({
+    url: '/programExecute/selApprovalManRegList',
+    param: param,
+    loading: true,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+/**
+ * 查询执行单列表
+ * @param companyId String
+ * @param userId String
+ * @param activityId String
+ */
+export function selSalesManRegList(param){
+  console.log('查询执行单列表', param)
+  return request({
+    url: '/programExecute/selSalesManRegList',
+    param: param,
+    loading: false,
+    dataType: 'json',
+    method: 'get'
+  })
+}
+
+
+/**
  * 查询执行单详细信息
  * @param regId String
  */

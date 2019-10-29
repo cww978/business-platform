@@ -14,53 +14,38 @@
   <!-- 执行单列表  -->
   <scroll-view style="height:calc(100vh - 60px)" scroll-y="{{true}}">
     <list>
-      <block>
+      <block a:for="{{list}}">
         <list-item disabled="{{true}}" last="{{true}}">
           <flex>
-            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
-            <view class="text-xxl" onTap="delete"><text class="text-gray cuIcon-delete"></text></view>
+            <flex-item><view class="text-lg text-cut">{{item['TITLE']}}</view></flex-item>
+            <view class="text-xxl" a:if="{{item['DEL_FLAG'] == 0}}" onTap="delete"><text class="text-gray cuIcon-delete"></text></view>
           </flex>
           <flex>
             <view class="text-lg text-gray">活动对象:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <flex-item><view class="text-lg">{{item['TRAGET_NAME']}}</view></flex-item>
           </flex>
           <flex>
-            <view class="text-lg text-gray">活动位置:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">执行单号:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view onTap="openEdit" class="text-lg text-blue">详情</view>
-          </flex>
-          <view class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
-        </list-item>
-        <list-item last="{{true}}">
-          <flex>
-            <flex-item><view class="text-lg text-cut">Black</view></flex-item>
-            <view class="text-xxl"><text class="text-gray cuIcon-delete"></text></view>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">活动对象:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
-          </flex>
-          <flex>
-            <view class="text-lg text-gray">活动位置:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <view class="text-lg text-gray">执行人:</view>
+            <flex-item><view class="text-lg">{{item['CREATEPERSON_NAME']}}</view></flex-item>
           </flex>
           <flex>
             <view class="text-lg text-gray">执行单号:</view>
-            <flex-item><view class="text-lg">Block</view></flex-item>
+            <flex-item><view class="text-lg">{{item['REG_CODE']}}</view></flex-item>
           </flex>
           <flex>
-            <view class="text-lg text-blue">详情</view>
+            <view class="text-lg text-gray">执行时间:</view>
+            <flex-item><view class="text-lg">{{item['CREATETIME']}}</view></flex-item>
           </flex>
-          <view class="tag-state bg-yellow text-center text-white text-df">删除申请中</view>
+          <flex>
+            <view data-id="{{item['REG_ID']}}" onTap="openEdit" class="text-lg text-blue">详情</view>
+          </flex>
+          <view a:if="{{item['DEL_FLAG'] == 0}}" class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
+          <view a:elif="{{item['DEL_FLAG'] == 1}}" class="tag-state bg-green text-center text-white text-df">删除申请中</view>
+          <view a:elif="{{item['DEL_FLAG'] == 2}}" class="tag-state bg-green text-center text-white text-df">修改申请中</view>
         </list-item>
       </block>
     </list>
+    <view class="padding-xs"></view>
   </scroll-view>
   <!-- 操作提示框 -->
   <c-modal
