@@ -134,7 +134,13 @@
   <footer>
     <flex-item>
       <view>
-        <button onTap="submission" type="primary">
+        <button a:if="{{regExecution['BILL_TYPE'] == 2}}" disabled="{{true}}" type="primary">
+          已提交修改
+        </button>
+        <button a:elif="{{regExecution['BILL_TYPE'] == 3}}" disabled="{{true}}" onTap="submission" type="primary">
+          已提交删除
+        </button>
+        <button a:else onTap="submission" type="primary">
           提交申请
         </button>
       </view>

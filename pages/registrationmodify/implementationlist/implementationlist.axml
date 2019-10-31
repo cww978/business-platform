@@ -1,7 +1,7 @@
 <view>
   <!-- 执行单搜索输入 -->
   <view style="height: 8px"></view>
-  <search-bar
+  <!-- <search-bar
     focus="{{false}}"
     value="{{value}}"
     placeholder="请输入执行单编码、名称"
@@ -10,15 +10,16 @@
     onClear="onClear"
     onSubmit="onSubmit"
     showCancelButton="{{false}}" />
-  <view style="height: 8px"></view>
+  <view style="height: 8px"></view> -->
   <!-- 执行单列表  -->
-  <scroll-view style="height:calc(100vh - 60px)" scroll-y="{{true}}">
+  <view>
     <list>
+      <view class="text-gray text-center padding-xl" a:if="{{list.length<=0}}">暂无数据</view>
       <block a:for="{{list}}">
         <list-item disabled="{{true}}" last="{{true}}">
           <flex>
             <flex-item><view class="text-lg text-cut">{{item['TITLE']}}</view></flex-item>
-            <view class="text-xxl" a:if="{{item['DEL_FLAG'] == 0}}" onTap="delete"><text class="text-gray cuIcon-delete"></text></view>
+            <view class="text-xxl" data-id="{{item['REG_ID']}}" a:if="{{item['BILL_TYPE'] == 1}}" onTap="delete"><text class="text-gray cuIcon-delete"></text></view>
           </flex>
           <flex>
             <view class="text-lg text-gray">活动对象:</view>
@@ -39,14 +40,14 @@
           <flex>
             <view data-id="{{item['REG_ID']}}" onTap="openEdit" class="text-lg text-blue">详情</view>
           </flex>
-          <view a:if="{{item['DEL_FLAG'] == 0}}" class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
-          <view a:elif="{{item['DEL_FLAG'] == 1}}" class="tag-state bg-green text-center text-white text-df">删除申请中</view>
-          <view a:elif="{{item['DEL_FLAG'] == 2}}" class="tag-state bg-green text-center text-white text-df">修改申请中</view>
+          <view a:if="{{item['BILL_TYPE'] == 1}}" class="tag-state bg-green text-center text-white text-df">可修改/删除</view>
+          <view a:elif="{{item['BILL_TYPE'] == 3}}" class="tag-state bg-red text-center text-white text-df">删除申请中</view>
+          <view a:elif="{{item['BILL_TYPE'] == 2}}" class="tag-state bg-yellow text-center text-white text-df">修改申请中</view>
         </list-item>
       </block>
     </list>
     <view class="padding-xs"></view>
-  </scroll-view>
+  </view>
   <!-- 操作提示框 -->
   <c-modal
     onRight="handleModalRight"

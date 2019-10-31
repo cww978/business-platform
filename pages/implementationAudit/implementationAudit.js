@@ -86,14 +86,14 @@ Page({
         userId: app.globalData.userInfo.userId,
         date: this.data.examineTime,
         regCode: ''
-      }).then((res => {
+      }).then(res => {
         if (this.data.activeTab == 0) {
           this.setData({ notList: res.data.list, not: true })
         } else {
           this.setData({ alreadyList: res.data.list, already: true })
         }
         resolve()
-      })).catch(error => {
+      }).catch(error => {
         reject()
       })
     }) 

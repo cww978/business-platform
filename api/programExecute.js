@@ -1,6 +1,21 @@
 import request from '../util/request'
 
 /**
+ * 执行登记单删除申请
+ * @param regId String
+ */
+export function delRegApply(param){
+  console.log('执行登记单删除申请', param)
+  return request({
+    url: '/programExecute/delRegApply',
+    data: param,
+    loading: true,
+    dataType: 'json',
+    method: 'post'
+  })
+}
+
+/**
  * 查询审核执行单列表
  * @param companyId String
  * @param userId String

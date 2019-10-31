@@ -7,7 +7,19 @@ Component({
     onDeleteImg: () => {},
     onUploadImg: () => {}
   },
-  didMount() {},
+  didMount() {
+    if (this.props.urls.length > 0) {
+      for (let item of this.props.urls) {
+        if (('path' in item)) {
+          if (!('id' in item)) {
+            console.error('图片', '没有id')
+          }
+        } else {
+          console.error('图片', '没有path')
+        }
+      }
+    }
+  },
   didUpdate() {},
   didUnmount() {},
   methods: {

@@ -1,4 +1,4 @@
-import { selSalesManRegList } from '/api/programExecute'
+import { selSalesManRegList, delRegApply } from '/api/programExecute'
 const app = getApp()
 Page({
   data: {
@@ -6,11 +6,12 @@ Page({
     modalContent: '你确定要删除该条执行单吗?',
     modalRightText: '确认删除',
     showModal: false,
-    list: []
+    list: [],
+    deleteId: 0,
   },
   // 删除执行单
-  delete() {
-    this.setData({ showModal: true })
+  delete(e) {
+    this.setData({ showModal: true, deleteId: e.target.dataset.id })
   },
   // 修改执行单
   openEdit(e) {
@@ -23,21 +24,40 @@ Page({
   },
   handleModalRight() {
     this.setData({ showModal: false })
+    this.deleteRegApply(this.data.deleteId)
+  },
+  deleteRegApply(id) {
+    delRegApply({ regId: id }).then(res => {
+      this.getSalesManRegList()
+    })
   },
   // 查询执行单列表
   getSalesManRegList() {
-    selSalesManRegList({
-      userId: app.globalData.userInfo.userId,
-      activityId: app.globalData.registration['activityId'],
-      companyId: app.globalData.registration['companyId'],
-      regCode: ''
-    }).then((res) => {
-      console.log('执行单', res.data)
-      this.setData({ list: res.data })
+    return new Promise((resolve, reject) => {
+      selSalesManRegList({
+        userId: app.globalData.userInfo.userId,
+        activityId: app.globalData.registration['activityId'],
+        companyId: app.globalData.registration['companyId'],
+        regCode: ''
+      }).then(res => {
+        console.log('执行单', res.data)
+        this.setData({ list: res.data })
+        resolve()
+      }).catch(error => {
+        reject()
+      })
     })
   },
-  onReady() {
+  onShow() {
     this.getSalesManRegList()
+  },
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.getSalesManRegList().then(() => {
+      dd.stopPullDownRefresh()
+    }).catch(() => {
+      dd.stopPullDownRefresh()
+    })
   },
   onLoad() {},
 });

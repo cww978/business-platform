@@ -29,12 +29,13 @@ Page({
     question: null,
     // 零售户
     retailerInfo: {},
-    // 图片
+    // 图片id
     regPicture: [],
     // 其他要素
     regElement: [],
     // 物资使用
     regGoods: [],
+    // 图片地址
     imgs: []
   },
   addImage(e) {
@@ -147,7 +148,7 @@ Page({
     // 活动对象
     let targetId = this.data.targets[this.data.targetIndex].targetId
     // 零售户
-    let retailId = this.data.retailerInfo.custCode
+    let retailId = this.data.retailerInfo == null ? '' : this.data.retailerInfo.custCode
     // 图片
     let imgs = []
     for (let img of this.data.imgs) {
@@ -171,7 +172,7 @@ Page({
     for (let item of this.data.regInvest) {
       regInvest.push(item.id)
     }
-    regInvest = regInvest.join(';')
+    regInvest = regInvest.join(',')
     // 调研目的
     let objective = ''
     for (let item of this.data.objectives) {
@@ -215,16 +216,9 @@ Page({
   getRegDetail() {
     return new Promise(resolve => {
       selRegDetail({ regId: this.data.regId }).then((res) => {
-        let detail = {}
-        // 如果修改了就显示修改之后的信息
-        if (res.data.listMod == void 0) {
-          detail = res.data.listPro
-        } else {
-          detail = res.data.listMod
-        }
+        let detail = res.data.listPro
         console.log('执行单信息', res.data)
         this.setData({
-          loading: false,
           regExecution: detail[0].regExecution[0],
           regExecutiondetail: detail[1].regExecutiondetail,
           address: detail[1].regExecutiondetail.location,
@@ -268,14 +262,14 @@ Page({
           index = i
         }
       }
-      this.setData({ targetIndex: index, targets: res.data })
+      this.setData({ targetIndex: index, targets: res.data, loading: false })
       console.log('活动', this.data)
     })
   },
   // 判断是否需要调研
   hasInvestigation() {
     return new Promise(resolve => {
-      selProgrammeInvestigation({ activityId: app.globalData.registration['activityId'] }).then(res =>{
+      selProgrammeInvestigation({ activityId: this.data.regExecution['ACTIVITY_ID'] }).then(res =>{
         this.setData({
           hasInvestigation: res.data.investigate
         })
@@ -286,7 +280,7 @@ Page({
   // 获取其他要素
   getOtherPoints() {
     return new Promise(resolve => {
-      selPromoItem({ activityId: app.globalData.registration['activityId'] }).then(res => {
+      selPromoItem({ activityId: this.data.regExecution['ACTIVITY_ID'] }).then(res => {
         if (res.data.list.length != 0 && res.data.list[0] != null) {
           for (let item of this.data.regElement) {
             for (let element of res.data.list) {
@@ -307,8 +301,8 @@ Page({
     return new Promise(resolve => {
       selResourcesDetail({
         userId: app.globalData.userInfo.userId,
-        activityId: app.globalData.registration['activityId'],
-        companyId: app.globalData.registration['companyId'],
+        activityId: this.data.regExecution['ACTIVITY_ID'],
+        companyId: this.data.regExecution['COMPANY_ID'],
         executeType: app.globalData.registration['userType'] == 1 ? 1 : 2
       }).then(res => {
         for (let reggood of this.data.regGoods) {
@@ -344,10 +338,11 @@ Page({
     if (fileIds != '') {
       let imgs = []
       downLoadFile({ fileIds: fileIds }).then(res => {
+        console.log('图片', res.data)
         for(let img of res.data) {
-          imgs.push(img.filePath)
+          imgs.push({ path: img.filePath, id: img.fileId })
         }
-        this.setData({ imgs })
+        this.setData({ imgs: imgs })
       })
     }
   },

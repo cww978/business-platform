@@ -1,6 +1,7 @@
 {
   "defaultTitle": "方案执行信息列表",
-  "allowsBounceVertical": "NO",
+  "allowsBounceVertical": "YES",
+  "pullRefresh": true,
   "usingComponents":{
     "search-bar": "mini-antui/es/search-bar/index",
     "loading-wapper": "/components/loading-wapper/loading-wapper",
